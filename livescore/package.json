@@ -1,0 +1,32 @@
+{
+  "name": "livescore",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bootstrap": "^4.5.3",
+    "copy-to-clipboard": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "jquery": "^3.5.1",
+    "next": "9.5.3",
+    "next-images": "^1.6.0",
+    "owl.carousel": "^2.3.4",
+    "plyr": "^3.6.2",
+    "react": "16.13.1",
+    "react-datepicker": "^3.3.0",
+    "react-device-detect": "^1.14.0",
+    "react-dom": "16.13.1",
+    "react-icons": "^3.11.0",
+    "react-slick": "^0.27.11",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.11.1"
+  }
+}
