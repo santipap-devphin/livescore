@@ -11,7 +11,7 @@ const Footer = ({ className }) => {
           <div className="row">
             <div className="col-md-4 col-lg-3 text-center text-md-left">
               <div className="footer-content">
-                <h3>WEBSITENAME!</h3>
+                <h3>7SCORE.live!</h3>
                 <p>อัพเดทข่าวสารวงการกีฬา ฟุตบอล ผลบอล ผลฟุตบอลทั่วโลก พรีเมียร์ลีก ไทยลีก ฟุตบอลโลก ยูฟ่าแชมเปี้ยนส์ลีก</p>
               </div>
             </div>
