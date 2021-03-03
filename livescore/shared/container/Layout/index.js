@@ -184,7 +184,7 @@ const Layout = (props) => {
                 </Sidebar>
               </div>
             </aside>
-            <main className={`col-md-8 col-xl-6 ${props.className}`}>
+            <main className={`col-md-8 col-xl-9 ${props.className}`}>
               <article>
                 {props.children}
               </article>
