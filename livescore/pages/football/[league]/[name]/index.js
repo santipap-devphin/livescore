@@ -41,14 +41,14 @@ const PremierLeague = ({ }) => {
                       : router.query.league === "jleague"
                         ? "เจ ลีก ญี่ปุ่น"
                         : router.query.league && router.query.league.replace(/-/g, " ")
-    : router.query.league && router.query.league.replace(/-/g, " ")
-  let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
-  for (var i = 0; i < nav.length; i++)
-    if (nav[i] == "football")
-      nav[i] = "ฟุตบอล";
-    else if (nav[i] == router.query.league)
-      nav[i] = toTh;
-  nav.push(pageTitle)
+                            : router.query.league && router.query.league.replace(/-/g, " ")
+                          let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
+                          for (var i = 0; i < nav.length; i++)
+                            if (nav[i] == "football")
+                              nav[i] = "ฟุตบอล";
+                            else if (nav[i] == router.query.league)
+                              nav[i] = toTh;
+                          nav.push(pageTitle)
 
   const [isVoted, setVoted] = useState(false);
   const [score, setScore] = useState(true)

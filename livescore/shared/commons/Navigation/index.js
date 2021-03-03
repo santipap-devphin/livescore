@@ -4,6 +4,8 @@ import Link from 'next/link'
 import {NavigationStyle} from "./style"
 
 const Navigation = ({ className, routes, navTitle }) => {
+
+  console.log(routes)
   return (
     <NavigationStyle className={`collapse bd-links d-md-block mb-4 ${className}`}>
       <div className="bd-toc-item">
@@ -12,14 +14,17 @@ const Navigation = ({ className, routes, navTitle }) => {
         </div>
         <ul className="nav bd-sidenav">
           {routes.map((url, k) => (
+
+            
             <li key={k.toString()}>
               <Link
                 href={{
-                  pathname: `/[league]`,
+                  pathname: `/league/${routes.id}`,
                   query: { slug: 'my-post' },
                 }}
                 as={`${url.links}`}
               >
+               
                 <a>
                   {url.img ? <span className="mr-2"><img src={url.img} alt={url.title}></img></span> : ""}
                   {url.title}

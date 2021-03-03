@@ -16,11 +16,31 @@ const TableScore = () => {
     const [isLeague, setLeague] = useState("0");
     const [isWidth, setWidth] = useState("0");
     const [value, setValue] = useState("")
+    const [item, setItem] = useState();
     const onChange = () => {
-        setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://www.aiscore.com/th?width=1200&theme=blue'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+        setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+        
     }
+
+    
+    const fetchItems = async (items) => {
+
+        const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+        const data = await res.json()
+
+        setItem(data)
+       
+    }
+
+
+    
+
     const handleChangeLeague = (value) => {
+
+        console.log(value.target.value)
         setLeague(value.target.value)
+        fetchItems(value.target.value)
+
     }
     const handleChangeWidth = (value) => {
         setWidth(value.target.value)
@@ -80,7 +100,7 @@ const TableScore = () => {
                             className="btn-secondary justify-content-center btn-block  mb-3 mb-md-0" 
                             type="button" onClick={() => {
                                 setPreview(!isPreview)
-                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://www.aiscore.com/th?width=1200&theme=blue'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
                             }}
                         >Preview</Button>
                     </div>
@@ -90,7 +110,7 @@ const TableScore = () => {
                             type="button" 
                             onClick={() => {
                                 setEmbedee(1)
-                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://www.aiscore.com/th?width=1200&theme=blue'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
                             }}
                         >Generate URL</Button>
                     </div>
@@ -100,7 +120,7 @@ const TableScore = () => {
                             type="button" 
                             onClick={() => {
                                 setEmbedee(1)
-                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://www.aiscore.com/th?width=1200&theme=blue'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
                             }}
                         >Generate Code</Button>
                     </div>
@@ -144,6 +164,23 @@ const TableScore = () => {
                                         <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
                                 </div>
+                                {console.log(item)}
+                                {item.scores.category.map((res,value) => (
+
+                                         <div key={value.toString()}> 
+                                            <TableBattle  
+                                            className="highlight bg-secondary text-white"
+                                            title={res['@name']}
+                                            data={res.matches.match}
+                                            highlight={true} 
+                                            exam = {""/*res.matches.match*/}
+                                            />
+                                        </div>
+                                        
+                                 ))}
+                                {
+                                    
+                                /*
                                 <TableBattle
                                     className="bg-secondary text-white"
                                     title="Europe - UEFA Europa League"
@@ -162,7 +199,8 @@ const TableScore = () => {
                                     title="Asia - AFC Champions League"
                                     data={PrimaveraCup}
                                     highlight={false}
-                                />
+                                />*/
+                                }
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                             </div>
@@ -189,7 +227,20 @@ const TableScore = () => {
                                     <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
                                 </div>
-                                <TableBattleMobile
+                                {item.scores.category.map((res,value) => (
+
+                                        <div key={value.toString()}>
+                                        <TableBattleMobile 
+                                        title={res['@name']}
+                                        data={res.matches.match}
+                                        highlight={false}
+                                        />
+                                        </div>
+
+                                ))}
+                                
+                                {
+                                /*<TableBattleMobile
                                     className=""
                                     title="Europe - UEFA Europa League" 
                                     data={UEFAleague}
@@ -208,6 +259,7 @@ const TableScore = () => {
                                     data={PrimaveraCup}
                                     highlight={false}
                                 />
+                                 */}
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                             </div>
@@ -225,4 +277,7 @@ const TableScore = () => {
         </Layout>
     )
 }
+
+
+
 export default TableScore

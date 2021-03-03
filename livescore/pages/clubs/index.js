@@ -7,15 +7,41 @@ import Avatar from "../../shared/commons/Avatar"
 
 import Clup from "../../mock/Clup"
 
+
 const Teams = () => {
-  const [isLeague, setLeague] = useState("0");
+
+   const [isLeague, setLeague] = useState("0");
+   const [items, setItems] = useState();
+   const [load, setLoad] = useState(false);
+   const [error, setError] = useState('');
 
   useEffect(() => {
     setLeague("0");
   }, []);
+
+ 
+  
   const handleChangeLeague = (value) => {
+
+    setError("start")
     setLeague(value.target.value)
+
+    fetchItems(value.target.value)
+
   }
+
+  const fetchItems = async (items) => {
+
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/${items}.xml?json=1`)
+    const data = await res.json()
+
+     setItems(data)
+     setLoad(true)
+     setError("end")
+  }
+
+  
+ 
   return (
     <Layout>
       <HeaderSeo
@@ -27,6 +53,7 @@ const Teams = () => {
         keyWords=""
         author=""
       />
+    
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <div className="d-flex border-bottom">
@@ -34,16 +61,18 @@ const Teams = () => {
         <div className="filter">
           <select className="form-control" id="exampleFormControlSelect1" onChange={handleChangeLeague}>
             <option value="0">เลือกลีคที่ต้องการ</option>
-            <option value="1">พรีเมียร์ลีก อังกฤษ</option>
-            <option value="2">ยูฟ่า แชมเปี้ยนส์ลีก</option>
-            <option value="3">ยูโรป้า ลีก</option>
-            <option value="4">เอฟเอ คัพ อังกฤษ</option>
-            <option value="5">ลาลีกา สเปน</option>
+            <option value="1204">พรีเมียร์ลีก อังกฤษ</option>
+            <option value="1399">ลาลีกา สเปน</option>
+            <option value="1229">บุนเดสลีกา เยอรมัน</option>
+            <option value="1269">เซเรียอา อิตาลี</option>
+            
           </select>
         </div>
       </div>
+
+     
       {
-        isLeague !== "0"
+        load !== false
           ? <div>
             <div className="content-wrapper">
               <div className="media align-items-center py-4">
@@ -55,10 +84,10 @@ const Teams = () => {
                   alt="English Premier League" 
                 />
                 <div className="media-body">
-                  <h5 className="mt-0">English Premier League</h5>
+                  <h5 className="mt-0">{items.standings.tournament["@league"]}</h5>
                   <div className="">
                     <img src="/assets/flag/england.png" className="avatar rounded-circle mr-3" alt="" />
-                    England
+                    {items.standings["@country"]}
                   </div>
                 </div>
               </div>
@@ -73,8 +102,54 @@ const Teams = () => {
                   </tr>
                 </thead>
                 <tbody>
+                {console.log(items)}
                   {
-                    Clup.map((item, index) => (
+
+                      items.standings.tournament.team.map((item, index) => (
+
+                      <tr className="border-bottom gray" style={{borderBottom: "#E3E3E3"}} key={index.toString()}>
+                      <td style={{background: "#606060"}} className="text-white text-center">{item["@position"]}</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <Link
+                            href={{
+                              pathname: `/clubs/[league]/[name]/overviews/${item["@id"]}`,
+                            }}
+                            as={`/clubs/${items.standings.tournament["@league"]}/${item["@name"]}/overviews/${item["@id"]}`}
+                          >
+                            <a className="text-dark">
+                              <Avatar 
+                                size={30}
+                                shape="square"
+                                src="/assets/mock/mock_avatar.png" alt={item["@name"]}
+                              />
+                            </a>
+                          </Link>
+                          <div className="ml-2">
+                            <Link
+                              href={{
+                                pathname: `/clubs/[league]/[name]/overviews/${item["@id"]}`,
+                              }}
+                              as={`/clubs/${items.standings.tournament["@league"]}/${item["@name"]}/overviews/${item["@id"]}`}
+                              >
+                              <a className="text-dark">
+                                {item["@name"]}
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        {item.total["@gd"]}
+                      </td>
+                    </tr>
+
+
+                    ))
+
+                  }
+                  {
+                    /*Clup.map((item, index) => (
                       <tr className="border-bottom gray" style={{borderBottom: "#E3E3E3"}} key={index.toString()}>
                         <td style={{background: "#606060"}} className="text-white text-center">{item.id}</td>
                         <td>
@@ -112,7 +187,7 @@ const Teams = () => {
                         </td>
                       </tr>
                     ))
-                  }
+                  */}
                 </tbody>
               </table>
 
@@ -120,7 +195,9 @@ const Teams = () => {
           </div>
           : <Empty className="pt-4 pb-4" />
       }
+      {error === "start" ? <div>load ......</div> : <div></div>}
     </Layout>
   )
 }
+
 export default Teams

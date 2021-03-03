@@ -31,10 +31,13 @@ const Header = ({className}) => {
                 <a className="nav-link" href="/highlight">ไฮไลท์ฟุตบอล</a>
               </li>
               <li className={`nav-item ${firstItem === "plugins" ? "active" : ""}`}>
-                <a className="nav-link" href="/plugins/table-score">แจกตารางผลคะแนน</a>
+                <a className="nav-link" href="/plugins/table-score">แจกผลบอลสด</a>
               </li>
               <li className={`nav-item ${firstItem === "clubs" ? "active" : ""}`}>
                 <a className="nav-link" href="/clubs">ข้อมูลสโมสร</a>
+              </li>
+              <li className={`nav-item ${firstItem === "standings" ? "active" : ""}`}>
+                <a className="nav-link" href="/standings">ตารางคะแนนฟุตบอล</a>
               </li>
               <li className={`nav-item ${firstItem === "contact" ? "active" : ""}`}>
                 <a className="nav-link" href="/contact">ติดต่อเรา</a>

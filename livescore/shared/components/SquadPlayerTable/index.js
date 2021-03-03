@@ -12,10 +12,10 @@ const SquadPlayerTable = ({ className, plyers, title}) => {
                     <tr>
                         <th>Players</th>
                         <th>Age</th>
-                        <th>Height</th>
-                        <th>Weight</th>
-                        <th>Market value</th>
-                        <th>Contract untill</th>
+                        <th>Number</th>
+                        <th>appearences</th>
+                        <th>goal</th>
+                        <th>rating</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,16 +27,16 @@ const SquadPlayerTable = ({ className, plyers, title}) => {
                                         size={30}
                                         shape="circle"
                                         src={play.img}
-                                        alt={play.name}
+                                        alt={play["@name"]}
                                         className="mr-3"
                                     />
-                                    <span>{play.name}</span>
+                                    <span>{play["@name"]}</span>
                                 </td>
-                                <td>{play.age}</td>
-                                <td>{play.height}</td>
-                                <td>{play.weight}</td>
-                                <td>{play.market}</td>
-                                <td>{play.contract}</td>
+                                <td>{play["@age"]}</td>
+                                <td>{play["@number"]}</td>
+                                <td>{play["@appearences"]}</td>
+                                <td>{play["@goals"]}</td>
+                                <td>{play["@rating"]}</td>
                             </tr>
                         ))
                     }

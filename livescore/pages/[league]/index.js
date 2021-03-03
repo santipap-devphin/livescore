@@ -11,6 +11,7 @@ import PrimaveraCup from "../../mock/PrimaveraCup"
 import PFL from "../../mock/PFL"
 
 const Teams = () => {
+
   let navDate = [
     { id: "1", date: "SEP 28", route: "/", today: false },
     { id: "2", date: "SEP 29", route: "/", today: false },
@@ -117,6 +118,7 @@ const Teams = () => {
         highlight={false}
       />
     </div>
+    
   </Layout>
   )
 }

@@ -9,7 +9,7 @@ import Button from "../../shared/commons/Button"
 const limit = 4;
 let arrayForHoldingPosts = [];
 
-const HighLight = () => {
+const HighLight = (props) => {
   const [clips, setClips] = useState([]);
   const [count, setCount] = useState(1);
   const [total, setTotal] = useState(0);
@@ -66,6 +66,37 @@ const HighLight = () => {
   //   setLoadMore(false);
   // }
   // };
+
+  let clicks = []
+  let obj = {};
+
+  {
+                props.highLight.map((res,value) => (
+
+
+                 
+                        (res.matches.match.videos === "undefined" ? 
+                        (
+                        <div>no</div>
+                        
+                        ) : (
+                        <div>{res.matches.match.videos}</div>
+                        )
+                        )
+                        /*res.matches.match.map((ress,values) => (
+
+                          
+  
+  
+                         
+                        ))*/
+
+
+                       
+                  ))
+  
+                }
+
   let clipsSlide = [
     {
       id: "1", 
@@ -109,6 +140,8 @@ const HighLight = () => {
     },
   ]
   return (
+
+    
     <Layout >
       <HeaderSeo
         siteName=""
@@ -119,6 +152,8 @@ const HighLight = () => {
         keyWords=""
         author=""
       />
+
+      
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <h1 className="mb-4">HIGHLIGHT!</h1>
@@ -156,6 +191,15 @@ const HighLight = () => {
       </div>
     </Layout>
   );
+}
+
+HighLight.getInitialProps = async (ctx) => {
+  const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/home?json=1')
+
+  const json = await res.json()
+
+  return { highLight: json.scores.category }
+
 }
 
 export default HighLight;

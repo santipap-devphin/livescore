@@ -10,16 +10,18 @@ import ClubStatus from "../../components/ClubStatus"
 
 const ClubNav = ({ children, title, logo, flag, nation }) => {
     const router = useRouter()
+    //const { id } = router.query
     let path = router.asPath
     const host = path.split("/");
     let nav = host.slice(1, host.length - 1);
     let lastItem = host[host.length - 1]
+    let newsitem = host[4]
     // let pageTitle = host.pop()
     let league = router.query && router.query.league
     let teamName = router.query && router.query.name
-    
+    let idd = router.query && router.query.id
     let navi = [
-        "Overview",
+        "Overviews",
         "Squad",
         "Champions"
     ]
@@ -95,9 +97,10 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                                             as={`/clubs/${league}/${teamName}/${slg.toLowerCase()}`}
                                         > */}
                                             <a 
-                                                href={`/clubs/${league}/${teamName}/${slg.toLowerCase()}`} 
-                                                className={`nav-link ${slg.toLowerCase() === lastItem ? "active" : ""}`}
+                                                href={`/clubs/${league}/${teamName}/${slg.toLowerCase()}/${idd}`} 
+                                                className={`nav-link ${slg.toLowerCase() === newsitem ? "active" : ""}`}
                                             >
+                                                {}
                                                 {slg}
                                             </a>
                                         {/* </Link> */}

@@ -10,11 +10,10 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
             <caption className="text-white">{title}</caption>
                 <thead>
                     <tr>
-                        <th>Players</th>
-                        <th>Age</th>
-                        <th>Reason</th>
-                        <th>Position</th>
-                        <th>Since</th>
+                        <th>ชื่อนักเตะ</th>
+                        <th>อาการ</th>
+                        <th>วันที่เริ่ม</th>
+                        <th>วันที่หาย</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,16 +24,16 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
                                     <Avatar
                                         size={30}
                                         shape="circle"
-                                        src={play.img}
-                                        alt={play.name}
+                                        src={""}
+                                        alt={play["@name"]}
                                         className="mr-3"
                                     />
-                                    <span>{play.name}</span>
+                                    <span>{play["@name"]}</span>
                                 </td>
-                                <td>{play.age}</td>
-                                <td>Injury</td>
-                                <td>-</td>
-                                <td>29 Sep 2020</td>
+                                
+                                <td>{play["@description"]}</td>
+                                <td>{play["@startdate"]}</td>
+                                <td>{play["@enddate"]}</td>
                             </tr>
                         ))
                     }

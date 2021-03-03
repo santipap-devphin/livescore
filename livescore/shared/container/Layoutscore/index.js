@@ -158,49 +158,13 @@ const Layout = (props) => {
         }
         <div className="container-fluid container-xl pt-4">
           <div className="row row-cols-xl-3">
-            <aside className="col-md-4 col-xl-3 d-none d-md-block">
-              <div className="sidebar-box">
-                <Sidebar>
-                  <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
-                  <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
-                </Sidebar>
-                <Navigation 
-                  className="" 
-                  navTitle="ลีคอื่นๆ (ทั่วโลก)" 
-                  routes={worldleague} 
-                  
-                />
-                <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
-                <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
-              </div>
-              <div className="sidebar-box d-none d-md-block d-xl-none">
-                <Sidebar>{/* ตารางคะแนนหน้า Homepage */}
-                  {/*<CarouselTable 
-                    slideValues={slide}
-                    className="mb-4"
-                  />*/}
-                  <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-                  <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-                </Sidebar>
-              </div>
-            </aside>
-            <main className={`col-md-8 col-xl-6 ${props.className}`}>
+            
+            <main className={`col-md-8 col-xl-12 ${props.className}`}>
               <article>
                 {props.children}
               </article>
             </main>
-            <aside className="col-md-4 col-xl-3 d-none d-xl-block">{/* ตารางคะแนนหน้า Homepage */}{}
-              <Sidebar>
-               
-                {/*<CarouselTable 
-                  slideValues={slide}
-                  className="mb-4"
-                />*/}
-                <p>{}</p>
-                <img className="mb-5 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-                <img className="mb-5 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-              </Sidebar>
-            </aside>
+            
           </div>
         </div>
         <Footer />

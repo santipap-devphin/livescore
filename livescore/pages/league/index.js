@@ -1,68 +1,133 @@
-import React from 'react'
-import HeaderSeo from "../../shared/commons/HeaderSeo"
+import React from 'react';
 import Layout from "../../shared/container/Layout"
-import Navigation from "../../shared/commons/Navigation"
+import HeaderSeo from "../../shared/commons/HeaderSeo"
+import NavDate from "../../shared/commons/NavDate"
+import TableBattle from "../../shared/commons/TableBattle"
+import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
-const League = () => {
-    let routes = [
-      { key: "1", title: "พรีเมียร์ลีก อังกฤษ", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "3", title: "ยูโรป้า ลีก", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "4", title: "เอฟเอ คัพ อังกฤษ", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น", links: "/jleague", img: "/assets/icons/league/league_jleague.png" }
-    ]
-    let worldleague = [
-      { key: "1", title: "พรีเมียร์ลีก อังกฤษ", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "3", title: "ยูโรป้า ลีก", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "4", title: "เอฟเอ คัพ อังกฤษ", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น", links: "/jleague", img: "/assets/icons/league/league_jleague.png" },
-      { key: "1", title: "พรีเมียร์ลีก อังกฤษ", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "3", title: "ยูโรป้า ลีก", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "4", title: "เอฟเอ คัพ อังกฤษ", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น", links: "/jleague", img: "/assets/icons/league/league_jleague.png" },
-      { key: "1", title: "พรีเมียร์ลีก อังกฤษ", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "3", title: "ยูโรป้า ลีก", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "4", title: "เอฟเอ คัพ อังกฤษ", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น", links: "/jleague", img: "/assets/icons/league/league_jleague.png" },
-    ]
-    return (
-        <Layout className="d-md-none">
-            <HeaderSeo
-                siteName=""
-                title="live score"
-                desc=""
-                imgSrc=""
-                metaUrl=""
-                keyWords=""
-                author=""
-            />
-            <Navigation navTitle="ลีคยอดฮิต" routes={routes} />
-            <Navigation navTitle="ลีคอื่นๆ (ทั่วโลก)" routes={worldleague} />
-        </Layout>
-    )
+import Europe from "../../mock/uefaleague"
+import Asia from "../../mock/afcleague"
+import PrimaveraCup from "../../mock/PrimaveraCup"
+import PFL from "../../mock/PFL"
+
+const Teams = () => {
+
+  let navDate = [
+    { id: "1", date: "SEP 28", route: "/", today: false },
+    { id: "2", date: "SEP 29", route: "/", today: false },
+    { id: "3", date: "SEP 30", route: "/", today: false },
+    { id: "4", date: "OCT 1", route: "/", today: true },
+    { id: "5", date: "OCT 2", route: "/", today: false },
+    { id: "6", date: "OCT 3", route: "/", today: false },
+    { id: "7", date: "OCT 4", route: "/", today: false }
+  ]
+  return (
+    <Layout className="px-0 px-md-3">
+    <HeaderSeo
+      siteName=""
+      title="live score"
+      desc=""
+      imgSrc=""
+      metaUrl=""
+      keyWords=""
+      author=""
+    />
+    <div className="d-none d-md-block">
+      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      <NavDate 
+        DataDate={navDate}
+        onClickLeft={() => console.log("left")}
+        onClickRight={() => console.log("right")}
+      />
+      <TableBattle
+        className="bg-secondary text-white"
+        title="Europe - UEFA Europa League"
+        data={Europe}
+        highlight={true}
+      />
+      <TableBattle
+        className="bg-secondary text-white"
+        title="Asia - AFC Champions League"
+        data={Asia}
+        highlight={false}
+      />
+      <TableBattle
+        className="bg-secondary text-white"
+        title="Italy - Primavera Cup"
+        data={PrimaveraCup}
+        highlight={false}
+      />
+      <TableBattle
+        className="bg-secondary text-white"
+        title="Russia - PFL"
+        data={PFL}
+        highlight={false}
+      />
+    </div>
+    <div className="d-block d-md-none">
+      <div className="banner px-3">
+        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      </div>
+      <TableBattleMobile 
+        title="Europe - UEFA Europa League" 
+        data={Europe}
+        highlight={false}
+      />
+      <div className="banner row mx-0">
+        <div className="col-6 pr-7px">
+          <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+        </div>
+        <div className="col-6 pl-7px">
+          <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+        </div>
+      </div>
+      <TableBattleMobile 
+        title="Asia - AFC Champions League" 
+        data={Asia}
+        highlight={false}
+      />
+      <div className="banner row mx-0">
+        <div className="col-6 pr-7px">
+          <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+        </div>
+        <div className="col-6 pl-7px">
+          <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+        </div>
+      </div>
+      <TableBattleMobile 
+        title="Italy - Primavera Cup" 
+        data={PrimaveraCup}
+        highlight={false}
+      />
+      <div className="banner row mx-0">
+        <div className="col-4 pr-7px">
+          <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
+        </div>
+        <div className="col-4 px-7px">
+          <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
+        </div>
+        <div className="col-4 pl-7px">
+          <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
+        </div>
+      </div>
+      <TableBattleMobile 
+        title="Russia - PFL" 
+        data={PFL}
+        highlight={false}
+      />
+    </div>
+    
+  </Layout>
+  )
 }
 
-export default League;
+
+Teams.propTypes = {
+
+};
+
+
+export default Teams;
+

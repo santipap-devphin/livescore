@@ -22,22 +22,25 @@ const OverViewStatsTable = ({ players, title }) => {
                     </tr>
                 </thead>
                 <tbody>
+                    {console.log(players)}
                     {
                         players.map((player, index) => (
+                            
                             <tr key={index.toString()}>
                                 <td className="py-1 px-2">
                                     <Avatar
                                         size={30}
                                         shape="circle"
                                         src={player.img}
-                                        alt={player.name}
+                                        alt={player['@name']}
                                         className="mr-2"
                                     />
-                                    <span>English Premier League</span>
+                                     {console.log(player)}
+                                    <span>{player['@name']}</span>
                                 </td>
 
-                                <td className="text-center">3</td>
-                                <td className="text-center">9</td>
+                                <td className="text-center">{player['@appearences']}</td>
+                                <td className="text-center">{player['@goals']}</td>
                                 <td className="text-center">8</td>
                                 <td className="text-center">
                                     <div className="discipline">
@@ -46,7 +49,7 @@ const OverViewStatsTable = ({ players, title }) => {
                                     </div>
                                 </td>
                                 <td className="text-center">59.0</td>
-                                <td className="text-center">0.01</td>
+                                <td className="text-center">{player['@passes']}</td>
                             </tr>
                         ))
                     }

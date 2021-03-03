@@ -3,7 +3,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import PropTypes from 'prop-types';
 import {NavDateStyle} from "./style"
 
-const NavDate = ({onClickLeft, onClickRight, className, DataDate}) => {
+const NavDate = ({onClickLeft, onClickRight, className, DataDate ,onClicks}) => {
 
   {console.log()}
   return (
@@ -15,10 +15,12 @@ const NavDate = ({onClickLeft, onClickRight, className, DataDate}) => {
       >
         <RiArrowLeftSLine />
       </div>
+     
       {
         DataDate.map((item, index) => (
-          <a className={`nav-link rounded-0 px-2 col text-ss text-nowrap ${item.today === true ? "active" : ""}`} href={item.route} key={index}>
+          <a className={`nav-link rounded-0 px-2 col text-ss text-nowrap ${item.today === true ? "active" : ""}`} href={item.route} key={index} onClick={onClicks}>
             {item.date}
+           
           </a>
         ))
       }
@@ -36,7 +38,8 @@ const NavDate = ({onClickLeft, onClickRight, className, DataDate}) => {
 NavDate.propTypes = {
   className: PropTypes.string,
   onClickLeft: PropTypes.func,
-  onClickRight: PropTypes.func
+  onClickRight: PropTypes.func,
+  onClicks:PropTypes.func
 };
 
 

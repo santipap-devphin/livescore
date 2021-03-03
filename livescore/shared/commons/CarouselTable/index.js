@@ -37,6 +37,7 @@ const settings = {
 };
 
 const CarouselTable = ({slideValues, className}) => {
+
   return (
     <SliderStyle {...settings}>
         {slideValues.map((matches, k) => {
@@ -58,5 +59,8 @@ CarouselTable.propTypes = {
 };
 CarouselTable.defaultProps = {
 };
+
+
+
 
 export default CarouselTable

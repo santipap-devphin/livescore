@@ -14,9 +14,11 @@ import liverpool from "../../../../mock/liverpool"
 
 class Apitest extends Component {
 
-  static async getInitialProps(){
-  
-      const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerstats/team/9249?json=1')
+  static async getInitialProps({ query }){
+
+      const { id } = query
+    
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerstats/team/${id}?json=1`)
       const data  = await res.json()
       
       return {home:data}
@@ -35,25 +37,23 @@ class Apitest extends Component {
           keyWords=""
           author=""
         />
-        <>
-          <span>
-          <h1>{this.props.home.teams.team.name}</h1>
-          <p>{this.props.home.teams.team.venue_name}</p>
-          
-          
-         
-        </span>
-        <img src={this.props.home.teams.team.image}/>
+          <h1>ผู้จัดการทีม {this.props.home.teams.team.coach["@name"]}</h1>
+          <h2>อันดับตารางปัจจุบัน {this.props.home.teams.team.leagues["@league_rank"]}</h2>
+          <p>ประเทศ {this.props.home.teams.team.country}</p>
+          <p>ชื่อสนามฟุตบอล {this.props.home.teams.team.venue_name}</p>
+          <p>ที่อยู่ {this.props.home.teams.team.venue_address["#cdata-section"]}</p>
+          <p>เมือง {this.props.home.teams.team.venue_city["#cdata-section"] }</p>
+          <p>ความจุสนาม {this.props.home.teams.team.venue_capacity}</p>
           <br />
           <button className="text-read-more mt-3 mb-3">
             Readmore <AiOutlineSwapRight className="ml-2" />
           </button>
-            {console.log(this.props.home.teams.team.squad.player)}
+            {console.log(this.props.home.teams.team.sidelined.player)}
           <OverViewMatchesTable plyers={liverpool[0].strikers} />
           <OverViewStatsTable title="Stats" players={this.props.home.teams.team.squad.player} />
-          <OverViewInjuredTable title="Injured or suspended" plyers={liverpool[0].strikers} />
+          <OverViewInjuredTable title="Injured or suspended" plyers={this.props.home.teams.team.sidelined.player} />
   
-        </>
+      
   
       </LayoutSidebarClub>
     );
