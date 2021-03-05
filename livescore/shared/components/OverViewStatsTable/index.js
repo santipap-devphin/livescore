@@ -22,7 +22,7 @@ const OverViewStatsTable = ({ players, title }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log(players)}
+                    {/*console.log(players)*/}
                     {
                         players.map((player, index) => (
                             
@@ -35,7 +35,7 @@ const OverViewStatsTable = ({ players, title }) => {
                                         alt={player['@name']}
                                         className="mr-2"
                                     />
-                                     {console.log(player)}
+                                     {/*console.log(player)*/}
                                     <span>{player['@name']}</span>
                                 </td>
 

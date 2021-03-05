@@ -102,7 +102,7 @@ const Teams = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {console.log(items)}
+                {/*console.log(items)*/}
                   {
 
                       items.standings.tournament.team.map((item, index) => (

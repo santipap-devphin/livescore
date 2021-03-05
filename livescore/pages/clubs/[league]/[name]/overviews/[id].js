@@ -48,7 +48,7 @@ class Apitest extends Component {
           <button className="text-read-more mt-3 mb-3">
             Readmore <AiOutlineSwapRight className="ml-2" />
           </button>
-            {console.log(this.props.home.teams.team.sidelined.player)}
+            {/*console.log(this.props.home.teams.team.sidelined.player)*/}
           <OverViewMatchesTable plyers={liverpool[0].strikers} />
           <OverViewStatsTable title="Stats" players={this.props.home.teams.team.squad.player} />
           <OverViewInjuredTable title="Injured or suspended" plyers={this.props.home.teams.team.sidelined.player} />

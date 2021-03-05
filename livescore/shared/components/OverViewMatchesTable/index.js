@@ -46,36 +46,68 @@ const OverViewMatchesTable = ({ className, plyers }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        plyers.map((play, index) => (
-                            <tr key={index.toString()}>
-                                <td>29 Sep 02:00</td>
-                                <td>English Premier League</td>
-                                <td>
-                                    <span>Liverpool</span>
-                                    <Avatar
-                                        size={30}
-                                        shape="square"
-                                        src={play.img}
-                                        alt={play.name}
-                                        className="ml-2"
-                                    />
-                                </td>
-                                <td>3 - 1</td>
-                                <td>
-                                    
-                                    <Avatar
-                                        size={30}
-                                        shape="square"
-                                        src={play.img}
-                                        alt={play.name}
-                                        className="mr-2"
-                                    />
-                                    <span>Arsenal FC</span>
-                                </td>
-                            </tr>
-                        ))
-                    }
+                {
+                       
+                      /* Array.isArray(plyers) ? 
+                       plyers.map((play, index) => (
+                               <tr key={index.toString()}>
+                                    <td>29 Sep 02:00</td>
+                                    <td>English Premier League</td>
+                                    <td>
+                                        <span>Liverpool</span>
+                                        <Avatar
+                                            size={30}
+                                            shape="square"
+                                            src={play.img}
+                                            alt={play["@name"]}
+                                            className="ml-2"
+                                        />
+                                    </td>
+                                    <td>3 - 1</td>
+                                    <td>
+                                        
+                                        <Avatar
+                                            size={30}
+                                            shape="square"
+                                            src={play.img}
+                                            alt={play["@name"]}
+                                            className="mr-2"
+                                        />
+                                        <span>Arsenal FC</span>
+                                    </td>
+                                </tr>
+                       )) 
+                       : 
+                       <>
+                        <tr key={0}>
+                                    <td>29 Sep 02:00</td>
+                                    <td>English Premier League</td>
+                                    <td>
+                                        <span>Liverpool</span>
+                                        <Avatar
+                                            size={30}
+                                            shape="square"
+                                            src={play.img}
+                                            alt={play.name}
+                                            className="ml-2"
+                                        />
+                                    </td>
+                                    <td>3 - 1</td>
+                                    <td>
+                                        
+                                        <Avatar
+                                            size={30}
+                                            shape="square"
+                                            src={play.img}
+                                            alt={play.name}
+                                            className="mr-2"
+                                        />
+                                        <span>Arsenal FC</span>
+                                    </td>
+                                </tr>
+                       </>*/
+                   }
+                   
                 </tbody>
             </table>
         </OverViewMatchesTableStyle>
@@ -85,6 +117,7 @@ const OverViewMatchesTable = ({ className, plyers }) => {
 OverViewMatchesTable.propTypes = {
     className: PropTypes.string,
     plyers: PropTypes.array.isRequired,
+    
 }
 OverViewMatchesTable.defaultProps = {
     className: "",

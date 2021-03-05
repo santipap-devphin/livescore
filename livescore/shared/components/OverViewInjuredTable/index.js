@@ -18,6 +18,8 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
                 </thead>
                 <tbody>
                     {
+                       
+                        Array.isArray(plyers) ? 
                         plyers.map((play, index) => (
                             <tr key={index.toString()}>
                                 <td>
@@ -35,7 +37,26 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
                                 <td>{play["@startdate"]}</td>
                                 <td>{play["@enddate"]}</td>
                             </tr>
-                        ))
+                        )) 
+                        : 
+                        <>
+                         <tr key={0}>
+                                <td>
+                                    <Avatar
+                                        size={30}
+                                        shape="circle"
+                                        src={""}
+                                        alt={plyers["@name"]}
+                                        className="mr-3"
+                                    />
+                                    <span>{plyers["@name"]}</span>
+                                </td>
+                                
+                                <td>{plyers["@description"]}</td>
+                                <td>{plyers["@startdate"]}</td>
+                                <td>{plyers["@enddate"]}</td>
+                            </tr>
+                        </>
                     }
                 </tbody>
             </table>
@@ -45,7 +66,8 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
 
 OverViewInjuredTable.propTypes = {
     className: PropTypes.string,
-    plyers: PropTypes.array.isRequired,
+    /*plyers: PropTypes.array.isRequired,
+    plyers: PropTypes.object.isRequired,*/
     title: PropTypes.string.isRequired
 }
 OverViewInjuredTable.defaultProps = {
