@@ -8,15 +8,15 @@ import { SliderStyle } from '../CarouselTable/style';
 const TableBattle = ({ className, title, data, highlight , exam }) => {
 
    
-  
+  //console.log(data)
   let new_data;
   let cutspace;
-  if(title.indexOf(": ") > -1){
+ /* if(title.indexOf(": ") > -1){
 
     new_data = title.replace(": ", "_");
     cutspace = new_data.replace(" ", "");
 
-  }
+  }*/
 
    
   return (
@@ -38,17 +38,18 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
                       <Link
                         href={{
                           pathname: `/football/[league]/[name]`,
+                          query: { event: JSON.stringify(item.events) , type:item["@status"]},
                         }}
-                        as={`/football/${cutspace}/${item.localteam['@name']}-vs-${item.visitorteam['@name']}`}
+                        as={`/football/${item["@static_id"]}/${exam}`}
                         >
-                          
+                         
                          <a className="row flex-column flex-md-row mx-0 py-2 text-decoration-none text-dark">
                           <div className="col-md-6 pl-md-2 pr-md-0">
                             <div className="d-flex row mx-0">
                               <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{item['@status']}</div>
                               <div className="col-md-9 px-0 pl-md-2 pr-md-2 flex-fill text-center text-md-right">
                                 {item.localteam['@name']}
-                              </div>
+                              </div> 
                               <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center">  
                                 {item.localteam['@goals']+" - "+item.visitorteam['@goals']}
                               </div>
@@ -61,7 +62,7 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
                           </div>
                         </a>
                       </Link>
-
+                     
                     </div>
                 ))
               }
@@ -74,8 +75,9 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
                     <Link
                       href={{
                         pathname: `/football/[league]/[name]`,
+                        query: { event: JSON.stringify(data.events) , type:JSON.stringify(data["@status"])},
                       }}
-                      as={`/football/${cutspace}/${data.localteam['@name']}-vs-${data.visitorteam['@name']}`}
+                      as={`/football/${data["@static_id"]}/${exam}`}
                       
                     >
                       <a className="row flex-column flex-md-row mx-0 py-2 text-decoration-none text-dark">
@@ -111,7 +113,8 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
            </div>
        )}
      </div>
-       
+
+     
       
       /*exam.map((res,value) => (
 

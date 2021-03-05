@@ -9,6 +9,8 @@ import VotedBar from "../../components/VotedBar"
 import NavMatch from "../../components/NavMatch"
 
 const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
+
+  
   // const router = useRouter()
   // let path = router.asPath
   // const host = path.split("/");
@@ -85,7 +87,7 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
   return (
     <TopLiveSoccerContentStyle className="mb-4">
       <Breadcrumb
-        title="ENGLAND - PREMIER LEAGUE (2020/09/26 18:30:00)"
+        title={data.title}
         path={nav}
       />
       <Battle

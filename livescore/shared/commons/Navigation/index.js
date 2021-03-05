@@ -5,7 +5,7 @@ import {NavigationStyle} from "./style"
 
 const Navigation = ({ className, routes, navTitle }) => {
 
-  console.log(routes)
+  
   return (
     <NavigationStyle className={`collapse bd-links d-md-block mb-4 ${className}`}>
       <div className="bd-toc-item">

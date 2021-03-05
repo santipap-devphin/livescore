@@ -17,6 +17,7 @@ const TableScore = () => {
     const [isWidth, setWidth] = useState("0");
     const [value, setValue] = useState("")
     const [item, setItem] = useState();
+    const [err, setErr] = useState(false);
     const onChange = () => {
         setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
         
@@ -29,6 +30,7 @@ const TableScore = () => {
         const data = await res.json()
 
         setItem(data)
+        setErr(true)
        
     }
 
@@ -45,6 +47,8 @@ const TableScore = () => {
     const handleChangeWidth = (value) => {
         setWidth(value.target.value)
     }
+
+  
 
     return (
         <Layout >
@@ -69,11 +73,11 @@ const TableScore = () => {
                         <label>เลือกรายการลีค</label>
                         <select onChange={handleChangeLeague} id="select-league" className="form-control">
                             <option value="0">กรุณาเลือกลีคที่ต้องการ</option>
-                            <option value="1">พรีเมียร์ลีก อังกฤษ</option>
-                            <option value="2">ยูฟ่า แชมเปี้ยนส์ลีก</option>
-                            <option value="3">ยูโรป้า ลีก</option>
-                            <option value="4">เอฟเอ คัพ อังกฤษ</option>
-                            <option value="5">ลาลีกา สเปน</option>
+                            <option value="1204">พรีเมียร์ลีก อังกฤษ</option>
+                            <option value="1005">ยูฟ่า แชมเปี้ยนส์ลีก</option>
+                            <option value="1007">ยูโรป้า ลีก</option>
+                            <option value="1198">เอฟเอ คัพ อังกฤษ</option>
+                            <option value="1399">ลาลีกา สเปน</option>
                         </select>
                     </div>
                     <div className="form-group col-md-6">
@@ -164,10 +168,17 @@ const TableScore = () => {
                                         <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
                                 </div>
-                                {console.log(item)}
-                                {item.scores.category.map((res,value) => (
 
-                                         <div key={value.toString()}> 
+                                {console.log(isLeague)}
+                                {
+
+                                    (err === true) ? 
+                                    
+                                    item.scores.category.map((res,value) => (
+
+                                        
+                                        (isLeague === res["@id"]) ? 
+                                        <div key={value.toString()}> 
                                             <TableBattle  
                                             className="highlight bg-secondary text-white"
                                             title={res['@name']}
@@ -176,31 +187,12 @@ const TableScore = () => {
                                             exam = {""/*res.matches.match*/}
                                             />
                                         </div>
-                                        
-                                 ))}
-                                {
-                                    
-                                /*
-                                <TableBattle
-                                    className="bg-secondary text-white"
-                                    title="Europe - UEFA Europa League"
-                                    data={UEFAleague}
-                                    highlight={false}
-                                />
-                                <TableBattle
-                                    className="bg-secondary text-white d-none d-md-block"
-                                    title="Asia - AFC Champions League"
-                                    data={PrimaveraCup}
-                                    highlight={false}
-                                />
-                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                                <TableBattle
-                                    className="bg-secondary text-white"
-                                    title="Asia - AFC Champions League"
-                                    data={PrimaveraCup}
-                                    highlight={false}
-                                />*/
-                                }
+                                        :null
+                                    )
+
+
+                                    ) : null}
+                                
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                             </div>
@@ -227,39 +219,23 @@ const TableScore = () => {
                                     <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
                                 </div>
-                                {item.scores.category.map((res,value) => (
-
-                                        <div key={value.toString()}>
-                                        <TableBattleMobile 
-                                        title={res['@name']}
-                                        data={res.matches.match}
-                                        highlight={false}
-                                        />
-                                        </div>
-
-                                ))}
-                                
                                 {
-                                /*<TableBattleMobile
-                                    className=""
-                                    title="Europe - UEFA Europa League" 
-                                    data={UEFAleague}
-                                    highlight={false}
-                                />
-                                <TableBattleMobile
-                                    className=""
-                                    title="Asia - AFC Champions League" 
-                                    data={PrimaveraCup}
-                                    highlight={false}
-                                />
-                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                                <TableBattleMobile
-                                    className=""
-                                    title="Asia - AFC Champions League" 
-                                    data={PrimaveraCup}
-                                    highlight={false}
-                                />
-                                 */}
+                                 (err === true) ?
+                                    item.scores.category.map((res,value) => (
+
+                                             (isLeague === res["@id"]) ? 
+                                            <div key={value.toString()}>
+                                            <TableBattleMobile 
+                                            title={res['@name']}
+                                            data={res.matches.match}
+                                            highlight={false}
+                                            />
+                                            </div>
+                                            : null
+
+                                    )) : null}
+                                
+                                
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                             </div>

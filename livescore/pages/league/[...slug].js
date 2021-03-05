@@ -108,8 +108,6 @@ Post.getInitialProps = async ({query}) => {
 
    }
 
- 
-
 }
 
 export default Post

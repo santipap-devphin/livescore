@@ -9,17 +9,80 @@ import VotedBar from "../../../../shared/components/VotedBar"
 import InputGroup from "../../../../shared/commons/InputGroup"
 import NavMatch from "../../../../shared/components/NavMatch"
 import MatchIonfo from "../../../../shared/components/MatchIonfo"
+import MatchSummary from "../../../../shared/components/MatchSummary"
 import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerContent"
 
-const PremierLeague = ({ }) => {
+const PremierLeague = (props ,{ }) => {
+  
   const router = useRouter()
+
+  var obj = {};
+  var title_obj = {}; 
+  
+
+  if(typeof router.query.event === "undefined"){
+
+    
+    obj = {event:"reload","summary":props.league.match.summary};
+    title_obj = {"title":props.league.match["@status"]};
+    //useRouter.reload(window.location.pathname);
+    
+  }
+  else if(router.query.event === "null"){
+
+    
+    obj = {event:null};
+  }
+  else{
+
+    obj = JSON.parse(router.query.event);
+
+  }
+
   let path = router.asPath
+  
   const host = path.split("/");
   let nav = host.slice(1, host.length - 1);
   let nmatch = host.slice(1, host.length);
   let navMatchs = Object.assign({}, nmatch);
 
-  let toTh = router.query.league
+  let toTh = router.query.name
+    ? router.query.name === "1005"
+      ? "ยูฟ่า แชมเปี้ยนส์ลีก"
+      : router.query.name === "1204"
+        ? "พรีเมียร์ลีก อังกฤษ"
+        : router.query.name === "1007"
+          ? "ยูโรป้า ลีก"
+          : router.query.name === "1198"
+            ? "เอฟเอ คัพ อังกฤษ"
+            : router.query.name === "1399"
+              ? "ลาลีกา สเปน"
+              : router.query.name === "1269"
+                ? "กัลโช่ เซเรีย อา อิตาลี"
+                : router.query.name === "1229"
+                  ? "บุนเดสลีกา เยอรมัน"
+                  : router.query.name === "1322"
+                    ? "เอเรดิวิซี่ ฮอลแลนด์"
+                    : router.query.name === "1221"
+                      ? "ลีก เอิง ฝรั่งเศส"
+                      : router.query.name === "1271"
+                        ? "เจ ลีก ญี่ปุ่น"
+                        : router.query.name && router.query.name.replace(/-/g, " ")
+                            : router.query.name && router.query.name.replace(/-/g, " ")
+                            let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
+
+                          //console.log(nav)
+                          for (var i = 0; i < nav.length; i++)
+                            if (nav[i] == "football")
+                              nav[i] = "ฟุตบอล";
+                            else if (nav[i] == router.query.name)
+                              nav[i] = toTh;
+                             
+                          nav.push(pageTitle)
+                          nav[1] = toTh;
+                          nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
+
+  /*let toTh = router.query.league
     ? router.query.league === "uefa-league"
       ? "ยูฟ่า แชมเปี้ยนส์ลีก"
       : router.query.league === "premier-league"
@@ -48,7 +111,9 @@ const PremierLeague = ({ }) => {
                               nav[i] = "ฟุตบอล";
                             else if (nav[i] == router.query.league)
                               nav[i] = toTh;
-                          nav.push(pageTitle)
+                          nav.push(pageTitle)*/
+
+
 
   const [isVoted, setVoted] = useState(false);
   const [score, setScore] = useState(true)
@@ -89,7 +154,7 @@ const PremierLeague = ({ }) => {
     }
   }
 
-  let data = [
+  /*let data = [
     {
       type: "FT",
       date: "2020/09/12",
@@ -99,7 +164,40 @@ const PremierLeague = ({ }) => {
       scoreB: "3",
       teamB: "Ferencvaros"
     },
+  ]*/
+ 
+  let data = [
+    {
+      title: props.league["@name"],
+      type: props.league.match["@status"],
+      date: props.league.match["@date"],
+      team: props.league.match.localteam["@name"],
+      score:props.league.match.localteam["@goals"] + " - " +props.league.match.visitorteam["@goals"] ,
+      scoreA:props.league.match.localteam["@goals"],
+      scoreB:props.league.match.visitorteam["@goals"],
+      teamB: props.league.match.visitorteam["@name"]
+    },
   ]
+
+  let matchionfoblank = [
+    {
+      id: "",
+      time: "'",
+      home: "",
+      homeChange: {
+        in: "",
+        out: ""
+      },
+      score: {
+        cardHome: "",
+        score: "",
+        cardAway: ""
+      },
+      away: "",
+      awayChange: null
+    }
+  ]
+  
   let matchionfo = [
     {
       id: "1",
@@ -183,6 +281,7 @@ const PremierLeague = ({ }) => {
       awayChange: null,
     }
   ]
+
   return (
     <Layout className="px-0 px-md-3">
       <HeaderSeo
@@ -203,24 +302,47 @@ const PremierLeague = ({ }) => {
           {id: "3", name: "LINE-UPS", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/line-us`, active: false },
           {id: "3", name: "H2H", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
         ]}
-      >
+      >  
+        
         <div className='card border-top-0 py-4 mb-4 mb-sm-0'>
+       
           {
-          score === true
-          ? (
-            <MatchIonfo 
-              type="FT"
-              matchionfo={matchionfo}
-            />
-            )
-            : ""
+             Array.isArray(obj.event) ? 
+            (
+              <MatchIonfo 
+                type={router.query.type}
+                matchionfo={obj.event}
+              />
+             ) :
+             /* (obj.event === null)
+              ? (<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล null</h1></center></div>)
+            :*/
+              (obj.event === "reload")
+              ? (<div style={{padding: "20px"}}>
+                <center>
+                  {
+                  obj.summary === null ? <h1>ไม่มีข้อมูล</h1>
+                  
+                  :<MatchSummary
+                    type={title_obj.title}
+                    matchionfo={obj.summary}
+                   />
+                  }
+                  
+                  {console.log(obj.summary)}
+                  </center>
+                  </div>
+                )
+              :<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
+
           }
+          
           <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4">
             <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
               venue:
             </div>
             <div className="card-body">
-              <p className="mb-0">The American Express Community Stadium</p>
+              <p className="mb-0">{props.league.match.matchinfo.stadium["@name"]}</p>
             </div>
           </div>
           <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4">
@@ -228,7 +350,7 @@ const PremierLeague = ({ }) => {
               referee:
             </div>
             <div className="card-body">
-              <p className="mb-0">Chris Kavanagh(Englang)</p>
+              <p className="mb-0">{props.league.match.matchinfo.referee["@name"]}</p>
             </div>
           </div>
           <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0">
@@ -258,6 +380,45 @@ const PremierLeague = ({ }) => {
       </TopLiveSoccerContent>
     </Layout>
   );
+}
+
+PremierLeague.getInitialProps = async ({query}) => {
+
+  let league =  query.league;
+  let name =  query.name;
+
+  const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/commentaries/match?id=${league}&league=${name}&json=1`)
+  const data = await res.json()
+
+  return { 
+    league: data.commentaries.tournament
+   }
+
+  /*let paths =  asPath;
+
+  if(paths.indexOf("#") > -1){
+
+    let newurl = paths.split("#");
+    
+    if(newurl[1].indexOf("&&") >-1){
+
+      let lasturl = newurl[1].split("&&");
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/commentaries/match?id=${lasturl[0]}&league=${lasturl[1]}&json=1`)
+      const data = await res.json()
+
+      return { 
+        league: data.commentaries.tournament.match
+       }
+    }
+    else{
+
+      return { 
+        league: null
+       }
+
+    }
+ }*/
+  
 }
 
 export default PremierLeague;

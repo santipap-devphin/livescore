@@ -126,7 +126,7 @@ export default class Home extends Component {
                   title={res['@name']}
                   data={res.matches.match}
                   highlight={true} 
-                  exam = {""/*res.matches.match*/}
+                  exam = {res['@id']}
                   />
                   
             </div>
@@ -146,7 +146,7 @@ export default class Home extends Component {
                   title={res['@name']}
                   data={res.matches.match}
                   highlight={true} 
-                  exam = {""/*res.matches.match*/}
+                  exam = {res['@id']}
                   />
               </div>
               :

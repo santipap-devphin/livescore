@@ -20,7 +20,7 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
             <span className="versus font-weight-normal">{scoreTeamB}</span>
           </div>
           <div className="date-time">
-            ยังไม่เริ่มแข่ง
+            
             {/* December 8, 2018
             <span className="time">16:30</span> */}
           </div>

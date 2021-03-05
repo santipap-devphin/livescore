@@ -5,7 +5,7 @@ import {NavDateStyle} from "./style"
 
 const NavDate = ({onClickLeft, onClickRight, className, DataDate ,onClicks}) => {
 
-  {console.log()}
+ 
   return (
 
     <NavDateStyle className={`nav nav-pills row mx-0 bg-light flex-nowrap align-items-center text-center mb-md-4 px-0 ${className}`}>

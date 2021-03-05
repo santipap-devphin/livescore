@@ -46,8 +46,6 @@ const Layout = (props) => {
     let Bundesliga = []
     let SerieA = []
 
-    console.log(pathname)
-    
     /*props.standings[1].LaLiga.team.map((res,value) => (
 
       LaLigaSantander.push({"key": res["@position"], "title":res["@name"], "matches": res.overall["@gp"], "gd": res.total["@gd"], "points":  res.total["@p"]})
