@@ -146,7 +146,7 @@ const TableBattleMobile = ({title, data, className }) => {
 TableBattleMobile.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  /*data: PropTypes.array.isRequired,*/
 };
 TableBattleMobile.defaultProps = {
   className: "",

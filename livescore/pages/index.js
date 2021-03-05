@@ -44,15 +44,17 @@ export default class Home extends Component {
     const resSerieA = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1269.xml?json=1')
     const jsonSerieA = await resSerieA.json()*/
  
-    let leage = [];
+    //let leage = [];
 
-    leage.push({home: data})
+
+
+    //leage.push({home: data})
     /*leage.push({LaLiga: jsonlaliga.standings.tournament})
     leage.push({PremierLeague: jsonpre.standings.tournament})
     leage.push({Bundesliga: jsonbun.standings.tournament})
     leage.push({Seriea: jsonSerieA.standings.tournament})*/
 
-    return {list:leage}
+    return {home: data}
 
   }
 
@@ -114,8 +116,8 @@ export default class Home extends Component {
             onClickLeft={() => console.log("left")}
             onClickRight={() => console.log("right")}
           />
-          
-          {this.props.list[0].home.scores.category.map((res,value) => (
+          {console.log(this.props)}
+          {this.props.home.scores.category.map((res,value) => (
 
              
              (res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
@@ -136,7 +138,7 @@ export default class Home extends Component {
             
             ))}
 
-            {this.props.list[0].home.scores.category.map((res,value) => (
+            {this.props.home.scores.category.map((res,value) => (
 
 
               (res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
@@ -165,7 +167,7 @@ export default class Home extends Component {
 
                   </div>
 
-                  {this.props.list[0].home.scores.category.map((res,value) => (
+                  {this.props.home.scores.category.map((res,value) => (
 
                     (res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1399" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
                         <div key={value.toString()}>
@@ -182,7 +184,7 @@ export default class Home extends Component {
                        
                   ))}
 
-                {this.props.list[0].home.scores.category.map((res,value) => (
+                {this.props.home.scores.category.map((res,value) => (
 
                     (res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
                     <div key={value.toString()}>

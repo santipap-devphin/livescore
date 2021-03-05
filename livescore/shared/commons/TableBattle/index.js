@@ -170,7 +170,7 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
 TableBattle.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  /*data: PropTypes.array.isRequired,*/
   highlight: PropTypes.bool
 };
 TableBattle.defaultProps = {
