@@ -1,6 +1,6 @@
 import Layout from "../shared/container/Layout"
 import axios from 'axios';
-import NavDate from "../shared/commons/NavDate"
+import NavDate from "../shared/commons/Navdate"
 import HeaderSeo from "../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
 

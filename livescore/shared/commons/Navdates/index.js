@@ -3,7 +3,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import PropTypes from 'prop-types';
 import {NavDateStyle} from "./style"
 
-const NavDate = ({onClickLeft, onClickRight, className, DataDate ,onClicks}) => {
+const NavDates = ({onClickLeft, onClickRight, className, DataDate ,onClicks}) => {
 
  
   return (
@@ -35,7 +35,7 @@ const NavDate = ({onClickLeft, onClickRight, className, DataDate ,onClicks}) => 
 };
 
 
-NavDate.propTypes = {
+NavDates.propTypes = {
   className: PropTypes.string,
   onClickLeft: PropTypes.func,
   onClickRight: PropTypes.func,
@@ -43,4 +43,4 @@ NavDate.propTypes = {
 };
 
 
-export default NavDate;
+export default NavDates;
