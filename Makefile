@@ -1,5 +1,8 @@
 pull:
-	git fetch && git pull
+	git reset --hard
+	git clean -f
+	git fetch
+	git pull
 build:
 	docker-compose build nextjs
 start:
