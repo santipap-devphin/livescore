@@ -1,3 +1,7 @@
 # livescore
 
-exampleeeeeeee111
+## On server
+
+```bash
+$ make update
+```
