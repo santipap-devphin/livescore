@@ -5,7 +5,7 @@ export const NavDateStyle = styled.div`
     .nav-link {
       text-align: center;
       position: relative;
-      color: #AAAAAA !important;
+      color: #aaaaaa !important;
       @media (min-width: 768px) {
         color: ${({ theme }) => theme.colors.primary_dark};
       }
@@ -16,7 +16,8 @@ export const NavDateStyle = styled.div`
         @media (min-width: 768px) {
           /* color: #AAAAAA !important; */
           color: ${({ theme }) => theme.colors.white} !important;
-          background-color: ${({ theme }) => theme.colors.primary_dark} !important;
+          background-color: ${({ theme }) =>
+            theme.colors.primary_dark} !important;
           font-weight: 400;
         }
         &:after {
@@ -24,7 +25,8 @@ export const NavDateStyle = styled.div`
           width: 100%;
           height: 2px;
           display: block;
-          background-color: ${({ theme }) => theme.colors.primary_dark} !important;
+          background-color: ${({ theme }) =>
+            theme.colors.primary_dark} !important;
           bottom: 0;
           position: absolute;
           left: 0;
@@ -35,11 +37,11 @@ export const NavDateStyle = styled.div`
       }
     }
     .show {
-      >.nav-link {
+      > .nav-link {
         color: ${({ theme }) => theme.colors.primary_dark} !important;
         background: ${({ theme }) => theme.colors.gray}!important;
         @media (min-width: 768px) {
-          color: #AAAAAA !important;
+          color: #aaaaaa !important;
           background-color: #606060 !important;
         }
       }
