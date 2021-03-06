@@ -6,7 +6,8 @@ RUN apk add --update curl tzdata && \
   apk del tzdata && \
   rm -rf /var/cache/apk/*
 COPY ./package*.json ./
-RUN npm install --production
+RUN npm install --production && \
+  npm audit fix
 COPY ./ ./
 RUN npm run build
 EXPOSE 3000
