@@ -3,22 +3,15 @@ import axios from 'axios';
 import NavDate from "../shared/commons/Navdate"
 import HeaderSeo from "../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
-import { useState,useEffect } from 'react'
+
 
 const TableBattle = dynamic(() => import('../shared/commons/TableBattle'));
 const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobile'));
 
+
 const Home = (props) => {
 
-  const [loads, setLoads] = useState(false);
-
   
-
-  //setLoads(true)
-
-  
-   console.log(props.load)
-
   function datee(nextday){
 
     const today = new Date()
@@ -181,10 +174,10 @@ return (
   )
 
 }
+Home.propTypes = {
 
+};
 Home.getInitialProps = async (ctx) => {
-
-  console.log(ctx)
 
   const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
   const data = await res.json()
