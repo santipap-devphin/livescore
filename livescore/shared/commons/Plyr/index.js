@@ -6,6 +6,8 @@ import { AiOutlineCalendar, AiOutlineEye, AiOutlineShareAlt } from "react-icons/
 import {PlyrStyle} from "./style"
 class PlyrComponent extends React.Component {
   constructor(props) {
+
+    console.log(props)
     super(props)
     this.state = {
        path: [],
@@ -13,31 +15,39 @@ class PlyrComponent extends React.Component {
     }
   }
   
-  componentDidMount() {
+  
+  
+ /* componentDidMount() {
     this.player = new plyr('.js-plyr', this.props.options)
     this.player.source = this.props.sources
+    //this.player.source = this.props.urlvideo
+  
   }
 
   componentWillUnmount() {
     this.player.destroy()
-  }
+  }*/
 
   render() {
     return (
       <PlyrStyle className="border-bottom pb-4">
-        <video
+        
+        {/*<video
           playsInline
           controls
           data-poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
           className='js-plyr plyr'
         >
-        </video>
+        </video>*/}
+        <iframe width="820" height="500"
+          src={this.props.urlvideo}>
+          </iframe>
         <div className="video_content p-3">
           <Link
             href={{
-              pathname: `/highlight/[post]`,
+              pathname: `/highlight/${this.props.matchid}`,
             }}
-            as={this.props.url}
+            as={this.props.matchid}
           >
             <a className="d-block"><h2 className="title">{this.props.title}</h2></a>
           </Link>
@@ -106,12 +116,12 @@ PlyrComponent.defaultProps = {
     type: 'video',
     sources: [
       {
-        src: 'https://rawcdn.githack.com/chintan9/Big-Buck-Bunny/e577fdbb23064bdd8ac4cecf13db86eef5720565/BigBuckBunny720p30s.mp4',
+        src: 'https://www.youtube.com/embed/JH5K5Vs7w2U',
         type: 'video/mp4',
         size: 720,
       },
       {
-        src: 'https://rawcdn.githack.com/chintan9/Big-Buck-Bunny/e577fdbb23064bdd8ac4cecf13db86eef5720565/BigBuckBunny1080p30s.mp4',
+        src: 'https://www.youtube.com/embed/JH5K5Vs7w2U',
         type: 'video/mp4',
         size: 1080,
       },

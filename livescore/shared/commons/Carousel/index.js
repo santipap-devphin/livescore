@@ -65,7 +65,10 @@ const Carousel = ({slideValues, title, className}) => {
     <SliderStyle {...settings} className="d-none d-md-block">
         {slideValues.map((item, k) => (
           <figure className={className} key={k.toString()}>
-            <img src={item.urlToImage} className="card-img-top" alt={item.title} />
+            {/*<img src={item.urlToImage} className="card-img-top" alt={item.title} />*/}
+              <iframe width="820" height="500"
+                src={item.urlToImage}>
+              </iframe>
             <figcaption>
               <Link
                 href={{

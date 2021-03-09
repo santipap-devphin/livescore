@@ -80,6 +80,7 @@ Layout.defaultProps = {
     
 Standings.getInitialProps = async (ctx) => {
 
+   
     const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1399.xml?json=1')
     const json = await res.json()
  

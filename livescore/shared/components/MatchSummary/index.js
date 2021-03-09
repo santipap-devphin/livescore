@@ -20,7 +20,7 @@ const MatchSummary = ({type, matchionfo}) => {
                     <div className="home col-4 px-2"> 
                     {matchionfo.localteam.goals.player.map((item, index) => (
 
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@player"]}   (goal)</p>
+                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
                     ))}
                     </div>
                     : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.localteam.goals.player["@minute"]}</span>}</div>
@@ -37,7 +37,7 @@ const MatchSummary = ({type, matchionfo}) => {
                     <div className="home col-4 px-2"> 
                     {matchionfo.localteam.yellowcards.player.map((item, index) => (
 
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@player"]}   (goal)</p>
+                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
                     ))}
                     </div>
                     : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.localteam.yellowcards.player["@minute"]}</span>}</div>
@@ -54,7 +54,7 @@ const MatchSummary = ({type, matchionfo}) => {
                     <div className="home col-4 px-2"> 
                     {matchionfo.localteam.redcards.player.map((item, index) => (
 
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@player"]}   (goal)</p>
+                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
                     ))}
                     </div>
                     : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.localteam.redcards.player["@minute"]}</span>}</div>
@@ -73,7 +73,7 @@ const MatchSummary = ({type, matchionfo}) => {
                     <div className="away col-4 px-2 text-left"> 
                     {matchionfo.visitorteam.goals.player.map((item, index) => (
 
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@player"]}   (goal)</p>
+                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
                     ))}
                     </div>
                     : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.visitorteam.goals.player["@minute"]}</span>}</div>
@@ -91,7 +91,7 @@ const MatchSummary = ({type, matchionfo}) => {
                     <div className="away col-4 px-2 text-left"> 
                     {matchionfo.visitorteam.yellowcards.player.map((item, index) => (
 
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@player"]}   (goal)</p>
+                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
                     ))}
                     </div>
                     : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.visitorteam.yellowcards.player["@minute"]}</span>}</div>
@@ -108,7 +108,7 @@ const MatchSummary = ({type, matchionfo}) => {
                     <div className="away col-4 px-2 text-left"> 
                     {matchionfo.visitorteam.redcards.player.map((item, index) => (
 
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@player"]}   (goal)</p>
+                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
                     ))}
                     </div>
                     : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.visitorteam.redcards.player["@minute"]}</span>}</div>
@@ -127,7 +127,7 @@ const MatchSummary = ({type, matchionfo}) => {
 
 MatchSummary.propTypes = {
   type: PropTypes.string,
-  matchionfo: PropTypes.array.isRequired
+  //matchionfo: PropTypes.array.isRequired
 };
 
 

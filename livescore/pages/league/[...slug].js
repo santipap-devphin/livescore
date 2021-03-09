@@ -52,6 +52,18 @@ const Post = (props) => {
   return (
     <>
        <Layout className="px-0 px-md-3">
+       <HeaderSeo
+          siteName=""
+          title="live score"
+          desc=""
+          imgSrc=""
+          metaUrl=""
+          keyWords=""
+          author=""
+        />
+        <div className="d-none d-md-block">
+          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
        <NavDate 
         DataDate={navDate}
         onClickLeft={() => console.log("left")}
@@ -62,19 +74,57 @@ const Post = (props) => {
         {
           props.listdata.map((res,val) => (
             (res["@id"] === slug[0]) ? 
-              <TableBattle  
-              className="highlight bg-secondary text-white"
-              title={res['@name']}
-              data={res.matches.match}
-              highlight={false} 
-              exam = {""/*res.matches.match*/}
-            />:
-            null
+            
+            <div key={val.toString()}>
+                  <TableBattle  
+                  className="highlight bg-secondary text-white"
+                  title={res['@name']}
+                  data={res.matches.match}
+                  highlight={false} 
+                  exam = {res['@id']}
+                  />
+              </div> 
+                :
+              null
           
 
           ))
 
         }
+
+        </div>
+
+        <div className="d-block d-md-none">
+                  <div className="banner px-3">
+
+                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+
+                  </div>
+
+                  {
+                      props.listdata.map((res,val) => (
+                        (res["@id"] === slug[0]) ? 
+                        
+                        <div key={val.toString()}>
+
+                             <TableBattleMobile 
+                              title={res['@name']}
+                              data={res.matches.match}
+                              highlight={false}
+                              />
+                              
+                          </div> 
+                            :
+                          null
+                      
+
+                      ))
+
+                    }
+
+
+        </div>
 
        </Layout>
      
@@ -90,7 +140,7 @@ Post.getInitialProps = async ({query}) => {
 
    if(lslug[1] === "today" || lslug[1] === "undefined"){
 
-    const res = await fetch(`http://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
     const data = await res.json()
 
     return { 
@@ -99,7 +149,7 @@ Post.getInitialProps = async ({query}) => {
 
    }else{
 
-    const res = await fetch(`http://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
     const data = await res.json()
 
     return { 

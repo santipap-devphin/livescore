@@ -39,6 +39,8 @@ const HighLight = (props) => {
     loopThroughPosts(count);
   };
 
+  
+
   // const onClickLoadMore = (e) => {
   //   e.preventDefault();
   //   setLimit(item + 2)
@@ -69,34 +71,51 @@ const HighLight = (props) => {
 
   let clicks = []
   let obj = {};
+  var clipss = []
+
+
 
   {
                 props.highLight.map((res,value) => (
 
-
-                 
-                        (res.matches.match.videos === "undefined" ? 
-                        (
-                        <div>no</div>
+                        Array.isArray(res.matches.match) ? 
+                        //console.log(res.matches.match)
+                        ""
                         
-                        ) : (
-                        <div>{res.matches.match.videos}</div>
-                        )
-                        )
-                        /*res.matches.match.map((ress,values) => (
+                        :
 
+                      Array.isArray(res.matches.match.videos.item) ?  
+                      clipss.push({id:res["@id"]
+                                  ,url:res.matches.match.localteam["@name"]+" vs "+res.matches.match.visitorteam["@name"]
+                                  ,title:res.matches.match["@id"]
+                                  ,img:res.matches.match.videos.item[0]["#cdata-section"]
+                                  ,urlToImage:res.matches.match.videos.item[0]["#cdata-section"]
+                                  ,publishedAt: res.matches.match["@date"] +"  "+res.matches.match["@time"]
+                                  ,view:"0"
+                                  ,shared:"0"})
+                    :
+                    
+                    clipss.push({id:res["@id"]
+                                  ,url:res.matches.match.localteam["@name"]+" vs "+res.matches.match.visitorteam["@name"]
+                                  ,title:res.matches.match["@id"]
+                                  ,img:res.matches.match.videos.item["#cdata-section"]
+                                  ,urlToImage:res.matches.match.videos.item["#cdata-section"]
+                                  ,publishedAt: res.matches.match["@date"] +"  "+res.matches.match["@time"]
+                                  ,view:"0"
+                                  ,shared:"0"})
                           
-  
-  
-                         
-                        ))*/
-
-
                        
                   ))
   
                 }
 
+        
+
+   //clipss.splice(4, 1)
+   clipss.slice(0,5)
+
+              
+  
   let clipsSlide = [
     {
       id: "1", 
@@ -158,7 +177,7 @@ const HighLight = (props) => {
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <h1 className="mb-4">HIGHLIGHT!</h1>
       <Carousel 
-        slideValues={clipsSlide} 
+        slideValues={clipss} 
         title="LaLiga Santander"
         className="mb-4"
       />

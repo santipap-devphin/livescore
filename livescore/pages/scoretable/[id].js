@@ -81,10 +81,6 @@ Teams.getInitialProps = async ({query}) => {
      return { 
         League: data.standings.tournament
        }
-    
- 
-  
- 
  }
 
 
