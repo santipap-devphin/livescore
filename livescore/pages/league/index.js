@@ -1,13 +1,13 @@
 import React from 'react';
 import Layout from "../../shared/container/Layout"
 import HeaderSeo from "../../shared/commons/HeaderSeo"
-import NavDate from "../../shared/commons/Navdate"
+import NavDate from "../../shared/commons/NavDate"
 import TableBattle from "../../shared/commons/TableBattle"
 import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
 const Teams = (props) => {
 
-  console.log(props)
+  //console.log(props)
 
   function datee(nextday){
 

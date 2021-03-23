@@ -26,7 +26,7 @@ const Squad = (props) => {
     setLoad(true);
  })
 
- console.log(props)
+ //console.log(props)
 
  props.players.player.map((sq,index) => (
     (sq["@position"] === "G") ?  gk.push(sq) : (sq["@position"] === "M") ? md.push(sq) : (sq["@position"] === "A") ? sk.push(sq) : def.push(sq)

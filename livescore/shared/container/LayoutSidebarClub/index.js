@@ -24,7 +24,7 @@ const LayoutSidebarClub = ({children }) => {
     { key: "10", title: "Barcelona", matches: "2", gd: "7", points: "6" },
   ]
 
-  console.log(children)
+  //console.log(children)
   return (
     <>
       <Header  />

@@ -40,7 +40,7 @@ const LineUs = (props) => {
                           : router.query.name && router.query.name.replace(/-/g, " ")
                           let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
 
-                        console.log(toTh)
+                        //console.log(toTh)
                         for (var i = 0; i < nav.length; i++)
                           if (nav[i] == "football")
                             nav[i] = "ฟุตบอล";

@@ -11,7 +11,7 @@ import PrimaveraCup from "../../mock/PrimaveraCup";
 import PFL from "../../mock/PFL";
 
 const Teams = () => {
-  let navDate = [
+  let navDates = [
     { id: "1", date: "SEP 28", route: "/", today: false },
     { id: "2", date: "SEP 29", route: "/", today: false },
     { id: "3", date: "SEP 30", route: "/", today: false },
@@ -43,7 +43,7 @@ const Teams = () => {
           alt=""
         />
         <NavDate
-          DataDate={navDate}
+          DataDate={navDates}
           onClickLeft={() => console.log("left")}
           onClickRight={() => console.log("right")}
         />

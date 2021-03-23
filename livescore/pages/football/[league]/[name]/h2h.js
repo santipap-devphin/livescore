@@ -13,7 +13,7 @@ import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerCon
 
 const H2h = (props) => {
 
-  console.log(props)
+  //console.log(props)
   const router = useRouter()
   let path = router.asPath
   const host = path.split("/");
@@ -48,7 +48,7 @@ const H2h = (props) => {
                           : router.query.name && router.query.name.replace(/-/g, " ")
                           let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
 
-                        console.log(toTh)
+                        //console.log(toTh)
                         for (var i = 0; i < nav.length; i++)
                           if (nav[i] == "football")
                             nav[i] = "ฟุตบอล";

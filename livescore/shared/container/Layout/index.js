@@ -40,7 +40,7 @@ const Layout = (props) => {
   const router = useRouter()
   //const pathh = router.asPath
   let pathname = router.pathname
-  console.log(pathname)
+  //console.log(pathname)
   const { isMobile } = useDeviceDetect();
 
     let LaLigaSantander = []

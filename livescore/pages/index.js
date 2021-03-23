@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from "../shared/container/Layout"
 import axios from 'axios';
-import NavDate from "../shared/commons/Navdate"
+import NavDate from "../shared/commons/NavDate"
 import HeaderSeo from "../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
 
@@ -12,7 +12,7 @@ const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobi
 
 const Home = (props) => {
 
-   console.log(props)
+   //console.log(props)
 
   const [priority , setPriority] = useState([]);
   
@@ -47,10 +47,10 @@ const Home = (props) => {
    
   });
 
-  console.log(priority)
+  //console.log(priority)
 
 
-  let navDate = [
+  let navDates = [
     { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: false },
     { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: false },
     { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: false },
@@ -76,7 +76,7 @@ return (
         <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
         <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
         <NavDate 
-          DataDate={navDate}
+          DataDate={navDates}
           onClickLeft={() => console.log("left")}
           onClickRight={() => console.log("right")}
         />

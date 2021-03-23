@@ -42,7 +42,7 @@ const Tabs = ({children /* initialTab*/}) => {
                      
                      const label = tab.props.label;
 
-                     console.log(slugify(label) +"==="+ activetab)
+                     //console.log(slugify(label) +"==="+ activetab)
                      
                      return(
                          

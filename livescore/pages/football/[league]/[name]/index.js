@@ -456,7 +456,7 @@ if(typeof router.query.event === "undefined"){
                        
 
 
-                      console.log(events)
+                      //console.log(events)
                         /*sortable.sort(function(a, b) {
                             console.log(a[1] + " "+b[1])
                             return a[1] - b[1];

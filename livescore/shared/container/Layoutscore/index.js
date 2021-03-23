@@ -46,7 +46,7 @@ const Layout = (props) => {
     let Bundesliga = []
     let SerieA = []
 
-    console.log(pathname)
+   // console.log(pathname)
     
     /*props.standings[1].LaLiga.team.map((res,value) => (
 

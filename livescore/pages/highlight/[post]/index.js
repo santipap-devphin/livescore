@@ -33,7 +33,7 @@ const index = (props) => {
       urlvideo = props.video.videos.item["#cdata-section"];
   }
   
- console.log(props)
+// console.log(props)
   return (
     <Layout >
       <HeaderSeo

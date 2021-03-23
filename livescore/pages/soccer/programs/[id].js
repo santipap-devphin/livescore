@@ -1,7 +1,7 @@
 
 import Layout from "../../../shared/container/Layout"
 import axios from 'axios';
-import NavDate from "../../../shared/commons/Navdate"
+import NavDate from "../../../shared/commons/NavDate"
 import HeaderSeo from "../../../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
 
@@ -33,7 +33,7 @@ const Homefilter = (props) => {
 
   }
 
-  let navDate = [
+  let navDates = [
     { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: false },
     { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: false },
     { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: false },
@@ -53,18 +53,18 @@ const Homefilter = (props) => {
  
 
   {
-    ( props.id === "d-3" ) ? navDate[0] = { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: true } 
+    ( props.id === "d-3" ) ? navDates[0] = { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: true } 
     :
-    ( props.id === "d-2" ) ? navDate[1] = { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
+    ( props.id === "d-2" ) ? navDates[1] = { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
     :
-    ( props.id === "d-1" ) ? navDate[2] = { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
+    ( props.id === "d-1" ) ? navDates[2] = { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
     :
-    ( props.id === "d1" ) ? navDate[4] = { id: "5", date: datee(1), route: "/soccer/programs/d1", today: true } 
+    ( props.id === "d1" ) ? navDates[4] = { id: "5", date: datee(1), route: "/soccer/programs/d1", today: true } 
     : 
-    ( props.id === "d2" ) ? navDate[5] = { id: "6", date: datee(2), route: "/soccer/programs/d2", today: true } 
+    ( props.id === "d2" ) ? navDates[5] = { id: "6", date: datee(2), route: "/soccer/programs/d2", today: true } 
     :
-    ( props.id === "d3" ) ? navDate[6] = { id: "7", date: datee(3), route: "/soccer/programs/d3", today: true } 
-    :(navDate[3] = { id: "4", date: datee(0), route: "/", today: true })
+    ( props.id === "d3" ) ? navDates[6] = { id: "7", date: datee(3), route: "/soccer/programs/d3", today: true } 
+    :(navDates[3] = { id: "4", date: datee(0), route: "/", today: true })
   }
 
   {
@@ -95,7 +95,7 @@ const Homefilter = (props) => {
           <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
           <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
           <NavDate 
-            DataDate={navDate}
+            DataDate={navDates}
             onClickLeft={() => console.log("left")}
             onClickRight={() => console.log("right")}
           />

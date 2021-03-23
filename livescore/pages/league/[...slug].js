@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react'
 import Link from 'next/link'
 import Layout from "../../shared/container/Layout"
 import HeaderSeo from "../../shared/commons/HeaderSeo"
-import NavDate from "../../shared/commons/Navdate"
+import NavDate from "../../shared/commons/NavDate"
 import TableBattle from "../../shared/commons/TableBattle"
 import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
@@ -14,7 +14,7 @@ const Post = (props) => {
   const router = useRouter()
   const slug = router.query.slug || []
 
- console.log(slug)
+ //console.log(slug)
   const [items, setItems] = useState();
   const [load, setLoad] = useState(false);
   const [error, setError] = useState('');
@@ -47,7 +47,7 @@ const Post = (props) => {
         { id: "7",pathid:"d3", date: datee(3), route: `/league/${slug[0]}/d3`, today: false }
       ]
 
-       console.log(navDate)
+      // console.log(navDate)
  
   return (
     <>

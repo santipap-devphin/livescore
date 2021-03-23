@@ -39,7 +39,7 @@ const TableScore = () => {
 
     const handleChangeLeague = (value) => {
 
-        console.log(value.target.value)
+       // console.log(value.target.value)
         setLeague(value.target.value)
         fetchItems(value.target.value)
 
@@ -173,7 +173,7 @@ const TableScore = () => {
                                     </div>
                                 </div>
 
-                                {console.log(isLeague)}
+                                {/*console.log(isLeague)*/}
                                 {
 
                                     (err === true) ? 

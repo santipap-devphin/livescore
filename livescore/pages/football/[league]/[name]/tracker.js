@@ -15,7 +15,7 @@ import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerCon
 
 const Tracker = (props) => {
 
-  console.log(props)
+  //console.log(props)
 
 
   let obj = {};
@@ -55,7 +55,7 @@ const Tracker = (props) => {
                             : router.query.name && router.query.name.replace(/-/g, " ")
                             let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
 
-                          console.log(toTh)
+                          //console.log(toTh)
                           for (var i = 0; i < nav.length; i++)
                             if (nav[i] == "football")
                               nav[i] = "ฟุตบอล";
