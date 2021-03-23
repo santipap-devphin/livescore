@@ -20,7 +20,7 @@ const Teams = () => {
     { id: "6", date: "OCT 3", route: "/", today: false },
     { id: "7", date: "OCT 4", route: "/", today: false },
   ];
-  return (
+  return ({/*
     <Layout className="px-0 px-md-3">
       <HeaderSeo
         siteName=""
@@ -157,7 +157,7 @@ const Teams = () => {
         </div>
         <TableBattleMobile title="Russia - PFL" data={PFL} highlight={false} />
       </div>
-    </Layout>
+  </Layout>*/}
   );
 };
 

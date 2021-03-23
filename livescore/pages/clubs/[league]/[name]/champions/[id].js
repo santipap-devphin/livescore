@@ -35,7 +35,7 @@ const Champions = (props) => {
       { 
           League.map((fifa, index) => (
 
-           <SevenColCups cups={fifa} key={index.toString()} title= {fifa["@league"] + " " +"("+fifa["@count"]+")"} />
+           <SevenColCups cups={fifa} key={index} title= {fifa["@league"] + " " +"("+fifa["@count"]+")"} />
 
           ))
       

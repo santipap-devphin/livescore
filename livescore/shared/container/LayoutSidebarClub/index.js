@@ -4,25 +4,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer"
 import Sidebar from "../../components/Sidebar"
 import ClubNav from "../../components/ClubNav"
-import HeaderTitle from "../../commons/HeaderTitle"
-import TopPlayer from "../../commons/TopPlayer"
-import ChampionsLeagueTable from "../../commons/ChampionsLeagueTable"
-
-import Players from "../../../mock/Players"
 
 const LayoutSidebarClub = ({children }) => {
-  let matches = [
-    { key: "1", title: "Getafe", matches: "3", gd: "4", points: "7" },
-    { key: "2", title: "Valencia", matches: "4", gd: "2", points: "7" },
-    { key: "3", title: "Real Madrid", matches: "3", gd: "2", points: "7" },
-    { key: "4", title: "Villarreal", matches: "4", gd: "-1", points: "7" },
-    { key: "5", title: "Barcelona", matches: "2", gd: "7", points: "6" },
-    { key: "6", title: "Getafe", matches: "3", gd: "4", points: "7" },
-    { key: "7", title: "Valencia", matches: "4", gd: "2", points: "7" },
-    { key: "8", title: "Real Madrid", matches: "3", gd: "2", points: "7" },
-    { key: "9", title: "Villarreal", matches: "4", gd: "-1", points: "7" },
-    { key: "10", title: "Barcelona", matches: "2", gd: "7", points: "6" },
-  ]
+ 
 
   //console.log(children)
   return (

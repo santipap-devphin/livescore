@@ -7,7 +7,7 @@ import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
 const Teams = (props) => {
 
-  //console.log(props)
+  
 
   function datee(nextday){
 
@@ -82,7 +82,7 @@ const Teams = (props) => {
         <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
         <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       </div>
-     
+      <p>adasdasdasdasd</p>
       {props.listdata.map((res,value) => (
 
           (res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1399" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  

@@ -70,6 +70,7 @@ const Post = (props) => {
         onClickRight={() => console.log("right")}
        
       />
+     
 
         {
           props.listdata.map((res,val) => (
@@ -85,7 +86,7 @@ const Post = (props) => {
                   />
               </div> 
                 :
-              null
+              null 
           
 
           ))

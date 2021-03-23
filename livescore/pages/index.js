@@ -196,7 +196,7 @@ return (
 Home.propTypes = {
 
 };
-Home.getInitialProps = async (ctx) => {
+Home.getInitialProps = async  (ctx) => {
 
   const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
   const data = await res.json()

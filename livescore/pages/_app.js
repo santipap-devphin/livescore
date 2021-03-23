@@ -36,16 +36,7 @@ const theme = {
 };
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let { store } = ctx;
-    return {
-      pageProps: {
-        ...(Component.getInitialProps
-          ? await Component.getInitialProps(ctx)
-          : {}),
-      },
-    };
-  }
+  
   render() {
     const { Component, pageProps, store } = this.props;
     return (
