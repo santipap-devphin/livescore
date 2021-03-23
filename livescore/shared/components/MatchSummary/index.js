@@ -11,114 +11,58 @@ const MatchSummary = ({type, matchionfo}) => {
           {type}
         </div>
         <div className="card-body p-0">
-                <div className={`w-100 border-match row mx-0 align-items-center`}>
-                 {
-                    (matchionfo.localteam.goals === null) ? ""
-
-                    : Array.isArray(matchionfo.localteam.goals.player) ?  
+        {
+            matchionfo.map((item, index) => (
+              <div className={`w-100 border-match row mx-0 align-items-center`} key={index}>
+                <div className="time col-1 px-1 text-left">{item["@team"] === "localteam" ? <span>{item["@minute"]}</span> : "" }</div>
+                <div className="home col-4 px-2">
+                  {item["@team"] === "localteam" ? 
+                  
+                  <div> 
+                  { 
+                  item["@type"] === "goal" ?  <p className="mb-0 text-dark"><span>{}</span> { item["@name"]}   (goal)</p>
+                  :item["@type"] === "yellowcard" ? <div className="card-match"><img src="/assets/cards/788px-Yellow_card.png" alt="Yellow Card"  style={{width: "20px"}}/>{ item["@name"]}</div>
+                  :item["@type"] === "redcard" ? <div className="card-match"><img src="/assets/cards/591px-Red_card.png" alt="Red Card" style={{width: "20px"}} />{ item["@name"]}</div>
+                  :item["@type"] === "subst" ? <><p className="mb-0 text-dark">In:{item["@on"]}</p><p className="mb-0 text-secondary">Out:{item["@off"]}</p></>
+                  : "" 
+                  }
+                  </div> 
+                  
+                  : "" 
+                  
+                  }
+                  
                     
-                    <div className="home col-4 px-2"> 
-                    {matchionfo.localteam.goals.player.map((item, index) => (
-
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
-                    ))}
-                    </div>
-                    : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.localteam.goals.player["@minute"]}</span>}</div>
-                        <div className="home col-4 px-2">
-                        <p className="mb-0 text-dark"> { matchionfo.localteam.goals.player["@name"]}   (goal)</p>
-                        </div>
-                      </>
-                 }
-                 {
-                    (matchionfo.localteam.yellowcards === null) ? ""
-
-                    : Array.isArray(matchionfo.localteam.yellowcards.player) ?  
-                    
-                    <div className="home col-4 px-2"> 
-                    {matchionfo.localteam.yellowcards.player.map((item, index) => (
-
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
-                    ))}
-                    </div>
-                    : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.localteam.yellowcards.player["@minute"]}</span>}</div>
-                        <div className="home col-4 px-2">
-                        <div className="card-match"><img src="/assets/cards/788px-Yellow_card.png" alt="Yellow Card"  style={{width: "20px"}}/>{ matchionfo.localteam.yellowcards.player["@name"]}</div>
-                        </div>
-                      </>
-                 }
-                 {
-                    (matchionfo.localteam.redcards === null) ? ""
-
-                    : Array.isArray(matchionfo.localteam.redcards.player) ?  
-                    
-                    <div className="home col-4 px-2"> 
-                    {matchionfo.localteam.redcards.player.map((item, index) => (
-
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
-                    ))}
-                    </div>
-                    : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.localteam.redcards.player["@minute"]}</span>}</div>
-                        <div className="home col-4 px-2">
-                        <div className="card-match"><img src="/assets/cards/591px-Red_card.png" alt="Red Card" style={{width: "20px"}} />{ matchionfo.localteam.redcards.player["@name"]}</div>
-                        </div>
-                      </>
-                 }
-
-
-                {   
-                    (matchionfo.visitorteam.goals === null) ? ""
-
-                    : Array.isArray(matchionfo.visitorteam.goals.player) ?  
-                    
-                    <div className="away col-4 px-2 text-left"> 
-                    {matchionfo.visitorteam.goals.player.map((item, index) => (
-
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
-                    ))}
-                    </div>
-                    : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.visitorteam.goals.player["@minute"]}</span>}</div>
-                        <div className="away col-4 px-2 text-left">
-                        <p className="mb-0 text-dark"> { matchionfo.visitorteam.goals.player["@name"]}   (goal)</p>
-                        </div>
-                      </>
-                 }
-                 
-                 {
-                    (matchionfo.visitorteam.yellowcards === null) ? ""
-
-                    : Array.isArray(matchionfo.visitorteam.yellowcards.player) ?  
-                    
-                    <div className="away col-4 px-2 text-left"> 
-                    {matchionfo.visitorteam.yellowcards.player.map((item, index) => (
-
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
-                    ))}
-                    </div>
-                    : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.visitorteam.yellowcards.player["@minute"]}</span>}</div>
-                        <div className="away col-4 px-2 text-left">
-                        <div className="card-match"><img src="/assets/cards/788px-Yellow_card.png" alt="Yellow Card"  style={{width: "20px"}}/>{ matchionfo.visitorteam.yellowcards.player["@name"]}</div>
-                        </div>
-                      </>
-                 }
-                 {
-                    (matchionfo.visitorteam.redcards === null) ? ""
-
-                    : Array.isArray(matchionfo.visitorteam.redcards.player) ?  
-                    
-                    <div className="away col-4 px-2 text-left"> 
-                    {matchionfo.visitorteam.redcards.player.map((item, index) => (
-
-                            <p className="mb-0 text-dark"><span>{ item["@minute"]}</span> { item["@name"]}   (goal)</p>
-                    ))}
-                    </div>
-                    : <><div className="time col-1 px-2 text-left">{<span>{matchionfo.visitorteam.redcards.player["@minute"]}</span>}</div>
-                        <div className="away col-4 px-2 text-left">
-                        <div className="card-match"><img src="/assets/cards/591px-Red_card.png" alt="Red Card" style={{width: "20px"}} />{ matchionfo.visitorteam.redcards.player["@name"]}</div>
-                        </div>
-                      </>
-                 }
 
                 </div>
+               
+                <div className="col-2 px-0"></div>
+                <div className="away col-1 px-0 text-left">{item["@team"] === "visitorteam" ? <span>{item["@minute"]}</span> : "" }</div>
+                <div className="away col-4 px-2">
+                  {item["@team"] === "visitorteam" ? 
+                  
+                  <div> 
+                  { 
+                  item["@type"] === "goal" ?  <p className="mb-0 text-dark"><span>{}</span> { item["@name"]}   (goal)</p>
+                  :item["@type"] === "yellowcard" ? <div className="card-match"><img src="/assets/cards/788px-Yellow_card.png" alt="Yellow Card" style={{width: "20px"}} />  { item["@name"]}</div>
+                  :item["@type"] === "redcard" ? <div className="card-match"><img src="/assets/cards/591px-Red_card.png" alt="Red Card" style={{width: "20px"}} />  { item["@name"]}</div>
+                  :item["@type"] === "subst" ? <><p className="mb-0 text-dark">In:{item["@on"]}</p><p className="mb-0 text-secondary">Out:{item["@off"]}</p></>
+                  : "" 
+                  }
+                  </div> 
+                  
+                  : "" 
+                  
+                  }
+                  
+                    
+
+                </div>
+               
+               
+              </div>
+            ))
+          }
         </div>
     </MatchSummaryStyle>
   );

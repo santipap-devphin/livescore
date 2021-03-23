@@ -23,6 +23,20 @@ const ContentFooterPost = ({ linkNext, linkPrev }) => {
             </Link>
         </div>
       </div>
+
+      <div className="post-next-post mb-3 mb-md-0">
+        <div className="post-next-prev-content rounded-pill">
+          {/* <span>Next article</span> */}
+             <a 
+                  href={`/highlight/`} 
+                  className=""
+              >
+               กลับหน้าหลัก 
+              </a>
+            
+        </div>
+      </div>
+
       <div className="post-next-post mb-3 mb-md-0">
         <div className={`post-next-prev-content rounded-pill ${linkNext !== "" ? "" : "disabled"}`}>
           {/* <span>Next article</span> */}

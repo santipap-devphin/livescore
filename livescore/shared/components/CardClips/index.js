@@ -49,7 +49,7 @@ const CardClips = ({ className, grid, data }) => {
                       </span>
                     </a> */}
                     <figure>
-                      <img src={item.urlToImage} className="card-img-top" alt={item.title} />
+                      <img src={item.urlToImage} className="card-img-top" alt={item.titleurl} />
                       <figcaption>
                         <Link
                           href={{
@@ -71,7 +71,7 @@ const CardClips = ({ className, grid, data }) => {
                           as={`/highlight/${item.title}`}
                         >
                         <a className="d-block">
-                            <h5 className="card-title h6">{item.title}</h5>
+                            <h5 className="card-title h6">{item.titleurl}</h5>
                         </a>
                       </Link>
                       <p className="card-text small">
@@ -121,7 +121,8 @@ const CardClips = ({ className, grid, data }) => {
                   <div className="row no-gutters">
                     <div className="col-sm-4">
                       <figure>
-                        <img src={item.urlToImage} className="card-img-top" alt={item.title} />
+                       
+                        <iframe src={item.urlToImage} className="card-img-top" alt={item.titleurl}></iframe>
                         <figcaption>
                           <Link
                             href={{
@@ -144,7 +145,7 @@ const CardClips = ({ className, grid, data }) => {
                           }}
                           as={`/highlight/${item.title}`}
                         >
-                          <a className="d-block"><h2 className="title">{item.title}</h2></a>
+                          <a className="d-block"><h2 className="title">{item.titleurl}</h2></a>
                         </Link>
                         <div className="video_content-editor d-flex align-items-center">
                           <AiOutlineCalendar className="mr-2" /> {item.publishedAt}

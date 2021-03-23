@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Layout from "../shared/container/Layout"
 import axios from 'axios';
 import NavDate from "../shared/commons/Navdate"
@@ -11,6 +12,9 @@ const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobi
 
 const Home = (props) => {
 
+   console.log(props)
+
+  const [priority , setPriority] = useState([]);
   
   function datee(nextday){
 
@@ -29,6 +33,21 @@ const Home = (props) => {
     return newsformat;
 
   }
+
+  useEffect(() => {
+
+
+    /*props.home.scores.category.map((res,value) => (
+
+       
+        (res["@file_group"] === "england") ? 
+            setPriority([...priority, res["@file_group"]]) : null
+        )
+    )*/
+   
+  });
+
+  console.log(priority)
 
 
   let navDate = [
@@ -68,7 +87,7 @@ return (
             props.home.scores.category.map((res,value) => (
 
            
-            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
+            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
             
             <div key={value.toString()}> 
                  <TableBattle  
@@ -93,7 +112,7 @@ return (
            props.home.scores.category.map((res,value) => (
 
 
-            (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
+            (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
             <div key={value.toString()}> 
                 <TableBattle  
                 className="highlight bg-secondary text-white"
@@ -125,7 +144,7 @@ return (
                 (props.load === true) ? 
                 props.home.scores.category.map((res,value) => (
 
-                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1399" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
+                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1399" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
                       <div key={value.toString()}>
                             <TableBattleMobile 
                               title={res['@name']}
@@ -147,7 +166,7 @@ return (
               (props.load === true) ? 
               props.home.scores.category.map((res,value) => (
 
-                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
+                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
                   <div key={value.toString()}>
                         <TableBattleMobile 
                           title={res['@name']}

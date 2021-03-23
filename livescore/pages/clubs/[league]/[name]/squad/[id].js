@@ -26,6 +26,7 @@ const Squad = (props) => {
     setLoad(true);
  })
 
+ console.log(props)
 
  props.players.player.map((sq,index) => (
     (sq["@position"] === "G") ?  gk.push(sq) : (sq["@position"] === "M") ? md.push(sq) : (sq["@position"] === "A") ? sk.push(sq) : def.push(sq)
@@ -60,8 +61,11 @@ const Squad = (props) => {
         keyWords=""
         author=""
       />
+
+     <img src={`data:image/jpeg;base64,${props.img}`}  style={{display: "none"}} />
+
       
-      <h1 className="text-uppercase border-bottom pb-3">SQUAD</h1>
+      <h1 className="text-uppercase border-bottom pb-3">นักเตะ</h1>
       { 
        
       (load !== false) ? 
@@ -70,23 +74,17 @@ const Squad = (props) => {
         
         <h2 className="text-dark pt-4 pb-3">Coach</h2>
         <div className="media align-items-center">
-              <img 
-                width={30}
-                height={30}
-                src={""}
-                alt={ldata["@name"]}
-                className="rounded-circle mx-2"
-              />
+              
               <div className="media-body">
                   {ldata["@name"]}
               </div>
             </div>
       </div>
       
-        <SquadPlayerTable title="Goalkeeper" plyers={gk} />  
-        <SquadPlayerTable title="Defender" plyers={def} />
-        <SquadPlayerTable title="Midfielders" plyers={md} />
-        <SquadPlayerTable title="Strikers" plyers={sk} />
+        <SquadPlayerTable title="ผู้รักษาประตู" plyers={gk} />  
+        <SquadPlayerTable title="กองหลัง" plyers={def} />
+        <SquadPlayerTable title="กองกลาง" plyers={md} />
+        <SquadPlayerTable title="กองหน้า" plyers={sk} />
     
      
       </div>
@@ -110,6 +108,7 @@ Squad.getInitialProps = async ({query}) => {
      return { 
                 listdata: json.teams.team.coach ,
                 players : json.teams.team.squad, 
+                img : json.teams.team.image, 
              }
 
   }

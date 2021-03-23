@@ -107,7 +107,7 @@ const Homefilter = (props) => {
           (props.load === true) ?
             props.list[0].home.scores.category.map((res,value) => (
 
-                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
+                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
                               
                   <div key={value.toString()}> 
                       <TableBattle  
@@ -131,7 +131,7 @@ const Homefilter = (props) => {
                   props.list[0].home.scores.category.map((res,value) => (
 
 
-                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229"  && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
+                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229"  && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
                     <div key={value.toString()}> 
                         <TableBattle  
                         className="highlight bg-secondary text-white"
@@ -168,7 +168,7 @@ const Homefilter = (props) => {
                       (props.load === true) ? 
                       props.list[0].home.scores.category.map((res,value) => (
 
-                            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
+                            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
                             <div key={value.toString()}>
                                   <TableBattleMobile 
                                     title={res['@name']}
@@ -188,7 +188,7 @@ const Homefilter = (props) => {
                       {(props.load === true) ? 
                                 props.list[0].home.scores.category.map((res,value) => (
 
-                                (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229"  && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
+                                (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229"  && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
                                 <div key={value.toString()}>
                                       <TableBattleMobile 
                                         title={res['@name']}

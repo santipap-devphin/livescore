@@ -5,7 +5,7 @@ import {ColMatchStyle} from "./style"
 const ColMatch = ({num, className, status, name}) => {
   return (
     <ColMatchStyle className={className}>
-        <div className="info">
+        <div className="info" key={num}>
             <span className="circle">
                 {
                   status === 0

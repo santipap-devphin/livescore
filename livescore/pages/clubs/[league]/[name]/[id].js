@@ -44,6 +44,7 @@ class Apitest extends Component {
           <p>ที่อยู่ {this.props.home.teams.team.venue_address["#cdata-section"]}</p>
           <p>เมือง {this.props.home.teams.team.venue_city["#cdata-section"] }</p>
           <p>ความจุสนาม {this.props.home.teams.team.venue_capacity}</p>
+          <p><img src={`data:image/jpeg;base64,${this.props.home.teams.team.venue_image}`}/></p>
           <br />
           <button className="text-read-more mt-3 mb-3">
             Readmore <AiOutlineSwapRight className="ml-2" />

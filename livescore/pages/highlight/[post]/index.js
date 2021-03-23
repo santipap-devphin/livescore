@@ -19,8 +19,21 @@ const video = {
 const index = (props) => {
 
   const router = useRouter()
+  let newslist = [];
+  var urlvideo;
+
+  if(Array.isArray(props.video.videos.item) === true){
+
+
+     
+      urlvideo = props.video.videos.item[0]["#cdata-section"];
+
+  }else{
+     
+      urlvideo = props.video.videos.item["#cdata-section"];
+  }
   
- //console.log(props.video)
+ console.log(props)
   return (
     <Layout >
       <HeaderSeo
@@ -34,16 +47,16 @@ const index = (props) => {
       />
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-      <h1 className="mb-4">HIGHLIGHT! {props.video.title}</h1>
-      <PlyrComponent
-        matchid={props.video.matchid}
-        title={props.video.title}
-        date={props.video.date}
-        view={props.video.view}
-        shared={props.video.shared}
+      <h1 className="mb-4">HIGHLIGHT! {/*props.video.title*/}</h1>
+      {<PlyrComponent
+        matchid={props.matchid}
+        title={props.title}
+        date={props.datee}
+        view={"0"}
+        shared={"0"}
         url={`/highlight/${props.video.title}`}
-        urlvideo={props.video.urlvideo}
-      />
+        urlvideo={urlvideo}
+      />}
       <ContentFooterPost
         linkNext=""
         linkPrev="/highlight/andy%20robertson"
@@ -56,63 +69,145 @@ index.getInitialProps = async ({query}) => {
 
   let posts =  query.post;
   var list_vdo  = []
-  
-  const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/home?json=1`)
+  var listview = []
+  var chkstatus;
+  var matchid;
+  var datee;
+  var title;
+  const restoday = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/home?json=1`)
+  const datatoday = await restoday.json()
+
+  const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/d-1?json=1`)
   const data = await res.json()
 
-  for(var i = 0; i <data.scores.category.length;i++)
+
+ /*if(data.scores.category !== undefined){
+
+
+    listview.push(data.scores.category);
+
+ }*/
+
+ if(Array.isArray(datatoday.scores.category) === true){
+
+
+  for(var i= 0 ; i < datatoday.scores.category.length ; i++)
   {
 
-    if(data.scores.category[i].matches.match["@id"] === posts){
+      
+         if(Array.isArray(datatoday.scores.category[i].matches.match) === true){
 
 
-      if(Array.isArray(data.scores.category[i].matches.match.videos.item)){
+                for(var k = 0 ; k < datatoday.scores.category[i].matches.match.length ; k++){
 
 
-        list_vdo.push(
-          {
-           matchid: data.scores.category[i].matches.match["@id"],
-           key: i,
-           title:data.scores.category[i].matches.match.localteam["@name"] + "( "+data.scores.category[i].matches.match.localteam["@goals"] +" )"
-           +" VS ( "+data.scores.category[i].matches.match.visitorteam["@goals"]+" )" +data.scores.category[i].matches.match.visitorteam["@name"],
-           date:data.scores.category[i].matches["@date"],
-           view:data.scores.category[i]["@id"],
-           shared:"0",
-           urlvideo:data.scores.category[i].matches.match.videos.item[0]["#cdata-section"],
-           img:""
-          }
-        );
+                      if(datatoday.scores.category[i].matches.match[k]["@id"] === posts){
+
+                        
+                            list_vdo.push(datatoday.scores.category[i].matches.match[k]);
+                            matchid = datatoday.scores.category[i].matches.match[k]["@id"];
+                            datee = datatoday.scores.category[i].matches.match[k]["@date"];
+                            title = datatoday.scores.category[i].matches.match[k].localteam["@name"] +" "+datatoday.scores.category[i].matches.match[k].localteam["@goals"]+" - " 
+                            + " "+datatoday.scores.category[i].matches.match[k].visitorteam["@goals"]+" "+ datatoday.scores.category[i].matches.match[k].visitorteam["@name"];
+
+                      }
+
+                  
+                }
+
+
+            }
+            else{
+
+                    if(datatoday.scores.category[i].matches.match["@id"] === posts){
+
+                              
+                             list_vdo.push(datatoday.scores.category[i].matches.match);
+                             matchid = datatoday.scores.category[i].matches.match["@id"];
+                             datee = datatoday.scores.category[i].matches.match["@date"];
+                             title = datatoday.scores.category[i].matches.match.localteam["@name"] +" "+datatoday.scores.category[i].matches.match.localteam["@goals"]+" - " 
+                            + " "+datatoday.scores.category[i].matches.match.visitorteam["@goals"]+" "+ datatoday.scores.category[i].matches.match.visitorteam["@name"];
+
+                    }
+
+
+            }
+
+            
+
+         
+
+    
+
+
         
+  }
 
-      }
+}
 
-      else{
-        list_vdo.push(
-          {
-           matchid: data.scores.category[i].matches.match["@id"],
-           key: i,
-           title:data.scores.category[i].matches.match.localteam["@name"] + "( "+data.scores.category[i].matches.match.localteam["@goals"] +" )"
-           +" VS ( "+data.scores.category[i].matches.match.visitorteam["@goals"]+" )" +data.scores.category[i].matches.match.visitorteam["@name"],
-           date:data.scores.category[i].matches["@date"],
-           view:data.scores.category[i]["@id"],
-           shared:"0",
-           urlvideo:data.scores.category[i].matches.match.videos.item["#cdata-section"],
-           img:""
-          }
-);
-      }
-     
+
+
+
+
+ if(Array.isArray(data.scores.category) === true){
+
+
+    for(var i= 0 ; i < data.scores.category.length ; i++)
+    {
+
+          if(Array.isArray(data.scores.category[i].matches.match) === true){
+
+
+                  for(var k = 0 ; k < data.scores.category[i].matches.match.length ; k++){
+
+
+                        if(data.scores.category[i].matches.match[k]["@id"] === posts){
+
+                          
+                              list_vdo.push(data.scores.category[i].matches.match[k]);
+                              matchid = data.scores.category[i].matches.match[k]["@id"];
+                              datee = data.scores.category[i].matches.match[k]["@date"];
+                              title = data.scores.category[i].matches.match[k].localteam["@name"] +" "+data.scores.category[i].matches.match[k].localteam["@goals"]+" - " 
+                            + " "+data.scores.category[i].matches.match[k].visitorteam["@goals"]+" "+ data.scores.category[i].matches.match[k].visitorteam["@name"];
+
+                        }
+
+                    
+                  }
+
+
+              }
+              else{
+
+                      if(data.scores.category[i].matches.match["@id"] === posts){
+
+                                
+                               list_vdo.push(data.scores.category[i].matches.match);
+                               matchid = data.scores.category[i].matches.match["@id"];
+                               datee = data.scores.category[i].matches.match["@date"];
+                               title = data.scores.category[i].matches.match.localteam["@name"] +" "+data.scores.category[i].matches.match.localteam["@goals"]+" - " 
+                               + " "+data.scores.category[i].matches.match.visitorteam["@goals"]+" "+ data.scores.category[i].matches.match.visitorteam["@name"];
+
+                      }
+
+
+              }
+
+              
+
+           
+
       
 
-       
-     }
 
+          
+    }
 
-  }
+ }
 
 
   return { 
-    video: list_vdo[0]
+    video: list_vdo[0] , matchid:matchid ,datee:datee ,title:title
 }
   
 

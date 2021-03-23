@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {ChampionsLeagueTableMobileStyle } from "./style"
 
 const ChampionsLeagueTableMobile = ({ className, matches, title }) => {
+  
   return (
     <ChampionsLeagueTableMobileStyle className={`league-table-container ${className}`}>
       <div className="league-table mt-0 table-responsive">
@@ -20,12 +21,14 @@ const ChampionsLeagueTableMobile = ({ className, matches, title }) => {
           <tbody>
           {
             matches.map((item, k) => (
+            
               <tr key={k.toString()}>
+               
                 <td className="px-0 py-1 text-center">{item.key}</td>
                 <td className="px-2 py-1 text-left">
                   {item.title}
                 </td>
-                <td className="px-0 py-1 text-center">{item.matches}</td>
+                <td className="px-0 py-1 text-center">{}</td>
                 <td className="px-0 py-1 text-center">{item.gd}</td>
                 <td className="px-0 py-1 text-center">{item.points}</td>
               </tr>

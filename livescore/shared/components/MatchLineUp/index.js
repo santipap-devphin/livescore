@@ -4,7 +4,7 @@ import {MatchLineUpStyle} from "./style"
 import ColMatch from "../../commons/ColMatch"
 import LineUpList from "../LineUpList"
 
-const MatchLineUp = ({type, players}) => {
+const MatchLineUp = ({teams,list,type, players}) => {
   return (
     <MatchLineUpStyle className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-5 pt-4">
         <div className="card-header text-dark text-center text-uppercase border-top-0 border-bottom-0 font-weight-bold">
@@ -12,7 +12,7 @@ const MatchLineUp = ({type, players}) => {
         </div>
         <div className="card-body p-0">
           {
-            players.map((item, index) => (
+            /*players.map((item, index) => (
                 <LineUpList 
                     key={index}
                     imgSrc={item.home !== "" || item.homeChange !== null ? item.imgHome : item.imgAway}
@@ -24,152 +24,212 @@ const MatchLineUp = ({type, players}) => {
                     awayName={item.away !== "" ? <span>{item.away}</span> : ""}
                     awayChange={item.awayChange}
                 />
-            ))
+            ))*/
           }
-          <div className="pitch-soccer-wrapper d-none">
+
+          
+          <div className="pitch-soccer-wrapper">
             <span className="teamInfo">
-                <span className="name">Bristol City</span>
-                <span>3-5-2</span>
+                <span className="name">{teams.localteam}</span>
+                <span>{list.localteam["@formation"]}</span>
             </span>
             <div className="pitch-soccer">
                 <div className="homeForm">
                     <span className="formRow">
-                        <ColMatch 
-                            className="goalkeeper"
-                            name="Daniel Bentley"
-                            num={1}
-                        />
+                        {
+                            (Array.isArray(list.localteam.player) ?  
+                            
+                              list.localteam.player.map((item, index) => (
+
+                                item["@pos"] === "G" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="goalkeeper"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                        }
+                        
                     </span>
                     <span className="formRow">
-                        <ColMatch
-                            className="soccer-back"
-                            num={5}
-                            name="Alfie Mawson"
-                            status={0}
-                        />
-                        <ColMatch 
-                            className="soccer-back"
-                            name="Taylor Moore"
-                            num={23}
-                        />
-                        <ColMatch 
-                            className="soccer-back"
-                            name="Zak Vyner"
-                            num={26}
-                        />
+                    {
+                            (Array.isArray(list.localteam.player) ?  
+                            
+                              list.localteam.player.map((item, index) => (
+
+                                item["@pos"] === "D" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="soccer-center"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                     }
                     </span>
                     <span className="formRow">
-                        <ColMatch 
-                            className="soccer-center"
-                            name="Tyreeq Bakinson"
-                            num={30}
-                        />
-                        <ColMatch 
-                            className="soccer-center"
-                            name="Jack Hunt"
-                            num={2}
-                        />
-                        <ColMatch 
-                            className="soccer-center"
-                            name="Andreas Weimann"
-                            num={14}
-                        />
-                        <ColMatch 
-                            className="soccer-center"
-                            name="Jamie Paterson"
-                            num={10}
-                        />
-                        <ColMatch 
-                            className="soccer-center"
-                            name="Tommy Rowe"
-                            num={25}
-                        />
+                    {
+                            (Array.isArray(list.localteam.player) ?  
+                            
+                              list.localteam.player.map((item, index) => (
+
+                                item["@pos"] === "M" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="soccer-center"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                     }
                     </span>
                     <span className="formRow">
-                        <ColMatch
-                            className="soccer-front"
-                            num={7}
-                            name="Chris Martin"
-                            status={0}
-                        />
-                        <ColMatch
-                            className="soccer-front"
-                            num={21}
-                            name="Nahki Wells"
-                            status={0}
-                        />
+                    {
+                            (Array.isArray(list.localteam.player) ?  
+                            
+                              list.localteam.player.map((item, index) => (
+
+                                item["@pos"] === "F" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="soccer-center"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                     }
                     </span>
                 </div>
                 <div className="awayForm">
+                <span className="formRow">
+                {
+                            (Array.isArray(list.visitorteam.player) ?  
+                            
+                              list.visitorteam.player.map((item, index) => (
+
+                                item["@pos"] === "F" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="soccer-front"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                        }
+                   </span>
                     <span className="formRow">
-                        <ColMatch
-                            className="soccer-front"
-                            num={19}
-                            name="Patrick Roberts"
-                        />
-                        <ColMatch
-                            className="soccer-front"
-                            num={10}
-                            name="Chuba Akpom"
-                            status={0}
-                        />
+                     {
+                            (Array.isArray(list.visitorteam.player) ?  
+                            
+                              list.visitorteam.player.map((item, index) => (
+
+                                item["@pos"] === "M" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="soccer-center"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                        }
                     </span>
-                    <span className="formRow">
-                        <ColMatch
-                            className="soccer-center"
-                            num={29}
-                            name="Djed Spence"
-                            status={0}
-                        />
-                        <ColMatch
-                            className="soccer-center"
-                            num={22}
-                            name="George Saville"
-                            status={3}
-                        />
-                        <ColMatch
-                            className="soccer-center"
-                            num={16}
-                            name="Jonathan Howson"
-                        />
-                        <ColMatch
-                            className="soccer-center"
-                            num={3}
-                            name="Marvin Johnson"
-                        />
-                    </span>
-                    <span className="formRow">
+                    {/*<span className="formRow">
                         <ColMatch
                             className="soccer-center-b"
                             num={5}
                             name="Sam Morsy"
                         />
+                    </span>*/}
+                    <span className="formRow">
+                        
+                        {
+                            (Array.isArray(list.visitorteam.player) ?  
+                            
+                              list.visitorteam.player.map((item, index) => (
+
+                                item["@pos"] === "D" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="soccer-center"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                        }
                     </span>
                     <span className="formRow">
-                        <ColMatch
-                            className="soccer-back"
-                            num={2}
-                            name="Anfernee Dijksteel"
-                        />
-                        <ColMatch
-                            className="soccer-back"
-                            num={17}
-                            name="Patrick McNair"
-                        />
-                        <ColMatch
-                            className="soccer-center"
-                            num={6}
-                            name="Dael Fry"
-                            status={1}
-                        />
-                    </span>
-                    <span className="formRow">
-                        <ColMatch
-                            className="goalkeeper"
-                            num={1}
-                            name="Marcus Bettinelli"
-                            status={1}
-                        />
+                    {
+                            (Array.isArray(list.visitorteam.player) ?  
+                            
+                              list.visitorteam.player.map((item, index) => (
+
+                                item["@pos"] === "G" ?
+                                
+                                <ColMatch 
+                                    key={parseInt(item["@number"])}
+                                    className="goalkeeper"
+                                    name={item["@name"]}
+                                    num={parseInt(item["@number"])}
+                                />
+                               
+                                :
+                                ""
+                              ))
+                              :""
+                            )
+                        
+                        }
+                       
                     </span>
                 </div>
                 <div className="corners">
@@ -193,8 +253,8 @@ const MatchLineUp = ({type, players}) => {
                 <div className="curve-bottom" />
             </div>
             <span className="teamInfo">
-              <span className="name">Middlesbrough</span>
-              <span>3-1-4-2</span>
+              <span className="name">{teams.visitorteam}</span>
+              <span>{list.visitorteam["@formation"]}</span>
             </span>
           </div>
         </div>

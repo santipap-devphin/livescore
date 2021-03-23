@@ -5,16 +5,13 @@ import Empty from "../../shared/commons/Empty"
 import Link from 'next/link'
 import Avatar from "../../shared/commons/Avatar"
 
-import Clup from "../../mock/Clup"
-
-
 const Teams = () => {
 
    const [isLeague, setLeague] = useState("0");
    const [items, setItems] = useState();
    const [load, setLoad] = useState(false);
    const [error, setError] = useState('');
-
+   let events = [];
   useEffect(() => {
     setLeague("0");
   }, []);
@@ -35,11 +32,19 @@ const Teams = () => {
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/${items}.xml?json=1`)
     const data = await res.json()
 
+    data.standings.tournament.team.sort(function(a, b) {
+      //console.log(a["@minute"])
+       return a["@id"] - b["@id"];
+    });
+   
      setItems(data)
      setLoad(true)
      setError("end")
+
   }
 
+
+  
   
  
   return (
@@ -53,7 +58,8 @@ const Teams = () => {
         keyWords=""
         author=""
       />
-    
+      
+     
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <div className="d-flex border-bottom">
@@ -65,7 +71,9 @@ const Teams = () => {
             <option value="1399">ลาลีกา สเปน</option>
             <option value="1229">บุนเดสลีกา เยอรมัน</option>
             <option value="1269">เซเรียอา อิตาลี</option>
-            
+            <option value="1221">ลีก เอิง ฝรั่งเศส</option>
+            <option value="1322">เอเรดิวิซี่ ฮอลแลนด์</option>
+            <option value="1271">เจ ลีก ญี่ปุ่น</option>
           </select>
         </div>
       </div>
@@ -98,7 +106,7 @@ const Teams = () => {
                   <tr>
                     <th>#</th>
                     <th>TEAMS</th>
-                    <th>GOALS</th>
+                    {/*<th></th>*/}
                   </tr>
                 </thead>
                 <tbody>
@@ -108,7 +116,7 @@ const Teams = () => {
                       items.standings.tournament.team.map((item, index) => (
 
                       <tr className="border-bottom gray" style={{borderBottom: "#E3E3E3"}} key={index.toString()}>
-                      <td style={{background: "#606060"}} className="text-white text-center">{item["@position"]}</td>
+                      <td style={{background: "#606060"}} className="text-white text-center">{index+1}</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <Link
@@ -139,9 +147,9 @@ const Teams = () => {
                           </div>
                         </div>
                       </td>
-                      <td>
-                        {item.total["@gd"]}
-                      </td>
+                      {/*<td>
+                        item.total["@gd"]
+                      </td>*/}
                     </tr>
 
 

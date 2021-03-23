@@ -23,13 +23,13 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
                         plyers.map((play, index) => (
                             <tr key={index.toString()}>
                                 <td>
-                                    <Avatar
+                                    {/*<Avatar
                                         size={30}
                                         shape="circle"
                                         src={""}
                                         alt={play["@name"]}
                                         className="mr-3"
-                                    />
+                                    />*/}
                                     <span>{play["@name"]}</span>
                                 </td>
                                 
@@ -37,8 +37,17 @@ const OverViewInjuredTable = ({ className, plyers, title}) => {
                                 <td>{play["@startdate"]}</td>
                                 <td>{play["@enddate"]}</td>
                             </tr>
-                        )) 
+                        ))
+                        :
+                        (plyers === null) ? 
+                        <tr key={0}>
+                                <td colSpan="3">ไม่มีข้อมูล</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         : 
+                        
                         <>
                          <tr key={0}>
                                 <td>

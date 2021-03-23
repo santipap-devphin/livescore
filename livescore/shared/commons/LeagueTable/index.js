@@ -28,6 +28,7 @@ const LeagueTable = ({ className, arrow, matches, title }) => {
             <th className="text-center px-1 py-2">P</th>
             <th className="text-center px-1 py-2">GD</th>
             <th className="text-center px-1 py-2">PTS</th>
+            <td className="px-0 py-1 text-center">form</td>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@ const LeagueTable = ({ className, arrow, matches, title }) => {
               <td className="px-0 py-1 text-center">{item.matches}</td>
               <td className="px-0 py-1 text-center">{item.gd}</td>
               <td className="px-0 py-1 text-center">{item.points}</td>
+              <td className="px-0 py-1 text-center">{item.recent_form}</td>
             </tr>
           ))
         }

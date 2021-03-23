@@ -18,16 +18,383 @@ const PremierLeague = (props ,{ }) => {
 
   var obj = {};
   var title_obj = {}; 
-  
+  var events = [];
 
-  if(typeof router.query.event === "undefined"){
+if(typeof router.query.event === "undefined"){
 
     
     obj = {event:"reload","summary":props.league.match.summary};
     title_obj = {"title":props.league.match["@status"]};
+
+     if(obj.summary !== null){
+
+
+
+      if(obj.summary.localteam.goals !== null){
+
+        if(Array.isArray(obj.summary.localteam.goals.player) === true){
+    
+    
+          for(var i =0; i< obj.summary.localteam.goals.player.length; i++)
+            {
+              
+             
+              //events.push(obj.summary.localteam.goals.player[i])
+              events.push({
+                            "@name":obj.summary.localteam.goals.player[i]["@name"],
+                            "@assist_id":obj.summary.localteam.goals.player[i]["@assist_id"],
+                            "@minute":obj.summary.localteam.goals.player[i]["@minute"],
+                            "@extra_min":obj.summary.localteam.goals.player[i]["@extra_min"],
+                            "@owngoal":obj.summary.localteam.goals.player[i]["@owngoal"],
+                            "@var_cancelled":obj.summary.localteam.goals.player[i]["@var_cancelled"],
+                            "@penalty":obj.summary.localteam.goals.player[i]["@penalty"],
+                            "@id":obj.summary.localteam.goals.player[i]["@id"],
+                            "@assist_name":obj.summary.localteam.goals.player[i]["@assist_name"],
+                            "@team":"localteam",
+                            "@type":"goal"
+                            
+                          })
+    
+            }
+    
+    
+        }
+        else{
+  
+          events.push({
+                      "@name":obj.summary.localteam.goals.player["@name"],
+                      "@assist_id":obj.summary.localteam.goals.player["@assist_id"],
+                      "@minute":obj.summary.localteam.goals.player["@minute"],
+                      "@extra_min":obj.summary.localteam.goals.player["@extra_min"],
+                      "@owngoal":obj.summary.localteam.goals.player["@owngoal"],
+                      "@var_cancelled":obj.summary.localteam.goals.player["@var_cancelled"],
+                      "@penalty":obj.summary.localteam.goals.player["@penalty"],
+                      "@id":obj.summary.localteam.goals.player["@id"],
+                      "@assist_name":obj.summary.localteam.goals.player["@assist_name"],
+                      "@team":"localteam",
+                      "@type":"goal"
+                      
+          })
+    
+        }
+  
+  
+      }
+      if(obj.summary.localteam.yellowcards !== null){
+  
+      if(Array.isArray(obj.summary.localteam.yellowcards.player) === true){
+  
+  
+        for(var i =0; i< obj.summary.localteam.yellowcards.player.length; i++)
+          {
+  
+            //events.push(obj.summary.localteam.goals.player[i])
+            events.push({
+                          "@name":obj.summary.localteam.yellowcards.player[i]["@name"],
+                          "@minute":obj.summary.localteam.yellowcards.player[i]["@minute"],
+                          "@extra_min":obj.summary.localteam.yellowcards.player[i]["@extra_min"],
+                          "@id":obj.summary.localteam.yellowcards.player[i]["@id"],
+                          "@comment":obj.summary.localteam.yellowcards.player[i]["@comment"],
+                          "@team":"localteam",
+                          "@type":"yellowcard"
+                          
+                        })
+  
+          }
+  
+  
+      }
+      else{
+  
+        events.push({
+                    "@name":obj.summary.localteam.yellowcards.player["@name"],
+                    "@minute":obj.summary.localteam.yellowcards.player["@minute"],
+                    "@extra_min":obj.summary.localteam.yellowcards.player["@extra_min"],
+                    "@id":obj.summary.localteam.yellowcards.player["@id"],
+                    "@comment":obj.summary.localteam.yellowcards.player["@comment"],
+                    "@team":"localteam",
+                    "@type":"yellowcard"
+                    
+        })
+  
+      }
+  
+  
+      }
+      if(obj.summary.localteam.redcards !== null){
+  
+          if(Array.isArray(obj.summary.localteam.redcards.player) === true){
+        
+        
+            for(var i =0; i< obj.summary.localteam.redcards.player.length; i++)
+              {
+  
+                //events.push(obj.summary.localteam.goals.player[i])
+                events.push({
+                              "@name":obj.summary.localteam.redcards.player[i]["@name"],
+                              "@minute":obj.summary.localteam.redcards.player[i]["@minute"],
+                              "@extra_min":obj.summary.localteam.redcards.player[i]["@extra_min"],
+                              "@id":obj.summary.localteam.redcards.player[i]["@id"],
+                              "@comment":obj.summary.localteam.redcards.player[i]["@comment"],
+                              "@team":"localteam",
+                              "@type":"redcard"
+                              
+                            })
+  
+              }
+  
+  
+          }
+          else{
+  
+            events.push({
+                        "@name":obj.summary.localteam.redcards.player["@name"],
+                        "@minute":obj.summary.localteam.redcards.player["@minute"],
+                        "@extra_min":obj.summary.localteam.redcards.player["@extra_min"],
+                        "@id":obj.summary.localteam.redcards.player["@id"],
+                        "@comment":obj.summary.localteam.redcards.player["@comment"],
+                        "@team":"localteam",
+                        "@type":"redcard"
+                        
+            })
+  
+          }
+  
+      }
+      if(obj.summary.visitorteam.goals !== null){
+  
+      if(Array.isArray(obj.summary.visitorteam.goals.player) === true){
+  
+  
+        for(var i =0; i< obj.summary.visitorteam.goals.player.length; i++)
+          {
+  
+            //events.push(obj.summary.localteam.goals.player[i])
+            events.push({
+                         "@name":obj.summary.visitorteam.goals.player[i]["@name"],
+                          "@assist_id":obj.summary.visitorteam.goals.player[i]["@assist_id"],
+                          "@minute":obj.summary.visitorteam.goals.player[i]["@minute"],
+                          "@extra_min":obj.summary.visitorteam.goals.player[i]["@extra_min"],
+                          "@owngoal":obj.summary.visitorteam.goals.player[i]["@owngoal"],
+                          "@var_cancelled":obj.summary.visitorteam.goals.player[i]["@var_cancelled"],
+                          "@penalty":obj.summary.visitorteam.goals.player[i]["@penalty"],
+                          "@id":obj.summary.visitorteam.goals.player[i]["@id"],
+                          "@assist_name":obj.summary.visitorteam.goals.player[i]["@assist_name"],
+                          "@team":"visitorteam",
+                          "@type":"goal"
+                          
+                        })
+  
+          }
+        }
+        else{
+  
+          events.push({
+                      "@name":obj.summary.visitorteam.goals.player["@name"],
+                      "@assist_id":obj.summary.visitorteam.goals.player["@assist_id"],
+                      "@minute":obj.summary.visitorteam.goals.player["@minute"],
+                      "@extra_min":obj.summary.visitorteam.goals.player["@extra_min"],
+                      "@owngoal":obj.summary.visitorteam.goals.player["@owngoal"],
+                      "@var_cancelled":obj.summary.visitorteam.goals.player["@var_cancelled"],
+                      "@penalty":obj.summary.visitorteam.goals.player["@penalty"],
+                      "@id":obj.summary.visitorteam.goals.player["@id"],
+                      "@assist_name":obj.summary.visitorteam.goals.player["@assist_name"],
+                      "@team":"visitorteam",
+                      "@type":"goal"
+            
+                  })
+    
+        }
+  
+      }
+      if(obj.summary.visitorteam.yellowcards !== null){
+  
+      if(Array.isArray(obj.summary.visitorteam.yellowcards.player) === true){
+  
+  
+        for(var i =0; i< obj.summary.visitorteam.yellowcards.player.length; i++)
+          {
+  
+            //events.push(obj.summary.localteam.goals.player[i])
+            events.push({
+                          "@name":obj.summary.visitorteam.yellowcards.player[i]["@name"],
+                          "@minute":obj.summary.visitorteam.yellowcards.player[i]["@minute"],
+                          "@extra_min":obj.summary.visitorteam.yellowcards.player[i]["@extra_min"],
+                          "@id":obj.summary.visitorteam.yellowcards.player[i]["@id"],
+                          "@comment":obj.summary.visitorteam.yellowcards.player[i]["@comment"],
+                          "@team":"visitorteam",
+                          "@type":"yellowcard"
+                          
+                        })
+  
+          }
+        }
+        else{
+  
+          events.push({
+                      "@name":obj.summary.visitorteam.yellowcards.player["@name"],
+                      "@minute":obj.summary.visitorteam.yellowcards.player["@minute"],
+                      "@extra_min":obj.summary.visitorteam.yellowcards.player["@extra_min"],
+                      "@id":obj.summary.visitorteam.yellowcards.player["@id"],
+                      "@comment":obj.summary.visitorteam.yellowcards.player["@comment"],
+                      "@team":"visitorteam",
+                      "@type":"yellowcard"
+            
+                  })
+    
+        }
+  
+  
+      }
+      if(obj.summary.visitorteam.redcards !== null){
+  
+          if(Array.isArray(obj.summary.visitorteam.redcards.player) === true){
+        
+        
+            for(var i =0; i< obj.summary.visitorteam.redcards.player.length; i++)
+              {
+  
+                //events.push(obj.summary.localteam.goals.player[i])
+                events.push({
+  
+                              "@name":obj.summary.visitorteam.redcards.player[i]["@name"],
+                              "@minute":obj.summary.visitorteam.redcards.player[i]["@minute"],
+                              "@extra_min":obj.summary.visitorteam.redcards.player[i]["@extra_min"],
+                              "@id":obj.summary.visitorteam.redcards.player[i]["@id"],
+                              "@comment":obj.summary.visitorteam.redcards.player[i]["@comment"],
+                              "@team":"visitorteam",
+                              "@type":"redcard"
+                              
+                            })
+  
+              }
+  
+  
+          }
+          else{
+  
+            events.push({
+                        "@name":obj.summary.visitorteam.redcards.player["@name"],
+                        "@minute":obj.summary.visitorteam.redcards.player["@minute"],
+                        "@extra_min":obj.summary.visitorteam.redcards.player["@extra_min"],
+                        "@id":obj.summary.visitorteam.redcards.player["@id"],
+                        "@comment":obj.summary.visitorteam.redcards.player["@comment"],
+                        "@team":"visitorteam",
+                        "@type":"redcard"
+              
+                    })
+  
+          }
+      }
+
+
+
+
+
+     }
+
+    
+    
+    if(props.league.match.substitutions !== null){
+
+      if(props.league.match.substitutions.localteam !== null){
+
+        if(Array.isArray(props.league.match.substitutions.localteam.substitution) === true){
+          
+          for(var i =0; i < props.league.match.substitutions.localteam.substitution.length;i++)
+          {
+                events.push({
+        
+                  "@off":props.league.match.substitutions.localteam.substitution[i]["@off"],
+                  "@on":props.league.match.substitutions.localteam.substitution[i]["@on"],
+                  "@minute":props.league.match.substitutions.localteam.substitution[i]["@minute"],
+                  "@on_id":props.league.match.substitutions.localteam.substitution[i]["@on_id"],
+                  "@off_id":props.league.match.substitutions.localteam.substitution[i]["@off_id"],
+                  "@injury":props.league.match.substitutions.localteam.substitution[i]["@injury"],
+                  "@team":"localteam",
+                  "@type":"subst"
+                  
+                })
+          }
+  
+  
+        }
+        else{
+  
+                events.push({
+          
+                  "@off":props.league.match.substitutions.localteam.substitution["@off"],
+                  "@on":props.league.match.substitutions.localteam.substitution["@on"],
+                  "@minute":props.league.match.substitutions.localteam.substitution["@minute"],
+                  "@on_id":props.league.match.substitutions.localteam.substitution["@on_id"],
+                  "@off_id":props.league.match.substitutions.localteam.substitution["@off_id"],
+                  "@injury":props.league.match.substitutions.localteam.substitution["@injury"],
+                  "@team":"localteam",
+                  "@type":"subst"
+                  
+                })
+  
+        
+        }
+  
+        
+      }
+      
+      if(props.league.match.substitutions.visitorteam !== null){
+  
+        
+        if(Array.isArray(props.league.match.substitutions.visitorteam.substitution) === true){
+  
+          for(var i =0; i < props.league.match.substitutions.visitorteam.substitution.length;i++)
+          {
+                events.push({
+        
+                  "@off":props.league.match.substitutions.visitorteam.substitution[i]["@off"],
+                  "@on":props.league.match.substitutions.visitorteam.substitution[i]["@on"],
+                  "@minute":props.league.match.substitutions.visitorteam.substitution[i]["@minute"],
+                  "@on_id":props.league.match.substitutions.visitorteam.substitution[i]["@on_id"],
+                  "@off_id":props.league.match.substitutions.visitorteam.substitution[i]["@off_id"],
+                  "@injury":props.league.match.substitutions.visitorteam.substitution[i]["@injury"],
+                  "@team":"visitorteam",
+                  "@type":"subst"
+                  
+                })
+          }
+  
+  
+        }
+        else{
+  
+                events.push({
+          
+                  "@off":props.league.match.substitutions.visitorteam.substitution["@off"],
+                  "@on":props.league.match.substitutions.visitorteam.substitution["@on"],
+                  "@minute":props.league.match.substitutions.visitorteam.substitution["@minute"],
+                  "@on_id":props.league.match.substitutions.visitorteam.substitution["@on_id"],
+                  "@off_id":props.league.match.substitutions.visitorteam.substitution["@off_id"],
+                  "@injury":props.league.match.substitutions.visitorteam.substitution["@injury"],
+                  "@team":"visitorteam",
+                  "@type":"subst"
+                  
+                })
+  
+  
+        }
+  
+      }
+
+
+    }
+
+  events.sort(function(a, b) {
+      //console.log(a["@minute"])
+      return a["@minute"] - b["@minute"];
+  });
     //useRouter.reload(window.location.pathname);
     
   }
+
+
   else if(router.query.event === "null"){
 
     
@@ -81,7 +448,21 @@ const PremierLeague = (props ,{ }) => {
                           nav.push(pageTitle)
                           nav[1] = toTh;
                           nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
+                          
 
+                        //console.log(obj.summary.localteam.goals)
+                       
+                        
+                       
+
+
+                      console.log(events)
+                        /*sortable.sort(function(a, b) {
+                            console.log(a[1] + " "+b[1])
+                            return a[1] - b[1];
+                        });*/
+                        //console.log(obj.summary.localteam.goals)
+                          //console.log(sortable);
   /*let toTh = router.query.league
     ? router.query.league === "uefa-league"
       ? "ยูฟ่า แชมเปี้ยนส์ลีก"
@@ -179,108 +560,9 @@ const PremierLeague = (props ,{ }) => {
     },
   ]
 
-  let matchionfoblank = [
-    {
-      id: "",
-      time: "'",
-      home: "",
-      homeChange: {
-        in: "",
-        out: ""
-      },
-      score: {
-        cardHome: "",
-        score: "",
-        cardAway: ""
-      },
-      away: "",
-      awayChange: null
-    }
-  ]
   
-  let matchionfo = [
-    {
-      id: "1",
-      time: "10'",
-      home: "",
-      homeChange: {
-        in: "Edward Nketiah",
-        out: "Alexandre Lacazette"
-      },
-      score: {
-        cardHome: "",
-        score: "",
-        cardAway: ""
-      },
-      away: "",
-      awayChange: null,
-    },
-    {
-      id: "2",
-      time: "23'",
-      home: "",
-      homeChange: null,
-      score: {
-        cardHome: "",
-        score: "",
-        cardAway: "y"
-      },
-      away: "Siebe Vandermeulen",
-      awayChange: null,
-    },
-    {
-      id: "3",
-      time: "51'",
-      home: "Erik Falkenburg",
-      homeChange: null,
-      score: {
-        cardHome: "",
-        score: "1 - 0",
-        cardAway: ""
-      },
-      away: "",
-      awayChange: null,
-    },
-    {
-      id: "4",
-      time: "87'",
-      home: "Kees Luijckx",
-      homeChange: null,
-      score: {
-        cardHome: "",
-        score: "",
-        cardAway: ""
-      },
-      away: "",
-      awayChange: null,
-    },
-    {
-      id: "5",
-      time: "88'",
-      home: "",
-      homeChange: null,
-      score: {
-        cardHome: "",
-        score: "1 - 1",
-        cardAway: ""
-      },
-      away: "Welat Cagro",
-      awayChange: null,
-    },
-    {
-      id: "6",
-      time: "89'",
-      home: "",
-      homeChange: null,
-      score: {
-        cardHome: "",
-        score: "",
-        cardAway: "y"
-      },
-      away: "Vincent Regeling",
-      awayChange: null,
-    }
-  ]
+  
+  
 
   return (
     <Layout className="px-0 px-md-3">
@@ -325,14 +607,16 @@ const PremierLeague = (props ,{ }) => {
                   
                   :<MatchSummary
                     type={title_obj.title}
-                    matchionfo={obj.summary}
+                    matchionfo={events}
                    />
                   }
                   
-                  {console.log(obj.summary)}
+                  
                   </center>
                   </div>
                 )
+              :
+              (obj.event === "nodata") ? <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
               :<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
 
           }
@@ -386,10 +670,12 @@ PremierLeague.getInitialProps = async ({query}) => {
 
   let league =  query.league;
   let name =  query.name;
-
+  let events ;
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/commentaries/match?id=${league}&league=${name}&json=1`)
   const data = await res.json()
 
+
+  
   return { 
     league: data.commentaries.tournament
    }

@@ -2,23 +2,113 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {CardSoccerStyle} from "./style"
 
-const CardSoccer = ({className}) => {
+
+const CardSoccer = ({teams,list,className}) => {
+  
   return (
     <CardSoccerStyle className={`pt-4 ${className}`}>
+
+    
+      
       <div className="pitch-soccer__container">
+         
         <div>
-          <div className="pitch-soccer__spotlight soccer-corner corner-top corner-left" />
+           <div className="pitch-soccer__spotlight soccer-corner corner-top corner-left" />
           <div className="pitch-soccer__spotlight soccer-corner corner-top corner-right" />
           <div className="pitch-soccer__spotlight soccer-corner corner-bottom corner-left" />
           <div className="pitch-soccer__spotlight soccer-corner corner-bottom corner-right" />
-          <div className="pitch-soccer__spotlight soccer-center" />
+          <div className="pitch-soccer__spotlight soccer-center">
+
+           <table>
+                    <thead>
+                          <tr>
+                            <th>{teams.localteam}</th>
+                            <th>Stats</th>
+                            <th>{teams.visitorteam}</th>
+                          </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <tr>
+                      <td>{list.localteam.shots["@total"]}</td>
+                      <td>ยิงทั้งหมด</td>
+                      <td>{list.visitorteam.shots["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.shots["@insidebox"]}</td>
+                      <td>ยิงเข้ากรอบ</td>
+                      <td>{list.visitorteam.shots["@insidebox"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.shots["@outsidebox"]}</td>
+                      <td>ยิงออกนอกกรอบ</td>
+                      <td>{list.visitorteam.shots["@outsidebox"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.fouls["@total"]}</td>
+                      <td>ฟาวล์</td>
+                      <td>{list.visitorteam.fouls["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.corners["@total"]}</td>
+                      <td>เตะมุม</td>
+                      <td>{list.visitorteam.corners["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.offsides["@total"]}</td>
+                      <td>ล้ำหน้า</td>
+                      <td>{list.visitorteam.offsides["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.possestiontime["@total"]}</td>
+                      <td>ครองบอล</td>
+                      <td>{list.visitorteam.possestiontime["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.yellowcards["@total"]}</td>
+                      <td>ใบเหลือง</td>
+                      <td>{list.visitorteam.yellowcards["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.redcards["@total"]}</td>
+                      <td>ใบแดง</td>
+                      <td>{list.visitorteam.redcards["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.saves["@total"]}</td>
+                      <td>เซฟบอล</td>
+                      <td>{list.visitorteam.saves["@total"]}</td>
+                    </tr>
+                    <tr>
+                      <td>{list.localteam.passes["@total"]}</td>
+                      <td>จ่ายบอลทั้งบอล</td>
+                      <td>{list.visitorteam.passes["@total"]}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                    
+                    </tr>
+
+                    </tfoot>
+            
+          </table>
+
+
+          
+          
+          
+          </div>
           <div className="pitch-soccer__spotlight soccer-goal soccer-goal-left" />
           <div className="pitch-soccer__spotlight soccer-goal soccer-goal-right" />
         </div>
         <div className="pitch-soccer__stripes"></div>
         <div className="pitch-soccer__noise" />
+        
         <div className="pitch-soccer__svg-container--">
+       
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 568 352" className="pitch-soccer__svg" style={{stroke: 'rgb(255, 255, 255)'}}>
+          
             <path vectorEffect="non-scaling-stroke" strokeWidth={2} fill="none" d="M10,10h548v332H10V10z" />
             <path vectorEffect="non-scaling-stroke" strokeWidth={2} fill="none" d="M83.5,211c12-7.2,20-20.2,20-35s-8-27.8-20-35 M10.5,87h73v178h-73 M557.5,87h-73v178h73 M484.5,211c-12-7.2-20-20.2-20-35s8-27.8,20-35" />
             <path vectorEffect="non-scaling-stroke" strokeWidth={2} fill="none" d="M10.5,139h29v74h-29 M557.5,139h-29v74h29 M284,10v332" />
@@ -32,6 +122,7 @@ const CardSoccer = ({className}) => {
           </svg>
         </div>
       </div>
+     
     </CardSoccerStyle>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Slider from "react-slick";
-import LeagueTable from "../LeagueTable"
+import LeagueTableFull from "../LeagueTableFull"
 import {SliderStyle} from "./style"
 
 function SampleNextArrow(props) {
@@ -42,7 +42,7 @@ const CarouselTable = ({slideValues, className}) => {
     <SliderStyle {...settings}>
         {slideValues.map((matches, k) => {
           return (
-          <LeagueTable 
+          <LeagueTableFull 
             title={matches.title} 
             arrow={true} 
             matches={matches.match} 

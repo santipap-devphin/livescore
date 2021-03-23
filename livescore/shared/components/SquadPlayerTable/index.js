@@ -10,12 +10,12 @@ const SquadPlayerTable = ({ className, plyers, title}) => {
                 <caption className="">{title}</caption>
                 <thead>
                     <tr>
-                        <th>Players</th>
-                        <th>Age</th>
-                        <th>Number</th>
-                        <th>appearences</th>
-                        <th>goal</th>
-                        <th>rating</th>
+                        <th>ชื่อนักเตะ</th>
+                        <th>อายุ</th>
+                        <th>หมายเลข</th>
+                        <th>ลงเล่น</th>
+                        <th>ทำประตู</th>
+                        <th>ค่าเฉลี่ย</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,20 +23,20 @@ const SquadPlayerTable = ({ className, plyers, title}) => {
                         plyers.map((play, index) => (
                             <tr key={index.toString()}>
                                 <td>
-                                    <Avatar
+                                    {/*<Avatar
                                         size={30}
                                         shape="circle"
                                         src={play.img}
                                         alt={play["@name"]}
                                         className="mr-3"
-                                    />
+                                    />*/}
                                     <span>{play["@name"]}</span>
                                 </td>
                                 <td>{play["@age"]}</td>
                                 <td>{play["@number"]}</td>
                                 <td>{play["@appearences"]}</td>
                                 <td>{play["@goals"]}</td>
-                                <td>{play["@rating"]}</td>
+                                <td>{(play['@rating'] === "") ? 0 :parseFloat(play['@rating']).toFixed(2)}</td>
                             </tr>
                         ))
                     }

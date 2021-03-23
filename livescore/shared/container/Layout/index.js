@@ -38,7 +38,9 @@ function datee(nextday){
 const Layout = (props) => {
 
   const router = useRouter()
+  //const pathh = router.asPath
   let pathname = router.pathname
+  console.log(pathname)
   const { isMobile } = useDeviceDetect();
 
     let LaLigaSantander = []
@@ -154,20 +156,45 @@ const Layout = (props) => {
           onClickRight={() => console.log("right")}
         /> : ""
         }
+
+    
         <div className="container-fluid container-xl pt-4">
           <div className="row row-cols-xl-3">
             <aside className="col-md-4 col-xl-3 d-none d-md-block">
               <div className="sidebar-box">
+               
                 <Sidebar>
-                  <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
+                  {
+                    pathname === "/highlight" ? "" 
+                    :
+                    pathname === "/plugins/table-score" ? "" 
+                    :
+                    pathname === "/clubs" ? "" 
+                    :
+                    pathname === "/standings" ? "" 
+                    :
+                    <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
+
+                  }
+                  
                   <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
                 </Sidebar>
-                <Navigation 
-                  className="" 
-                  navTitle="ลีคอื่นๆ (ทั่วโลก)" 
-                  routes={worldleague} 
-                  
-                />
+                {
+                     pathname === "/highlight" ? ""
+                     :
+                     pathname === "/plugins/table-score" ? ""
+                     :
+                     pathname === "/clubs" ? "" 
+                     :
+                     pathname === "/standings" ? "" 
+                     :
+                    <Navigation 
+                      className="" 
+                      navTitle="ลีคอื่นๆ (ทั่วโลก)" 
+                      routes={worldleague} 
+                    />
+                 }
+                
                 <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
                 <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
               </div>

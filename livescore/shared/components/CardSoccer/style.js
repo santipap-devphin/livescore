@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
 export const CardSoccerStyle = styled.div`
+
+  table, td, th {
+    border: 1px solid black;
+    color:#fff;
+    text-align:center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
   .soccer__content {
     position: relative;
     overflow: hidden;

@@ -8,23 +8,151 @@ import Button from "../../shared/commons/Button"
 
 const limit = 4;
 let arrayForHoldingPosts = [];
-
+let category = []
 const HighLight = (props) => {
   const [clips, setClips] = useState([]);
   const [count, setCount] = useState(1);
   const [total, setTotal] = useState(0);
+
+
   // const [limit, setLimit] = useState(4);
   // const [loadMore, setLoadMore] = useState(false);
 
+ //console.log(props.highLight_slide)
+ //console.log(props.highLight)
+ 
+  if(props.highLight.scores.category !== null){
+
+
+    if(Array.isArray(props.highLight.scores.category) === true){
+
+     for(var i = 0 ; i < props.highLight.scores.category.length;i++)
+      {
+
+           if(props.highLight.scores.category[i].matches.match !== null){
+
+
+              if(Array.isArray(props.highLight.scores.category[i].matches.match) === true){ 
+
+
+                    for(var j = 0; j < props.highLight.scores.category[i].matches.match.length; j++){
+
+
+                          if(props.highLight.scores.category[i].matches.match[j].videos !== null){
+
+
+                            if(Array.isArray(props.highLight.scores.category[i].matches.match[j].videos.item) === true){
+
+                              category.push({
+                                    id:props.highLight.scores.category[i].matches.match[j]["@id"]
+                                    ,url:props.highLight.scores.category[i].matches.match[j].localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match[j].visitorteam["@name"]
+                                    ,title:props.highLight.scores.category[i].matches.match[j]["@id"]
+                                    ,titleurl:"Highlights " + props.highLight.scores.category[i]["@name"] + " " +props.highLight.scores.category[i].matches.match[j].localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match[j].visitorteam["@name"]
+                                    ,img:props.highLight.scores.category[i].matches.match[j].videos.item[0]["#cdata-section"]
+                                    ,urlToImage:props.highLight.scores.category[i].matches.match[j].videos.item[0]["#cdata-section"]
+                                    ,publishedAt: props.highLight.scores.category[i].matches.match[j]["@date"] +"  "+props.highLight.scores.category[i].matches.match[j]["@time"]
+                                    ,view:"0"
+                                    ,shared:"0"
+                                    })
+
+                            }else{
+    
+                              category.push({
+                                    id:props.highLight.scores.category[i].matches.match[j]["@id"]
+                                    ,url:props.highLight.scores.category[i].matches.match[j].localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match[j].visitorteam["@name"]
+                                    ,title:props.highLight.scores.category[i].matches.match[j]["@id"]
+                                    ,titleurl:"Highlights " + props.highLight.scores.category[i]["@name"] + " " +props.highLight.scores.category[i].matches.match[j].localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match[j].visitorteam["@name"]
+                                    ,img:props.highLight.scores.category[i].matches.match[j].videos.item["#cdata-section"]
+                                    ,urlToImage:props.highLight.scores.category[i].matches.match[j].videos.item["#cdata-section"]
+                                    ,publishedAt: props.highLight.scores.category[i].matches.match[j]["@date"] +"  "+props.highLight.scores.category[i].matches.match[j]["@time"]
+                                    ,view:"0"
+                                    ,shared:"0"
+                                    })
+                                  
+                            }
+
+
+                          }
+
+
+                    }
+
+
+              }else{
+
+
+                   if(props.highLight.scores.category[i].matches.match.videos !== null){
+
+                      
+                      if(Array.isArray(props.highLight.scores.category[i].matches.match.videos.item) === true){
+
+                        // วีดีโอ ไม่ใช่ youtube มีโอกาสเกิด error
+                        category.push({
+                             id:props.highLight.scores.category[i].matches.match["@id"]
+                            ,url:props.highLight.scores.category[i].matches.match.localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match.visitorteam["@name"]
+                            ,title:props.highLight.scores.category[i].matches.match["@id"]
+                            ,titleurl:"Highlights " + props.highLight.scores.category[i]["@name"] + " " +props.highLight.scores.category[i].matches.match.localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match.visitorteam["@name"]
+                            ,img:props.highLight.scores.category[i].matches.match.videos.item[0]["#cdata-section"]
+                            ,urlToImage:props.highLight.scores.category[i].matches.match.videos.item[0]["#cdata-section"]
+                            ,publishedAt: props.highLight.scores.category[i].matches.match["@date"] +"  "+props.highLight.scores.category[i].matches.match["@time"]
+                            ,view:"0"
+                            ,shared:"0"
+                            })
+
+                              
+
+                     }else{
+
+                      category.push({
+                             id:props.highLight.scores.category[i].matches.match["@id"]
+                            ,url:props.highLight.scores.category[i].matches.match.localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match.visitorteam["@name"]
+                            ,title:props.highLight.scores.category[i].matches.match["@id"]
+                            ,titleurl:"Highlights " + props.highLight.scores.category[i]["@name"] + " " +props.highLight.scores.category[i].matches.match.localteam["@name"]+" vs "+props.highLight.scores.category[i].matches.match.visitorteam["@name"]
+                            ,img:props.highLight.scores.category[i].matches.match.videos.item["#cdata-section"]
+                            ,urlToImage:props.highLight.scores.category[i].matches.match.videos.item["#cdata-section"]
+                            ,publishedAt: props.highLight.scores.category[i].matches.match["@date"] +"  "+props.highLight.scores.category[i].matches.match["@time"]
+                            ,view:"0"
+                            ,shared:"0"
+                          })
+
+
+                     }
+
+
+
+                   }
+
+
+
+              }
+
+
+           }
+          
+
+      }
+
+
+    }
+
+  }
+
+
+
   const loopThroughPosts = (count) => {
+    
     for (let i = count * limit - limit; i < limit * count; i++) {
-      if (posts.data[i] !== undefined) {
-        arrayForHoldingPosts.push(posts.data[i]);
+      if (category[i] !== undefined) {
+        //console.log(posts.data[i])
+        arrayForHoldingPosts.push(category[i]);
       }
     }
-    setTotal(posts.total)
+    setTotal(props.total)
     setClips(arrayForHoldingPosts);
   }
+
+   
+  
   // useEffect(() => {
   //   loopWithSlice(0, limit);
   // }, []);
@@ -39,7 +167,8 @@ const HighLight = (props) => {
     loopThroughPosts(count);
   };
 
-  
+  //console.log(props)
+ 
 
   // const onClickLoadMore = (e) => {
   //   e.preventDefault();
@@ -69,95 +198,7 @@ const HighLight = (props) => {
   // }
   // };
 
-  let clicks = []
-  let obj = {};
-  var clipss = []
 
-
-
-  {
-                props.highLight.map((res,value) => (
-
-                        Array.isArray(res.matches.match) ? 
-                        //console.log(res.matches.match)
-                        ""
-                        
-                        :
-
-                      Array.isArray(res.matches.match.videos.item) ?  
-                      clipss.push({id:res["@id"]
-                                  ,url:res.matches.match.localteam["@name"]+" vs "+res.matches.match.visitorteam["@name"]
-                                  ,title:res.matches.match["@id"]
-                                  ,img:res.matches.match.videos.item[0]["#cdata-section"]
-                                  ,urlToImage:res.matches.match.videos.item[0]["#cdata-section"]
-                                  ,publishedAt: res.matches.match["@date"] +"  "+res.matches.match["@time"]
-                                  ,view:"0"
-                                  ,shared:"0"})
-                    :
-                    
-                    clipss.push({id:res["@id"]
-                                  ,url:res.matches.match.localteam["@name"]+" vs "+res.matches.match.visitorteam["@name"]
-                                  ,title:res.matches.match["@id"]
-                                  ,img:res.matches.match.videos.item["#cdata-section"]
-                                  ,urlToImage:res.matches.match.videos.item["#cdata-section"]
-                                  ,publishedAt: res.matches.match["@date"] +"  "+res.matches.match["@time"]
-                                  ,view:"0"
-                                  ,shared:"0"})
-                          
-                       
-                  ))
-  
-                }
-
-        
-
-   //clipss.splice(4, 1)
-   clipss.slice(0,5)
-
-              
-  
-  let clipsSlide = [
-    {
-      id: "1", 
-      url: "/highlight/แมนฯ ยูไนเต็ด VS อาร์เซนอล ลืมเกมพ่ายจิ้งจอกพร้อมบวกปีศาจแดง ลุ้นสามแต้มที่นี่", 
-      title: "แมนฯ ยูไนเต็ด VS อาร์เซนอล ลืมเกมพ่ายจิ้งจอกพร้อมบวกปีศาจแดง ลุ้นสามแต้มที่นี่",
-      img: "/assets/mock/players/andy-robertson.jpg", 
-      urlToImage: "/assets/mock/players/andy-robertson.jpg",
-      publishedAt: "22 กันยายน 2563 , 12:15",
-      view: "1,105",
-      shared: "4",
-    },
-    {
-      id: "2", 
-      url: "/highlight/ลิเวอร์พูล VS เวสต์แฮม ยูไนเต็ด ภารกิจดับขุนค้อนฟอร์มร้อน แฟนหงส์แดงลุ้นไปกับเราที่นี่", 
-      title: "ลิเวอร์พูล VS เวสต์แฮม ยูไนเต็ด ภารกิจดับขุนค้อนฟอร์มร้อน แฟนหงส์แดงลุ้นไปกับเราที่นี่", 
-      img: "/assets/mock/players/andy-robertson.jpg", 
-      urlToImage: "/assets/mock/players/andy-robertson.jpg",
-      publishedAt: "22 กันยายน 2563 , 12:15",
-      view: "1,105",
-      shared: "4",
-    },
-    {
-      id: "3", 
-      url: "/highlight/เบิร์นลี่ย์ VS เชลซี สุดป้ายสิงห์ต้อง 3 แต้มเกมเยือน ชวนแฟนเชียร์ไปพร้อมกันที่นี่", 
-      title: "เบิร์นลี่ย์ VS เชลซี สุดป้ายสิงห์ต้อง 3 แต้มเกมเยือน ชวนแฟนเชียร์ไปพร้อมกันที่นี่", 
-      img: "/assets/mock/players/andy-robertson.jpg", 
-      urlToImage: "/assets/mock/players/andy-robertson.jpg",
-      publishedAt: "22 กันยายน 2563 , 12:15",
-      view: "1,105",
-      shared: "4",
-    },
-    {
-      id: "4", 
-      url: "/highlight/ลิเวอร์พูล VS อาร์เซนอล ชนะสามเกมรวดรออยู่แฟนหงส์พร้อมบู๊บิ๊กแมตช์ชนปืนโตที่นี่", 
-      title: "ลิเวอร์พูล VS อาร์เซนอล ชนะสามเกมรวดรออยู่แฟนหงส์พร้อมบู๊บิ๊กแมตช์ชนปืนโตที่นี่", 
-      img: "/assets/mock/players/andy-robertson.jpg", 
-      urlToImage: "/assets/mock/players/andy-robertson.jpg",
-      publishedAt: "22 กันยายน 2563 , 12:15",
-      view: "1,105",
-      shared: "4",
-    },
-  ]
   return (
 
     
@@ -177,11 +218,12 @@ const HighLight = (props) => {
       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <h1 className="mb-4">HIGHLIGHT!</h1>
       <Carousel 
-        slideValues={clipss} 
+        slideValues={props.highLight_slide} 
         title="LaLiga Santander"
         className="mb-4"
       />
-      <CardClips className="d-block d-md-none mb-5" data={clipsSlide} grid={false} />
+
+      {<CardClips className="d-block d-md-none mb-5" data={clips} grid={false} />/* case check mobile */}
       <h2 className="mb-4">SPORTS CLIPS</h2>
       <div className="row mx-0">
         {/* {
@@ -189,7 +231,7 @@ const HighLight = (props) => {
             ? <CardClips data={clips} grid={true} />
             : "loading..."
         } */}
-        <CardClips data={clips} grid={false} />
+        {<CardClips data={clips} grid={false} /> /*case clip desktop*/}
 
         {
           total !== clips.length
@@ -213,11 +255,135 @@ const HighLight = (props) => {
 }
 
 HighLight.getInitialProps = async (ctx) => {
-  const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/home?json=1')
 
-  const json = await res.json()
+  const res_today = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/home?json=1')
 
-  return { highLight: json.scores.category }
+  const json = await res_today.json()
+
+  const res_yesterday = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerhighlights/d-1?json=1')
+
+  const json_yes = await res_yesterday.json()
+
+  let category = []
+  
+  let highLight_slide = []
+
+  if(json.scores.category !== null){
+
+      if(Array.isArray(json.scores.category) === true){
+
+        for(var i = 0 ; i < json.scores.category.length;i++)
+        {
+
+             if(json.scores.category[i].matches.match !== null){
+
+
+                if(Array.isArray(json.scores.category[i].matches.match) === true){ 
+
+
+                      for(var j = 0; j < json.scores.category[i].matches.match.length; j++){
+
+
+                            if(json.scores.category[i].matches.match[j].videos !== null){
+
+
+                              if(Array.isArray(json.scores.category[i].matches.match[j].videos.item) === true){
+
+                                      highLight_slide.push({
+                                      id:json.scores.category[i].matches.match[j]["@id"]
+                                      ,url:json.scores.category[i].matches.match[j].localteam["@name"]+" vs "+json.scores.category[i].matches.match[j].visitorteam["@name"]
+                                      ,title:json.scores.category[i].matches.match[j]["@id"]
+                                      ,titleurl:"Highlights " + json.scores.category[i]["@name"] + " " +json.scores.category[i].matches.match[j].localteam["@name"]+" vs "+json.scores.category[i].matches.match[j].visitorteam["@name"]
+                                      ,img:json.scores.category[i].matches.match[j].videos.item[0]["#cdata-section"]
+                                      ,urlToImage:json.scores.category[i].matches.match[j].videos.item[0]["#cdata-section"]
+                                      ,publishedAt: json.scores.category[i].matches.match[j]["@date"] +"  "+json.scores.category[i].matches.match[j]["@time"]
+                                      ,view:"0"
+                                      ,shared:"0"
+                                      })
+
+                              }else{
+      
+                                highLight_slide.push({
+                                      id:json.scores.category[i].matches.match[j]["@id"]
+                                      ,url:json.scores.category[i].matches.match[j].localteam["@name"]+" vs "+json.scores.category[i].matches.match[j].visitorteam["@name"]
+                                      ,title:json.scores.category[i].matches.match[j]["@id"]
+                                      ,titleurl:"Highlights " + json.scores.category[i]["@name"] + " " +json.scores.category[i].matches.match[j].localteam["@name"]+" vs "+json.scores.category[i].matches.match[j].visitorteam["@name"]
+                                      ,img:json.scores.category[i].matches.match[j].videos.item["#cdata-section"]
+                                      ,urlToImage:json.scores.category[i].matches.match[j].videos.item["#cdata-section"]
+                                      ,publishedAt: json.scores.category[i].matches.match[j]["@date"] +"  "+json.scores.category[i].matches.match[j]["@time"]
+                                      ,view:"0"
+                                      ,shared:"0"
+                                      })
+                                    
+                              }
+
+
+                            }
+
+
+                      }
+
+
+                }else{
+
+
+                     if(json.scores.category[i].matches.match.videos !== null){
+
+                        
+                        if(Array.isArray(json.scores.category[i].matches.match.videos.item) === true){
+
+                          // วีดีโอ ไม่ใช่ youtube มีโอกาสเกิด error
+                            highLight_slide.push({
+                               id:json.scores.category[i].matches.match["@id"]
+                              ,url:json.scores.category[i].matches.match.localteam["@name"]+" vs "+json.scores.category[i].matches.match.visitorteam["@name"]
+                              ,title:json.scores.category[i].matches.match["@id"]
+                              ,titleurl:"Highlights " + json.scores.category[i]["@name"] + " " +json.scores.category[i].matches.match.localteam["@name"]+" vs "+json.scores.category[i].matches.match.visitorteam["@name"]
+                              ,img:json.scores.category[i].matches.match.videos.item[0]["#cdata-section"]
+                              ,urlToImage:json.scores.category[i].matches.match.videos.item[0]["#cdata-section"]
+                              ,publishedAt: json.scores.category[i].matches.match["@date"] +"  "+json.scores.category[i].matches.match["@time"]
+                              ,view:"0"
+                              ,shared:"0"
+                              })
+
+                                
+
+                       }else{
+
+                            highLight_slide.push({
+                               id:json.scores.category[i].matches.match["@id"]
+                              ,url:json.scores.category[i].matches.match.localteam["@name"]+" vs "+json.scores.category[i].matches.match.visitorteam["@name"]
+                              ,title:json.scores.category[i].matches.match["@id"]
+                              ,titleurl:"Highlights " + json.scores.category[i]["@name"] + " " +json.scores.category[i].matches.match.localteam["@name"]+" vs "+json.scores.category[i].matches.match.visitorteam["@name"]
+                              ,img:json.scores.category[i].matches.match.videos.item["#cdata-section"]
+                              ,urlToImage:json.scores.category[i].matches.match.videos.item["#cdata-section"]
+                              ,publishedAt: json.scores.category[i].matches.match["@date"] +"  "+json.scores.category[i].matches.match["@time"]
+                              ,view:"0"
+                              ,shared:"0"
+                            })
+
+
+                       }
+
+
+
+                     }
+
+
+
+                }
+
+
+             }
+            
+
+        }
+
+
+      }
+    
+  } //casetoday
+
+  return { highLight: json_yes ,highLight_slide :highLight_slide,total:category.length }
 
 }
 

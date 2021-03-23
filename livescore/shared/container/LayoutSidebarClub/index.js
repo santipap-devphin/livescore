@@ -10,7 +10,7 @@ import ChampionsLeagueTable from "../../commons/ChampionsLeagueTable"
 
 import Players from "../../../mock/Players"
 
-const LayoutSidebarClub = ({ children }) => {
+const LayoutSidebarClub = ({children }) => {
   let matches = [
     { key: "1", title: "Getafe", matches: "3", gd: "4", points: "7" },
     { key: "2", title: "Valencia", matches: "4", gd: "2", points: "7" },
@@ -23,14 +23,16 @@ const LayoutSidebarClub = ({ children }) => {
     { key: "9", title: "Villarreal", matches: "4", gd: "-1", points: "7" },
     { key: "10", title: "Barcelona", matches: "2", gd: "7", points: "6" },
   ]
+
+  console.log(children)
   return (
     <>
       <Header  />
       <ClubNav
         title={`Liverpool`}
-        logo={`https://upload.wikimedia.org/wikipedia/th/d/d1/Liverpool_FC_Logo.svg`}
+        logo={children[1].props.src}
         flag={`https://www.cct-tour.com/wp-content/themes/wow/resources/templates/cct/assets/images/flag/england.png`}
-        nation={`England`}
+        nation={""}
       />
       <div className="container-fluid container-xl pt-4 ">
         <div className="row">
@@ -39,14 +41,14 @@ const LayoutSidebarClub = ({ children }) => {
           </main>
           <div className="col-md-4 col-xl-3">
             <Sidebar>
-              <ChampionsLeagueTable 
+              {/*<ChampionsLeagueTable 
                 title="English Premier League" 
                 matches={matches} 
                 className="mb-4" 
-              />
+              />*/}
               <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
               <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-              <TopPlayer title="Monthly savings" players={Players} />
+              {/*<TopPlayer title="Monthly savings" players={Players} />*/}
             </Sidebar>
           </div>
         </div>

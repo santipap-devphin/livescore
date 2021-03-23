@@ -10,7 +10,7 @@ import ClubStatus from "../../components/ClubStatus"
 
 const ClubNav = ({ children, title, logo, flag, nation }) => {
     const router = useRouter()
-    //const { id } = router.query
+    const { id } = router.query
     let path = router.asPath
     const host = path.split("/");
     let nav = host.slice(1, host.length - 1);
@@ -25,6 +25,9 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
         "Squad",
         "Champions"
     ]
+
+    
+    
     return (
         <ClubNavStyle>
             <div className="jumbotron-fluid" style={{ backgroundColor: '#F5F5F5' }}>
@@ -57,6 +60,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                     <div className="row">
                         <div className="col-md-8 col-xl-9">
                             <div className="media align-items-center">
+                           
                                 <img 
                                     width={100} 
                                     height={100} 
@@ -65,22 +69,22 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                                     className="img-thumbnail h-100px rounded-0 bg-transparent border-0" 
                                 />
                                 <div className="media-body">
-                                    <h2 className='h4 text-title'>{title}</h2>
-                                    <img width={25} height={25} src={flag} alt='logo' className="border rounded-circle" />
+                                    <h2 className='h4 text-title'>{teamName}</h2>
+                                    {/*<img width={25} height={25} src={flag} alt='logo' className="border rounded-circle" />*/}
                                     <small className="ml-3">{nation}</small>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-4 col-xl-3">
                             <Sidebar>
-                                <ClubStatus
+                                {/*<ClubStatus
                                     className="mt-3 mt-md-0"
-                                    title="20-21 PREM STATS"
+                                    title="TEAM STATS"
                                     squad="41"
                                     players="24"
                                     avgAge="23.9"
                                     market="€ 1.07B"
-                                />
+                                />*/}
                             </Sidebar>
                         </div>
                     </div>
@@ -121,5 +125,8 @@ ClubNav.propTypes = {
     // children: PropTypes.node.isRequired,
 };
 ClubNav.defaultProps = {}
+
+
+
 
 export default ClubNav;
