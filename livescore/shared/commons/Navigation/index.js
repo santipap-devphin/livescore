@@ -9,7 +9,7 @@ const Navigation = ({ className, routes, navTitle }) => {
   return (
     <NavigationStyle className={`collapse bd-links d-md-block mb-4 ${className}`}>
       <div className="bd-toc-item">
-        <div className="bd-toc-link bg-secondary text-white">
+        <div className="bd-toc-link side-heading">
           {navTitle}
         </div>
         <ul className="nav bd-sidenav">

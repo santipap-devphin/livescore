@@ -98,19 +98,19 @@ const Footer = ({ className }) => {
             <div className="text-center text-lg-right ml-lg-auto">
               <ul className="nav nav-sm nav-white nav-x-sm align-items-center justify-content-center">
                 <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">Partners</a>
+                  <a className="nav-link " href="#">Partners</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">Contact Us</a>
+                  <a className="nav-link " href="#">Contact Us</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">About</a>
+                  <a className="nav-link " href="#">About</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">Help</a>
+                  <a className="nav-link " href="#">Help</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">Privacy Policy</a>
+                  <a className="nav-link " href="#">Privacy Policy</a>
                 </li>
               </ul>
             </div>

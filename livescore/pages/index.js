@@ -72,9 +72,16 @@ return (
         keyWords=""
         author=""
       />
-      <div className="d-none d-md-block">
-        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      <div className="d-none d-md-block mainf-tab">
+        <div className="banner f">
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sg8bet22.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-888-728x180 2.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Top789-728x180.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/MSbobet-online 728x180.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet891 728x180-2.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/UFABET8989-728x180.gif" alt="" /></a>
+        </div>
+        
         <NavDate 
           DataDate={navDates}
           onClickLeft={() => console.log("left")}
@@ -91,7 +98,8 @@ return (
             
             <div key={value.toString()}> 
                  <TableBattle  
-                 className="highlight bg-secondary text-white"
+                 className="highlight text-white"
+                 // className="highlight bg-secondary text-white"
                  title={res['@name']}
                  data={res.matches.match}
                  highlight={true} 
@@ -115,7 +123,7 @@ return (
             (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
             <div key={value.toString()}> 
                 <TableBattle  
-                className="highlight bg-secondary text-white"
+                className="highlight text-white"
                 title={res['@name']}
                 data={res.matches.match}
                 highlight={true} 
@@ -133,7 +141,7 @@ return (
        {
              <div className="d-block d-md-none">
                 <div className="banner px-3">
-
+                    // mobile banner
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
 
