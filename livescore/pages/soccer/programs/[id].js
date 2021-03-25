@@ -11,9 +11,36 @@ const TableBattleMobile = dynamic(()=> import('../../../shared/commons/TableBatt
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 
 const Homefilter = (props) => {
+
+  
+  const [sdata , setDatas] =  useState(false);
+
+  useEffect(() => {
+
+
+
+    if(props.list[0].sortdata.category.length > 0){
+
+           setDatas(true);
+
+    }
+    
+
+    //console.log(sdata)
+    /*props.home.scores.category.map((res,value) => (
+
+      
+        (res["@file_group"] === "england") ? 
+            setPriority([...priority, res["@file_group"]]) : null
+        )
+    )*/
+ 
+  });
 
   function datee(nextday){
 
@@ -100,16 +127,11 @@ const Homefilter = (props) => {
             onClickRight={() => console.log("right")}
           />
           
-          {/*console.log(this.props.home.scores.category)*/}
-          {/*console.log(Europe)*/}
-          
-          {
-          (props.load === true) ?
-            props.list[0].home.scores.category.map((res,value) => (
+         {
+          (sdata !== false) ?
+            props.list[0].sortdata.category.map((res,value) => (
 
-                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
-                              
-                  <div key={value.toString()}> 
+                 <div key={value.toString()}> 
                       <TableBattle  
                       className="highlight bg-secondary text-white"
                       title={res['@name']}
@@ -119,34 +141,10 @@ const Homefilter = (props) => {
                       />
                       
                   </div>
-                  :
-                  null
+                  
             ))
           :"loading ......"
          }
-
-
-          {
-            (props.load === true) ?
-                  props.list[0].home.scores.category.map((res,value) => (
-
-
-                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229"  && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
-                    <div key={value.toString()}> 
-                        <TableBattle  
-                        className="highlight bg-secondary text-white"
-                        title={res['@name']}
-                        data={res.matches.match}
-                        highlight={true} 
-                        exam = {res['@id']}
-                        />
-                    </div>
-                    :
-                    null
-            ))
-          :"loading ....."
-         }
-         
         </div>
 
          {
@@ -165,45 +163,20 @@ const Homefilter = (props) => {
                     />
 
                       {
-                      (props.load === true) ? 
-                      props.list[0].home.scores.category.map((res,value) => (
-
-                            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
-                            <div key={value.toString()}>
-                                  <TableBattleMobile 
-                                    title={res['@name']}
-                                    data={res.matches.match}
-                                    highlight={false}
-                                  />
-                                
-                            </div>
-                            :
-                            null
-
+                      (sdata !== false) ?
+                            props.list[0].sortdata.category.map((res,value) => (
+                                  <div key={value.toString()}>
+                                        <TableBattleMobile 
+                                          title={res['@name']}
+                                          data={res.matches.match}
+                                          highlight={false}
+                                        />
+                                      
+                                  </div>
                       ))
                      : "loading ...."
                      }
-
-
-                      {(props.load === true) ? 
-                                props.list[0].home.scores.category.map((res,value) => (
-
-                                (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229"  && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
-                                <div key={value.toString()}>
-                                      <TableBattleMobile 
-                                        title={res['@name']}
-                                        data={res.matches.match}
-                                        highlight={false}
-                                      />
-                                    
-                                </div>
-                                :
-                                null
-                              ))
-                     :"loading ...."
-                    }
-                                                            
-          </div>
+             </div>
 
 
          }
@@ -223,13 +196,210 @@ Homefilter.getInitialProps = async ({ query }) => {
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${id}?json=1`)
   const data  = await res.json()
 
+  let ndata = [];
+
+  for(var i = 0 ; i < data.scores.category.length; i++)
+  {
+    
+    if(data.scores.category[i]["@id"] === "1204"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "1",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1005"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "2",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1007"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "3",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1198"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "4",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1399"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "5",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1269"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "6",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1229"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "7",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1322"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "8",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1221"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "9",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1271"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "10",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }else{
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "11",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+
+    }
+    
+
+  }
+
+  ndata.sort(function(a, b) {
+  
+      return a["@priority"] - b["@priority"];
+
+  });
+
   let leage = [];
 
-  leage.push({home: data})
-    
-  return {id:id,list:leage , load :true}
-}
+  let scores = {
+                  "@sport":data.scores["@sport"],
+                  "@updated":data.scores["@updated"],
+                  "category":ndata
+                   
+              }
 
+  leage.push({sortdata:scores})
+    
+  return {id:id,list:leage}
+}
 
 export default Homefilter;
 

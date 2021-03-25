@@ -12,11 +12,351 @@ const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobi
 
 const Home = (props) => {
 
-   //console.log(props)
+  //console.log(props)
+
+  const [sdata , setDatas] =  useState(false);
+
+  const [defaults , setDefaults] = useState(props);
 
   const [priority , setPriority] = useState([]);
+  const [live , setLive] = useState([]);
+
+
+
+  const handleClicklive = async (e) => {
+
+    e.preventDefault();
+
+    setDatas(false);
+    //console.log(e.target.value);
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+    
+    const data = await res.json()
+
+    let ndata = [];
+    let objj = {};
+    let lives = [];
+    let objs = {};
+    let tmpp;
+
+      for(var i = 0 ; i < data.scores.category.length; i++)
+      {
+        
+         
+        if(data.scores.category[i]["@id"] === "1204"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "1",
+              "matches": data.scores.category[i]["matches"],
+              
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1005"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "2",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1007"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "3",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1198"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "4",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1399"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "5",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1269"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "6",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1229"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "7",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1322"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "8",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1221"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "9",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }
+        else if(data.scores.category[i]["@id"] === "1271"){
+
+          ndata.push(
+            {
+              "@name":data.scores.category[i]["@name"] ,
+              "@gid": data.scores.category[i]["@gid"] ,
+              "@id": data.scores.category[i]["@id"] ,
+              "@file_group": data.scores.category[i]["@file_group"],
+              "@iscup": data.scores.category[i]["@iscup"],
+              "@priority": "10",
+              "matches": data.scores.category[i]["matches"],
+            }
+
+          )
+
+        }else{
+
+
+           if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+
+
+                for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+
+                      lives = [];
+                     
+                      
+                      if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+
+
+                             lives.push(
+                               {
+                                 "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                                 "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                                 "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                                 "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                                 "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                                 "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                                 "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                                 "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                                 "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                                 "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                                 "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                                 "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                                 "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                                 "events": data.scores.category[i]["matches"].match[j]["events"],
+                                 "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                               }
+                             )
+
+                             objs = {
+                              "@date": data.scores.category["@date"],
+                              "@formatted_date": data.scores.category["@formatted_date"],
+                              "match":lives
+                            }
+                              
+
+                              ndata.push(
+                                {
+                                  "@name":data.scores.category[i]["@name"] ,
+                                  "@gid": data.scores.category[i]["@gid"] ,
+                                  "@id": data.scores.category[i]["@id"] ,
+                                  "@file_group": data.scores.category[i]["@file_group"],
+                                  "@iscup": data.scores.category[i]["@iscup"],
+                                  "@priority": "11",
+                                  "matches": objs,
+                                }
+                    
+                              )
+                        }
+
+               }
+          
+
+           }else{
+
+
+
+                  if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+
+                       
+                          ndata.push(
+                            {
+                              "@name":data.scores.category[i]["@name"] ,
+                              "@gid": data.scores.category[i]["@gid"] ,
+                              "@id": data.scores.category[i]["@id"] ,
+                              "@file_group": data.scores.category[i]["@file_group"],
+                              "@iscup": data.scores.category[i]["@iscup"],
+                              "@priority": "11",
+                              "matches": data.scores.category[i]["matches"],
+                            }
+                
+                          )
+
+
+                  }
+
+
+
+
+           }
+       }
+        
+
+      }
+
+      
+
+      ndata.sort(function(a, b) {
+      
+          return a["@priority"] - b["@priority"];
+      });
+
+      let scores = {
+            "@sport":data.scores["@sport"],
+            "@updated":data.scores["@updated"],
+            "category":ndata
+        
+    }
+    
+  //setLoads(true)
+    
+    objj = {home:scores};
+
+    //return {home: scores}
+    setDefaults(objj);
+
+    setDatas(true);
+
+  }
+
+  //console.log(defaults.home)
+  let items = ['one', 'two', 'three', 'four', 'five'];
+
+  let index = 2;
+
+  let tmp = items.splice(index, 1)
+
+  //console.log(tmp)
+
+  items.unshift(tmp[0])
+
+  //console.log(items);
+ 
+  /*let newindex;
+
+  for(var i = 0 ; i < props.home.scores.category.length; i++)
+  {
+    if(props.home.scores.category[i]["@file_group"].toLowerCase() === "spain"){
+
+      console.log(props.home.scores.category[i]["@file_group"].toUpperCase())
+
+      newindex = i;
+
+      let tmpp = props.home.scores.category.splice(newindex, 1);
+
+      props.home.scores.category.unshift(tmpp[0]);
+
+    }else{
+
+    }
+  }*/
+
+   
   
-  function datee(nextday){
+
+
+  /*setDatas([...props.home.scores.category, newElement]);*/
+
+function datee(nextday){
 
     const today = new Date()
     const tomorrow = new Date(today)
@@ -34,18 +374,19 @@ const Home = (props) => {
 
   }
 
+
+
   useEffect(() => {
 
 
-    /*props.home.scores.category.map((res,value) => (
+    //setDatas(true);
+      if(defaults.home.category.length > 0){
 
-       
-        (res["@file_group"] === "england") ? 
-            setPriority([...priority, res["@file_group"]]) : null
-        )
-    )*/
+             setDatas(true);
+
+      }
    
-  });
+  },[setDatas]);
 
   //console.log(priority)
 
@@ -80,53 +421,33 @@ return (
           onClickLeft={() => console.log("left")}
           onClickRight={() => console.log("right")}
         />
-
+        <a href="#" onClick={handleClicklive}>
+            Live
+        </a>
+        {console.log(sdata)}
         {
-          (props.load === true) ? 
+          
+          (sdata !== false) ? 
 
-            props.home.scores.category.map((res,value) => (
+              defaults.home.category.map((res,value) => (
 
+                <div key={value.toString()}> 
+                    <TableBattle  
+                    className="highlight bg-secondary text-white"
+                    title={res['@name']}
+                    data={res.matches.match}
+                    highlight={true} 
+                    exam = {res['@id']}
+                    />
+                    
+                </div>
            
-            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
-            
-            <div key={value.toString()}> 
-                 <TableBattle  
-                 className="highlight bg-secondary text-white"
-                 title={res['@name']}
-                 data={res.matches.match}
-                 highlight={true} 
-                 exam = {res['@id']}
-                 />
-                 
-           </div>
-            :
-            null
-           )) 
+                )) 
            : "loading........."
 
 
         }
-        {
-          
-          (props.load === true) ? 
-           props.home.scores.category.map((res,value) => (
-
-
-            (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
-            <div key={value.toString()}> 
-                <TableBattle  
-                className="highlight bg-secondary text-white"
-                title={res['@name']}
-                data={res.matches.match}
-                highlight={true} 
-                exam = {res['@id']}
-                />
-            </div>
-            :
-            null
-          ))
-         : "loading........."
-        }
+     
       
       </div>
 
@@ -141,50 +462,26 @@ return (
                 
                 {
 
-                (props.load === true) ? 
-                props.home.scores.category.map((res,value) => (
+                (sdata !== false) ? 
+                        defaults.home.category.map((res,value) => (
 
-                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1198" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1399" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
-                      <div key={value.toString()}>
-                            <TableBattleMobile 
-                              title={res['@name']}
-                              data={res.matches.match}
-                              highlight={false}
-                            />
-                           
-                      </div>
-                      :
-                      null
                       
-                     
-                ))
+                            <div key={value.toString()}>
+                                  <TableBattleMobile 
+                                    title={res['@name']}
+                                    data={res.matches.match}
+                                    highlight={false}
+                                  />
+                                
+                            </div>
+                          
+                            
+                          
+                      ))
               : "loading........."
               }
 
-
-              {
-              (props.load === true) ? 
-              props.home.scores.category.map((res,value) => (
-
-                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1198" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
-                  <div key={value.toString()}>
-                        <TableBattleMobile 
-                          title={res['@name']}
-                          data={res.matches.match}
-                          highlight={false}
-                        />
-                      
-                  </div>
-                  :
-                  null
-                  
-                
-              ))
-              : "loading........."
-            }
-               
-            
-        </div>
+           </div>
         
 
        }
@@ -200,12 +497,211 @@ Home.getInitialProps = async  (ctx) => {
 
   const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
   const data = await res.json()
+  let ndata = [];
+
+  for(var i = 0 ; i < data.scores.category.length; i++)
+  {
+    
+    if(data.scores.category[i]["@id"] === "1204"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "1",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1005"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "2",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1007"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "3",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1198"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "4",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1399"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "5",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1269"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "6",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1229"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "7",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1322"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "8",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1221"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "9",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1271"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "10",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }else{
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "11",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+
+    }
+    
+
+  }
+
+  ndata.sort(function(a, b) {
+  
+      return a["@priority"] - b["@priority"];
+  });
+  
+
+  let scores = {
+        "@sport":data.scores["@sport"],
+        "@updated":data.scores["@updated"],
+        "category":ndata
+     
+ }
+    
+
+  
 
   //setLoads(true)
 
-  return {home: data , load : true}
+  return {home: scores}
 }
-
 
 export default Home;
 
