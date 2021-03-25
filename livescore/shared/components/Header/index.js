@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import {HeaderStyle} from "./style"
 import { AiOutlineMenu } from "react-icons/ai";
 
+
 const Header = ({className}) => {
   const [collapse, setCollapse] = useState(false);
   const router = useRouter()
@@ -18,12 +19,12 @@ const Header = ({className}) => {
     <HeaderStyle id="top" className="margin-bottom-small">
       <nav className={`navbar navbar-expand-md shadow-sm rounded-0`}>
         <div className="container">
-          <a className="navbar-brand" href="./">7SCORE.live!</a>
+          <a className="navbar-brand" href="./"><img src="/assets/7scorex300.png" alt="7SCORE" /></a>
           <button className="navbar-toggler" onClick={() => setCollapse(!collapse)} type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
             <AiOutlineMenu />
           </button>
           <div className={`collapse navbar-collapse ${collapse === true ? "show" : ""}`} id="navbarsExample07">
-            <ul className="navbar-nav mr-auto">
+            <ul className="navbar-nav ml-auto">
               <li className={`nav-item ${firstItem === "" ? "active" : ""}`}>
                 <a className="nav-link" href="/">หน้าแรก <span className="sr-only">(current)</span></a>
               </li>

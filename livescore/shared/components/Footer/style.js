@@ -4,8 +4,9 @@ export const FooterStyle = styled.footer`
   .footer-top {
     padding: 60px 0 20px 0;
     text-align: left;
-    box-shadow: 0 0.5rem 1.3rem #afafaf, inset 0 0px 0 #afafaf;
+ /*    box-shadow: 0 0.5rem 1.3rem #afafaf, inset 0 0px 0 #afafaf; */
     margin-top: 10px;
+    border-top: 1px solid #222222;
     // color: #fff;
     // color: rgba(255, 255, 255, 0.8);
     @media (min-width: 768px) {
@@ -15,7 +16,7 @@ export const FooterStyle = styled.footer`
   }
   .footer-bottom {
     padding: 25px 0 15px 0;
-    background: #F5F5F5;
+    background: #222222;
     text-align: left;
     // color: #aaa;
     font-size: 15px;

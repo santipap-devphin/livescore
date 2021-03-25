@@ -413,9 +413,16 @@ return (
         keyWords=""
         author=""
       />
-      <div className="d-none d-md-block">
-        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      <div className="d-none d-md-block mainf-tab">
+        <div className="banner f">
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sg8bet22.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-888-728x180 2.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Top789-728x180.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/MSbobet-online 728x180.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet891 728x180-2.gif" alt="" /></a>
+          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/UFABET8989-728x180.gif" alt="" /></a>
+        </div>
+        
         <NavDate 
           DataDate={navDates}
           onClickLeft={() => console.log("left")}
@@ -442,19 +449,20 @@ return (
                     
                 </div>
            
+
                 )) 
-           : "loading........."
+            : "loading........."
 
 
         }
-     
+
       
       </div>
 
        {
              <div className="d-block d-md-none">
                 <div className="banner px-3">
-
+                    // mobile banner
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
 

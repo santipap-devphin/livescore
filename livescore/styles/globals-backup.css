@@ -7,7 +7,7 @@ body {
   font-family: 'Kanit', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #cccccc;
+  color: #eeeeee;
 }
 html, body{
   background: #030303;
@@ -17,7 +17,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  /* color: #363636; */
+  color: #363636;
   text-decoration: none;
 }
 
@@ -61,183 +61,6 @@ h5 {font-size: 14px;}
 }
 .pointer {
   cursor: pointer;
-}
-
-.navbar .container{
-  
-}
-.navbar{
-  padding: 1rem 1rem;
-}
-.navbar-brand{
-  width: 200px;
-}
-.navbar-nav{
-  margin-top: 15px;
-}
-#navbarsExample07{
-  text-align: right;
-  /* float: right; */
-}
-.navbar-brand img{display: block; max-width: 100%; height: auto;}
-
-
-.side-heading{
-  background: #710000;
-  background: -moz-linear-gradient(0deg, #710000 0%, #af0000 100%);
-  background: -webkit-linear-gradient(0deg, #710000 0%, #af0000 100%);
-  background: linear-gradient(0deg, #710000 0%, #af0000 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#710000",endColorstr="#af0000",GradientType=1);
-  color: #ffffff;
-}
-
-/* ============ sidebar ============  */
-.sidebar-box  .bd-toc-link{
-  display: block;
-  padding: .45rem 1.5rem;
-  font-weight: 600;
-}
-.bd-sidenav li{
-  border-bottom: 1px solid #2f2f2f;
-  display: block;
-  flex: 0 0 100%;
-}
-.bd-sidenav li a{
-  display: block;
-  padding: 8px 15px;
-  text-decoration: none;
-  color: #dddddd;
-  background: #111111;
-  font-size: 0.9em;
-}
-.bd-sidenav li a span{ margin-right: .8rem !important;}
-/* ============ sidebar ============  */
-
-.mainf-tab{
-  
-}
-.d-md-block .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  position: relative;
-  background: transparent;
-  font-weight: bold;
-  font-size: 1.1em;
-}
-.d-md-block .nav-pills .nav-link.active:before{
-  content: "";
-  display: block;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 10px solid red;
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: 50%;
-  top: -8px;
-  margin-left: -5px;
-}
-.d-md-block .nav-pills .nav-link.active:after{
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 10px solid red;
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  margin-left: -5px;
-}
-.league-matches .text-score{
-  color: #ffffff;
-  font-weight: bold;
-}
-.league-matches .block-title{
-  text-transform: uppercase;
-  background: #212121;
-  display: block;
-  color: #ffffff;
-  line-height: 120%;
-  padding: 12px 15px;
-  border-bottom: 3px solid #4c4c4c;
-  margin: 0px;
-  font-size: 0.9em;
-  position: relative;
-}
-.league-matches {
-  border-left: 3px solid #444444;
-}
-.league-matches.league-1059{ border-left: 3px solid #00853f; }
-.league-matches.league-1066{ border-left: 3px solid #e21d25; }
-.league-matches.league-1070{ border-left: 3px solid #458cc1; }
-.league-matches.league-1073{ border-left: 3px solid #fec936;}
-.league-matches.league-2129{ border-left: 3px solid #006633;}
-.league-matches.league-1049{ border-left: 3px solid #d23600;}
-.league-matches.league-2050{ border-left: 3px solid #53d689;}
-.league-matches.league-2437{ border-left: 3px solid #7129cc;}
-.league-matches.league-2471{ border-left: 3px solid #f7ff00;}
-.league-matches.league-1123{ border-left: 3px solid #00e72c;}
-.league-matches.league-1125{ border-left: 3px solid #00ced2;}
-.league-matches.league-1140{ border-left: 3px solid #fbff00;}
-.league-matches.league-1144{ border-left: 3px solid #79aafc;}
-.league-matches.league-1142{ border-left: 3px solid #ff9437;}
-.league-matches.league-1148{ border-left: 3px solid #dbd9d9;}
-.league-matches.league-1521{ border-left: 3px solid #f037ff;}
-.league-matches.league-2076{ border-left: 3px solid #33389c;}
-.league-matches.league-1167{ border-left: 3px solid #fbff00;}
-.league-matches.league-1904{ border-left: 3px solid #33389c;}
-.league-matches.league-1190{ border-left: 3px solid #d23600;}
-.league-matches.league-4164{ border-left: 3px solid #00853f;}
-.league-matches.league-4243{ border-left: 3px solid #f7ff00;}
-.league-matches.league-5230{ border-left: 3px solid #ff9437;}
-.league-matches.league-1817{ border-left: 3px solid #00e72c;}
-.league-matches.league-1051{ border-left: 3px solid #fec936;}
-.league-matches.league-2107{ border-left: 3px solid #d23600;}
-.league-matches.league-3875{ border-left: 3px solid #006633;}
-.league-matches.league-2107{ border-left: 3px solid #33389c;}
-.league-matches.league-1511{ border-left: 3px solid #f037ff;}
-.league-matches.league-1250{ border-left: 3px solid #00853f;}
-.league-matches.league-1250{ border-left: 3px solid #e21d25;}
-.league-matches.league-4050{ border-left: 3px solid #458cc1;}
-.league-matches.league-1551{ border-left: 3px solid #fec936;}
-.league-matches.league-2490{ border-left: 3px solid #d23600;}
-.league-matches.league-1309{ border-left: 3px solid #f7ff00;}
-.league-matches.league-18746{ border-left: 3px solid #53d689;}
-.league-matches.league-1326{ border-left: 3px solid #7129cc;}
-.league-matches.league-1050{ border-left: 3px solid #dbd9d9;}
-.league-matches.league-18844{ border-left: 3px solid #fec936;}
-.league-matches.league-1362{ border-left: 3px solid #f037ff;}
-.league-matches.league-1367{ border-left: 3px solid #1dda5c;}
-.league-matches.league-1379{border-left: 3px solid #3755ff;}
-.league-matches.league-1054{ border-left: 3px solid #ffac11;}
-.league-matches.league-1424{ border-left: 3px solid #c40202;}
-.league-matches.league-1424{ border-left: 3px solid #ffed00;}
-.league-matches.league-1424{ border-left: 3px solid #17b9fd;}
-.league-matches.league-1427{ border-left: 3px solid #00d70c;}
-.league-matches.league-1430{ border-left: 3px solid #dbd9d9;}
-.league-matches.league-1441{ border-left: 3px solid #37fcff;}
-.league-matches.league-1535{ border-left: 3px solid #ff0000;}
-.league-matches.league-1534{ border-left: 3px solid #1cbc11;}
-
-.league-matches .league-matches-item{
-  color: #aaaaaa;
-  border-bottom: 1px solid #1d1d23;
-  background: #101010;
-}
-.league-matches .league-matches-item:hover{
-  background: #000000;
-}
-.league-matches .league-matches-item:hover a{
-  color: #ff1c1c;
-}
-.banner{
-  display: block;
-  margin: 20px 0px ;
-}
-.banner.f{ margin-top: 0px;}
-.banner img{ display: block ; width: 100%; height: auto; }
-.banner a{ display: block; margin-bottom: 5px; }
-@media (max-width: 400px), (max-height: 550px) {
-  
 }
 /* 
 .text-dark {

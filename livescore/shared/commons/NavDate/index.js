@@ -5,8 +5,9 @@ import { NavDateStyle } from "./style";
 
 const NavDate = ({ onClickLeft, onClickRight, className, DataDate }) => {
   return (
+    
     <NavDateStyle
-      className={`nav nav-pills row mx-0 bg-light flex-nowrap align-items-center text-center mb-md-4 px-0 ${className}`}
+      className={`nav nav-pills row mx-0 flex-nowrap align-items-center text-center mb-md-4 px-0 ${className}`}
     >
       <div
         onClick={onClickLeft}
@@ -22,7 +23,7 @@ const NavDate = ({ onClickLeft, onClickRight, className, DataDate }) => {
           href={item.route}
           key={index}
         >
-          {item.date}
+           {item.date}
         </a>
       ))}
       <div

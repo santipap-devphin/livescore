@@ -18,13 +18,12 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
 
   }*/
 
-   
+  // console.log({exam});
   return (
-    <TableBattleStyle className={`league-matches ${highlight === true ? "highlight" : ""} mb-4`}>
+    <TableBattleStyle className={`league-matches ${highlight === true ? "highlight" : ""} mb-4 league-${exam}`}>
       <h4 className={`block-title ${className} mb-0`}>{title}</h4>
        
       {
-       
        
        <div className="league-matches-list list-unstyled mb-0">
        {Array.isArray(data) ? (
@@ -43,14 +42,14 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
                         as={`/football/${item["@static_id"]}/${exam}`}
                         >
                          
-                         <a className="row flex-column flex-md-row mx-0 py-2 text-decoration-none text-dark">
+                         <a className="row flex-column flex-md-row mx-0 py-2 text-decoration-none">
                           <div className="col-md-6 pl-md-2 pr-md-0">
                             <div className="d-flex row mx-0">
                               <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{item['@status']}</div>
                               <div className="col-md-9 px-0 pl-md-2 pr-md-2 flex-fill text-center text-md-right">
                                 {item.localteam['@name']}
                               </div> 
-                              <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center">  
+                              <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center text-score">  
                                 {item.localteam['@goals']+" - "+item.visitorteam['@goals']}
                               </div>
                             </div>
@@ -80,7 +79,7 @@ const TableBattle = ({ className, title, data, highlight , exam }) => {
                       as={`/football/${data["@static_id"]}/${exam}`}
                       
                     >
-                      <a className="row flex-column flex-md-row mx-0 py-2 text-decoration-none text-dark">
+                      <a className="row flex-column flex-md-row mx-0 py-2 text-decoration-none">
                         <div className="col-md-6 pl-md-2 pr-md-0">
                           <div className="d-flex row mx-0">
                             <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{data['@status']}</div>

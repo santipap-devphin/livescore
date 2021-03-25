@@ -177,8 +177,11 @@ const Layout = (props) => {
                     <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
 
                   }
+                  <div class="banner">
+                    <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="" /></a>
+                    { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
+                  </div>
                   
-                  <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
                 </Sidebar>
                 {
                      pathname === "/highlight" ? ""
@@ -195,9 +198,10 @@ const Layout = (props) => {
                       routes={worldleague} 
                     />
                  }
-                
-                <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
-                <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
+                <div class="banner">
+                  <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sbobetsc 250x500.gif" alt="" /></a>
+                  { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
+                </div>
               </div>
               <div className="sidebar-box d-none d-md-block d-xl-none">
                 <Sidebar>{/* ตารางคะแนนหน้า Homepage */}
