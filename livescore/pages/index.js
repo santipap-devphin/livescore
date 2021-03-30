@@ -20,9 +20,22 @@ const Home = (props) => {
 
   const [priority , setPriority] = useState([]);
   const [live , setLive] = useState([]);
+  var newsarr = [];
+  var _blank = [];
+  const sw = 0;
+  function convertTZ(date, tzString) {
+    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+  }
+
+  function chklive(obj){
+
+    
 
 
+  }
 
+  //console.log(convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok"))
+  
   const handleClicklive = async (e) => {
 
     e.preventDefault();
@@ -35,14 +48,11 @@ const Home = (props) => {
 
     let ndata = [];
     let objj = {};
-    let lives = [];
-    let objs = {};
-    let tmpp;
-
+  
       for(var i = 0 ; i < data.scores.category.length; i++)
       {
         
-         
+       // 
         if(data.scores.category[i]["@id"] === "1204"){
 
           ndata.push(
@@ -205,20 +215,17 @@ const Home = (props) => {
 
         }else{
 
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
 
-           if(Array.isArray(data.scores.category[i]["matches"].match) === true){
-
-
+                 //newsarr = [];
                 for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
 
-                      lives = [];
-                     
-                      
-                      if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+                       //newsarr = []
+                       if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
 
-
-                             lives.push(
+                           newsarr.push(
                                {
+                                 "@leagueid": data.scores.category[i]["@gid"],
                                  "@status": data.scores.category[i]["matches"].match[j]["@status"],
                                  "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
                                  "@date": data.scores.category[i]["matches"].match[j]["@date"],
@@ -237,25 +244,21 @@ const Home = (props) => {
                                }
                              )
 
-                             objs = {
-                              "@date": data.scores.category["@date"],
-                              "@formatted_date": data.scores.category["@formatted_date"],
-                              "match":lives
-                            }
+                             ndata.push(
+                              {
+                                "@name":data.scores.category[i]["@name"] ,
+                                "@gid": data.scores.category[i]["@gid"] ,
+                                "@id": data.scores.category[i]["@id"] ,
+                                "@file_group": data.scores.category[i]["@file_group"],
+                                "@iscup": data.scores.category[i]["@iscup"],
+                                "@priority": "11",
+                                "matches":{match :[]}
+                              }
                               
-
-                              ndata.push(
-                                {
-                                  "@name":data.scores.category[i]["@name"] ,
-                                  "@gid": data.scores.category[i]["@gid"] ,
-                                  "@id": data.scores.category[i]["@id"] ,
-                                  "@file_group": data.scores.category[i]["@file_group"],
-                                  "@iscup": data.scores.category[i]["@iscup"],
-                                  "@priority": "11",
-                                  "matches": objs,
-                                }
-                    
-                              )
+                  
+                            )
+                          
+                             
                         }
 
                }
@@ -284,31 +287,71 @@ const Home = (props) => {
 
                   }
 
-
-
-
-           }
+            }
        }
         
 
       }
-
-      
 
       ndata.sort(function(a, b) {
       
           return a["@priority"] - b["@priority"];
       });
 
-      let scores = {
+      var flags = [], output = [], l = ndata.length, i;
+
+      for( i=0; i<l; i++) {
+
+          if(flags[ndata[i]["@gid"]]) continue;
+          flags[ndata[i]["@gid"]] = true;
+          output.push(ndata[i]);
+      }
+      
+
+     var newArray = newsarr.reduce(function(acc, curr) {
+        //finding Index in the array where the NamaCategory matched
+        var findIfNameExist = acc.findIndex(function(item) {
+          return item["@leagueid"] === curr["@leagueid"];
+        })
+        // if in the new array no such object exist where
+        // namecategory matches then create a new object
+        if (findIfNameExist === -1) {
+          let obj = {
+            '@leagueid': curr["@leagueid"],
+            "match": [curr]
+          }
+          acc.push(obj)
+        } else {
+          // if name category matches , then push the value 
+          acc[findIfNameExist].match.push(curr)
+        }
+        return acc;
+
+      }, []);
+
+
+       for (let [key, value] of Object.entries(output)) {
+        //console.log(value);
+         if(value["@gid"] === newArray[key]["@leagueid"]){
+
+              //value.matches.push(newArray[key])
+
+              //objjj = newArray[key]["match"];
+              value.matches.match = newArray[key]["match"];
+             // console.log(newArray[key]["match"])
+          
+
+         }
+       
+      }
+     
+   let scores = {
             "@sport":data.scores["@sport"],
             "@updated":data.scores["@updated"],
-            "category":ndata
+            "category":output
         
     }
-    
-  //setLoads(true)
-    
+ 
     objj = {home:scores};
 
     //return {home: scores}
@@ -431,7 +474,7 @@ return (
         <a href="#" onClick={handleClicklive}>
             Live
         </a>
-        {console.log(sdata)}
+       
         {
           
           (sdata !== false) ? 
@@ -462,7 +505,7 @@ return (
        {
              <div className="d-block d-md-none">
                 <div className="banner px-3">
-                    // mobile banner
+                  
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
 
@@ -506,6 +549,15 @@ Home.getInitialProps = async  (ctx) => {
   const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
   const data = await res.json()
   let ndata = [];
+  let string_re;
+  let newdate;
+  let obkk  = {};
+  let matchs = [];
+  function convertTZ(date, tzString) {
+    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+  }
+
+  //convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok")
 
   for(var i = 0 ; i < data.scores.category.length; i++)
   {
@@ -522,6 +574,8 @@ Home.getInitialProps = async  (ctx) => {
           "@priority": "1",
           "matches": data.scores.category[i]["matches"],
         }
+
+
 
       )
 
@@ -683,8 +737,6 @@ Home.getInitialProps = async  (ctx) => {
         }
 
       )
-
-
     }
     
 
@@ -702,6 +754,8 @@ Home.getInitialProps = async  (ctx) => {
         "category":ndata
      
  }
+
+
     
 
   

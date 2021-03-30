@@ -17,10 +17,10 @@ const Tracker = (props) => {
 
   //console.log(props)
 
-
+  const [defalut, setDefalut] = useState(props);
   let obj = {};
   let objteam = {};
- 
+  let data;
 
   var clipss = []
   const router = useRouter()
@@ -63,24 +63,50 @@ const Tracker = (props) => {
                               nav[i] = toTh;
                              
                           nav.push(pageTitle)
-                          nav[1] = toTh;
-                          nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
-                         
-                          let data = [
-                            {
-                              title: props.league["@name"],
-                              type: props.league.match["@status"],
-                              date: props.league.match["@date"],
-                              team: props.league.match.localteam["@name"],
-                              score:props.league.match.localteam["@goals"] + " - " +props.league.match.visitorteam["@goals"] ,
-                              scoreA:props.league.match.localteam["@goals"],
-                              scoreB:props.league.match.visitorteam["@goals"],
-                              teamB: props.league.match.visitorteam["@name"]
-                            },
-                          ]
+                          if(defalut.check === 0){
 
-                          objteam["localteam"] = props.league.match.localteam["@name"];
-                          objteam["visitorteam"] = props.league.match.visitorteam["@name"];
+                            nav[1] = toTh;
+                            nav[2] = defalut.league.match.localteam["@name"] +" vs "+ defalut.league.match.visitorteam["@name"];
+                          
+                             data = [
+                              {
+                                title: defalut.league["@name"],
+                                type: defalut.league.match["@status"],
+                                date: defalut.league.match["@date"],
+                                team: defalut.league.match.localteam["@name"],
+                                score:defalut.league.match.localteam["@goals"] + " - " +defalut.league.match.visitorteam["@goals"] ,
+                                scoreA:defalut.league.match.localteam["@goals"],
+                                scoreB:defalut.league.match.visitorteam["@goals"],
+                                teamB: defalut.league.match.visitorteam["@name"]
+                              },
+                            ]
+
+                            objteam["localteam"] = defalut.league.match.localteam["@name"];
+                            objteam["visitorteam"] = defalut.league.match.visitorteam["@name"];
+
+                          }else{
+
+                            nav[1] = toTh;
+                            nav[2] = defalut.sleague.matches.match.localteam["@name"] +" vs "+ defalut.sleague.matches.match.visitorteam["@name"];
+                            data = [
+                             {
+                               title: defalut.sleague["@name"],
+                               type: defalut.sleague.matches.match["@status"],
+                               date: defalut.sleague.matches.match["@date"],
+                               team: defalut.sleague.matches.match.localteam["@name"],
+                               score:defalut.sleague.matches.match.localteam["@goals"] + " - " +defalut.sleague.matches.match.visitorteam["@goals"] ,
+                               scoreA:defalut.sleague.matches.match.localteam["@goals"],
+                               scoreB:defalut.sleague.matches.match.visitorteam["@goals"],
+                               teamB: defalut.sleague.matches.match.visitorteam["@name"]
+                             },
+                           ]
+
+                            objteam["localteam"] = defalut.sleague.matches.match.localteam["@name"];
+                            objteam["visitorteam"] = defalut.sleague.matches.match.visitorteam["@name"];
+
+
+                          }
+                          
                           
 
 
@@ -145,9 +171,19 @@ const Tracker = (props) => {
           {id: "3", name: "H2H", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
         ]}
       >
-        {props.league.match.stats === null ? <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
-        : 
-        <CardSoccer teams={objteam} list={props.league.match.stats}/>
+        {
+        defalut.check === 1 ? 
+        <div style={{padding: "20px"}}>
+          <center><h1>ไม่มีข้อมูล</h1></center>
+        </div>
+        
+        :  
+            defalut.league.match.stats === null ? 
+            <div style={{padding: "20px"}}>
+              <center><h1>ไม่มีข้อมูล</h1></center>
+            </div>
+            : 
+            <CardSoccer teams={objteam} list={defalut.league.match.stats}/>
         }
         
         
@@ -163,11 +199,78 @@ Tracker.getInitialProps = async ({asPath}) => {
   const host = path.split("/");
 
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/commentaries/match?id=${host[2]}&league=${host[3]}&json=1`)
-  const json = await res.json()
+  const data = await res.json()
+  let check = 0; 
+  let match;
+  let cate;
+  if(typeof data.commentaries.tournament === "undefined"){
+
+    check = 1;
+    const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+    const datadefalut = await resdefalut.json()
+
+    for(var i =0; i < datadefalut.scores.category.length; i++){
+
+      if(datadefalut.scores.category[i]["@id"] === host[3]){
+
+              cate = {
+                "@name":datadefalut.scores.category[i]["@name"],
+                "@gid":datadefalut.scores.category[i]["@gid"],
+                "@id":datadefalut.scores.category[i]["@id"],
+                "@file_group":datadefalut.scores.category[i]["@file_group"],
+                "@iscup":datadefalut.scores.category[i]["@iscup"],
+                "matches":{}
+            }
+
+            if(Array.isArray(datadefalut.scores.category[i].matches.match) === true){
+
+              for(var j =0; j < datadefalut.scores.category[i].matches.match.length; j++){
+
+
+                if(datadefalut.scores.category[i].matches.match[j]["@static_id"] === host[2]){
+
+
+                         match = datadefalut.scores.category[i].matches.match[j];
+                         cate.matches  = {match}
+
+
+                }
+
+
+              }
+
+
+            }else{
+
+              if(datadefalut.scores.category[i].matches.match["@static_id"] === host[2]){
+
+
+                        match = datadefalut.scores.category[i].matches.match;
+                        cate.matches  = {match}
+
+
+                 }
+
+
+            }
+
+
+      }
+
+
+
+    }
+
+
+
+  }
+
+
+
 
   
   //return { listdata: host[2]}
-  return { league: json.commentaries.tournament}
+  return { league: data.commentaries.tournament , check:check ,sleague :cate}
 }
 
 export default Tracker;

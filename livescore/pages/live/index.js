@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HeaderSeo from "../../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
@@ -8,6 +9,8 @@ const TableBattleMobile = dynamic(()=> import('../../shared/commons/TableBattleM
 
 
 const Live = (props) => {
+
+const [defaults , setDefaults] = useState(props);
 
 return (
       
@@ -27,52 +30,27 @@ return (
         
 
         {
-          (props.load === true) ? 
-
-            props.live.scores.category.map((res,value) => (
-
+          (defaults.load === true) ? 
            
-            (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
-            
-            <div key={value.toString()}> 
-                 <TableBattle  
-                 className="highlight bg-secondary text-white"
-                 title={res['@name']}
-                 data={res.matches.match}
-                 highlight={true} 
-                 exam = {res['@id']}
-                 />
-                 
-           </div>
-            :
-            null
-           )) 
-           : "loading........."
+            defaults.live.category.map((res,value) => (
+  
+              <div key={value.toString()}> 
+                      <TableBattle  
+                      className="highlight bg-secondary text-white"
+                      title={res['@name']}
+                      data={res.matches.match}
+                      highlight={true} 
+                      exam = {res['@id']}
+                      />
+                      
+                </div>
+                
+                )) 
+                : "loading........."
 
 
         }
-        {
-          
-          (props.load === true) ? 
-           props.live.scores.category.map((res,value) => (
-
-
-            (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
-            <div key={value.toString()}> 
-                <TableBattle  
-                className="highlight bg-secondary text-white"
-                title={res['@name']}
-                data={res.matches.match}
-                highlight={true} 
-                exam = {res['@id']}
-                />
-            </div>
-            :
-            null
-          ))
-         : "loading........."
-        }
-      
+        
       </div>
 
        {
@@ -86,50 +64,23 @@ return (
                 
                 {
 
-                (props.load === true) ? 
-                props.live.scores.category.map((res,value) => (
+                (defaults.load === true) ? 
+                   
+                    defaults.live.category.map((res,value) => (
 
-                  (res['@id'] === "1005" || res['@id'] === "1007" || res['@id'] === "1204" || res['@id'] === "1399" || res['@id'] === "1269" || res['@id'] === "1229" || res['@id'] === "1399" || res['@id'] === "1322" || res['@id'] === "1221" || res['@id'] === "1271") ?  
-                      <div key={value.toString()}>
+                       <div key={value.toString()}>
                             <TableBattleMobile 
                               title={res['@name']}
                               data={res.matches.match}
                               highlight={false}
                             />
                            
-                      </div>
-                      :
-                      null
-                      
-                     
+                        </div>
                 ))
               : "loading........."
               }
-
-
-              {
-              (props.load === true) ? 
-              props.live.scores.category.map((res,value) => (
-
-                  (res['@id'] !== "1005"  && res['@id'] !== "1007" && res['@id'] !== "1204" && res['@id'] !== "1399" && res['@id'] !== "1269" && res['@id'] !== "1229" && res['@id'] !== "1399" && res['@id'] !== "1322" && res['@id'] !== "1221" && res['@id'] !== "1271") ?  
-                  <div key={value.toString()}>
-                        <TableBattleMobile 
-                          title={res['@name']}
-                          data={res.matches.match}
-                          highlight={false}
-                        />
-                      
-                  </div>
-                  :
-                  null
-                  
-                
-              ))
-              : "loading........."
-            }
-               
-            
-        </div>
+        
+          </div>
         
 
        }
@@ -145,10 +96,206 @@ Live.getInitialProps = async (ctx) => {
 
   const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
   const data = await res.json()
+  let ndata = [];
 
-  //setLoads(true)
+  for(var i = 0 ; i < data.scores.category.length; i++)
+  {
+    
+    if(data.scores.category[i]["@id"] === "1204"){
 
-  return {live: data , load : true}
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "1",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1005"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "2",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1007"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "3",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1198"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "4",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1399"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "5",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1269"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "6",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1229"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "7",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1322"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "8",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1221"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "9",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }
+    else if(data.scores.category[i]["@id"] === "1271"){
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "10",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+    }else{
+
+      ndata.push(
+        {
+          "@name":data.scores.category[i]["@name"] ,
+          "@gid": data.scores.category[i]["@gid"] ,
+          "@id": data.scores.category[i]["@id"] ,
+          "@file_group": data.scores.category[i]["@file_group"],
+          "@iscup": data.scores.category[i]["@iscup"],
+          "@priority": "11",
+          "matches": data.scores.category[i]["matches"],
+        }
+
+      )
+
+
+    }
+    
+
+  }
+
+  ndata.sort(function(a, b) {
+  
+      return a["@priority"] - b["@priority"];
+  });
+  
+
+  let scores = {
+        "@sport":data.scores["@sport"],
+        "@updated":data.scores["@updated"],
+        "category":ndata
+     
+ }
+  
+
+  return {live: scores , load : true}
 }
 
 

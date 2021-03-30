@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import HeaderSeo from "../../../../shared/commons/HeaderSeo"
 import Layout from "../../../../shared/container/Layout"
 import Battle from "../../../../shared/commons/Battle"
@@ -15,12 +15,120 @@ import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerCon
 const PremierLeague = (props ,{ }) => {
   
   const router = useRouter()
+  const [defalut, setDefalut] = useState(props);
+  const [ldata, setLdata] = useState(null);
+  const [errs, setErrs] = useState(false);
+
 
   var obj = {};
   var title_obj = {}; 
   var events = [];
+  let data;
+  //console.log(defalut)
+  const loadods = async (param,param2) => {
 
-if(typeof router.query.event === "undefined"){
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/getodds/soccer?cat=soccer_10&league=${param2}&json=1`)
+    const data = await res.json()
+
+    for(var i = 0; i < data.scores.categories.length; i++)
+    {
+               if(Array.isArray(data.scores.categories[i].matches) === true){
+
+               
+                for(var j = 0; j < data.scores.categories[i].matches.length; j++)
+                {
+                   //console.log(data.scores.categories[i].matches[j])
+                   if(data.scores.categories[i].matches[j].static_id === param){
+                          setLdata(data.scores.categories[i].matches[j])
+
+                   }
+
+                }
+
+
+               }else{
+
+                      setLdata(data.scores.categories[i].matches)
+
+               }
+     }
+     setErrs(true)
+     
+  }
+
+
+if(props.check === 1){
+
+//loadingdata();
+        console.log(defalut.sleague)
+       if(defalut.sleague.matches.match.events !== null){
+
+        obj = {event:props.check}
+        title_obj = {"title":defalut.sleague.matches.match["@status"]};
+
+       
+              if(Array.isArray(defalut.sleague.matches.match.events.event) === true){
+
+
+                for(var i =0; i< defalut.sleague.matches.match.events.event.length; i++){
+
+
+                  //console.log(defalut.sleague.matches.match.events.event[i])
+
+                  events.push({
+                              "@player":defalut.sleague.matches.match.events.event[i]["@player"],
+                              "@assist_id":defalut.sleague.matches.match.events.event[i]["@assistid"],
+                              "@minute":defalut.sleague.matches.match.events.event[i]["@minute"],
+                              "@extra_min":defalut.sleague.matches.match.events.event[i]["@extra_min"],
+                              "@owngoal":"",
+                              "@var_cancelled":"",
+                              "@penalty":"",
+                              "@id":defalut.sleague.matches.match.events.event[i]["@playerId"],
+                              "@assist":defalut.sleague.matches.match.events.event[i]["@assist"],
+                              "@team":defalut.sleague.matches.match.events.event[i]["@team"],
+                              "@type":defalut.sleague.matches.match.events.event[i]["@type"]
+                    
+                          })
+
+
+                }
+
+
+              }else{
+
+                events.push({
+                  "@player":defalut.sleague.matches.match.events.event["@player"],
+                  "@assist_id":defalut.sleague.matches.match.events.event["@assist_id"],
+                  "@minute":defalut.sleague.matches.match.events.event["@minute"],
+                  "@extra_min":defalut.sleague.matches.match.events.event["@extra_min"],
+                  "@owngoal":"",
+                  "@var_cancelled":"",
+                  "@penalty":"",
+                  "@id":defalut.sleague.matches.match.events.event["@playerId"],
+                  "@assist":defalut.sleague.matches.match.events.event["@assist"],
+                  "@team":defalut.sleague.matches.match.events.event["@team"],
+                  "@type":defalut.sleague.matches.match.events.event["@type"]
+        
+              })
+
+              }
+
+
+            events.sort(function(a, b) {
+                //console.log(a["@minute"])
+                return a["@minute"] - b["@minute"];
+            });
+        
+      }else{
+
+        obj = {event:"nodata"}
+      }
+
+
+
+}else{
+
+  if(typeof router.query.event === "undefined"){
 
     
     obj = {event:"reload","summary":props.league.match.summary};
@@ -406,6 +514,28 @@ if(typeof router.query.event === "undefined"){
 
   }
 
+
+}
+
+/*useEffect(() => async () => {
+    
+  const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/getodds/soccer?cat=soccer_10&bm=88&json=1`)
+  const data = await res.json()
+
+   setLdata(data)
+   setErrs(true)
+
+  
+
+},[]);*/
+useEffect(() => {
+    
+  
+  loadods(router.query.league,router.query.name)
+  
+
+},[]);
+
   let path = router.asPath
   
   const host = path.split("/");
@@ -446,124 +576,87 @@ if(typeof router.query.event === "undefined"){
                               nav[i] = toTh;
                              
                           nav.push(pageTitle)
-                          nav[1] = toTh;
-                          nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
-                          
 
-                        //console.log(obj.summary.localteam.goals)
-                       
-                        
-                       
+                          if(props.check === 0){
 
-
-                      //console.log(events)
-                        /*sortable.sort(function(a, b) {
-                            console.log(a[1] + " "+b[1])
-                            return a[1] - b[1];
-                        });*/
-                        //console.log(obj.summary.localteam.goals)
-                          //console.log(sortable);
-  /*let toTh = router.query.league
-    ? router.query.league === "uefa-league"
-      ? "ยูฟ่า แชมเปี้ยนส์ลีก"
-      : router.query.league === "premier-league"
-        ? "พรีเมียร์ลีก อังกฤษ"
-        : router.query.league === "europa-league"
-          ? "ยูโรป้า ลีก"
-          : router.query.league === "fa_cup-league"
-            ? "เอฟเอ คัพ อังกฤษ"
-            : router.query.league === "laliga-league"
-              ? "ลาลีกา สเปน"
-              : router.query.league === "calcio-league"
-                ? "กัลโช่ เซเรีย อา อิตาลี"
-                : router.query.league === "bundesliga-league"
-                  ? "บุนเดสลีกา เยอรมัน"
-                  : router.query.league === "eredivisie-league"
-                    ? "เอเรดิวิซี่ ฮอลแลนด์"
-                    : router.query.league === "ligue-league"
-                      ? "ลีก เอิง ฝรั่งเศส"
-                      : router.query.league === "jleague"
-                        ? "เจ ลีก ญี่ปุ่น"
-                        : router.query.league && router.query.league.replace(/-/g, " ")
-                            : router.query.league && router.query.league.replace(/-/g, " ")
-                          let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "
-                          for (var i = 0; i < nav.length; i++)
-                            if (nav[i] == "football")
-                              nav[i] = "ฟุตบอล";
-                            else if (nav[i] == router.query.league)
-                              nav[i] = toTh;
-                          nav.push(pageTitle)*/
+                            nav[1] = toTh;
+                            nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
+                            data = [
+                              {
+                                title: props.league["@name"],
+                                type: props.league.match["@status"],
+                                date: props.league.match["@date"],
+                                team: props.league.match.localteam["@name"],
+                                score:props.league.match.localteam["@goals"] + " - " +props.league.match.visitorteam["@goals"] ,
+                                scoreA:props.league.match.localteam["@goals"],
+                                scoreB:props.league.match.visitorteam["@goals"],
+                                teamB: props.league.match.visitorteam["@name"]
+                              },
+                            ]
 
 
+                          }else{
 
-  const [isVoted, setVoted] = useState(false);
-  const [score, setScore] = useState(true)
-  const [score1, setScore1] = useState(250)
-  const [score2, setScore2] = useState(0)
-  const [score3, setScore3] = useState(0)
-  const [percent1, setPercent1] = useState(0)
-  const [percent2, setPercent2] = useState(0)
-  const [percent3, setPercent3] = useState(0)
-  const Score1 = () => {
-    setVoted(!isVoted)
-    if (score1 > 240) {
-      setPercent1(100)
-      setScore1(240)
-    } else {
-      setPercent1(score1 + 10)
-      setScore1(score1 + 10)
-    }
-  }
-  const Score2 = () => {
-    setVoted(!isVoted)
-    if (score2 > 240) {
-      setPercent2(100)
-      setScore2(240)
-    } else {
-      setPercent2(score2 + 10)
-      setScore2(score2 + 10)
-    }
-  }
-  const Score3 = () => {
-    setVoted(!isVoted)
-    if (score3 > 240) {
-      setPercent2(100)
-      setScore3(240)
-    } else {
-      setPercent3(score3 + 10)
-      setScore3(score3 + 10)
-    }
-  }
+                            //console.log(defalut);
 
-  /*let data = [
-    {
-      type: "FT",
-      date: "2020/09/12",
-      team: "Molde",
-      score: "1 - 3",
-      scoreA: "1",
-      scoreB: "3",
-      teamB: "Ferencvaros"
-    },
-  ]*/
- 
-  let data = [
-    {
-      title: props.league["@name"],
-      type: props.league.match["@status"],
-      date: props.league.match["@date"],
-      team: props.league.match.localteam["@name"],
-      score:props.league.match.localteam["@goals"] + " - " +props.league.match.visitorteam["@goals"] ,
-      scoreA:props.league.match.localteam["@goals"],
-      scoreB:props.league.match.visitorteam["@goals"],
-      teamB: props.league.match.visitorteam["@name"]
-    },
-  ]
+                            nav[1] = toTh;
+                            nav[2] = defalut.sleague.matches.match.localteam["@name"] +" vs "+ defalut.sleague.matches.match.visitorteam["@name"];
+                             data = [
+                              {
+                                title: defalut.sleague["@name"],
+                                type: defalut.sleague.matches.match["@status"],
+                                date: defalut.sleague.matches.match["@date"],
+                                team: defalut.sleague.matches.match.localteam["@name"],
+                                score:defalut.sleague.matches.match.localteam["@goals"] + " - " +defalut.sleague.matches.match.visitorteam["@goals"] ,
+                                scoreA:defalut.sleague.matches.match.localteam["@goals"],
+                                scoreB:defalut.sleague.matches.match.visitorteam["@goals"],
+                                teamB: defalut.sleague.matches.match.visitorteam["@name"]
+                              },
+                            ]
+
+
+                          }
+        
+      const [isVoted, setVoted] = useState(false);
+      const [score, setScore] = useState(true)
+      const [score1, setScore1] = useState(250)
+      const [score2, setScore2] = useState(0)
+      const [score3, setScore3] = useState(0)
+      const [percent1, setPercent1] = useState(0)
+      const [percent2, setPercent2] = useState(0)
+      const [percent3, setPercent3] = useState(0)
+      const Score1 = () => {
+        setVoted(!isVoted)
+        if (score1 > 240) {
+          setPercent1(100)
+          setScore1(240)
+        } else {
+          setPercent1(score1 + 10)
+          setScore1(score1 + 10)
+        }
+      }
+      const Score2 = () => {
+        setVoted(!isVoted)
+        if (score2 > 240) {
+          setPercent2(100)
+          setScore2(240)
+        } else {
+          setPercent2(score2 + 10)
+          setScore2(score2 + 10)
+        }
+      }
+      const Score3 = () => {
+        setVoted(!isVoted)
+        if (score3 > 240) {
+          setPercent2(100)
+          setScore3(240)
+        } else {
+          setPercent3(score3 + 10)
+          setScore3(score3 + 10)
+        }
+      }
 
   
-  
-  
-
   return (
     <Layout className="px-0 px-md-3">
       <HeaderSeo
@@ -579,10 +672,10 @@ if(typeof router.query.event === "undefined"){
         nav={nav} 
         data={data[0]} 
         navMatch={[
-          {id: "1", name: "MATCH INFO", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}`, active: true },
-          {id: "2", name: "TRACKER", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/tracker`, active: false },
-          {id: "3", name: "LINE-UPS", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/line-us`, active: false },
-          {id: "3", name: "H2H", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
+          {id: "1", name: "รายละเอียด", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}`, active: true },
+          {id: "2", name: "ข้อมูลเชิงลึก", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/tracker`, active: false },
+          {id: "3", name: "ผู้เล่น", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/line-us`, active: false },
+          {id: "3", name: "ผลงานเจอกัน", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
         ]}
       >  
         
@@ -596,6 +689,13 @@ if(typeof router.query.event === "undefined"){
                 matchionfo={obj.event}
               />
              ) :
+             obj.event === 1 ?  
+             <MatchIonfo
+                    type={title_obj.title}
+                    matchionfo={events}
+               />
+               
+             :
              /* (obj.event === null)
               ? (<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล null</h1></center></div>)
             :*/
@@ -623,45 +723,106 @@ if(typeof router.query.event === "undefined"){
           
           <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4">
             <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              venue:
+              เตะสนาม:
             </div>
             <div className="card-body">
-              <p className="mb-0">{props.league.match.matchinfo.stadium["@name"]}</p>
+              <p className="mb-0">{ defalut.check === 1 ? "ไม่มีข้อมูล" :  defalut.league.match.matchinfo.stadium["@name"]}</p>
             </div>
           </div>
           <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4">
             <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              referee:
+              ผู้ตัดสิน:
             </div>
             <div className="card-body">
-              <p className="mb-0">{props.league.match.matchinfo.referee["@name"]}</p>
+              <p className="mb-0">{defalut.check === 1 ? "ไม่มีข้อมูล" : defalut.league.match.matchinfo.referee["@name"]}</p>
             </div>
           </div>
+
+          
           <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0">
             <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              ODDS:
+              ราคาต่อรอง (Match Winner) :
             </div>
-            <div className="card-body">
-              <div className="row align-items-center">
-                <div className="col-sm-4 text-center text-sm-left">
-                  <img className="img-fluid mb-3 mb-sm-0" src='/assets/defabet.png' />
-                </div>
-                <div className="col-sm-8 d-inline-block">
-                  <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 pl-sm-0 pr-sm-2">
-                    <InputGroup symbo="1" value="4.80" disabled={true}/>
-                  </div>
-                  <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 px-sm-2">
-                    <InputGroup symbo="X" value="3.85" disabled={true}/>
-                  </div>
-                  <div className="col-sm-4 d-inline-block pl-sm-2 pr-sm-0">
-                    <InputGroup symbo="2" value="1.75" disabled={true}/>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {
+
+                  errs !== false ?
+
+                  ldata === null ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center>
+                  :
+                  ldata.odds.map((res,index) => (
+
+                          res["value"] === "Match Winner" ?
+
+                                Array.isArray(res["bookmakers"]) === true ?
+                                
+                                          res["bookmakers"].map((resin,indexin) => (
+
+                                              resin["id"] === "88" || resin["id"] === "56" || resin["id"] === "105" || resin["id"] === "232" || resin["id"] === "16" ? 
+                                              <div className="card-body" key={indexin}>
+                                              <div className="row align-items-center">
+                                                <div className="col-sm-4 text-center text-sm-left">
+                                                  {/*<img className="img-fluid mb-3 mb-sm-0" src='/assets/defabet.png' />*/}
+                                                  {resin["name"]}
+                                                </div>
+                                                <div className="col-sm-8 d-inline-block">
+                                                  <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 pl-sm-0 pr-sm-2">
+                                                    {
+                                                    
+                                                    resin["odds"].map((result,num) => 
+                                                      
+                                                    result["name"] === "Home" ?
+                                                    <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
+                                                    : ""
+                                                    )
+                                                    }
+                                                    
+                                                  </div>
+                                                  <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 px-sm-2">
+                                                    {
+                                                    
+                                                    resin["odds"].map((result,num) => 
+                                                      
+                                                    result["name"] === "Draw" ?
+                                                    <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
+                                                    :""
+                                                    )
+                                                    }
+                                                  </div>
+                                                  <div className="col-sm-4 d-inline-block pl-sm-2 pr-sm-0">
+                                                  {
+                                                      resin["odds"].map((result,num) => 
+                                                      
+                                                        result["name"] === "Away" ?
+                                                        <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
+                                                        :""
+                                                        )
+                                                    }
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            :null
+
+                                      ))
+                                  
+
+                                : 
+                                null
+                                
+                          : null
+
+
+                    )) 
+                  :<center><h1>loading .......</h1></center>
+
+                  }
+         
+            
           </div>
         </div>
       </TopLiveSoccerContent>
+      
+      
     </Layout>
   );
 }
@@ -670,14 +831,70 @@ PremierLeague.getInitialProps = async ({query}) => {
 
   let league =  query.league;
   let name =  query.name;
-  let events ;
+  let events;
+  
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/commentaries/match?id=${league}&league=${name}&json=1`)
   const data = await res.json()
 
+  let check = 0; 
+  let obb = {};
+  let match;
+  let cate;
+  if(typeof data.commentaries.tournament === "undefined"){
 
-  
-  return { 
-    league: data.commentaries.tournament
+       check = 1;
+
+       const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+       const datadefalut = await resdefalut.json()
+
+       for(var i =0; i < datadefalut.scores.category.length; i++){
+
+         
+              if(datadefalut.scores.category[i]["@id"] === name){
+
+
+                cate = {
+                    "@name":datadefalut.scores.category[i]["@name"],
+                    "@gid":datadefalut.scores.category[i]["@gid"],
+                    "@id":datadefalut.scores.category[i]["@id"],
+                    "@file_group":datadefalut.scores.category[i]["@file_group"],
+                    "@iscup":datadefalut.scores.category[i]["@iscup"],
+                    "matches":{}
+                }
+
+                  if(Array.isArray(datadefalut.scores.category[i].matches.match) === true){
+
+                    for(var j =0; j < datadefalut.scores.category[i].matches.match.length; j++){
+
+
+                      if(datadefalut.scores.category[i].matches.match[j]["@static_id"] === league){
+
+
+                              match = datadefalut.scores.category[i].matches.match[j];
+                              cate.matches  = {match}
+                       }
+                    }
+
+
+                  }else{
+
+                        if(datadefalut.scores.category[i].matches.match["@static_id"] === league){
+
+
+                                  match = datadefalut.scores.category[i].matches.match;
+                                  cate.matches  = {match}
+                        }
+                   }
+            }
+       }
+
+
+
+
+
+   }
+   return { 
+        league: data.commentaries.tournament , check:check , sleague :cate
    }
 
   /*let paths =  asPath;

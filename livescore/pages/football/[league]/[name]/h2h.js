@@ -20,9 +20,9 @@ const H2h = (props) => {
   let nav = host.slice(1, host.length - 2);
   let navM = host.slice(1, host.length - 1);
   let navMatchs = Object.assign({}, navM);
-
+  const [defalut, setDefalut] = useState(props);
   let objteam = {};
-  
+  let data;
   let toTh = router.query.name
   ? router.query.name === "1005"
     ? "ยูฟ่า แชมเปี้ยนส์ลีก"
@@ -54,21 +54,51 @@ const H2h = (props) => {
                             nav[i] = "ฟุตบอล";
                           else if (nav[i] == router.query.name)
                             nav[i] = toTh;
-                            nav[1] = toTh;
-                            nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
+
+                            if(defalut.check === 0){
+
+                              nav[1] = toTh;
+                              nav[2] = defalut.league.match.localteam["@name"] +" vs "+ defalut.league.match.visitorteam["@name"];
+                            
+                               data = [
+                                {
+                                  title: defalut.league["@name"],
+                                  type: defalut.league.match["@status"],
+                                  date: defalut.league.match["@date"],
+                                  team: defalut.league.match.localteam["@name"],
+                                  score:defalut.league.match.localteam["@goals"] + " - " +defalut.league.match.visitorteam["@goals"] ,
+                                  scoreA:defalut.league.match.localteam["@goals"],
+                                  scoreB:defalut.league.match.visitorteam["@goals"],
+                                  teamB: defalut.league.match.visitorteam["@name"]
+                                },
+                              ]
   
-                            let data = [
-                              {
-                                title: props.league["@name"],
-                                type: props.league.match["@status"],
-                                date: props.league.match["@date"],
-                                team: props.league.match.localteam["@name"],
-                                score:props.league.match.localteam["@goals"] + " - " +props.league.match.visitorteam["@goals"] ,
-                                scoreA:props.league.match.localteam["@goals"],
-                                scoreB:props.league.match.visitorteam["@goals"],
-                                teamB: props.league.match.visitorteam["@name"]
-                              },
-                            ]
+                              objteam["localteam"] = defalut.league.match.localteam["@name"];
+                              objteam["visitorteam"] = defalut.league.match.visitorteam["@name"];
+  
+                            }else{
+  
+                              nav[1] = toTh;
+                              nav[2] = defalut.sleague.matches.match.localteam["@name"] +" vs "+ defalut.sleague.matches.match.visitorteam["@name"];
+                              data = [
+                               {
+                                 title: defalut.sleague["@name"],
+                                 type: defalut.sleague.matches.match["@status"],
+                                 date: defalut.sleague.matches.match["@date"],
+                                 team: defalut.sleague.matches.match.localteam["@name"],
+                                 score:defalut.sleague.matches.match.localteam["@goals"] + " - " +defalut.sleague.matches.match.visitorteam["@goals"] ,
+                                 scoreA:defalut.sleague.matches.match.localteam["@goals"],
+                                 scoreB:defalut.sleague.matches.match.visitorteam["@goals"],
+                                 teamB: defalut.sleague.matches.match.visitorteam["@name"]
+                               },
+                             ]
+  
+                              objteam["localteam"] = defalut.sleague.matches.match.localteam["@name"];
+                              objteam["visitorteam"] = defalut.sleague.matches.match.visitorteam["@name"];
+  
+  
+                            }
+                            
   
   return (
     <Layout className="px-0 px-md-3">
@@ -95,13 +125,14 @@ const H2h = (props) => {
          
                   
                     {
+                      
 
-                      props.listh2s.h2h.top50 !== null ? 
+                        defalut.listh2s.h2h.top50 !== null ? 
                      
-                          Array.isArray(props.listh2s.h2h.top50.match) === true ?  
+                          Array.isArray(defalut.listh2s.h2h.top50.match) === true ?  
                         
                         
-                                props.listh2s.h2h.top50.match.slice(0, 10).map((res,index) => (
+                              defalut.listh2s.h2h.top50.match.slice(0, 10).map((res,index) => (
 
                                     <div className="row" key={index.toString()} style={{margin: "20px"}}>
                                           <div className="col-6 px-2" style={{textAlign: "center"}}>
@@ -126,13 +157,13 @@ const H2h = (props) => {
                         <div className="row" key={0} style={{margin: "20px"}}>
                             <div className="col-6 px-2" style={{textAlign: "center"}}>
                               
-                                    {props.listh2s.h2h.top50.match["@team1"] +" "+ props.listh2s.h2h.top50.match["@team1_score"] +"-" + props.listh2s.h2h.top50.match["@team2_score"] +" "+props.listh2s.h2h.top50.match["@team2"]} 
+                                    {defalut.listh2s.h2h.top50.match["@team1"] +" "+ defalut.listh2s.h2h.top50.match["@team1_score"] +"-" + defalut.listh2s.h2h.top50.match["@team2_score"] +" "+defalut.listh2s.h2h.top50.match["@team2"]} 
                             </div>
                             <div className="col-4 px-2" style={{textAlign: "center"}}>
-                                  {props.listh2s.h2h.top50.match["@league"]}
+                                  {defalut.listh2s.h2h.top50.match["@league"]}
                             </div>
                             <div className="col-2 px-2" style={{textAlign: "center"}}>
-                                วัน {props.listh2s.h2h.top50.match["@date"]}
+                                วัน {defalut.listh2s.h2h.top50.match["@date"]}
                             </div>
                         </div>
                     
@@ -152,17 +183,111 @@ H2h.getInitialProps = async ({asPath}) => {
 
   let path = asPath
   const host = path.split("/");
-
+  
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/commentaries/match?id=${host[2]}&league=${host[3]}&json=1`)
   const json = await res.json()
+  let check = 0; 
+  let match;
+  let cate;
+  let localteamid;
+  let visitorteam;
+  let global;
+  if(typeof json.commentaries.tournament === "undefined"){
 
-  const responh2h = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${json.commentaries.tournament.match.localteam["@id"]}/${json.commentaries.tournament.match.visitorteam["@id"]}?json=1`)
-  const jsonh2h = await responh2h.json()
+      check = 1;
+      const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+      const datadefalut = await resdefalut.json()
+
+      for(var i =0; i < datadefalut.scores.category.length; i++){
+
+        if(datadefalut.scores.category[i]["@id"] === host[3]){
+
+                cate = {
+                  "@name":datadefalut.scores.category[i]["@name"],
+                  "@gid":datadefalut.scores.category[i]["@gid"],
+                  "@id":datadefalut.scores.category[i]["@id"],
+                  "@file_group":datadefalut.scores.category[i]["@file_group"],
+                  "@iscup":datadefalut.scores.category[i]["@iscup"],
+                  "matches":{}
+              }
+  
+               
+              if(Array.isArray(datadefalut.scores.category[i].matches.match) === true){
+  
+                for(var j =0; j < datadefalut.scores.category[i].matches.match.length; j++){
+  
+  
+                  if(datadefalut.scores.category[i].matches.match[j]["@static_id"] === host[2]){
+  
+
+                           match = datadefalut.scores.category[i].matches.match[j];
+                           cate.matches  = {match}
+                           localteamid = datadefalut.scores.category[i].matches.match[j].localteam["@id"];
+                           visitorteam = datadefalut.scores.category[i].matches.match[j].visitorteam["@id"];
+                           const responh2hin = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${localteamid}/${visitorteam}?json=1`)
+                           const jsonh2h = await responh2hin.json()
+                           global = jsonh2h;
+
+                          
+  
+  
+                  }
+  
+  
+                }
+  
+  
+              }else{
+  
+                if(datadefalut.scores.category[i].matches.match["@static_id"] === host[2]){
+  
+  
+                            match = datadefalut.scores.category[i].matches.match;
+                            cate.matches  = {match}
+                            localteamid = datadefalut.scores.category[i].matches.match.localteam["@id"];
+                            visitorteam = datadefalut.scores.category[i].matches.match.visitorteam["@id"];
+                            const responh2hin = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${localteamid}/${visitorteam}?json=1`)
+                            const jsonh2h = await responh2hin.json()
+                            global = jsonh2h;
+                        
+  
+  
+                   }
+  
+  
+              }
+  
+  
+        }
+  
+  
+  
+      }
+
+
+
+  }else{
+
+
+    const responh2h = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${json.commentaries.tournament.match.localteam["@id"]}/${json.commentaries.tournament.match.visitorteam["@id"]}?json=1`)
+    const jsonh2h = await responh2h.json()
+    global = jsonh2h;
+
+
+  }
+
+
+
+
+
+
+
+  
 
 
 
   //return { listdata: host[2]}
-  return { league: json.commentaries.tournament ,listh2s :jsonh2h}
+  return { league: json.commentaries.tournament ,listh2s :global ,check:check ,sleague :cate}
 }
 
 export default H2h;

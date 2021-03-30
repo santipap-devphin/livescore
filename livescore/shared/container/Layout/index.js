@@ -177,7 +177,7 @@ const Layout = (props) => {
                     <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
 
                   }
-                  <div class="banner">
+                  <div className="banner">
                     <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="" /></a>
                     { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
                   </div>
@@ -198,7 +198,7 @@ const Layout = (props) => {
                       routes={worldleague} 
                     />
                  }
-                <div class="banner">
+                <div className="banner">
                   <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sbobetsc 250x500.gif" alt="" /></a>
                   { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
                 </div>
