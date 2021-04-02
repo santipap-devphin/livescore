@@ -165,10 +165,10 @@ const Tracker = (props) => {
         nav={nav} 
         data={data[0]} 
         navMatch={[
-          {id: "1", name: "รายละเอียด", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}`, active: false },
-          {id: "2", name: "ข้อมูลเชิงลึก", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/tracker`, active: true },
-          {id: "3", name: "ผู้เล่น", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/line-us`, active: false },
-          {id: "3", name: "ผลงานเจอกัน", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
+          {id: "1", name: "MATCH INFO", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}`, active: false },
+          {id: "2", name: "TRACKER", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/tracker`, active: true },
+          {id: "3", name: "LINE-UPS", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/line-us`, active: false },
+          {id: "3", name: "H2H", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
         ]}
       >
         {
@@ -206,90 +206,10 @@ Tracker.getInitialProps = async ({asPath}) => {
   if(typeof data.commentaries.tournament === "undefined"){
 
     check = 1;
+    const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+    const datadefalut = await resdefalut.json()
 
-    var datadefalut = await Promise.all([
-      /* Alternatively store each in an array */
-      // var [x, y, z] = await Promise.all([
-      // parse results as json; fetch data response has several reader methods available:
-      //.arrayBuffer()
-      //.blob()
-      //.formData()
-      //.json()
-      //.text()
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1').then((response) => response.json()),// parse each response as json
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-1?json=1').then((response) => response.json()),
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d1?json=1').then((response) => response.json()),
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-2?json=1').then((response) => response.json()),
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d2?json=1').then((response) => response.json()),
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-3?json=1').then((response) => response.json()),
-      fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d3?json=1').then((response) => response.json()),
-     
-    ]);
-
-
-    for(var ii =0; ii < datadefalut.length; ii++){
-
-          for(var i =0; i < datadefalut[ii].scores.category.length; i++){
-
-            if(datadefalut[ii].scores.category[i]["@id"] === host[3]){
-      
-                    cate = {
-                      "@name":datadefalut[ii].scores.category[i]["@name"],
-                      "@gid":datadefalut[ii].scores.category[i]["@gid"],
-                      "@id":datadefalut[ii].scores.category[i]["@id"],
-                      "@file_group":datadefalut[ii].scores.category[i]["@file_group"],
-                      "@iscup":datadefalut[ii].scores.category[i]["@iscup"],
-                      "matches":{}
-                  }
-      
-                  if(Array.isArray(datadefalut[ii].scores.category[i].matches.match) === true){
-      
-                    for(var j =0; j < datadefalut[ii].scores.category[i].matches.match.length; j++){
-      
-      
-                      if(datadefalut[ii].scores.category[i].matches.match[j]["@static_id"] === host[2]){
-      
-      
-                              match = datadefalut[ii].scores.category[i].matches.match[j];
-                              //cate.matches  = {match}
-      
-      
-                      }
-      
-      
-                    }
-      
-      
-                  }else{
-      
-                    if(datadefalut[ii].scores.category[i].matches.match["@static_id"] === host[2]){
-      
-      
-                              match = datadefalut[ii].scores.category[i].matches.match;
-                              //cate.matches  = {match}
-      
-      
-                      }
-      
-      
-                  }
-      
-      
-            }
-      
-      
-      
-          }
-
-
-      
-    }
-    
-    cate.matches  = {match}
-    //const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
-    //const datadefalut = await resdefalut.json()
-
-    /*for(var i =0; i < datadefalut.scores.category.length; i++){
+    for(var i =0; i < datadefalut.scores.category.length; i++){
 
       if(datadefalut.scores.category[i]["@id"] === host[3]){
 
@@ -339,7 +259,7 @@ Tracker.getInitialProps = async ({asPath}) => {
 
 
 
-    }*/
+    }
 
 
 

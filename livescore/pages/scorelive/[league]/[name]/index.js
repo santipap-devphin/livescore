@@ -11,7 +11,6 @@ import NavMatch from "../../../../shared/components/NavMatch"
 import MatchIonfo from "../../../../shared/components/MatchIonfo"
 import MatchSummary from "../../../../shared/components/MatchSummary"
 import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerContent"
-import { isIE } from 'react-device-detect';
 
 const PremierLeague = (props ,{ }) => {
   
@@ -629,7 +628,7 @@ useEffect(() => {
   let nav = host.slice(1, host.length - 1);
   let nmatch = host.slice(1, host.length);
   let navMatchs = Object.assign({}, nmatch);
-
+console.log(navMatchs)
   let toTh = router.query.name
     ? router.query.name === "1005"
       ? "ยูฟ่า แชมเปี้ยนส์ลีก"
@@ -1031,77 +1030,10 @@ PremierLeague.getInitialProps = async ({query}) => {
 
        check = 1;
 
-       //const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${paramdefalut}?json=1`)
-       //const datadefalut = await resdefalut.json()
+       const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${paramdefalut}?json=1`)
+       const datadefalut = await resdefalut.json()
 
-       var datadefalut = await Promise.all([
-        /* Alternatively store each in an array */
-        // var [x, y, z] = await Promise.all([
-        // parse results as json; fetch data response has several reader methods available:
-        //.arrayBuffer()
-        //.blob()
-        //.formData()
-        //.json()
-        //.text()
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1').then((response) => response.json()),// parse each response as json
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-1?json=1').then((response) => response.json()),
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d1?json=1').then((response) => response.json()),
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-2?json=1').then((response) => response.json()),
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d2?json=1').then((response) => response.json()),
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-3?json=1').then((response) => response.json()),
-        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d3?json=1').then((response) => response.json()),
-       
-      ]);
-
-
-      for(var ii =0; ii < datadefalut.length; ii++){
-
-        for(var i =0; i < datadefalut[ii].scores.category.length; i++){
-
-              
-              if(datadefalut[ii].scores.category[i]["@id"] === name){
-
-                
-                  cate = {
-                      "@name":datadefalut[ii].scores.category[i]["@name"],
-                      "@gid":datadefalut[ii].scores.category[i]["@gid"],
-                      "@id":datadefalut[ii].scores.category[i]["@id"],
-                      "@file_group":datadefalut[ii].scores.category[i]["@file_group"],
-                      "@iscup":datadefalut[ii].scores.category[i]["@iscup"],
-                      "matches":{}
-                  }
-                
-                  
-                  if(Array.isArray(datadefalut[ii].scores.category[i].matches.match) === true){
-
-
-                    for(var j =0; j < datadefalut[ii].scores.category[i].matches.match.length; j++){
-
-                      
-                      if(datadefalut[ii].scores.category[i].matches.match[j]["@static_id"] === league){
-
-                        
-                              match = datadefalut[ii].scores.category[i].matches.match[j];
-                           }
-                    }
-
-
-                  }else{
-
-                        if(datadefalut[ii].scores.category[i].matches.match["@static_id"] === league){
-
-
-                              match = datadefalut[ii].scores.category[i].matches.match;
-                        }
-                   }
-            }
-       }
-
-
-        
-      }
-       // defalut version
-       /*for(var i =0; i < datadefalut.scores.category.length; i++){
+       for(var i =0; i < datadefalut.scores.category.length; i++){
 
               
               if(datadefalut.scores.category[i]["@id"] === name){
@@ -1140,7 +1072,7 @@ PremierLeague.getInitialProps = async ({query}) => {
                         }
                    }
             }
-       }*/
+       }
 
 
 
@@ -1151,7 +1083,7 @@ PremierLeague.getInitialProps = async ({query}) => {
    
 
    return { 
-        league: data.commentaries.tournament , check:check , sleague : cate
+        league: data.commentaries.tournament , check:check , sleague : cate  ,date :todayNY
    }
 
   /*let paths =  asPath;

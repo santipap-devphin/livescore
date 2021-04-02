@@ -4,7 +4,8 @@ import Link from 'next/link'
 import {TableBattleMobileStyle} from "./style"
 import Avatar from "../Avatar"
 
-const TableBattleMobile = ({title, data, className }) => {
+const TableBattleMobile = ({title, data, className , exam }) => {
+ // console.log(exam)
   return (
     <TableBattleMobileStyle className={`league-matches mb-4 ${className}`}>
       <div className="block-title
@@ -31,8 +32,9 @@ const TableBattleMobile = ({title, data, className }) => {
                       <Link
                         href={{
                           pathname: `/football/[league]/[name]`,
+                          query: { event: JSON.stringify(item.events) , type:item["@status"]}
                         }}
-                        as={`/football/premier-league/${item.localteam['@name']}-vs-${item.visitorteam['@name']}`}
+                        as={`/football/${item["@static_id"]}/${exam}`}
                       >
                         <a className="row mx-0 text-decoration-none text-dark border-bottom">
                           <div className="col-3 px-0 py-2 text-center align-self-center">
@@ -89,8 +91,9 @@ const TableBattleMobile = ({title, data, className }) => {
                               <Link
                               href={{
                                 pathname: `/football/[league]/[name]`,
+                               query: { event: JSON.stringify(data.events) , type:JSON.stringify(data["@status"])}
                               }}
-                              as={`/football/premier-league/${data.localteam['@name']}-vs-${data.visitorteam['@name']}`}
+                              as={`/football/${data["@static_id"]}/${exam}`}
                             >
                               <a className="row mx-0 text-decoration-none text-dark border-bottom">
                                 <div className="col-3 px-0 py-2 text-center align-self-center">

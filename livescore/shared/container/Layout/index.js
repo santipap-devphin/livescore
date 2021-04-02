@@ -144,10 +144,29 @@ const Layout = (props) => {
     ]
     return (
       <>
+
+        {pathname.indexOf("/scorelive") > -1 ?
+        <div className="container">
+           <div className="row">
+           
+              <div className="col-md-3">
+                      <a className="navbar-brand" href="/live"><img src="/assets/7scorex300.png" alt="7SCORE" /></a>
+              </div>
+              <div className="col-md-4" style={{paddingTop:20}}>
+                      <a href="/live">กลับหน้าหลัก </a>
+              </div>
+          </div>
+        </div>
+        : 
         <Header className={props.className} />
+        }
+        
         
         {/* {!isMobile ? */}
-        <NavCategory route={mobileRoute} />
+        {pathname.indexOf("/scorelive") > -1 ? "" 
+        :<NavCategory route={mobileRoute} />
+        }
+       
         {
           pathname === "/"
           ? <NavDate
@@ -174,6 +193,8 @@ const Layout = (props) => {
                     :
                     pathname === "/standings" ? "" 
                     :
+                    pathname.indexOf("/scorelive") > -1 ? ""
+                    :
                     <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
 
                   }
@@ -181,7 +202,7 @@ const Layout = (props) => {
                     <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="" /></a>
                     { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
                   </div>
-                  
+                 
                 </Sidebar>
                 {
                      pathname === "/highlight" ? ""
@@ -190,7 +211,9 @@ const Layout = (props) => {
                      :
                      pathname === "/clubs" ? "" 
                      :
-                     pathname === "/standings" ? "" 
+                     pathname === "/standings" ? ""
+                     :
+                     pathname.indexOf("/scorelive") > -1 ? "" 
                      :
                     <Navigation 
                       className="" 

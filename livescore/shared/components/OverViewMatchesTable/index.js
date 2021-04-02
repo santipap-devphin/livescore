@@ -44,7 +44,7 @@ const OverViewMatchesTable = ({ className, plyers ,fixture }) => {
    //console.log(router.query.name)
    // console.log(nmonth)
   
-    console.log(fixture)
+    //console.log(fixture)
    
     if(Array.isArray(fixture.results.tournament.week) === true){
 
@@ -146,7 +146,7 @@ const OverViewMatchesTable = ({ className, plyers ,fixture }) => {
          return a["date"] - b["date"];
       });
 
-    console.log(list_fixture)
+    //console.log(list_fixture)
     
     //console.log(fixture.results.tournament.week)
     const oneventChange = (date) =>{

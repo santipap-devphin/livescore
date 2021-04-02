@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect ,useRef } from 'react';
 import Layout from "../../../shared/container/Layout"
 import dynamic from 'next/dynamic';
 import HeaderSeo from "../../../shared/commons/HeaderSeo"
@@ -10,18 +10,44 @@ import PrimaveraCup from "../../../mock/PrimaveraCup"
 import CopyButton from "../../../shared/components/CopyButton"
 import Button from "../../../shared/commons/Button"
 
+
+
 const TableScore = () => {
     const [isEmbeded, setEmbedee] = useState(0);
     const [isPreview, setPreview] = useState(false);
     const [isLeague, setLeague] = useState("0");
     const [isWidth, setWidth] = useState("0");
+    const [iPreview, setiPreview] = useState(false);
+    const [loading, setLoading] = useState(false);
+    
     const [value, setValue] = useState("")
+    const [showvalue, setshowValue] = useState("")
     const [item, setItem] = useState();
     const [err, setErr] = useState(false);
+    const myRef = useRef(null)
+
+    /*const stringToHTML = function (str) {
+        var dom = document.createElement('div');
+        dom.innerHTML = str;
+        return dom;
+    };*/
+
+    /*useEffect(() => {
+
+        
+        setTimeout(function(){ setLoading(true) }, 1000);
+
+            
+        
+        
+     
+      },[setLoading]);*/
     const onChange = () => {
+        //console.log(isWidth)
         setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
         
     }
+
 
     
     const fetchItems = async (items) => {
@@ -45,7 +71,40 @@ const TableScore = () => {
 
     }
     const handleChangeWidth = (value) => {
+       // console.log(value.target.value)
         setWidth(value.target.value)
+        setTimeout(function(){ setLoading(false) }, 200);
+        myRef.current.scrollIntoView()
+        if(value.target.value === "1"){
+           
+            setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/live/'  height='100%' width='300' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+            setshowValue(`<iframe src='https://7score.live/live/'  height='300' width='300' scrolling='auto' border='0' frameborder='0'></iframe>`)
+            setiPreview(true)
+            setTimeout(function(){ setLoading(true) }, 1000);
+            //setLoading(true)
+        }
+        else if(value.target.value === "2"){
+            setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/live/'  height='100%' width='500' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+            setshowValue(`<iframe src='https://7score.live/live/'  height='500' width='500' scrolling='auto' border='0' frameborder='0'></iframe>`)
+            setiPreview(true)
+            setTimeout(function(){ setLoading(true) }, 1000);
+        }
+        else if(value.target.value === "3"){
+            setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/live/'  height='100%' width='600' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+            setshowValue(`<iframe src='https://7score.live/live/'  height='600' width='600' scrolling='auto' border='0' frameborder='0'></iframe>`)
+            setiPreview(true)
+            setTimeout(function(){ setLoading(true) }, 1000);
+        }
+        else if(value.target.value === "4"){
+            setshowValue(`<iframe src='https://7score.live/live/'  height='600' width='100%' scrolling='auto' border='0' frameborder='0'></iframe>`)
+            setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+            setiPreview(true)
+            setTimeout(function(){ setLoading(true) }, 1000);
+           
+        }   
+
+        
+
     }
 
   
@@ -89,6 +148,7 @@ const TableScore = () => {
                             <option value="1">300 x 300 px</option>
                             <option value="2">500 x 500 px</option>
                             <option value="3">600 x 600 px</option>
+                            <option value="4">เต็มจอ</option>
                         </select>
                     </div>
                 </div>
@@ -108,7 +168,8 @@ const TableScore = () => {
                             className="btn-secondary justify-content-center btn-block  mb-3 mb-md-0" 
                             type="button" onClick={() => {
                                 setPreview(!isPreview)
-                                setValue(`<div id="aiscore-free"></div><script language="javascript">document.getElementById("aiscore-free").innerHTML="<iframe src='https://7score.live/live/'  height='100%' width='1200' scrolling='auto' border='0' frameborder='0'></iframe>";</script><style>body{margin:0}#aiscore-free{display:flex;justify-content:center;height:100vh}</style>`);
+                                //console.log(value)
+                                setValue(value);
                             }}
                         >Preview</Button>
                     </div>
@@ -156,9 +217,13 @@ const TableScore = () => {
                 <h3 className="pb-4 border-bottom">
                     แสดงตัวอย่าง
                 </h3>
+                
+                <div ref={myRef}></div> 
                 <div className="preview text-center pt-4">
                     {
-                        isPreview === true
+
+ 
+                        iPreview === true
                             ? <>
                             <div className="d-none d-md-block">
                                 <div className="row">
@@ -173,25 +238,38 @@ const TableScore = () => {
                                     </div>
                                 </div>
 
-                                {/*console.log(isLeague)*/}
+                               
+                              
                                 {
-
-                                    (err === true) ? 
                                     
-                                    item.scores.category.slice(0, 1).map((res,value) => (
+                                    
+                                    <div>
+                                        { loading !== false ?
+                                        <div dangerouslySetInnerHTML={{__html: showvalue}} />
+                                        : <center><h1 style={{color:"white"}}>Loading ......</h1></center>
+                                        }</div>
+                                    
+
+                                    /*(err === true) ? 
+                                    
+                                    item.scores.category.slice(0, 3).map((res,value) => (
 
                                         
-                                        <div key={value.toString()}> 
+                                        <div key={value.toString()} style={{width:500}}> 
                                             <TableBattle  
                                             className="highlight bg-secondary text-white"
                                             title={res['@name']}
                                             data={res.matches.match}
                                             highlight={true} 
-                                            exam = {""/*res.matches.match*/}
+                                            exam = {res.matches.match}
+                                            
                                             />
                                         </div>
                                        
-                                    )) : null}
+                                    )) : null*/
+                                    
+                                }
+
                                 
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
@@ -219,7 +297,12 @@ const TableScore = () => {
                                     <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
                                 </div>
+                               
                                 {
+                                    loading !== false ?
+                                    <div dangerouslySetInnerHTML={{__html: showvalue}} />
+                                    : <center><h1 style={{color:"white"}}>Loading ......</h1></center>
+                                    /*
                                  (err === true) ?
                                     item.scores.category.slice(0, 1).map((res,value) => (
 
@@ -233,7 +316,10 @@ const TableScore = () => {
                                             </div>
                                            
 
-                                    )) : null}
+                                    )) : null
+                                    */
+                                   
+                                    }
                                 
                                 
                                 <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />

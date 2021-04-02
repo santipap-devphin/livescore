@@ -11,36 +11,40 @@ const TableBattleMobile = dynamic(()=> import('../../../shared/commons/TableBatt
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Component } from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef } from 'react';
+
+
 
 
 
 const Homefilter = (props) => {
 
   
+  const myRef = useRef(null)  
+  const handdleClickAfterload = (e) => {
+
+
+    e.preventDefault();
+
+    setDatas(false);
+
+    myRef.current.scrollIntoView()
+
+
+
+  }
   const [sdata , setDatas] =  useState(false);
 
   useEffect(() => {
 
-
-
-    if(props.list[0].sortdata.category.length > 0){
+   if(props.list[0].sortdata.category.length > 0){
 
            setDatas(true);
 
     }
-    
-
-    //console.log(sdata)
-    /*props.home.scores.category.map((res,value) => (
-
-      
-        (res["@file_group"] === "england") ? 
-            setPriority([...priority, res["@file_group"]]) : null
-        )
-    )*/
+   
  
-  });
+  },[setDatas]);
 
   function datee(nextday){
 
@@ -126,12 +130,12 @@ const Homefilter = (props) => {
             onClickLeft={() => console.log("left")}
             onClickRight={() => console.log("right")}
           />
-          
+         <div ref={myRef}></div>
          {
           (sdata !== false) ?
             props.list[0].sortdata.category.map((res,value) => (
 
-                 <div key={value.toString()}> 
+                 <div key={value.toString()} onClick={handdleClickAfterload}> 
                       <TableBattle  
                       className="highlight bg-secondary text-white"
                       title={res['@name']}
@@ -143,7 +147,7 @@ const Homefilter = (props) => {
                   </div>
                   
             ))
-          :"loading ......"
+          :<center><h1>Loading .....</h1></center>
          }
         </div>
 
@@ -161,20 +165,21 @@ const Homefilter = (props) => {
                       onClickLeft={() => console.log("left")}
                       onClickRight={() => console.log("right")}
                     />
-
+                      
                       {
                       (sdata !== false) ?
                             props.list[0].sortdata.category.map((res,value) => (
-                                  <div key={value.toString()}>
+                                  <div key={value.toString()} onClick={handdleClickAfterload}>
                                         <TableBattleMobile 
                                           title={res['@name']}
                                           data={res.matches.match}
                                           highlight={false}
+                                          exam = {res['@id']}
                                         />
                                       
                                   </div>
                       ))
-                     : "loading ...."
+                     : <center><h1>Loading .....</h1></center>
                      }
              </div>
 

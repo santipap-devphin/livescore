@@ -16,6 +16,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
     let nav = host.slice(1, host.length - 1);
     let lastItem = host[host.length - 1]
     let newsitem = host[4]
+    //console.log(newsitem)
     // let pageTitle = host.pop()
     let league = router.query && router.query.league
     let teamName = router.query && router.query.name
@@ -25,7 +26,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
         "Squad",
         "Champions"
     ]
-
+   
     
     
     return (
@@ -40,8 +41,11 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                                         {
                                             index === nav.length - 1
                                             ? navitem
-                                            : <a className="text-secondary text-decoration-none" href="/">
+                                            : 
+                                            
+                                            <a className="text-secondary text-decoration-none" href="/clubs">
                                                 {navitem.replace(/-/g, " ")}
+                                                
                                             </a>
                                         }
                                     </li>

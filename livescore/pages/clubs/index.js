@@ -1,23 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef } from 'react';
 import HeaderSeo from "../../shared/commons/HeaderSeo"
 import Layout from "../../shared/container/Layout"
 import Empty from "../../shared/commons/Empty"
 import Link from 'next/link'
 import Avatar from "../../shared/commons/Avatar"
 
-const Teams = () => {
+const Teams = (props) => {
 
    const [isLeague, setLeague] = useState("0");
-   const [items, setItems] = useState();
+   const [items, setItems] = useState(props);
    const [load, setLoad] = useState(false);
    const [error, setError] = useState('');
+   const [sdata , setDatas] =  useState(false);
+   const myRef = useRef(null)
    let events = [];
   useEffect(() => {
-    setLeague("0");
+    setLeague("1204");
+    setLoad(true)
   }, []);
 
  
+   
+  const  handdleClickAfterload = (e) => {
+
+    e.preventDefault();
   
+    setLoad(false);
+    setDatas(false);
+  
+    
+  
+    myRef.current.scrollIntoView()
+  
+    //window.scrollTo(3000, 20)
+  
+  }
   const handleChangeLeague = (value) => {
 
     setError("start")
@@ -82,6 +99,7 @@ const Teams = () => {
       {
         load !== false
           ? <div>
+            <div ref={myRef}></div> 
             <div className="content-wrapper">
               <div className="media align-items-center py-4">
                 <Avatar
@@ -118,7 +136,7 @@ const Teams = () => {
                       <tr className="border-bottom gray" style={{borderBottom: "#E3E3E3"}} key={index.toString()}>
                       <td style={{background: "#606060"}} className="text-white text-center">{index+1}</td>
                       <td>
-                        <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center" onClick={handdleClickAfterload}>
                           <Link
                             href={{
                               pathname: `/clubs/[league]/[name]/overviews/${item["@id"]}`,
@@ -201,11 +219,25 @@ const Teams = () => {
 
             </div>
           </div>
-          : <Empty className="pt-4 pb-4" />
+          : sdata === false ? <center><h1>Loading .......</h1></center>:<Empty className="pt-4 pb-4" />
       }
       {error === "start" ? <div>load ......</div> : <div></div>}
     </Layout>
   )
 }
+Teams.getInitialProps = async () => {
+
+  const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1204.xml?json=1`)
+  const data = await res.json()
+
+  data.standings.tournament.team.sort(function(a, b) {
+    //console.log(a["@minute"])
+     return a["@id"] - b["@id"];
+  });
+ 
+   return data
+
+}
+
 
 export default Teams
