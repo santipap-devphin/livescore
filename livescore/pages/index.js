@@ -1433,9 +1433,7 @@ Home.getInitialProps = async  (ctx) => {
   let newdate;
   let obkk  = {};
   let matchs = [];
-  function convertTZ(date, tzString) {
-    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
-  }
+ 
 
   //convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok")
 

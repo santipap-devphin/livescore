@@ -2,7 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch'
 import useDeviceDetect from "../../utils/useDeviceDetect";
 import { useRouter } from 'next/router'
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import dynamic from 'next/dynamic'
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -42,11 +42,52 @@ const Layout = (props) => {
   let pathname = router.pathname
   //console.log(pathname)
   const { isMobile } = useDeviceDetect();
+  const [league, setLeague] = useState()
+  const [loads, setLoads] = useState(false)
 
     let LaLigaSantander = []
     let Premier = []
     let Bundesliga = []
     let SerieA = []
+
+    useEffect( () => {
+
+      setLeague("0");
+  
+    }, []);
+    
+
+    /*useEffect(() => async () => {
+
+        const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerfixtures/data/mapping?json=1`)
+        const data = await res.json()
+
+        
+        data.fixtures.mapping.sort(function(a, b) {
+          console.log(a["@name"])
+          return a["@name"] - b["@name"];
+        });
+
+
+        //console.log(data)
+
+
+        setLeague(data)
+        setLoads(true)
+  
+    }, []);*/
+    
+
+    //console.log(league)
+
+   /* Layout.getInitialProps = async () => {
+
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerfixtures/data/mapping?json=1`)
+      const data = await res.json()
+     
+      
+      return { league: data.fixtures.mapping}
+    }*/
 
     /*props.standings[1].LaLiga.team.map((res,value) => (
 
@@ -89,36 +130,36 @@ const Layout = (props) => {
       { key: "10", title: "เจ ลีก ญี่ปุ่น",id:"1271", links: "/league/1271/today/", img: "/assets/icons/league/league_jleague.png" }
     ]
     let worldleague = [
-      { key: "1", title: "พรีเมียร์ลีก อังกฤษ",id:"", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "3", title: "ยูโรป้า ลีก",id:"", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "4", title: "เอฟเอ คัพ อังกฤษ",id:"", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน",id:"", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี",id:"", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน",id:"", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส",id:"", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น",id:"", links: "/jleague", img: "/assets/icons/league/league_jleague.png" },
-      { key: "11", title: "พรีเมียร์ลีก อังกฤษ",id:"", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "12", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "13", title: "ยูโรป้า ลีก",id:"", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "14", title: "เอฟเอ คัพ อังกฤษ",id:"", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "15", title: "ลาลีกา สเปน",id:"", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "16", title: "กัลโช่ เซเรีย อา อิตาลี",id:"", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "17", title: "บุนเดสลีกา เยอรมัน",id:"", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "18", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "19", title: "ลีก เอิง ฝรั่งเศส",id:"", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "20", title: "เจ ลีก ญี่ปุ่น",id:"", links: "/jleague", img: "/assets/icons/league/league_jleague.png" },
-      { key: "21", title: "พรีเมียร์ลีก อังกฤษ",id:"", links: "/premier-league", img: "/assets/icons/league/league_premier.png" },
-      { key: "22", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"", links: "/uefa-league", img: "/assets/icons/league/league_uefa.png" },
-      { key: "23", title: "ยูโรป้า ลีก",id:"", links: "/europa-league", img: "/assets/icons/league/league_europa.png" },
-      { key: "24", title: "เอฟเอ คัพ อังกฤษ",id:"", links: "/fa-cup-league", img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "25", title: "ลาลีกา สเปน",id:"", links: "/laliga-league", img: "/assets/icons/league/league_laliga.png" },
-      { key: "26", title: "กัลโช่ เซเรีย อา อิตาลี",id:"", links: "/calcio-league", img: "/assets/icons/league/league_calcio.png" },
-      { key: "27", title: "บุนเดสลีกา เยอรมัน",id:"", links: "/bundesliga-league", img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "28", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"", links: "/eredivisie-league", img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "29", title: "ลีก เอิง ฝรั่งเศส",id:"", links: "/ligue-league", img: "/assets/icons/league/league_ligue.png" },
-      { key: "30", title: "เจ ลีก ญี่ปุ่น",id:"", links: "/jleague", img: "/assets/icons/league/league_jleague.png" },
+      { key: "1", title: "France",id:"1012", links: "/league/1012/today/", img: "" },
+      { key: "2", title: "Germany",id:"1014", links: "/league/1014/today/", img: "" },
+      { key: "3", title: "Italy",id:"1019", links: "/league/1019/today/", img: ""},
+      { key: "4", title: "Spain",id:"1033", links: "/league/1033/today/", img: "" },
+      { key: "5", title: "Sweden",id:"1035", links: "/league/1035/today/", img: "" },
+      { key: "6", title: "Albania",id:"1064", links: "/league/1064/today/", img: "" },
+      { key: "7", title: "Argentina",id:"1076", links: "/league/1076/today/", img: "" },
+      { key: "8", title: "Armenia",id:"1082", links: "/league/1082/today/", img: "" },
+      { key: "9", title: "Australia",id:"1086", links: "/league/1086/today/",img: "" },
+      { key: "10", title: "Bahrain",id:"1097", links: "/league/1097/today/", img: "" },
+      { key: "11", title: "Belgium",id:"1102", links: "/league/1102/today/", img: "" },
+      { key: "12", title: "Bosnia and Herzegovina",id:"1111", links: "/league/1111/today/",img: "" },
+      { key: "13", title: "Brazil",id:"1141", links: "/league/1141/today/", img: "" },
+      { key: "14", title: "Bulgaria",id:"1154", links: "/league/1154/today/", img: "" },
+      { key: "15", title: "Canada",id:"1156", links: "/league/1156/today/", img: "" },
+      { key: "16", title: "Chile",id:"1159", links: "/league/1159/today/", img: "" },
+      { key: "17", title: "China",id:"1162", links: "/league/1162/today/", img: "" },
+      { key: "18", title: "Croatia",id:"1172", links: "/league/1172/today/", img: "" },
+      { key: "19", title: "Czech Republic",id:"1184", links: "/league/1184/today/", img: "" },
+      { key: "20", title: "Denmark",id:"1185", links: "/league/1185/today/", img: ""},
+      { key: "21", title: "Ecuador",id:"1191", links: "/league/1191/today/", img: "" },
+      { key: "22", title: "Egypt",id:"1193", links: "/league/1193/today/", img: ""},
+      { key: "23", title: "England",id:"1204", links: "/league/1204/today/", img: "" },
+      { key: "24", title: "Finland",id:"1213", links: "/league/1213/today/", img: ""},
+      { key: "25", title: "Greece",id:"1232", links: "/league/1232/today/", img: "" },
+      { key: "26", title: "Hong Kong",id:"1243", links: "/league/1243/today/", img: "" },
+      { key: "27", title: "Hungary",id:"1248", links: "/league/1248/today/", img: "" },
+      { key: "28", title: "India",id:"1250", links: "/league/1250/today/", img: ""},
+      { key: "29", title: "Japan",id:"1271", links: "/league/1271/today/", img: ""},
+      { key: "30", title: "Jordan",id:"1275", links: "/league/1275/today/", img: ""},
     ]
     
     /*let slide = [
@@ -218,7 +259,9 @@ const Layout = (props) => {
                     <Navigation 
                       className="" 
                       navTitle="ลีคอื่นๆ (ทั่วโลก)" 
-                      routes={worldleague} 
+                      routes={
+                        worldleague
+                      } 
                     />
                  }
                 <div className="banner">
@@ -272,7 +315,7 @@ Layout.defaultProps = {
   standings:[]
   }
 
-
+  
 
   
 
