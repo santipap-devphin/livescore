@@ -18,14 +18,17 @@ const Live = (props) => {
 const [sdata , setDatas] =  useState(false);
 const [defaults , setDefaults] = useState(props);
 const myRef = useRef(null)
+const [sectiontwo , setSectiontwo] = useState(false);
+const [lang , setLang] = useState([]);
 var newsarr = [];
+let teamth  = [];
 
 const  handdleClickAfterload = (e) => {
 
   e.preventDefault();
 
   setDatas(false);
-
+  setSectiontwo(false);
   
 
   myRef.current.scrollIntoView()
@@ -38,6 +41,7 @@ const handleClicklive = async (e) => {
   e.preventDefault();
 
   setDatas(false);
+  setSectiontwo(false);
   //console.log(e.target.value);
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
   
@@ -1047,6 +1051,7 @@ const handleClicklive = async (e) => {
   setDefaults(objj);
 
   setDatas(true);
+  setSectiontwo(true);
 
 }
 
@@ -1143,6 +1148,36 @@ useEffect(() => {
 
 }, [setDatas])
 
+useEffect(() => {
+
+  const fetchItems = async () => {
+
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/teams_th?json=1`)
+    const data = await res.json()
+
+    
+     for(var i=0 ;i < data.teams.team.length; i++){
+
+      teamth[data.teams.team[i]["@id"]] = data.teams.team[i]["@name"];
+
+    }
+    setLang(teamth)
+
+  }
+
+  setTimeout(function(){
+
+  
+    fetchItems();
+    setSectiontwo(true)
+
+    
+  
+  }, 100);
+
+},[setLang])
+
+
 return (
       
     <div className="container">
@@ -1169,15 +1204,40 @@ return (
         {
           (sdata !== false) ? 
            
-            defaults.home.category.map((res,value) => (
+            defaults.home.category.slice(0,7).map((res,value) => (
   
-              <div key={value.toString()} onClick={handdleClickAfterload}> 
+              <div key={value.toString()}> 
                       <TableLive  
                       className="highlight bg-secondary text-white"
                       title={res['@name']}
                       data={res.matches.match}
                       highlight={true} 
                       exam = {res['@id']}
+                      after = {handdleClickAfterload}
+                      th = {lang}
+                      />
+                      
+                </div>
+                
+                )) 
+                : <center><h1>loading.........</h1></center>
+
+
+        }
+        {
+          (sectiontwo !== false) ? 
+           
+            defaults.home.category.slice(8).map((res,value) => (
+  
+              <div key={value.toString()}> 
+                      <TableLive  
+                      className="highlight bg-secondary text-white"
+                      title={res['@name']}
+                      data={res.matches.match}
+                      highlight={true} 
+                      exam = {res['@id']}
+                      after = {handdleClickAfterload}
+                      th = {lang}
                       />
                       
                 </div>
@@ -1216,6 +1276,8 @@ return (
                               data={res.matches.match}
                               highlight={false}
                               exam = {res['@id']}
+                              after = {handdleClickAfterload}
+                              th = {lang}
                             />
                            
                         </div>

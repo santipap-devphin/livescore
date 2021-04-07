@@ -623,6 +623,8 @@ useEffect(() => {
 
 },[]);
 
+  //loadods(router.query.league,router.query.name)
+
   let path = router.asPath
   
   const host = path.split("/");

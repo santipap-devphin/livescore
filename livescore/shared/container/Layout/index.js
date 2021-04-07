@@ -2,7 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch'
 import useDeviceDetect from "../../utils/useDeviceDetect";
 import { useRouter } from 'next/router'
-import { useState ,useEffect } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic'
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -42,52 +42,11 @@ const Layout = (props) => {
   let pathname = router.pathname
   //console.log(pathname)
   const { isMobile } = useDeviceDetect();
-  const [league, setLeague] = useState()
-  const [loads, setLoads] = useState(false)
 
     let LaLigaSantander = []
     let Premier = []
     let Bundesliga = []
     let SerieA = []
-
-    useEffect( () => {
-
-      setLeague("0");
-  
-    }, []);
-    
-
-    /*useEffect(() => async () => {
-
-        const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerfixtures/data/mapping?json=1`)
-        const data = await res.json()
-
-        
-        data.fixtures.mapping.sort(function(a, b) {
-          console.log(a["@name"])
-          return a["@name"] - b["@name"];
-        });
-
-
-        //console.log(data)
-
-
-        setLeague(data)
-        setLoads(true)
-  
-    }, []);*/
-    
-
-    //console.log(league)
-
-   /* Layout.getInitialProps = async () => {
-
-      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerfixtures/data/mapping?json=1`)
-      const data = await res.json()
-     
-      
-      return { league: data.fixtures.mapping}
-    }*/
 
     /*props.standings[1].LaLiga.team.map((res,value) => (
 
@@ -259,9 +218,7 @@ const Layout = (props) => {
                     <Navigation 
                       className="" 
                       navTitle="ลีคอื่นๆ (ทั่วโลก)" 
-                      routes={
-                        worldleague
-                      } 
+                      routes={worldleague} 
                     />
                  }
                 <div className="banner">
@@ -315,7 +272,7 @@ Layout.defaultProps = {
   standings:[]
   }
 
-  
+
 
   
 

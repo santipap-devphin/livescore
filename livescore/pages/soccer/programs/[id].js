@@ -13,10 +13,6 @@ import { useRouter } from 'next/router'
 import { Component } from 'react';
 import React, { useState, useEffect ,useRef } from 'react';
 
-
-
-
-
 const Homefilter = (props) => {
 
   
@@ -27,6 +23,7 @@ const Homefilter = (props) => {
     e.preventDefault();
 
     setDatas(false);
+    setSectiontwo(false);
 
     myRef.current.scrollIntoView()
 
@@ -34,6 +31,9 @@ const Homefilter = (props) => {
 
   }
   const [sdata , setDatas] =  useState(false);
+  const [sectiontwo , setSectiontwo] = useState(false);
+  const [lang , setLang] = useState([]);
+  let teamth  = [];
 
   useEffect(() => {
 
@@ -45,6 +45,35 @@ const Homefilter = (props) => {
    
  
   },[setDatas]);
+
+   useEffect(() => {
+
+    const fetchItems = async () => {
+
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/teams_th?json=1`)
+      const data = await res.json()
+  
+      
+       for(var i=0 ;i < data.teams.team.length; i++){
+
+        teamth[data.teams.team[i]["@id"]] = data.teams.team[i]["@name"];
+
+      }
+      setLang(teamth)
+  
+    }
+
+    setTimeout(function(){
+
+    
+      fetchItems();
+      setSectiontwo(true)
+
+      
+    
+    }, 100);
+
+  },[setLang])
 
   function datee(nextday){
 
@@ -84,29 +113,31 @@ const Homefilter = (props) => {
  
 
   {
-    ( props.id === "d-3" ) ? navDates[0] = { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: true } 
+    props.id === "d-3"  ? navDates[0] = { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: true } 
     :
-    ( props.id === "d-2" ) ? navDates[1] = { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
+    props.id === "d-2"  ? navDates[1] = { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
     :
-    ( props.id === "d-1" ) ? navDates[2] = { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
+    props.id === "d-1"  ? navDates[2] = { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
     :
-    ( props.id === "d1" ) ? navDates[4] = { id: "5", date: datee(1), route: "/soccer/programs/d1", today: true } 
+    props.id === "d1"  ? navDates[4] = { id: "5", date: datee(1), route: "/soccer/programs/d1", today: true } 
     : 
-    ( props.id === "d2" ) ? navDates[5] = { id: "6", date: datee(2), route: "/soccer/programs/d2", today: true } 
+    props.id === "d2"  ? navDates[5] = { id: "6", date: datee(2), route: "/soccer/programs/d2", today: true } 
     :
-    ( props.id === "d3" ) ? navDates[6] = { id: "7", date: datee(3), route: "/soccer/programs/d3", today: true } 
-    :(navDates[3] = { id: "4", date: datee(0), route: "/", today: true })
+    props.id === "d3"  ? navDates[6] = { id: "7", date: datee(3), route: "/soccer/programs/d3", today: true } 
+    :
+    navDates[3] = { id: "4", date: datee(0), route: "/", today: true }
   }
 
   {
-    ( props.id === "d-2" ) ? navDatemobile[0] = { id: "1", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
+    props.id === "d-2" ? navDatemobile[0] = { id: "1", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
     :
-    ( props.id === "d-1" ) ? navDatemobile[1] = { id: "2", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
+    props.id === "d-1" ? navDatemobile[1] = { id: "2", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
     :
-    ( props.id === "d1" ) ? navDatemobile[3] = { id: "4", date: datee(1), route: "/soccer/programs/d1", today: true } 
+    props.id === "d1"  ? navDatemobile[3] = { id: "4", date: datee(1), route: "/soccer/programs/d1", today: true } 
     :
-    ( props.id === "d2" ) ? navDatemobile[4] = { id: "5", date: datee(2), route: "/soccer/programs/d2", today: true } 
-    :( navDatemobile[2] = { id: "3", date: datee(0), route: "/", today: true })
+    props.id === "d2"  ? navDatemobile[4] = { id: "5", date: datee(2), route: "/soccer/programs/d2", today: true } 
+    :
+    navDatemobile[2] = { id: "3", date: datee(0), route: "/", today: true }
   }
 
 
@@ -133,21 +164,44 @@ const Homefilter = (props) => {
          <div ref={myRef}></div>
          {
           (sdata !== false) ?
-            props.list[0].sortdata.category.map((res,value) => (
+            props.list[0].sortdata.category.slice(0,7).map((res,value) => (
 
-                 <div key={value.toString()} onClick={handdleClickAfterload}> 
+                 <div key={value.toString()}> 
                       <TableBattle  
                       className="highlight bg-secondary text-white"
                       title={res['@name']}
                       data={res.matches.match}
                       highlight={true} 
                       exam = {res['@id']}
+                      after = {handdleClickAfterload}
+                      th = {lang}
                       />
                       
                   </div>
                   
             ))
           :<center><h1>Loading .....</h1></center>
+         }
+
+{
+          (sectiontwo !== false) ? 
+            props.list[0].sortdata.category.slice(8).map((res,value) => (
+
+                 <div key={value.toString()}> 
+                      <TableBattle  
+                      className="highlight bg-secondary text-white"
+                      title={res['@name']}
+                      data={res.matches.match}
+                      highlight={true} 
+                      exam = {res['@id']}
+                      after = {handdleClickAfterload}
+                      th = {lang}
+                      />
+                      
+                  </div>
+                  
+            ))
+          :null
          }
         </div>
 
@@ -169,12 +223,14 @@ const Homefilter = (props) => {
                       {
                       (sdata !== false) ?
                             props.list[0].sortdata.category.map((res,value) => (
-                                  <div key={value.toString()} onClick={handdleClickAfterload}>
+                                  <div key={value.toString()}>
                                         <TableBattleMobile 
                                           title={res['@name']}
                                           data={res.matches.match}
                                           highlight={false}
                                           exam = {res['@id']}
+                                          after = {handdleClickAfterload}
+                                          th = {lang}
                                         />
                                       
                                   </div>

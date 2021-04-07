@@ -5,7 +5,7 @@ import {TableLiveStyle} from "./style"
 import { SliderStyle } from '../CarouselTable/style';
 
 
-const TableLive = ({ className, title, data, highlight , exam }) => {
+const TableLive = ({ className, title, data, highlight , exam , after ,th }) => {
 
    
   //console.log(data)
@@ -19,9 +19,48 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
   }*/
 
   // console.log({exam});
+
+  function leaugethai(legid){
+    var txt;
+     switch (legid) {
+       case "1005":
+         txt = "ยูฟ่า แชมเปี้ยนส์ลีก";
+         break;
+       case "1204":
+         txt = "พรีเมียร์ลีก อังกฤษ";
+         break;
+       case "1007":
+         txt = "ยูโรป้า ลีก";
+         break;
+       case "1198":
+         txt = "เอฟเอ คัพ อังกฤษ";
+         break;
+       case "1399":
+         txt = "ลาลีกา สเปน";
+         break;
+       case "1269":
+         txt = "กัลโช่ เซเรีย อา อิตาลี";
+         break;
+         case "1229":
+         txt = "บุนเดสลีกา เยอรมัน";
+         break;
+         case "1322":
+         txt = "เอเรดิวิซี่ ฮอลแลนด์";
+         break;
+         case "1221":
+         txt = "ลีก เอิง ฝรั่งเศส";
+         break;
+         case "1271":
+         txt = "เจ ลีก ญี่ปุ่น";
+         break;
+         default:
+         txt = title;
+     }
+     return txt;
+ }
   return (
     <TableLiveStyle className={`league-matches ${highlight === true ? "highlight" : ""} mb-4 league-${exam}`}>
-      <h4 className={`block-title ${className} mb-0`}>{title}</h4>
+      <h4 className={`block-title ${className} mb-0`}>{leaugethai(exam)}</h4>
        
       {
        
@@ -33,7 +72,7 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
               data.map((item, index) => (
 
                     
-                     <div className="w-100 league-matches-item" key={index.toString()}>
+                     <div className="w-100 league-matches-item" key={index.toString()} onClick={after}>
                       <Link
                         href={{
                           pathname: `/scorelive/[league]/[name]`,
@@ -47,7 +86,7 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
                             <div className="d-flex row mx-0">
                               <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{item['@status']}</div>
                               <div className="col-md-9 px-0 pl-md-2 pr-md-2 flex-fill text-center text-md-right">
-                                {item.localteam['@name']}
+                               {typeof th[item.localteam['@id']] === "undefined" ? item.localteam['@name'] : th[item.localteam['@id']]}
                               </div> 
                               <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center text-score">  
                                 {item.localteam['@goals']+" - "+item.visitorteam['@goals']}
@@ -56,7 +95,7 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
                           </div>
                           <div className="col-md-6 px-0 px-md-2">
                             <div className="play text-center text-md-left">
-                              {item.visitorteam['@name']}
+                             {typeof th[item.visitorteam['@id']] === "undefined" ? item.visitorteam['@name'] : th[item.visitorteam['@id']]}
                             </div>
                           </div>
                         </a>
@@ -70,7 +109,7 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
         <div className="league-matches-list list-unstyled mb-0">
                 {
                 typeof(data) != "undefined" ? 
-                (<div className="w-100 league-matches-item" key={0}>
+                (<div className="w-100 league-matches-item" key={0} onClick={after}>
                     <Link
                       href={{
                         pathname: `/scorelive/[league]/[name]`,
@@ -84,7 +123,7 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
                           <div className="d-flex row mx-0">
                             <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{data['@status']}</div>
                             <div className="col-md-9 px-0 pl-md-2 pr-md-2 flex-fill text-center text-md-right">
-                              {data.localteam['@name']}
+                               {typeof th[data.localteam['@id']] === "undefined" ? data.localteam['@name'] : th[data.localteam['@id']]}
                             </div>
                             <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center">  
                               {data.localteam['@goals']+" - "+data.visitorteam['@goals']}
@@ -93,7 +132,7 @@ const TableLive = ({ className, title, data, highlight , exam }) => {
                         </div>
                         <div className="col-md-6 px-0 px-md-2">
                           <div className="play text-center text-md-left">
-                            {data.visitorteam['@name']}
+                             {typeof th[data.visitorteam['@id']] === "undefined" ? data.visitorteam['@name'] : th[data.visitorteam['@id']]}
                           </div>
                         </div>
                       </a>
@@ -170,7 +209,8 @@ TableLive.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   /*data: PropTypes.array.isRequired,*/
-  highlight: PropTypes.bool
+  highlight: PropTypes.bool,
+  after:PropTypes.func.isRequired
 };
 TableLive.defaultProps = {
   className: "bg-secondary text-white",

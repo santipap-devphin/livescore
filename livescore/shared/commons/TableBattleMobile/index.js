@@ -4,20 +4,59 @@ import Link from 'next/link'
 import {TableBattleMobileStyle} from "./style"
 import Avatar from "../Avatar"
 
-const TableBattleMobile = ({title, data, className , exam }) => {
+const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
+
+  function leaugethai(legid){
+    var txt;
+     switch (legid) {
+       case "1005":
+         txt = "ยูฟ่า แชมเปี้ยนส์ลีก";
+         break;
+       case "1204":
+         txt = "พรีเมียร์ลีก อังกฤษ";
+         break;
+       case "1007":
+         txt = "ยูโรป้า ลีก";
+         break;
+       case "1198":
+         txt = "เอฟเอ คัพ อังกฤษ";
+         break;
+       case "1399":
+         txt = "ลาลีกา สเปน";
+         break;
+       case "1269":
+         txt = "กัลโช่ เซเรีย อา อิตาลี";
+         break;
+         case "1229":
+         txt = "บุนเดสลีกา เยอรมัน";
+         break;
+         case "1322":
+         txt = "เอเรดิวิซี่ ฮอลแลนด์";
+         break;
+         case "1221":
+         txt = "ลีก เอิง ฝรั่งเศส";
+         break;
+         case "1271":
+         txt = "เจ ลีก ญี่ปุ่น";
+         break;
+         default:
+         txt = title;
+     }
+     return txt;
+ }
  // console.log(exam)
   return (
     <TableBattleMobileStyle className={`league-matches mb-4 ${className}`}>
       <div className="block-title
          align-items-center">
-        <Avatar
+        {/*<Avatar
           className="align-self-center mr-3"
           size={25}
           shape="square"
           src="/assets/icons/league/league_premier.png"
           alt={title}
-        />
-        <h4 className="mb-0">{title}</h4>
+        />*/}
+        <h4 className="mb-0">{leaugethai(exam)}</h4>
       </div>
 
     
@@ -28,7 +67,7 @@ const TableBattleMobile = ({title, data, className , exam }) => {
 
                 data.map((item, index) => {
                   return (
-                    <div className="w-100 league-matches-item"  key={index.toString()}>
+                    <div className="w-100 league-matches-item"  key={index.toString()} onClick={after}>
                       <Link
                         href={{
                           pathname: `/football/[league]/[name]`,
@@ -43,24 +82,24 @@ const TableBattleMobile = ({title, data, className , exam }) => {
                           </div>
                           <div className="col-7 px-2 league-matches-list_name py-2 border-left border-right text-left">
                             <p className="mb-2">
-                              <Avatar
+                              {/*<Avatar
                                 className="align-self-center mr-2"
                                 size={25}
                                 shape="square"
                                 src="/assets/icons/league/league_premier.png"
                                 alt={title}
-                              />
-                              {item.localteam['@name']}
+                              />*/}
+                             {typeof th[item.localteam['@id']] === "undefined" ? item.localteam['@name'] : th[item.localteam['@id']]}
                             </p>
                             <p className="mb-0">
-                              <Avatar
+                              {/*<Avatar
                                 className="align-self-center mr-2"
                                 size={25}
                                 shape="square"
                                 src="/assets/icons/league/league_premier.png"
                                 alt={title}
-                              />
-                              {item.visitorteam['@name']}
+                              />*/}
+                              {typeof th[item.visitorteam['@id']] === "undefined" ? item.visitorteam['@name'] : th[item.visitorteam['@id']]}
                             </p>
                           </div>
                           <div className="col-2 py-2 px-0 text-center align-self-center">
@@ -86,7 +125,7 @@ const TableBattleMobile = ({title, data, className , exam }) => {
                       typeof(data) != "undefined" ?  
                       
                          (
-                          <div className="w-100 league-matches-item"  key={0}>
+                          <div className="w-100 league-matches-item"  key={0} onClick={after}>
 
                               <Link
                               href={{
@@ -102,24 +141,25 @@ const TableBattleMobile = ({title, data, className , exam }) => {
                                 </div>
                                 <div className="col-7 px-2 league-matches-list_name py-2 border-left border-right text-left">
                                   <p className="mb-2">
-                                    <Avatar
+                                    {/*<Avatar
                                       className="align-self-center mr-2"
                                       size={25}
                                       shape="square"
                                       src="/assets/icons/league/league_premier.png"
                                       alt={title}
-                                    />
-                                    {data.localteam['@name']}
+                                    />*/}
+                                    {typeof th[data.localteam['@id']] === "undefined" ? data.localteam['@name'] : th[data.localteam['@id']]}
                                   </p>
                                   <p className="mb-0">
-                                    <Avatar
+                                    {/*<Avatar
                                       className="align-self-center mr-2"
                                       size={25}
                                       shape="square"
                                       src="/assets/icons/league/league_premier.png"
                                       alt={title}
-                                    />
-                                    {data.visitorteam['@name']}
+                                    />*/}
+                                    
+                                    {typeof th[data.visitorteam['@id']] === "undefined" ? data.visitorteam['@name'] : th[data.visitorteam['@id']]}
                                   </p>
                                 </div>
                                 <div className="col-2 py-2 px-0 text-center align-self-center">
@@ -149,6 +189,7 @@ const TableBattleMobile = ({title, data, className , exam }) => {
 TableBattleMobile.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
+  after:PropTypes.func.isRequired
   /*data: PropTypes.array.isRequired,*/
 };
 TableBattleMobile.defaultProps = {
