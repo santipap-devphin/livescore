@@ -29,7 +29,7 @@ const PremierLeague = (props ,{ }) => {
   var events = [];
   let data;
   let numm = 0;
-  console.log(defalut)
+ 
   const loadods = async (param,param2) => {
 
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/getodds/soccer?cat=soccer_10&league=${param2}&json=1`)
@@ -621,7 +621,7 @@ useEffect(() => {
   loadods(router.query.league,router.query.name)
   
 
-},[]);
+},[loadods]);
 
   //loadods(router.query.league,router.query.name)
 
@@ -695,7 +695,7 @@ useEffect(() => {
                             
 
                             if(props.league.match["@timer"] === ""){
-                              console.log(props.league.match["@status"])
+                              //console.log(props.league.match["@status"])
                    
                               if(props.league.match["@status"] === "HT" 
                               || props.league.match["@status"] === "FT" 
@@ -723,11 +723,13 @@ useEffect(() => {
                                 title: props.league["@name"],
                                 type: date_convert,
                                 date: props.league.match["@date"],
+                                teamid: props.league.match.localteam["@id"],
                                 team: props.league.match.localteam["@name"],
                                 score:props.league.match.localteam["@goals"] + " - " +props.league.match.visitorteam["@goals"] ,
                                 scoreA:props.league.match.localteam["@goals"],
                                 scoreB:props.league.match.visitorteam["@goals"],
-                                teamB: props.league.match.visitorteam["@name"]
+                                teamB: props.league.match.visitorteam["@name"],
+                                teamBid: props.league.match.visitorteam["@id"],
                               },
                             ]
 
@@ -787,11 +789,13 @@ useEffect(() => {
                                 title: defalut.sleague["@name"],
                                 type: date_convert,
                                 date: defalut.sleague.matches.match["@date"],
+                                teamid: defalut.sleague.matches.match.localteam["@id"],
                                 team: defalut.sleague.matches.match.localteam["@name"],
                                 score:defalut.sleague.matches.match.localteam["@goals"] + " - " +defalut.sleague.matches.match.visitorteam["@goals"] ,
                                 scoreA:defalut.sleague.matches.match.localteam["@goals"],
                                 scoreB:defalut.sleague.matches.match.visitorteam["@goals"],
-                                teamB: defalut.sleague.matches.match.visitorteam["@name"]
+                                teamB: defalut.sleague.matches.match.visitorteam["@name"],
+                                teamBid: defalut.sleague.matches.match.visitorteam["@id"],
                               },
                             ]
 

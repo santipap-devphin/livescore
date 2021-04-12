@@ -38,6 +38,7 @@ const settings = {
 
 const CarouselTable = ({slideValues, className}) => {
 
+   console,log(slideValues)
   return (
     <SliderStyle {...settings}>
         {slideValues.map((matches, k) => {

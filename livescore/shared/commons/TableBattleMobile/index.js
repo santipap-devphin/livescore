@@ -3,9 +3,35 @@ import PropTypes from 'prop-types';
 import Link from 'next/link'
 import {TableBattleMobileStyle} from "./style"
 import Avatar from "../Avatar"
+import { useRouter } from 'next/router'
 
 const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
 
+  let newimg;
+  let lastimg;
+  const router = useRouter()
+  var assets = "/";
+  if(router.pathname !== "/"){
+    
+     assets = "/assets";
+
+  }else{
+    assets = "../assets";
+  }
+
+  if(title.indexOf(":") > -1){
+
+    newimg = title.split(":");
+    lastimg = newimg[0]+".png";
+
+  }else{
+    lastimg = "default-team-logo.png";
+  }
+
+  function DefaultSrc(ev){
+    ev.target.src = '/assets/default-team-logo.png';
+    //ev.target.src = '';
+   }
   function leaugethai(legid){
     var txt;
      switch (legid) {
@@ -44,6 +70,44 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
      }
      return txt;
  }
+ function chkforimg(legid){
+  var txt;
+   switch (legid) {
+     case "1005":
+       txt = true;
+       break;
+     case "1204":
+       txt = true;
+       break;
+     case "1007":
+       txt = true;
+       break;
+     case "1198":
+      txt = true;
+       break;
+     case "1399":
+      txt = true;
+       break;
+      case "1269":
+      txt = true;
+       break;
+       case "1229":
+      txt = true;
+       break;
+       case "1322":
+        txt = true;
+       break;
+       case "1221":
+        txt = true;
+       break;
+       case "1271":
+       txt = true;
+       break;
+       default:
+       txt = false;
+   }
+   return txt;
+}
  // console.log(exam)
   return (
     <TableBattleMobileStyle className={`league-matches mb-4 ${className}`}>
@@ -56,7 +120,15 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
           src="/assets/icons/league/league_premier.png"
           alt={title}
         />*/}
-        <h4 className="mb-0">{leaugethai(exam)}</h4>
+        <h4 className="mb-0">
+        <img 
+         src={`${assets}/country/${lastimg}`}
+         alt={"icon"} 
+         width={25}
+         style={{marginRight:20}}
+         onError={DefaultSrc} />
+          {leaugethai(exam)}
+          </h4>
       </div>
 
     
@@ -81,24 +153,24 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                             <p className="mb-0">{item['@status']}</p>
                           </div>
                           <div className="col-7 px-2 league-matches-list_name py-2 border-left border-right text-left">
-                            <p className="mb-2">
-                              {/*<Avatar
-                                className="align-self-center mr-2"
-                                size={25}
-                                shape="square"
-                                src="/assets/icons/league/league_premier.png"
-                                alt={title}
-                              />*/}
-                             {typeof th[item.localteam['@id']] === "undefined" ? item.localteam['@name'] : th[item.localteam['@id']]}
+                            <p className="mb-0">
+                                <Avatar
+                                  className="align-self-center"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
+                             {typeof th[item.localteam['@id']] === "undefined" ? <span className="mx-2">{item.localteam['@name']}</span> : <span className="mx-2">{th[item.localteam['@id']]}</span>}
                             </p>
                             <p className="mb-0">
-                              {/*<Avatar
-                                className="align-self-center mr-2"
-                                size={25}
-                                shape="square"
-                                src="/assets/icons/league/league_premier.png"
-                                alt={title}
-                              />*/}
+                                <Avatar
+                                  className="align-self-center mr-2"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
                               {typeof th[item.visitorteam['@id']] === "undefined" ? item.visitorteam['@name'] : th[item.visitorteam['@id']]}
                             </p>
                           </div>
@@ -141,23 +213,23 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                                 </div>
                                 <div className="col-7 px-2 league-matches-list_name py-2 border-left border-right text-left">
                                   <p className="mb-2">
-                                    {/*<Avatar
-                                      className="align-self-center mr-2"
-                                      size={25}
-                                      shape="square"
-                                      src="/assets/icons/league/league_premier.png"
-                                      alt={title}
-                                    />*/}
-                                    {typeof th[data.localteam['@id']] === "undefined" ? data.localteam['@name'] : th[data.localteam['@id']]}
+                                  <Avatar
+                                  className="align-self-center"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
+                                    {typeof th[data.localteam['@id']] === "undefined" ? <span className="mx-2">{data.localteam['@name']}</span> : <span className="mx-2">{th[data.localteam['@id']]}</span>}
                                   </p>
                                   <p className="mb-0">
-                                    {/*<Avatar
-                                      className="align-self-center mr-2"
-                                      size={25}
-                                      shape="square"
-                                      src="/assets/icons/league/league_premier.png"
-                                      alt={title}
-                                    />*/}
+                                  <Avatar
+                                  className="align-self-center mr-2"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
                                     
                                     {typeof th[data.visitorteam['@id']] === "undefined" ? data.visitorteam['@name'] : th[data.visitorteam['@id']]}
                                   </p>

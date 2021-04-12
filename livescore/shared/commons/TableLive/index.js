@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link'
 import {TableLiveStyle} from "./style"
 import { SliderStyle } from '../CarouselTable/style';
-
+import Avatar from "../Avatar"
 
 const TableLive = ({ className, title, data, highlight , exam , after ,th }) => {
 
@@ -11,15 +11,24 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
   //console.log(data)
   let new_data;
   let cutspace;
- /* if(title.indexOf(": ") > -1){
+  let newimg;
+  let lastimg;
 
-    new_data = title.replace(": ", "_");
-    cutspace = new_data.replace(" ", "");
+  var assets = "/assets";
 
-  }*/
+  if(title.indexOf(":") > -1){
 
-  // console.log({exam});
+    newimg = title.split(":");
+    lastimg = newimg[0]+".png";
 
+  }else{
+    lastimg = "default-team-logo.png";
+  }
+
+  function DefaultSrc(ev){
+    ev.target.src = '/assets/default-team-logo.png';
+    //ev.target.src = '';
+   }
   function leaugethai(legid){
     var txt;
      switch (legid) {
@@ -58,9 +67,56 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
      }
      return txt;
  }
+ function chkforimg(legid){
+  var txt;
+   switch (legid) {
+     case "1005":
+       txt = true;
+       break;
+     case "1204":
+       txt = true;
+       break;
+     case "1007":
+       txt = true;
+       break;
+     case "1198":
+      txt = true;
+       break;
+     case "1399":
+      txt = true;
+       break;
+      case "1269":
+      txt = true;
+       break;
+       case "1229":
+      txt = true;
+       break;
+       case "1322":
+        txt = true;
+       break;
+       case "1221":
+        txt = true;
+       break;
+       case "1271":
+       txt = true;
+       break;
+       default:
+       txt = false;
+   }
+   return txt;
+ }
   return (
     <TableLiveStyle className={`league-matches ${highlight === true ? "highlight" : ""} mb-4 league-${exam}`}>
-      <h4 className={`block-title ${className} mb-0`}>{leaugethai(exam)}</h4>
+      <h4 className={`block-title ${className} mb-0`}>
+      <img 
+         src={`${assets}/country/${lastimg}`}
+         alt={"icon"} 
+         width={25}
+         style={{marginRight:20}}
+         onError={DefaultSrc} />
+        {leaugethai(exam)}
+
+      </h4>
        
       {
        
@@ -87,6 +143,13 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                               <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{item['@status']}</div>
                               <div className="col-md-9 px-0 pl-md-2 pr-md-2 flex-fill text-center text-md-right">
                                {typeof th[item.localteam['@id']] === "undefined" ? item.localteam['@name'] : th[item.localteam['@id']]}
+                               <Avatar
+                                  className="align-self-center mx-2"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
                               </div> 
                               <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center text-score">  
                                 {item.localteam['@goals']+" - "+item.visitorteam['@goals']}
@@ -95,6 +158,13 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                           </div>
                           <div className="col-md-6 px-0 px-md-2">
                             <div className="play text-center text-md-left">
+                            <Avatar
+                                  className="align-self-center mr-2"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
                              {typeof th[item.visitorteam['@id']] === "undefined" ? item.visitorteam['@name'] : th[item.visitorteam['@id']]}
                             </div>
                           </div>
@@ -124,6 +194,13 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                             <div className="col-md-1 px-0 px-md-2 flex-fill text-center text-md-left">{data['@status']}</div>
                             <div className="col-md-9 px-0 pl-md-2 pr-md-2 flex-fill text-center text-md-right">
                                {typeof th[data.localteam['@id']] === "undefined" ? data.localteam['@name'] : th[data.localteam['@id']]}
+                               <Avatar
+                                  className="align-self-center mx-2"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
                             </div>
                             <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center">  
                               {data.localteam['@goals']+" - "+data.visitorteam['@goals']}
@@ -132,6 +209,13 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                         </div>
                         <div className="col-md-6 px-0 px-md-2">
                           <div className="play text-center text-md-left">
+                          <Avatar
+                                  className="align-self-center mr-2"
+                                  size={25}
+                                  shape="square"
+                                  src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
+                                  alt={title}
+                                />
                              {typeof th[data.visitorteam['@id']] === "undefined" ? data.visitorteam['@name'] : th[data.visitorteam['@id']]}
                           </div>
                         </div>

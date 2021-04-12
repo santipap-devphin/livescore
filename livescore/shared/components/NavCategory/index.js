@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {NavCategoryStyle} from "./style"
 
 const NavCategory = ({route}) => {
+  /*console.log(route)*/
   const router = useRouter()
   let path = router.asPath
   return (

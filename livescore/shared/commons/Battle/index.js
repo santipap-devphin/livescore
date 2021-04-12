@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import {BattleStyle} from "./style"
 
 const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, imgTeamAName, imgTeamBName, versusText, vote, children }) => {
+  
+  function addDefaultSrc(ev){
+    ev.target.src = '/assets/default-team-logo.png';
+    //ev.target.src = '';
+   }
+  
   return (
     <BattleStyle className={`match-header ${className}`}>
       <div className="right row mx-0 align-items-center">
         <div className="home-team team col-4 text-center">
-          <div className="logo">
-            <img src={imgTeamA} alt={imgTeamAName} />
+          <div className="logo" style={{padding:20}}>
+            <img 
+            src={imgTeamA}
+            alt={imgTeamAName} 
+            onError={addDefaultSrc} />
           </div>
           <div className="name">{imgTeamAName}</div>
         </div>
@@ -26,8 +35,12 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
           </div>
         </div>
         <div className="away-team team col-4 text-center">
-          <div className="logo">
-            <img src={imgTeamB} alt={imgTeamBName} />
+          <div className="logo" style={{padding:20}}>
+            <img 
+            src={imgTeamB} 
+           
+            alt={imgTeamBName} 
+            onError={addDefaultSrc} />
           </div>
           <div className="name">{imgTeamBName}</div>
         </div>

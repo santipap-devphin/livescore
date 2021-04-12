@@ -58,11 +58,13 @@ const LineUs = (props) => {
                                 title: defalut.league["@name"],
                                 type: defalut.league.match["@status"],
                                 date: defalut.league.match["@date"],
+                                teamid: defalut.league.match.localteam["@id"],
                                 team: defalut.league.match.localteam["@name"],
                                 score:defalut.league.match.localteam["@goals"] + " - " +defalut.league.match.visitorteam["@goals"] ,
                                 scoreA:defalut.league.match.localteam["@goals"],
                                 scoreB:defalut.league.match.visitorteam["@goals"],
-                                teamB: defalut.league.match.visitorteam["@name"]
+                                teamB: defalut.league.match.visitorteam["@name"],
+                                teamBid: defalut.league.match.visitorteam["@id"]
                               },
                             ]
 
@@ -78,11 +80,13 @@ const LineUs = (props) => {
                                title: defalut.sleague["@name"],
                                type: defalut.sleague.matches.match["@status"],
                                date: defalut.sleague.matches.match["@date"],
+                               teamid: defalut.sleague.matches.match.localteam["@id"],
                                team: defalut.sleague.matches.match.localteam["@name"],
                                score:defalut.sleague.matches.match.localteam["@goals"] + " - " +defalut.sleague.matches.match.visitorteam["@goals"] ,
                                scoreA:defalut.sleague.matches.match.localteam["@goals"],
                                scoreB:defalut.sleague.matches.match.visitorteam["@goals"],
-                               teamB: defalut.sleague.matches.match.visitorteam["@name"]
+                               teamB: defalut.sleague.matches.match.visitorteam["@name"],
+                               teamBid: defalut.sleague.matches.match.visitorteam["@id"]
                              },
                            ]
 

@@ -7,7 +7,7 @@ import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
 const Teams = (props) => {
 
-  
+   
 
   function datee(nextday){
 

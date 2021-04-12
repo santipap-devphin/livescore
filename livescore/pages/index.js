@@ -24,6 +24,7 @@ const Home = (props) => {
   const [live , setLive] = useState([]);
   const [sectiontwo , setSectiontwo] = useState(false);
   const [lang , setLang] = useState([]);
+  const fuct = useState();
   var newsarr = [];
   var _blank = [];
   let teamth = [];
@@ -31,6 +32,13 @@ const Home = (props) => {
   function convertTZ(date, tzString) {
     return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
   }
+
+  
+
+  /*function addDefaultSrc(ev){
+    ev.target.src = '/assets/default-team-logo.png';
+    //ev.target.src = '';
+  }*/
   
   
   const handdleClickAfterload = (e) => {
@@ -1102,6 +1110,8 @@ const Home = (props) => {
           return a["@priority"] - b["@priority"];
       });
 
+      
+
       var flags = [], output = [], l = ndata.length, i;
 
       for( i=0; i<l; i++) {
@@ -1110,6 +1120,8 @@ const Home = (props) => {
           flags[ndata[i]["@gid"]] = true;
           output.push(ndata[i]);
       }
+
+      
       
 
      var newArray = newsarr.reduce(function(acc, curr) {
@@ -1134,18 +1146,30 @@ const Home = (props) => {
       }, []);
 
 
+      //console.log(output)
+      //console.log(newArray)
+
+       
+
        for (let [key, value] of Object.entries(output)) {
-        //console.log(value);
-         if(value["@gid"] === newArray[key]["@leagueid"]){
+        
 
-              //value.matches.push(newArray[key])
+         for(var i = 0; i < newArray.length; i++){
+          //console.log(value["@gid"] +"==="+ newArray[i]["@leagueid"])
+          if(value["@gid"] === newArray[i]["@leagueid"]){
 
-              //objjj = newArray[key]["match"];
-              value.matches.match = newArray[key]["match"];
-             // console.log(newArray[key]["match"])
-          
+            //console.log(newArray[key])
+           //value.matches.push(newArray[key])
+
+           //objjj = newArray[key]["match"];
+           value.matches.match = newArray[i]["match"];
+          // console.log(newArray[key]["match"])
+       
+
+      }
 
          }
+         
        
       }
      
@@ -1411,6 +1435,8 @@ return (
                     exam = {res['@id']}
                     after = {handdleClickAfterload}
                     th = {lang}
+                  
+
                     />
                     
                   
@@ -1441,6 +1467,7 @@ return (
                     exam = {res['@id']}
                     after = {handdleClickAfterload}
                     th = {lang}
+                   
                     />
                     
                   
@@ -1466,7 +1493,12 @@ return (
                     <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
 
                 </div>
-                
+                <a href="/">
+                    All
+                </a>
+                <a href="#" onClick={handleClicklive} style={{"marginLeft":"20px"}}>
+                    Live
+                </a>
                 {
 
                 (sdata !== false) ? 

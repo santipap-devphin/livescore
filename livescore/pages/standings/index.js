@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect ,useRef } from 'react'
 import { isMobile } from "react-device-detect"
 import HeaderSeo from "../../shared/commons/HeaderSeo"
 import Layout from "../../shared/container/Layout"
@@ -6,13 +6,19 @@ import LeagueTable from "../../shared/commons/LeagueTableFull"
 import CarouselTableMobile from "../../shared/commons/CarouselTableMobile"
 import Tabs from "../../shared/components/Tabs"
 
+
 const Standings = (data) => {
 
     let LaLigaSantander = []
     let Premier = []
     let Bundesliga = []
     let SerieA = []
+    let France = []
+    let Japan = []
+    let Thailand = []
     let obj = {};
+    const [chkload ,setchkLoad] = useState(false);
+    
 
     //console.log(data)
 
@@ -72,14 +78,75 @@ const Standings = (data) => {
 
      )
      )
+     data.leages[4].France.team.map((res,value) => (
 
-    
+        France.push(
+            {"key": res["@position"],
+             "title":res["@name"], 
+             "matches": res,
+             "gd": res.total["@gd"], 
+             "points":  res.total["@p"] , 
+             "recent_form": res["@recent_form"],
+             "gp": res.overall["@gp"] 
+            })
+
+     )
+     )
+
+     data.leages[5].Japan.team.map((res,value) => (
+
+        Japan.push(
+            {"key": res["@position"],
+             "title":res["@name"], 
+             "matches": res,
+             "gd": res.total["@gd"], 
+             "points":  res.total["@p"] , 
+             "recent_form": res["@recent_form"],
+             "gp": res.overall["@gp"] 
+            })
+
+     )
+     )
+     data.leages[6].Thailand.team.map((res,value) => (
+
+        Thailand.push(
+            {"key": res["@position"],
+             "title":res["@name"], 
+             "matches": res,
+             "gd": res.total["@gd"], 
+             "points":  res.total["@p"] , 
+             "recent_form": res["@recent_form"],
+             "gp": res.overall["@gp"] 
+            })
+
+     )
+     )
+
+     useEffect(() => {
+
+       if(isMobile === true){
+
+        setchkLoad(false)
+
+       }else{
+        setchkLoad(true)
+       }
+
+
+     })
+
+
+  
     let slide = [
-      { id: "1", title: "LaLiga Santander", match: LaLigaSantander},
-      { id: "2", title: "Premier League", match: Premier},
-      { id: "3", title: "Bundesliga", match: Bundesliga},
-      { id: "4", title: "SerieA", match: SerieA},
-    ]
+        { id: "1", title: "ลาลีกา สเปน", match: LaLigaSantander},
+        { id: "2", title: "พรีเมียร์ลีก อังกฤษ", match: Premier},
+        { id: "3", title: "บุนเดสลีกา เยอรมัน", match: Bundesliga},
+        { id: "4", title: "กัลโช่ เซเรีย อา อิตาลี", match: SerieA},
+        { id: "5", title: "ลีก เอิง ฝรั่งเศส", match: France},
+        { id: "6", title: "เจ ลีก ญี่ปุ่น", match: Japan},
+        { id: "7", title: "ไทย ลีก", match: Thailand}
+      ]
+    
     return (
         <Layout className="px-0 pr-md-3 pl-md-0">
             <HeaderSeo
@@ -91,21 +158,20 @@ const Standings = (data) => {
                 keyWords=""
                 author=""
             />
-
-             {isMobile ? 
-             
-             <CarouselTableMobile 
-               slideValues={slide}
-                className="mb-4"
-             />
-             
-             :
-             <div>
-                 
-             <h1>ตารางคะแนน</h1>
+            {
+                
+                chkload  !== false ?
+                <div>
+                 <h1>ตารางคะแนน</h1>
                 {<Tabs>
                     <div label="premier">
-                        <h1>2020-2021 PREMIER TABLE</h1>
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/England.png"}
+                        alt={"พรีเมียร์ลีก อังกฤษ ล่าสุด"} 
+                        />พรีเมียร์ลีก อังกฤษ</h1>
                         <LeagueTable 
                         title={data.leages[1].PremierLeague["@league"]}
                         matches={data.leages[1].PremierLeague.team} 
@@ -114,7 +180,14 @@ const Standings = (data) => {
 
                     </div>
                     <div label="la-liga">
-                        <h1>2020-2021 LA LIGA TABLE</h1>
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/Spain.png"}
+                        alt={"ลาลีกาลีก สเปน ล่าสุด"} 
+                        />
+                        ลาลีกาลีก สเปน</h1>
                         <LeagueTable 
                         title={data.leages[0].LaLiga["@league"]}
                         matches={data.leages[0].LaLiga.team} 
@@ -122,7 +195,14 @@ const Standings = (data) => {
                         />
                     </div>
                     <div label="seria-a">
-                        <h1>2020-2021 SERIA A TABLE</h1>
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/Italy.png"}
+                        alt={"เซเรีย อา อิตาลี ล่าสุด"} 
+                        />
+                        กัลโช่ เซเรีย อา อิตาลี</h1>
                         <LeagueTable 
                         title={data.leages[3].Seriea["@league"]}
                         matches={data.leages[3].Seriea.team} 
@@ -130,7 +210,15 @@ const Standings = (data) => {
                         />
                     </div>
                     <div label="bundes">
-                        <h1>2020-2021 BUNDES TABLE</h1>
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/Germany.png"}
+                        alt={"บุนเดสลีกา เยอรมัน ล่าสุด"} 
+                        />
+                        บุนเดสลีกา เยอรมัน
+                        </h1>
                         <LeagueTable 
                         title={data.leages[2].Bundesliga["@league"]}
                         matches={data.leages[2].Bundesliga.team} 
@@ -138,7 +226,15 @@ const Standings = (data) => {
                         />
                     </div>
                     <div label="france">
-                        <h1>FRANCE</h1>
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/France.png"}
+                        alt={"ลีก เอิง ฝรั่งเศส ล่าสุด"} 
+                        />
+                        ลีก เอิง ฝรั่งเศส
+                        </h1>
                         <LeagueTable 
                         title={data.leages[4].France["@league"]}
                         matches={data.leages[4].France.team} 
@@ -146,17 +242,49 @@ const Standings = (data) => {
                         />
                     </div>
                     <div label="j-league">
-                        <h1>J League</h1>
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/Japan.png"}
+                        alt={"เจลีก ญี่ปุ่น ล่าสุด"} 
+                        />
+                        เจลีก ญี่ปุ่น
+                        </h1>
                         <LeagueTable 
                         title={data.leages[5].Japan["@league"]}
                         matches={data.leages[5].Japan.team} 
                         className={""}
                         />
                     </div>
+                    <div label="thai-league">
+                        <h1 style={{padding:10}}>
+                        <img 
+                        width={30}
+                        style={{marginRight:10}}
+                        src={"../assets/country/Thailand.png"}
+                        alt={"ตารางคะแนนไทยลีก 2021"} 
+                        />
+                        ไทยลีก 
+                        </h1>
+                        <LeagueTable 
+                        title={data.leages[6].Thailand["@league"]}
+                        matches={data.leages[6].Thailand.team} 
+                        className={""}
+                        />
+                    </div>
                     
                 </Tabs>}
             </div>
-                }
+                
+            :
+
+            <CarouselTableMobile 
+                slideValues={slide}
+                className="mb-4"
+            />
+            }
+          
              
             
             <div className="banner px-3 px-md-0">
@@ -197,7 +325,9 @@ Standings.getInitialProps = async (ctx) => {
           fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1229.xml?json=1').then((response) => response.json()),
           fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1269.xml?json=1').then((response) => response.json()),
           fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1221.xml?json=1').then((response) => response.json()),
-          fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1271.xml?json=1').then((response) => response.json())
+          fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1271.xml?json=1').then((response) => response.json()),
+          fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1415.xml?json=1').then((response) => response.json())
+
         ]);
   
       
@@ -214,6 +344,7 @@ Standings.getInitialProps = async (ctx) => {
       leage.push({Seriea:data[3].standings.tournament})
       leage.push({France:data[4].standings.tournament})
       leage.push({Japan: data[5].standings.tournament})
+      leage.push({Thailand: data[6].standings.tournament})
      
   
       return { leages: leage}

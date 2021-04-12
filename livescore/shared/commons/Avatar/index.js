@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import {AvatarStyle} from "./style"
 
 const Avatar = ({shape, size, src, srcSet, alt, icon, className}) => {
+
+   function addDefaultSrc(ev){
+    ev.target.src = '/assets/default-team-logo.png';
+    //ev.target.src = '';
+   }
+
   return (
     <AvatarStyle style={{width: size, height: size, lineHeight: size}} className={shape === "circle" ? `rounded-circle ${className}` : `rounded-0 ${className}`}>
       {
@@ -14,6 +20,7 @@ const Avatar = ({shape, size, src, srcSet, alt, icon, className}) => {
         src={src} 
         srcSet={srcSet} 
         alt={alt} 
+        onError={addDefaultSrc}
       /> 
       }
     </AvatarStyle>
@@ -32,6 +39,7 @@ Avatar.propTypes = {
 };
 Avatar.defaultProps = {
   shape: 'circle',
+ 
 };
 
 export default Avatar;

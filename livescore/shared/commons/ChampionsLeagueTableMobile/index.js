@@ -6,6 +6,7 @@ const ChampionsLeagueTableMobile = ({ className, matches, title }) => {
   
   return (
     <ChampionsLeagueTableMobileStyle className={`league-table-container ${className}`}>
+      
       <div className="league-table mt-0 table-responsive">
         <table className="table table-bordered">
           <caption>{title}</caption>
@@ -28,7 +29,7 @@ const ChampionsLeagueTableMobile = ({ className, matches, title }) => {
                 <td className="px-2 py-1 text-left">
                   {item.title}
                 </td>
-                <td className="px-0 py-1 text-center">{}</td>
+                <td className="px-0 py-1 text-center">{item.gp}</td>
                 <td className="px-0 py-1 text-center">{item.gd}</td>
                 <td className="px-0 py-1 text-center">{item.points}</td>
               </tr>

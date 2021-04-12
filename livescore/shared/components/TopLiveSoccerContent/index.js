@@ -10,7 +10,54 @@ import NavMatch from "../../components/NavMatch"
 
 const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
 
+  const router = useRouter()
+  var assets = "/";
+  if(router.pathname !== "/"){
+    
+     assets = "/assets";
+
+  }else{
+    assets = "../assets";
+  }
   
+  function chkforimg(legid){
+    var txt;
+     switch (legid) {
+       case "1005":
+         txt = true;
+         break;
+       case "1204":
+         txt = true;
+         break;
+       case "1007":
+         txt = true;
+         break;
+       case "1198":
+        txt = true;
+         break;
+       case "1399":
+        txt = true;
+         break;
+        case "1269":
+        txt = true;
+         break;
+         case "1229":
+        txt = true;
+         break;
+         case "1322":
+          txt = true;
+         break;
+         case "1221":
+          txt = true;
+         break;
+         case "1271":
+         txt = true;
+         break;
+         default:
+         txt = false;
+     }
+     return txt;
+   }
   // const router = useRouter()
   // let path = router.asPath
   // const host = path.split("/");
@@ -97,8 +144,8 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
         type={data.type}
         scoreTeamA={data.scoreA}
         scoreTeamB={data.scoreB}
-        imgTeamB="https://demo.gloriathemes.com/wp/cloux/wp-content/uploads/2018/01/esport-team-logo-4-150x150.png"
-        imgTeamA="https://demo.gloriathemes.com/wp/cloux/wp-content/uploads/2018/01/esport-team-logo-2-150x150.png"
+        imgTeamB={chkforimg(router.query.name) !== false ? `${assets}/logoteam/small/${data.teamBid}.jpg` : `${assets}/default-team-logo.png`}
+        imgTeamA={chkforimg(router.query.name) !== false ? `${assets}/logoteam/small/${data.teamid}.jpg` : `${assets}/default-team-logo.png`}
         imgTeamAName={data.team}
         imgTeamBName={data.teamB}
       >

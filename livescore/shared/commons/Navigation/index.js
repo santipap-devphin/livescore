@@ -5,7 +5,7 @@ import {NavigationStyle} from "./style"
 
 const Navigation = ({ className, routes, navTitle }) => {
 
-  
+  //console.log(routes);
   return (
     <NavigationStyle className={`collapse bd-links d-md-block mb-4 ${className}`}>
       <div className="bd-toc-item">
@@ -26,7 +26,7 @@ const Navigation = ({ className, routes, navTitle }) => {
               >
                
                 <a>
-                  {url.img ? <span className="mr-2"><img src={url.img} alt={url.title}></img></span> : ""}
+                  {url.img ? <span className="mr-2"><img src={url.img} alt={url.title} style={{width:19}}></img></span> : ""}
                   {url.title}
                 </a>
               </Link>

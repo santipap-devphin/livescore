@@ -41,12 +41,15 @@ const settings = {
 };
 
 const CarouselTableMobile = ({slideValues, className}) => {
+
+  
   return (
     <CarouselTableMobileStyle {...settings}>
         {slideValues.map((matches, k) => {
-         
-          return (
-          <ChampionsLeagueTableMobile 
+        
+           return (
+
+            <ChampionsLeagueTableMobile 
             title={matches.title} 
             arrow={true} 
             matches={matches.match} 

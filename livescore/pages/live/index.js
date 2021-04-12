@@ -1022,20 +1022,27 @@ const handleClicklive = async (e) => {
     }, []);
 
 
-     for (let [key, value] of Object.entries(output)) {
-      //console.log(value);
-       if(value["@gid"] === newArray[key]["@leagueid"]){
-
-            //value.matches.push(newArray[key])
-
-            //objjj = newArray[key]["match"];
-            value.matches.match = newArray[key]["match"];
-           // console.log(newArray[key]["match"])
+    for (let [key, value] of Object.entries(output)) {
         
 
-       }
-     
-    }
+      for(var i = 0; i < newArray.length; i++){
+       //console.log(value["@gid"] +"==="+ newArray[i]["@leagueid"])
+       if(value["@gid"] === newArray[i]["@leagueid"]){
+
+         //console.log(newArray[key])
+        //value.matches.push(newArray[key])
+
+        //objjj = newArray[key]["match"];
+        value.matches.match = newArray[i]["match"];
+       // console.log(newArray[key]["match"])
+    
+
+   }
+
+      }
+      
+    
+   }
    
  let scores = {
           "@sport":data.scores["@sport"],
@@ -1243,7 +1250,7 @@ return (
                 </div>
                 
                 )) 
-                : <center><h1>loading.........</h1></center>
+                : null
 
 
         }
@@ -1270,7 +1277,7 @@ return (
                    
                     defaults.home.category.map((res,value) => (
 
-                       <div key={value.toString()} onClick={handdleClickAfterload}>
+                       <div key={value.toString()}>
                             <TableBattleMobile 
                               title={res['@name']}
                               data={res.matches.match}

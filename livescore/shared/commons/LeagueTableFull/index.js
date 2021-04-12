@@ -4,6 +4,36 @@ import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 import {LeagueTableStyle } from "./style"
 
 const LeagueTable = ({ className, arrow, matches, title }) => {
+ 
+  function leaugenamethai(titlee){
+    var txt;
+     switch (titlee) {
+       case "Premier League":
+         txt = "พรีเมียร์ลีก อังกฤษ";
+         break;
+       case "Primera División":
+         txt = "ลาลีกา สเปน";
+         break;
+       case "Serie A":
+         txt = "กัลโช่ เซเรีย อา อิตาลี";
+         break;
+       case "Bundesliga":
+         txt = "บุนเดสลีกา เยอรมัน";
+         break;
+       case "Ligue 1":
+         txt = "ลีก เอิง ฝรั่งเศส";
+         break;
+       case "J1 League":
+         txt = "เจ ลีก ญี่ปุ่น";
+         break;
+         case "Thai League 1":
+         txt = "ไทย ลีก";
+         break;
+        default:
+         txt = title;
+     }
+     return txt;
+ }
   return (
     <LeagueTableStyle className={`league-table-container ${className}`}>
 
@@ -12,7 +42,7 @@ const LeagueTable = ({ className, arrow, matches, title }) => {
         <thead>
           <tr>
             <th></th>
-            <th colSpan="2">{title}</th>
+            <th colSpan="2">{leaugenamethai(title)}</th>
             <th className="text-center px-1 py-2">MP</th>
             <th className="text-center px-1 py-2">W</th>
             <th className="text-center px-1 py-2">D</th>

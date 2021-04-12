@@ -41,17 +41,60 @@ const Tabs = ({children /* initialTab*/}) => {
                  {children.map((tab) => {
                      
                      const label = tab.props.label;
-
+                    //console.log(tab)
                      //console.log(slugify(label) +"==="+ activetab)
                      
                      return(
-                         
-
-                        <li 
+                         <li 
                             className={slugify(label) === activetab ? styles.current : ""}  
                             key={label}
-                        >
-                            <a href="#" onClick={(e) =>  handleClick(e , label)}>{label}</a>
+                        > 
+                       
+                         {label === "premier" ?   
+                            <img 
+                            width="20"
+                            src="../assets/country/7score_icon_pre.png"
+                            alt="icon premier"/>
+                            :
+                            label === "la-liga" ? 
+                            <img 
+                            width="20"
+                            src="../assets/country/7score_icon_la_liga.png"
+                            alt="icon la-liga"/>
+                            :
+                            label === "seria-a" ? 
+                            <img 
+                            width="20"
+                            src="../assets/country/7score_icon_serie_a.png"
+                            alt="icon seria-a"/>
+                            :
+                            label === "bundes" ? 
+                            <img 
+                            width="20"
+                            src="../assets/country/7score_icon_bundes.png"
+                            alt="icon la-liga"/>
+                            : 
+                            label === "france" ? 
+                            <img 
+                            width="20"
+                            src="../assets/country/7score_icon_france.png"
+                            alt="icon la-liga"/>
+                            : 
+                            label === "j-league" ? 
+                            <img 
+                            width="20"
+                            src="../assets/country/7score_icon_japan.png"
+                            alt="icon la-liga"/>
+                            : 
+                            label === "thai-league" ? 
+                            <img 
+                            width="20"
+                            src="../assets/country/Thailand.png"
+                            alt="icon thailand"/>
+                            : 
+                            null
+                            }
+                        <a href="#" onClick={(e) =>  handleClick(e , label)}>{label}</a>
                         </li>
 
                         )
