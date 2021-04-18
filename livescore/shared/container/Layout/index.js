@@ -33,11 +33,17 @@ function datee(nextday){
 
 }
 
+function afterLoad(){
+
+
+}
+
 
 
 const Layout = (props) => {
 
   
+  const [sLoads , setLoads] = useState(false)
   const router = useRouter()
   const pathh = router.asPath;
   var pathname = router.pathname;
@@ -92,50 +98,50 @@ const Layout = (props) => {
     let routes = [
       
    
-      { key: "1", title: "พรีเมียร์ลีก อังกฤษ",id:"1204", links: `/league/1204/${nstr}/`, img: "/assets/icons/league/league_premier.png" },
-      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"1005", links: `/league/1005/${nstr}/`, img: "/assets/icons/league/league_uefa.png" },
-      { key: "3", title: "ยูโรป้า ลีก",id:"1007", links: `/league/1007/${nstr}/`, img: "/assets/icons/league/league_europa.png" },
-      { key: "4", title: "เอฟเอ คัพ อังกฤษ",id:"1198", links: `/league/1198/${nstr}/`, img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน",id:"1399", links: `/league/1399/${nstr}/`, img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี",id:"1269", links: `/league/1269/${nstr}/`, img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน",id:"1229", links: `/league/1229/${nstr}/`, img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"1322", links: `/league/1322/${nstr}/`, img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส",id:"1221", links: `/league/1221/${nstr}/`, img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น",id:"1271", links: `/league/1271/${nstr}/`, img: "/assets/icons/league/league_jleague.png" }
+      { key: "1", title: "พรีเมียร์ลีก อังกฤษ",id:"1204", country:false, links: `/league/1204/${nstr}/`, img: "/assets/icons/league/league_premier.png" },
+      { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"1005", country:false, links: `/league/1005/${nstr}/`, img: "/assets/icons/league/league_uefa.png" },
+      { key: "3", title: "ยูโรป้า ลีก",id:"1007", country:false, links: `/league/1007/${nstr}/`, img: "/assets/icons/league/league_europa.png" },
+      { key: "4", title: "เอฟเอ คัพ อังกฤษ",id:"1198", country:false, links: `/league/1198/${nstr}/`, img: "/assets/icons/league/league_fa_cup.png" },
+      { key: "5", title: "ลาลีกา สเปน",id:"1399", country:false, links: `/league/1399/${nstr}/`, img: "/assets/icons/league/league_laliga.png" },
+      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี",id:"1269", country:false, links: `/league/1269/${nstr}/`, img: "/assets/icons/league/league_calcio.png" },
+      { key: "7", title: "บุนเดสลีกา เยอรมัน",id:"1229", country:false, links: `/league/1229/${nstr}/`, img: "/assets/icons/league/league_bundesliga.png" },
+      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"1322", country:false, links: `/league/1322/${nstr}/`, img: "/assets/icons/league/league_eredivisie.png" },
+      { key: "9", title: "ลีก เอิง ฝรั่งเศส",id:"1221", country:false, links: `/league/1221/${nstr}/`, img: "/assets/icons/league/league_ligue.png" },
+      { key: "10", title: "เจ ลีก ญี่ปุ่น",id:"1271", country:false, links: `/league/1271/${nstr}/`, img: "/assets/icons/league/league_jleague.png" }
     ]
 
 
     let worldleague = [
-      { key: "1", title: "France",id:"1012", links: `/league/1012/${nstr}/`, img: "/assets/country/France.png" },
-      { key: "2", title: "Germany",id:"1014", links: `/league/1014/${nstr}/`, img: "/assets/country/Germany.png" },
-      { key: "3", title: "Italy",id:"1019", links: `/league/1019/${nstr}/`, img: "/assets/country/Italy.png"},
-      { key: "4", title: "Spain",id:"1033", links: `/league/1033/${nstr}/`, img: "/assets/country/Spain.png"},
-      { key: "5", title: "Sweden",id:"1035", links: `/league/1035/${nstr}/`, img: "/assets/country/Sweden.png" },
-      { key: "6", title: "Albania",id:"1064", links: `/league/1064/${nstr}/`, img: "/assets/country/Albania.png" },
-      { key: "7", title: "Argentina",id:"1076", links: `/league/1076/${nstr}/`, img: "/assets/country/Argentina.png" },
-      { key: "8", title: "Armenia",id:"1082", links: `/league/1082/${nstr}/`, img: "/assets/country/Armenia.png" },
-      { key: "9", title: "Australia",id:"1086", links: `/league/1086/${nstr}/`,img: "/assets/country/Australia.png" },
-      { key: "10", title: "Bahrain",id:"1097", links: `/league/1097/${nstr}/`, img: "/assets/country/Bahrain.png" },
-      { key: "11", title: "Belgium",id:"1102", links: `/league/1102/${nstr}/`, img: "/assets/country/Belgium.png" },
-      { key: "12", title: "Bosnia and Herzegovina",id:"1111", links: `/league/1111/${nstr}/`,img: "/assets/country/Bosnia and Herzegovina.png" },
-      { key: "13", title: "Brazil",id:"1141", links: `/league/1141/${nstr}/`, img: "/assets/country/Brazil.png" },
-      { key: "14", title: "Bulgaria",id:"1154", links: `/league/1154/${nstr}/`, img: "/assets/country/Bulgaria.png" },
-      { key: "15", title: "Canada",id:"1156", links: `/league/1156/${nstr}/`, img: "/assets/country/Canada.png" },
-      { key: "16", title: "Chile",id:"1159", links: `/league/1159/${nstr}/`, img: "/assets/country/Chile.png" },
-      { key: "17", title: "China",id:"1162", links: `/league/1162/${nstr}/`, img: "/assets/country/China.png" },
-      { key: "18", title: "Croatia",id:"1172", links: `/league/1172/${nstr}/`, img: "/assets/country/Croatia.png" },
-      { key: "19", title: "Czech Republic",id:"1184", links: `/league/1184/${nstr}/`, img: "/assets/country/Czech Republic.png" },
-      { key: "20", title: "Denmark",id:"1185", links: `/league/1185/${nstr}/`, img: "/assets/country/Denmark.png"},
-      { key: "21", title: "Ecuador",id:"1191", links: `/league/1191/${nstr}/`, img: "/assets/country/Ecuador.png" },
-      { key: "22", title: "Egypt",id:"1193", links: `/league/1193/${nstr}/`, img: "/assets/country/Egypt.png" },
-      { key: "23", title: "England",id:"1204", links: `/league/1204/${nstr}/`, img: "/assets/country/England.png" },
-      { key: "24", title: "Finland",id:"1213", links: `/league/1213/${nstr}/`, img: "/assets/country/Finland.png" },
-      { key: "25", title: "Greece",id:"1232", links: `/league/1232/${nstr}/`, img: "/assets/country/Greece.png" },
-      { key: "26", title: "Hong Kong",id:"1243", links: `/league/1243/${nstr}/`, img: "/assets/country/Hong Kong.png" },
-      { key: "27", title: "Hungary",id:"1248", links: `/league/1248/${nstr}/`, img: "/assets/country/Hungary.png" },
-      { key: "28", title: "India",id:"1250", links: `/league/1250/${nstr}/`, img: "/assets/country/India.png" },
-      { key: "29", title: "Japan",id:"1271", links: `/league/1271/${nstr}/`, img: "/assets/country/Japan.png" },
-      { key: "30", title: "Jordan",id:"1275", links: `/league/1275/${nstr}/`, img: "/assets/country/Jordan.png" },
+      { key: "1", title: "France",id:"france", country:true, links: `/country/france/${nstr}/`, img: "/assets/country/France.png" },
+      { key: "2", title: "Germany",id:"germany",country:true, links: `/country/germany/${nstr}/`, img: "/assets/country/Germany.png" },
+      { key: "3", title: "Italy",id:"italy",country:true, links: `/country/italy/${nstr}/`, img: "/assets/country/Italy.png"},
+      { key: "4", title: "Spain",id:"spain",country:true, links: `/country/spain/${nstr}/`, img: "/assets/country/Spain.png"},
+      { key: "5", title: "Sweden",id:"sweden",country:true, links: `/country/sweden/${nstr}/`, img: "/assets/country/Sweden.png" },
+      { key: "6", title: "Albania",id:"albania",country:true, links: `/country/albania/${nstr}/`, img: "/assets/country/Albania.png" },
+      { key: "7", title: "Argentina",id:"argentina",country:true, links: `/country/argentina/${nstr}/`, img: "/assets/country/Argentina.png" },
+      { key: "8", title: "Armenia",id:"armenia",country:true, links: `/country/armenia/${nstr}/`, img: "/assets/country/Armenia.png" },
+      { key: "9", title: "Australia",id:"australia",country:true, links: `/country/australia/${nstr}/`,img: "/assets/country/Australia.png" },
+      { key: "10", title: "Bahrain",id:"bahrain",country:true, links: `/country/bahrain/${nstr}/`, img: "/assets/country/Bahrain.png" },
+      { key: "11", title: "Belgium",id:"belgium",country:true, links: `/country/belgium/${nstr}/`, img: "/assets/country/Belgium.png" },
+      { key: "12", title: "Bosnia and Herzegovina",country:true,id:"bosnia_and_herzegovina", links: `/country/bosnia_and_herzegovina/${nstr}/`,img: "/assets/country/Bosnia and Herzegovina.png" },
+      { key: "13", title: "Brazil",id:"brazil",country:true, links: `/country/brazil/${nstr}/`, img: "/assets/country/Brazil.png" },
+      { key: "14", title: "Bulgaria",id:"bulgaria",country:true, links: `/country/bulgaria/${nstr}/`, img: "/assets/country/Bulgaria.png" },
+      { key: "15", title: "Canada",id:"canada",country:true, links: `/country/canada/${nstr}/`, img: "/assets/country/Canada.png" },
+      { key: "16", title: "Chile",id:"chile",country:true, links: `/country/chile/${nstr}/`, img: "/assets/country/Chile.png" },
+      { key: "17", title: "China",id:"china",country:true, links: `/country/china/${nstr}/`, img: "/assets/country/China.png" },
+      { key: "18", title: "Croatia",id:"croatia",country:true, links: `/country/croatia/${nstr}/`, img: "/assets/country/Croatia.png" },
+      { key: "19", title: "Czech Republic",id:"czech_republic",country:true, links: `/country/czech_republic/${nstr}/`, img: "/assets/country/Czech Republic.png" },
+      { key: "20", title: "Denmark",id:"denmark",country:true, links: `/country/denmark/${nstr}/`, img: "/assets/country/Denmark.png"},
+      { key: "21", title: "Ecuador",id:"ecuador",country:true, links: `/country/ecuador/${nstr}/`, img: "/assets/country/Ecuador.png" },
+      { key: "22", title: "Egypt",id:"egypt",country:true, links: `/country/egypt/${nstr}/`, img: "/assets/country/Egypt.png" },
+      { key: "23", title: "England",id:"england",country:true, links: `/country/england/${nstr}/`, img: "/assets/country/England.png" },
+      { key: "24", title: "Finland",id:"finland",country:true, links: `/country/finland/${nstr}/`, img: "/assets/country/Finland.png" },
+      { key: "25", title: "Greece",id:"greece",country:true, links: `/country/greece/${nstr}/`, img: "/assets/country/Greece.png" },
+      { key: "26", title: "Hong Kong",id:"hong_kong",country:true, links: `/country/hong_kong/${nstr}/`, img: "/assets/country/Hong Kong.png" },
+      { key: "27", title: "Hungary",id:"hungary",country:true, links: `/country/hungary/${nstr}/`, img: "/assets/country/Hungary.png" },
+      { key: "28", title: "India",id:"india",country:true, links: `/country/india/${nstr}/`, img: "/assets/country/India.png" },
+      { key: "29", title: "Japan",id:"japan",country:true, links: `/country/japan/${nstr}/`, img: "/assets/country/Japan.png" },
+      { key: "30", title: "Jordan",id:"jordan",country:true, links: `/country/jordan/${nstr}/`, img: "/assets/country/Jordan.png" },
     ]
     
     /*let slide = [
@@ -181,7 +187,8 @@ const Layout = (props) => {
         
         {/* {!isMobile ? */}
         {pathname.indexOf("/scorelive") > -1 ? "" 
-        :<NavCategory route={mobileRoute} />
+        :<NavCategory 
+        route = {mobileRoute} />
         }
        
         {
@@ -212,7 +219,10 @@ const Layout = (props) => {
                     :
                     pathname.indexOf("/scorelive") > -1 ? ""
                     :
-                    <Navigation navTitle="ลีคยอดฮิต" routes={routes}/>
+                    <Navigation 
+                    navTitle="ลีคยอดฮิต" 
+                    routes={routes}
+                    country = {false}/>
 
                   }
                   <div className="banner">
@@ -236,6 +246,7 @@ const Layout = (props) => {
                       className="" 
                       navTitle="ลีคอื่นๆ (ทั่วโลก)" 
                       routes={worldleague} 
+                      country = {true}
                     />
                  }
                 <div className="banner">

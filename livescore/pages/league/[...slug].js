@@ -14,13 +14,14 @@ const Post = (props) => {
   const router = useRouter()
   const slug = router.query.slug || []
   const myRef = useRef(null)
- //console.log(slug)
+ console.log(slug)
   const [items, setItems] = useState();
   const [load, setLoad] = useState(false);
   const [error, setError] = useState('');
   const [lang , setLang] = useState([]);
   const [sectiontwo , setSectiontwo] = useState(false);
   let teamth = [];
+  console.log(props)
 
   function datee(nextday){
 
@@ -72,12 +73,22 @@ const Post = (props) => {
       
         fetchItems();
         setSectiontwo(true)
+       
   
         
       
       }, 100);
   
     },[setLang])
+
+    useEffect(() => {
+
+      myRef.current.scrollIntoView()
+      setTimeout(function(){
+        setLoad(true)
+      }, 1500)
+      
+    })
     
     let navDate = [
         { id: "1",pathid:"d-3", date: datee(-3), route: `/league/${slug[0]}/d-3`, today: false },
@@ -125,12 +136,14 @@ const Post = (props) => {
         onClickRight={() => console.log("right")}
        
       />
+      {console.log(load)}
        <div ref={myRef}></div> 
 
         {
+          load !== false ?
+          props.listdata.length > 0 ?
           props.listdata.map((res,val) => (
-            (res["@id"] === slug[0]) ? 
-            
+           
             <div key={val.toString()}>
                   <TableBattle  
                   className="highlight bg-secondary text-white"
@@ -142,12 +155,10 @@ const Post = (props) => {
                   th = {lang}
                   />
               </div> 
-                :
-              null 
-          
-
+               
           ))
-
+          : <center><h1>ไม่มีข้อมูล</h1></center>
+          :<center><h1>Loading ......</h1></center>  
         }
 
         </div>
@@ -161,8 +172,10 @@ const Post = (props) => {
                   </div>
 
                   {
+                      load !== false ?
+                      props.listdata.length > 0 ?
                       props.listdata.map((res,val) => (
-                        (res["@id"] === slug[0]) ? 
+                       
                         
                         <div key={val.toString()}>
 
@@ -176,12 +189,12 @@ const Post = (props) => {
                               />
                               
                           </div> 
-                            :
-                          null
+                           
                       
 
                       ))
-
+                      :<center><h1>ไม่มีข้อมูล</h1></center>
+                      :<center><h1>Loading ......</h1></center>  
                     }
 
 
@@ -197,24 +210,44 @@ const Post = (props) => {
 Post.getInitialProps = async ({query}) => {
 
    let lslug =  query.slug;
-   
+   var objj = [];
 
    if(lslug[1] === "today" || lslug[1] === "undefined"){
 
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
     const data = await res.json()
+    for(var i =0; i < data.scores.category.length; i++)
+    {
+            if(lslug[0] === data.scores.category[i]["@id"]){
+
+                objj.push(data.scores.category[i]);
+
+            }
+
+
+    }
 
     return { 
-        listdata: data.scores.category
+        listdata: objj
       }
 
    }else{
 
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
     const data = await res.json()
+    for(var i =0; i < data.scores.category.length; i++)
+    {
+            if(lslug[0] === data.scores.category[i]["@id"]){
+
+                objj.push(data.scores.category[i]);
+
+            }
+
+
+    }
 
     return { 
-        listdata: data.scores.category
+        listdata: objj
       }
 
    }
