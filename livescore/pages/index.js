@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 
 const TableBattle = dynamic(() => import('../shared/commons/TableBattle'));
 const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobile'));
-
+import BannerInner from "../shared/components/Banner/Inner"
 
 const Home = (props) => {
 
@@ -1486,12 +1486,9 @@ return (
       </div>
 
        {
-             <div className="d-block d-md-none">
-                <div className="banner px-3">
-                  
-                    <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                    <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-
+             <div className="d-block d-md-none mainf-tab score-mobile">
+                <div className="banners">
+                    <BannerInner />
                 </div>
                 <a href="/">
                     All

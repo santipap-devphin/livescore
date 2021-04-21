@@ -7,7 +7,7 @@ const NavDate = ({ onClickLeft, onClickRight, className, DataDate }) => {
   return (
     
     <NavDateStyle
-      className={`nav nav-pills row mx-0 flex-nowrap align-items-center text-center mb-md-4 px-0 ${className}`}
+      className={`nav nav-pills nav-pill-date row mx-0 flex-nowrap align-items-center text-center mb-md-4 px-0 ${className}`}
     >
       <div
         onClick={onClickLeft}

@@ -153,7 +153,7 @@ const Homefilter = (props) => {
           keyWords=""
           author=""
         />
-        <div className="d-none d-md-block">
+        <div className="d-none d-md-block mainf-tab">
           <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
           <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
           <NavDate 

@@ -30,8 +30,12 @@ const LayoutSidebarClub = ({children }) => {
                 matches={matches} 
                 className="mb-4" 
               />*/}
-              <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-              <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+              <div className="banner">
+              <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="" /></a>
+              </div>
+              <div className="banner">
+              <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sbobetsc 250x500.gif" alt="" /></a>
+              </div>
               {/*<TopPlayer title="Monthly savings" players={Players} />*/}
             </Sidebar>
           </div>

@@ -843,7 +843,7 @@ useEffect(() => {
 
   
   return (
-    <Layout className="px-0 px-md-3">
+    <Layout className="px-0 px-md-3"> 
       <HeaderSeo
         siteName=""
         title="live score"
@@ -853,6 +853,7 @@ useEffect(() => {
         keyWords=""
         author=""
       />
+      
       <TopLiveSoccerContent 
         nav={nav} 
         data={data[0]} 
@@ -864,8 +865,7 @@ useEffect(() => {
         ]}
       >  
         
-        <div className='card border-top-0 py-4 mb-4 mb-sm-0'>
-       
+        <div className='card border-top-0 py-4 mb-4 mb-sm-0 card-content'>
           {
              Array.isArray(obj.event) ? 
             (
@@ -906,26 +906,34 @@ useEffect(() => {
 
           }
           
-          <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4">
-            <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              เตะสนาม:
+          <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4 card-content">
+          <div className="row bg-dark">
+            <div className="col-md-3">
+              <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold"> เตะสนาม: </div>
             </div>
-            <div className="card-body">
-              <p className="mb-0">{ defalut.check === 1 ? "ไม่มีข้อมูล" :  defalut.league.match.matchinfo.stadium["@name"]}</p>
-            </div>
-          </div>
-          <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4">
-            <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              ผู้ตัดสิน:
-            </div>
-            <div className="card-body">
-              <p className="mb-0">{defalut.check === 1 ? "ไม่มีข้อมูล" : defalut.league.match.matchinfo.referee["@name"]}</p>
+            <div className="col-md-9">
+              <div className="card-body">
+                <p className="mb-0">{ defalut.check === 1 ? "ไม่มีข้อมูล" :  defalut.league.match.matchinfo.stadium["@name"]}</p>
+              </div>
             </div>
           </div>
-
-          
-          <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0">
-            <div className="card-header text-dark text-lowercase border-top-0 border-bottom-0 font-weight-bold">
+          </div>
+          <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4 card-content">
+            <div className="row bg-dark">
+              <div className="col-md-3">
+                <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
+                  ผู้ตัดสิน:
+                </div>
+              </div>
+              <div className="col-md-9">
+                <div className="card-body">
+                  <p className="mb-0">{defalut.check === 1 ? "ไม่มีข้อมูล" : defalut.league.match.matchinfo.referee["@name"]}</p>
+                </div>
+              </div>
+            </div>          
+          </div>
+          <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
+            <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
               ราคาต่อรอง (Match Winner) :
             </div>
             {

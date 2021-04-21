@@ -120,7 +120,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
           src="/assets/icons/league/league_premier.png"
           alt={title}
         />*/}
-        <div className="mb-0">
+        <h4 className="mb-0">
         <img 
          src={`${assets}/country/${lastimg}`}
          alt={"icon"} 
@@ -128,7 +128,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
          style={{marginRight:20}}
          onError={DefaultSrc} />
           {leaugethai(exam)}
-          </div>
+          </h4>
       </div>
 
     
@@ -147,7 +147,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                         }}
                         as={`/football/${item["@static_id"]}/${exam}`}
                       >
-                        <a className="row mx-0 text-decoration-none border-bottom">
+                        <a className="row mx-0 text-decoration-none text-dark border-bottom">
                           <div className="col-3 px-0 py-2 text-center align-self-center">
                             <p className="small mb-2">{item['@date']}</p>
                             <p className="mb-0">{item['@status']}</p>
@@ -206,7 +206,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                               }}
                               as={`/football/${data["@static_id"]}/${exam}`}
                             >
-                              <a className="row mx-0 text-decoration-none border-bottom">
+                              <a className="row mx-0 text-decoration-none text-dark border-bottom">
                                 <div className="col-3 px-0 py-2 text-center align-self-center">
                                   <p className="small mb-2">{data['@date']}</p>
                                   <p className="mb-0">{data['@status']}</p>

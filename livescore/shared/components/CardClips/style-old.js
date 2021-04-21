@@ -60,6 +60,7 @@ export const CardClipsStyle = styled.div`
     font-size: 18px;
   }
   .video_content {
+    background: ${({ theme }) => theme.colors.light};
     h2 {
       font-size: 14px;
       @media (min-width: 375px) {
@@ -73,11 +74,10 @@ export const CardClipsStyle = styled.div`
       }
     }
     &-editor {
-      padding: 5px 0;
       font-size: 12px;
       font-weight: 400;
       @media (min-width: 375px) {
-        font-size: 0.85em;
+        font-size: 16px;
       }
     }
   }

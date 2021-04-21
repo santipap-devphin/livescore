@@ -31,7 +31,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
     
     return (
         <ClubNavStyle>
-            <div className="jumbotron-fluid">
+            <div className="jumbotron-fluid" style={{ backgroundColor: '#F5F5F5' }}>
                 <div className="container-fluid container-xl">
                     <div className="breadcrumb-nav pt-4 pb-1">
                         <ol className="breadcrumb">
@@ -91,10 +91,9 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                                 />*/}
                             </Sidebar>
                         </div>
-                        <hr className="mb-0" />
                     </div>
                 </div>
-               
+                <hr className="mb-0" />
                 <div className="container-fluid container-xl">
                     <div className="nav-overview">
                         <ul className="nav">

@@ -125,7 +125,7 @@ const Countrys = (props) => {
             keyWords=""
             author=""
           />
-          <div className="d-none d-md-block">
+          <div className="d-none d-md-block mainf-tab">
             <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
             <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
          <NavDate 
@@ -163,7 +163,7 @@ const Countrys = (props) => {
   
           </div>
   
-          <div className="d-block d-md-none">
+          <div className="d-block d-md-none mainf-tab">
                     <div className="banner px-3">
   
                         <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
