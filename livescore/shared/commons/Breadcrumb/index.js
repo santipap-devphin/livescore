@@ -7,9 +7,9 @@ const breadcrumb = ({ title, path }) => {
   const router = useRouter()
   return (
     <BreadcrumbStyle className="border d-none d-md-block">
-      <h4 className="mb-0 px-3 py-2 bg-secondary text-white text-uppercase h6">{title}</h4>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb mb-0 rounded-0 bg-white flex-column flex-md-row">
+      <h4 className="mb-0 px-3 py-2 bg-secondary text-white text-uppercase h6 breadcrumb-head">{title}</h4>
+      <nav aria-label="breadcrumb" className="breadcrumb-box">
+        <ol className="breadcrumb mb-0 rounded-0 flex-column flex-md-row">
           {/* {
             console.log(path.pop())
           } */}

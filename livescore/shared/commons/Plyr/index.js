@@ -30,7 +30,7 @@ class PlyrComponent extends React.Component {
 
   render() {
     return (
-      <PlyrStyle className="border-bottom pb-4">
+      <PlyrStyle className=" pb-4">
         
         {/*<video
           playsInline

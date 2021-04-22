@@ -20,7 +20,7 @@ const Header = ({className}) => {
       <nav className={`navbar navbar-expand-md shadow-sm rounded-0`}>
         <div className="container">
         <div className="header-inner">
-          <a className="navbar-brand" href="./"><img src="/assets/7scorex300.png" alt="7SCORE" /></a>
+          <a className="navbar-brand" href="/"><img src="/assets/7scorex300.png" alt="7SCORE" /></a>
           <button className="navbar-toggler" onClick={() => setCollapse(!collapse)} type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
             <AiOutlineMenu />
           </button>

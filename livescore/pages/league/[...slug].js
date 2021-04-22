@@ -7,6 +7,7 @@ import HeaderSeo from "../../shared/commons/HeaderSeo"
 import NavDate from "../../shared/commons/NavDate"
 import TableBattle from "../../shared/commons/TableBattle"
 import TableBattleMobile from "../../shared/commons/TableBattleMobile"
+import BannerInner from "../../shared/components/Banner/Inner"
 
 import Europe from "../../mock/uefaleague"
 
@@ -127,9 +128,8 @@ const Post = (props) => {
           keyWords=""
           author=""
         />
-        <div className="d-none d-md-block">
-          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+        <div className="d-none d-md-block mainf-tab">
+          <BannerInner />
        <NavDate 
         DataDate={navDate}
         onClickLeft={() => console.log("left")}
@@ -163,7 +163,7 @@ const Post = (props) => {
 
         </div>
 
-        <div className="d-block d-md-none">
+        <div className="d-block d-md-none mainf-tab">
                   <div className="banner px-3">
 
                       <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />

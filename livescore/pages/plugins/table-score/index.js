@@ -9,6 +9,7 @@ import UEFAleague from "../../../mock/afcleague"
 import PrimaveraCup from "../../../mock/PrimaveraCup"
 import CopyButton from "../../../shared/components/CopyButton"
 import Button from "../../../shared/commons/Button"
+import BannerInner from "../../../shared/components/Banner/Inner"
 
 
 
@@ -120,8 +121,7 @@ const TableScore = () => {
                 keyWords=""
                 author=""
             />
-            <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-            <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+            <BannerInner />
             <h1 className="pb-4 border-bottom mb-0" style={{ lineHeight: 'unset' }}>แจกตารางผลคะแนน</h1>
             <p className="mb-0 pt-4 pb-4">
                 Setup your very own free Livescore Widget. You will have a customised version of Livescore-eiei  to use for free on your own website. The free Livescore Widget can be customised with your own size. All data is provided by Livescore-eiei which means, that all data is fast & reliable, 24/7.

@@ -202,7 +202,7 @@ const Layout = (props) => {
         }
 
     
-        <div className="container container-xl pt-4">
+        <div className="container-fluid container-xl pt-4">
           <div className="row row-cols-xl-3">
             <aside className="col-md-4 col-xl-3 d-none d-md-block">
               <div className="sidebar-box">

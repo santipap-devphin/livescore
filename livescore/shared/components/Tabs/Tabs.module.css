@@ -3,17 +3,17 @@
     padding: 0;
     margin: 0;
     display: flex;
-    border-bottom: 2px solid blue;
+    border-bottom: 2px solid #666666;
 }
 .tabs > li {
-    margin: 0 1em;
-    padding: 2px 5px;
+    margin: 0 0.3em;
+    padding: 7px 5px;
 }
 .current{
     background: white;
     color:blue;
     font-weight: bold;
-    border:2px solid blue;
+    border: 2px solid #666666;
     border-bottom: 0;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -21,5 +21,6 @@
     top:2px;
 }
 .content{
-    
+    padding: 20px 5px 5px 5px;
+    background: #444444;
 }

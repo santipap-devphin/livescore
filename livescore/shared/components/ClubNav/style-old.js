@@ -29,14 +29,11 @@ export const ClubNavStyle = styled.div`
     .nav-overview {
         padding-top: 40px;
         border-bottom: 3px solid #444444;
-        padding-bottom: 0px;
         .nav {
             .nav-item {
-                margin-bottom: -1px;
                 .active {
                     font-weight: 800;
-                    background: #444444;
-                    color: #ffffff;
+                    border-bottom : 3px solid ${({ theme }) => theme.colors.primary};
                 }
             }
             .nav-link {

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const BattleStyle = styled.div`
-    border: 0px solid #dee2e6 !important;
+    border: 0px solid #444444 !important;
     @media (min-width: 768px) {
-        border: 1px solid #dee2e6!important;
+        border: 1px solid #444444 !important;
     }
     &.match-header {
         .team {

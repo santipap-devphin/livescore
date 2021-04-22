@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const NavCategoryStyle = styled.div`
-  background: #333333;
-  
+  background: ${({ theme }) => theme.colors.light};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
   &.category {
     ul {
       li {

@@ -6,6 +6,8 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import Button from "../../../shared/commons/Button"
 import ContentFooterPost from "../../../shared/components/ContentFooterPost"
 import { useRouter } from 'next/router'
+import BannerInner from "../../../shared/components/Banner/Inner"
+
 
 const video = {
   key: "1",
@@ -45,9 +47,9 @@ const index = (props) => {
         keyWords=""
         author=""
       />
-      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      <BannerInner />
       <h1 className="mb-4">HIGHLIGHT! {/*props.video.title*/}</h1>
+      <div className="iframe-clip">
       {<PlyrComponent
         matchid={props.matchid}
         title={props.title}
@@ -57,6 +59,7 @@ const index = (props) => {
         url={`/highlight/${props.video.title}`}
         urlvideo={urlvideo}
       />}
+      </div>
       <ContentFooterPost
         linkNext=""
         linkPrev="/highlight/andy%20robertson"

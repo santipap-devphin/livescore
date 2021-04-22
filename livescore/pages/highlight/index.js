@@ -5,6 +5,7 @@ import CardClips from "../../shared/components/CardClips"
 import posts from "../../mock/Blog"
 import Carousel from "../../shared/commons/Carousel"
 import Button from "../../shared/commons/Button"
+import BannerInner from "../../shared/components/Banner/Inner"
 
 const limit = 4;
 let arrayForHoldingPosts = [];
@@ -212,17 +213,16 @@ const HighLight = (props) => {
         keyWords=""
         author=""
       />
-
+      <BannerInner />
       
-      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
       <h1 className="mb-4">HIGHLIGHT!</h1>
+      <div className="iframe-clip no-border">
       <Carousel 
         slideValues={props.highLight_slide} 
         title="LaLiga Santander"
         className="mb-4"
       />
-
+      </div>
       {<CardClips className="d-block d-md-none mb-5" data={clips} grid={false} />/* case check mobile */}
       <h2 className="mb-4">SPORTS CLIPS</h2>
       <div className="row mx-0">

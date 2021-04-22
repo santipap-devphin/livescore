@@ -4,6 +4,7 @@ import Layout from "../../shared/container/Layout"
 import Empty from "../../shared/commons/Empty"
 import Link from 'next/link'
 import Avatar from "../../shared/commons/Avatar"
+import BannerInner from "../../shared/components/Banner/Inner"
 
 const Teams = (props) => {
 
@@ -76,9 +77,7 @@ const Teams = (props) => {
         author=""
       />
       
-     
-      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+      <BannerInner />
       <div className="d-flex border-bottom">
         <h1 className="pb-4 mr-auto mb-0">ข้อมูลสโมสร</h1>
         <div className="filter">
@@ -133,7 +132,7 @@ const Teams = (props) => {
 
                       items.standings.tournament.team.map((item, index) => (
 
-                      <tr className="border-bottom gray" style={{borderBottom: "#E3E3E3"}} key={index.toString()}>
+                      <tr className="border-bottom gray"  key={index.toString()}>
                       <td style={{background: "#606060"}} className="text-white text-center">{index+1}</td>
                       <td>
                         <div className="d-flex align-items-center" onClick={handdleClickAfterload}>
@@ -158,7 +157,7 @@ const Teams = (props) => {
                               }}
                               as={`/clubs/${items.standings.tournament["@league"]}/${item["@name"]}/overviews/${item["@id"]}`}
                               >
-                              <a className="text-dark">
+                              <a className="">
                                 {item["@name"]}
                               </a>
                             </Link>

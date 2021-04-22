@@ -88,7 +88,7 @@ const CardClips = ({ className, grid, data }) => {
           : <>
             {
               data.map((item, index) => (
-                <div className="card rounded-0 border-0 mb-3" style={{ background: "#F5F5F5" }} key={index.toString()}>
+                <div className="card rounded-0 border-0 mb-3 card-clip" key={index.toString()}>
                   {/* <article className="item">
                     <a className="thumb" href="/blog-details/#">
                       <span className="fullimage cover bg1" role="img" />

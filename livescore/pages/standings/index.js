@@ -5,6 +5,7 @@ import Layout from "../../shared/container/Layout"
 import LeagueTable from "../../shared/commons/LeagueTableFull"
 import CarouselTableMobile from "../../shared/commons/CarouselTableMobile"
 import Tabs from "../../shared/components/Tabs"
+import BannerInner from "../../shared/components/Banner/Inner"
 
 
 const Standings = (data) => {
@@ -162,7 +163,9 @@ const Standings = (data) => {
                 
                 chkload  !== false ?
                 <div>
+                    <BannerInner />
                  <h1>ตารางคะแนน</h1>
+                 <div className="tab-standing">
                 {<Tabs>
                     <div label="premier">
                         <h1 style={{padding:10}}>
@@ -275,6 +278,7 @@ const Standings = (data) => {
                     </div>
                     
                 </Tabs>}
+                </div>
             </div>
                 
             :
@@ -285,19 +289,7 @@ const Standings = (data) => {
             />
             }
           
-             
             
-            <div className="banner px-3 px-md-0">
-                <img className="mb-3 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-                <div className="row">
-                    <div className="col-6 pr-7px">
-                        <img className="mb-3 img-fluid w-100 h-100px" src="/assets/ads/ads200x200.png" alt="" />
-                    </div>
-                    <div className="col-6 pl-7px">
-                        <img className="mb-3 img-fluid w-100 h-100px" src="/assets/ads/ads200x200.png" alt="" />
-                    </div>
-                </div>
-            </div>
         </Layout>
     )
 }
