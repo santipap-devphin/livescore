@@ -1384,11 +1384,11 @@ return (
       `}</style>
       <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title="7score ผลบอล ผลบอลสด ตารางแข่งขัน ไฮไลท์ฟุตบอลทั่วโลก"
+        desc="ผลบอล live score ผลบอลสด ผลบอลเมื่อคืน ไฮไลท์การแข่งขัน อัพเดทเรียลไทม์ พร้อมข้อมูลทีมแต่ละลีกทั่วโลก"
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords="ผลบอล, live score, ผลบอลสด, ไฮไลท์ฟุตบอล"
         author=""
       />
       <div className="d-none d-md-block mainf-tab">
