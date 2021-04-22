@@ -802,7 +802,7 @@ useEffect(() => {
 
                           }
         
-      const [isVoted, setVoted] = useState(false);
+      /*const [isVoted, setVoted] = useState(false);
       const [score, setScore] = useState(true)
       const [score1, setScore1] = useState(250)
       const [score2, setScore2] = useState(0)
@@ -839,7 +839,7 @@ useEffect(() => {
           setPercent3(score3 + 10)
           setScore3(score3 + 10)
         }
-      }
+      }*/
 
   
   return (
@@ -954,8 +954,8 @@ useEffect(() => {
                                               <div className="card-body" key={indexin}>
                                               <div className="row align-items-center">
                                                 <div className="col-sm-4 text-center text-sm-left">
-                                                  {/*<img className="img-fluid mb-3 mb-sm-0" src='/assets/defabet.png' />*/}
-                                                  {resin["name"]}
+                                                  {<img className="img-fluid mb-3 mb-sm-0" src={`/assets/odds/${resin["name"]}.png`} />}
+                                                  
                                                 </div>
                                                 <div className="col-sm-8 d-inline-block">
                                                   <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 pl-sm-0 pr-sm-2">

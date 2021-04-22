@@ -2,24 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {BattleStyle} from "./style"
 
-const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, imgTeamAName, imgTeamBName, versusText, vote, children }) => {
+const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, imgTeamAName, imgTeamBName, versusText, vote, children ,list}) => {
   
   function addDefaultSrc(ev){
     ev.target.src = '/assets/default-team-logo.png';
     //ev.target.src = '';
    }
-  
+
+   
+   
   return (
     <BattleStyle className={`match-header ${className}`}>
       <div className="right row mx-0 align-items-center">
         <div className="home-team team col-4 text-center">
           <div className="logo" style={{padding:20}}>
+            <a href={`/clubs/${list.title}/${list.team}/overviews/${list.teamid}`} target="_blank">
             <img 
             src={imgTeamA}
             alt={imgTeamAName} 
             onError={addDefaultSrc} />
+            </a>
           </div>
-          <div className="name">{imgTeamAName}</div>
+          <div className="name"><a href={`/clubs/${list.title}/${list.team}/overviews/${list.teamid}`} target="_blank">{imgTeamAName}</a></div>
         </div>
         <div className="score-date col-4">
           <div className="match-type">{type}</div>
@@ -36,13 +40,14 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
         </div>
         <div className="away-team team col-4 text-center">
           <div className="logo" style={{padding:20}}>
-            <img 
-            src={imgTeamB} 
-           
-            alt={imgTeamBName} 
-            onError={addDefaultSrc} />
+            <a href={`/clubs/${list.title}/${list.teamB}/overviews/${list.teamBid}`} target="_blank">
+              <img 
+                src={imgTeamB} 
+                alt={imgTeamBName} 
+                onError={addDefaultSrc} />
+            </a>
           </div>
-          <div className="name">{imgTeamBName}</div>
+          <div className="name"><a href={`/clubs/${list.title}/${list.teamB}/overviews/${list.teamBid}`} target="_blank">{imgTeamBName}</a></div>
         </div>
       </div>
       {

@@ -19,7 +19,7 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
   }else{
     assets = "../assets";
   }
-  
+   //console.log(data)
   function chkforimg(legid){
     var txt;
      switch (legid) {
@@ -148,12 +148,13 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
         imgTeamA={chkforimg(router.query.name) !== false ? `${assets}/logoteam/small/${data.teamid}.jpg` : `${assets}/default-team-logo.png`}
         imgTeamAName={data.team}
         imgTeamBName={data.teamB}
+        list={data}
       >
         {
           isVoted === true
             ? (
               <div className="row mx-0 mt-3 mt-md-4">
-                <VotedBar
+                {/*<VotedBar
                   className="col-4"
                   score={score1}
                   perCent={`${percent1}%`}
@@ -186,11 +187,11 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
                   <span className="text-secondary">
                     18+ | Dafabet T&C's Apply | Gamble Responsibly
                   </span>
-                </div>
+                </div>*/}
               </div>
             )
             : (<div className="row mx-0 mt-3 mt-md-4">
-              <div className="col-4 text-center">
+              {/*<div className="col-4 text-center">
                 <Button
                   className="btn-outline-secondary px-sm-4 mx-auto" size="large"
                   onClick={Score1}
@@ -214,8 +215,8 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
                   Vote
                 </Button>
               </div>
-              <div className="col-12 text-center my-5 font-weight-bold">3843 votes so far</div>
-
+              <div className="col-12 text-center my-5 font-weight-bold">3843 votes so far</div>*/}
+              
             </div>)
         }
       </Battle>

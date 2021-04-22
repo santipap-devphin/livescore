@@ -47,6 +47,8 @@ const Teams = (props) => {
 
   const fetchItems = async (items) => {
 
+    setLoad(false)
+
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/${items}.xml?json=1`)
     const data = await res.json()
 
@@ -82,7 +84,7 @@ const Teams = (props) => {
         <h1 className="pb-4 mr-auto mb-0">ข้อมูลสโมสร</h1>
         <div className="filter">
           <select className="form-control" id="exampleFormControlSelect1" onChange={handleChangeLeague}>
-            <option value="0">เลือกลีคที่ต้องการ</option>
+            <option value="0">เลือกลีกที่ต้องการ</option>
             <option value="1204">พรีเมียร์ลีก อังกฤษ</option>
             <option value="1399">ลาลีกา สเปน</option>
             <option value="1229">บุนเดสลีกา เยอรมัน</option>
@@ -90,6 +92,7 @@ const Teams = (props) => {
             <option value="1221">ลีก เอิง ฝรั่งเศส</option>
             <option value="1322">เอเรดิวิซี่ ฮอลแลนด์</option>
             <option value="1271">เจ ลีก ญี่ปุ่น</option>
+            <option value="1415">ไทย ลีก</option>
           </select>
         </div>
       </div>
@@ -103,16 +106,16 @@ const Teams = (props) => {
               <div className="media align-items-center py-4">
                 <Avatar
                   className="align-self-center mr-3"
-                  size={100}
+                 
                   shape="square"
-                  src="/assets/league_1204@2x.png"
+                  src={`/assets/country/${items.standings["@country"]}.png`}
                   alt="English Premier League" 
                 />
                 <div className="media-body">
-                  <h5 className="mt-0">{items.standings.tournament["@league"]}</h5>
+                  <h5 className="mt-0">{items.standings.tournament["@league"]} ({items.standings["@country"]})</h5>
                   <div className="">
-                    <img src="/assets/flag/england.png" className="avatar rounded-circle mr-3" alt="" />
-                    {items.standings["@country"]}
+                    {/*<img src="/assets/flag/england.png" className="avatar rounded-circle mr-3" alt="" />*/}
+                    {/*items.standings["@country"]*/}
                   </div>
                 </div>
               </div>
@@ -146,7 +149,7 @@ const Teams = (props) => {
                               <Avatar 
                                 size={30}
                                 shape="square"
-                                src="/assets/mock/mock_avatar.png" alt={item["@name"]}
+                                src={`/assets/logoteam/small/${item["@id"]}.jpg`} alt={item["@name"]}
                               />
                             </a>
                           </Link>
@@ -220,7 +223,7 @@ const Teams = (props) => {
           </div>
           : sdata === false ? <center><h1>Loading .......</h1></center>:<Empty className="pt-4 pb-4" />
       }
-      {error === "start" ? <div>load ......</div> : <div></div>}
+      {/*error === "start" ? <div>load ......</div> : <div></div>*/}
     </Layout>
   )
 }
