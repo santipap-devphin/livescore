@@ -41,6 +41,7 @@ const Tabs = ({children /* initialTab*/}) => {
                  {children.map((tab) => {
                      
                      const label = tab.props.label;
+                     const texts = tab.props.texts;
                     //console.log(tab)
                      //console.log(slugify(label) +"==="+ activetab)
                      
@@ -94,7 +95,7 @@ const Tabs = ({children /* initialTab*/}) => {
                             : 
                             null
                             }
-                        <a href="#" onClick={(e) =>  handleClick(e , label)}>{label}</a>
+                        <a href="#" onClick={(e) =>  handleClick(e , label)} style={{fontSize:16}}>{texts}</a>
                         </li>
 
                         )

@@ -152,11 +152,11 @@ const Standings = (data) => {
         <Layout className="px-0 pr-md-3 pl-md-0">
             <HeaderSeo
                 siteName=""
-                title="live score"
-                desc=""
+                title="7score ตารางคะแนนทุกลีกดัง อัพเดทฉับไวกับลีกฟุตบอลดังทั่วโลก"
+                desc="อัพเดทตารางคะแนนทุกลีกดังทั่วยุโรป พรีเมียร์ ลีก, ลา ลีกา , กัลโช่ ซีเรีย อา, บุนเดส ลีกา และไทย ลีก พร้อมทั้งสถิติข้อมูลการแข่งขันย้อนหลังของฟุตบอลทั่วทุกมุมโลก"
                 imgSrc=""
                 metaUrl=""
-                keyWords=""
+                keyWords="ตารางคะแนนพรีเมียร์ลีก, ตารางคะแนนบุนเดสลีกา, ตารางคะแนนซีเรียอา, ตารางคะแนนลาลีกา, ตารางคะแนนไทยลีก, ตารางคะแนนทุกลีก"
                 author=""
             />
             {
@@ -167,7 +167,7 @@ const Standings = (data) => {
                  <h1>ตารางคะแนน</h1>
                  <div className="tab-standing">
                 {<Tabs>
-                    <div label="premier">
+                    <div label="premier" texts="พรีเมียร์ ลีก">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}
@@ -182,7 +182,7 @@ const Standings = (data) => {
                         />
 
                     </div>
-                    <div label="la-liga">
+                    <div label="la-liga" texts="ลาลีกา">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}
@@ -197,7 +197,7 @@ const Standings = (data) => {
                         className={""}
                         />
                     </div>
-                    <div label="seria-a">
+                    <div label="seria-a" texts="กัลโช่ เซเรีย อา">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}
@@ -212,7 +212,7 @@ const Standings = (data) => {
                         className={""}
                         />
                     </div>
-                    <div label="bundes">
+                    <div label="bundes" texts="บุนเดสลีกา">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}
@@ -228,7 +228,7 @@ const Standings = (data) => {
                         className={""}
                         />
                     </div>
-                    <div label="france">
+                    <div label="france" texts="ลีก เอิง">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}
@@ -244,7 +244,7 @@ const Standings = (data) => {
                         className={""}
                         />
                     </div>
-                    <div label="j-league">
+                    <div label="j-league" texts="เจลีก">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}
@@ -260,7 +260,7 @@ const Standings = (data) => {
                         className={""}
                         />
                     </div>
-                    <div label="thai-league">
+                    <div label="thai-league" texts="ไทยลีก">
                         <h1 style={{padding:10}}>
                         <img 
                         width={30}

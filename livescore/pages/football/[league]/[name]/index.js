@@ -933,89 +933,7 @@ useEffect(() => {
               </div>
             </div>          
           </div>
-          <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
-          <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              ราคาต่อรอง :
-            </div>
-            {/*.slice(0, 50)*/}
-          {
-
-         errs !== false ?
-
-          ldata === null ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center>
-          :
-          
-          <Accordion>
-                
-                   {ldata.odds.map((res,index) => {
-                         
-                          return(
-    
-                            <div label={res["id"]} text={res["value"]} key={index} style={{padding:5}}>
-                               
-                                  {Array.isArray(res["bookmakers"]) === true ?
-
-                                        res["bookmakers"].map((resin,indexin) => (
-
-                                          resin["id"] === "88" || resin["id"] === "56" || resin["id"] === "105" || resin["id"] === "232" || resin["id"] === "16" ? 
-                                          <div className="card-body" key={indexin} style={{background: "#222222"}}>
-                                              <div className="row align-items-center">
-                                                <div className="col-sm-4 text-center text-sm-left">
-                                                  {<img className="img-fluid mb-3 mb-sm-0" src={`/assets/odds/${resin["name"]}.png`} />}
-                                                  
-                                                </div>
-                                                <div className="col-sm-8 d-inline-block">
-                                                  <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 pl-sm-0 pr-sm-2">
-                                                    {
-                                                    
-                                                    resin["odds"].map((result,num) => 
-                                                      
-                                                    result["name"] === "Home" || result["name"] === "Over" ?
-                                                    <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
-                                                    : ""
-                                                    )
-                                                    }
-                                                    
-                                                  </div>
-                                                  <div className="col-sm-4 d-inline-block mb-3 mb-sm-0 px-sm-2">
-                                                    {
-                                                    
-                                                    resin["odds"].map((result,num) => 
-                                                      
-                                                    result["name"] === "Draw" ?
-                                                    <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
-                                                    :""
-                                                    )
-                                                    }
-                                                  </div>
-                                                  <div className="col-sm-4 d-inline-block pl-sm-2 pr-sm-0">
-                                                  {
-                                                      resin["odds"].map((result,num) => 
-                                                      
-                                                        result["name"] === "Away" || result["name"] === "Under" ?
-                                                        <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
-                                                        :""
-                                                        )
-                                                    }
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            :null
-
-                                        ))
-
-                                   :null}
-                                 
-                                
-                          </div>
-    
-                       )})}
-           </Accordion>
-           :<center><h1>loading .......</h1></center>
-           
-          }
-          </div>
+         
          
           {/*<Accordion>
             
@@ -1033,7 +951,7 @@ useEffect(() => {
                 </div>
                
           </Accordion>*/}
-          {/*<div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
+          {<div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
             <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
               ราคาต่อรอง (Match Winner) :
             </div>
@@ -1112,7 +1030,7 @@ useEffect(() => {
                   }
          
             
-                </div>*/}
+                </div>}
         </div>
       </TopLiveSoccerContent>
       

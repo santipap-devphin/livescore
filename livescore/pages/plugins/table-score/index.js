@@ -114,11 +114,11 @@ const TableScore = () => {
         <Layout >
             <HeaderSeo
                 siteName=""
-                title="live score"
-                desc=""
+                title="7score แจกโค้ดผลบอลสด livescore ราคาบอลอัพเดททุกวินาทีจากลีกดังทั่วโลก"
+                desc="ผลบอลสด อัพเดทผลบอลทุกลีกแบบเรียลไทม์ ราคาบอล ราคาต่อรองจากเว็บเดิมพันชื่อดัง พร้อมแจกโค้ดผลบอลสดใส่เว็บ ฟรีโค้ด livescore"
                 imgSrc=""
                 metaUrl=""
-                keyWords=""
+                keyWords="ผลบอลสด, livescore, ราคาบอล, แจกโค้ดผลบอลสด, แจกโค้ด livescore"
                 author=""
             />
             <BannerInner />
