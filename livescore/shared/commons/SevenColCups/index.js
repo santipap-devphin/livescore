@@ -145,6 +145,7 @@ const SevenColCups = ({ title, cups }) => {
 
   }
 
+
   //console.log(cups["@league"])
   
   if(cups["@seasons"].indexOf(",") >-1){
