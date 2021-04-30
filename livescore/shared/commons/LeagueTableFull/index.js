@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 import {LeagueTableStyle } from "./style"
+import ReactHtmlParser from 'react-html-parser';
+
 
 const LeagueTable = ({ className, arrow, matches, title }) => {
  
@@ -34,6 +36,26 @@ const LeagueTable = ({ className, arrow, matches, title }) => {
      }
      return txt;
  }
+ function chkforms(txt){
+  var str = "";
+  for(var i =0; i < txt.length; i++)
+  {
+
+      if(txt[i] === "W"){
+        str += "<span class='form-W'>"+txt[i]+"</span>";
+      }
+      else if(txt[i] === "D"){
+        str += "<span class='form-D'>"+txt[i]+"</span>";
+      }else{
+        str += "<span class='form-L'>"+txt[i]+"</span>";
+      }
+
+
+  }
+
+  return str;
+
+ }
   return (
     <LeagueTableStyle className={`league-table-container ${className}`}>
 
@@ -55,9 +77,57 @@ const LeagueTable = ({ className, arrow, matches, title }) => {
           </tr>
         </thead>
         <tbody>
+        
         {
+          matches.length === 18 ?
+
           matches.map((item, k) => (
             <tr key={k.toString()}>
+              
+              <td className={item["@position"] === "16" || item["@position"] === "17" ? `league-lower text-center px-0 py-1`:"text-center px-0 py-1"}>{item["@position"]}</td>
+              <td colSpan="2">{item["@name"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@gp"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@w"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@d"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@l"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@gs"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@ga"]}</td>
+              <td className="px-0 py-1 text-center">{item.total["@gd"]}</td>
+              <td className="px-0 py-1 text-center">{item.total["@p"]}</td>
+              <td className="px-0 py-1 text-center">
+              { ReactHtmlParser (chkforms(item["@recent_form"])) } 
+                          
+              </td>
+            </tr>
+          ))
+
+          :
+          matches.length === 16 ?
+
+          matches.map((item, k) => (
+            <tr key={k.toString()}>
+              
+              <td className={item["@position"] === "14" || item["@position"] === "15" || item["@position"] === "16" ? `league-lower text-center px-0 py-1`:"text-center px-0 py-1"}>{item["@position"]}</td>
+              <td colSpan="2">{item["@name"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@gp"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@w"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@d"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@l"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@gs"]}</td>
+              <td className="px-0 py-1 text-center">{item.overall["@ga"]}</td>
+              <td className="px-0 py-1 text-center">{item.total["@gd"]}</td>
+              <td className="px-0 py-1 text-center">{item.total["@p"]}</td>
+              <td className="px-0 py-1 text-center">
+              { ReactHtmlParser (chkforms(item["@recent_form"])) } 
+                          
+              </td>
+            </tr>
+          ))
+          :
+
+          matches.map((item, k) => (
+            <tr key={k.toString()}>
+              
               <td className="text-center px-0 py-1">{item["@position"]}</td>
               <td colSpan="2">{item["@name"]}</td>
               <td className="px-0 py-1 text-center">{item.overall["@gp"]}</td>
@@ -68,7 +138,10 @@ const LeagueTable = ({ className, arrow, matches, title }) => {
               <td className="px-0 py-1 text-center">{item.overall["@ga"]}</td>
               <td className="px-0 py-1 text-center">{item.total["@gd"]}</td>
               <td className="px-0 py-1 text-center">{item.total["@p"]}</td>
-              <td className="px-0 py-1 text-center">{item["@recent_form"]}</td>
+              <td className="px-0 py-1 text-center">
+              { ReactHtmlParser (chkforms(item["@recent_form"])) } 
+                          
+              </td>
             </tr>
           ))
         }

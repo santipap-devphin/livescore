@@ -21,9 +21,39 @@ const ChampionsLeagueTableMobile = ({ className, matches, title }) => {
           </thead>
           <tbody>
           {
-            matches.map((item, k) => (
+             matches.length === 18 ?
+             matches.map((item, k) => (
             
               <tr key={k.toString()}>
+               
+                <td className={item.key === "16" || item.key === "17" ? `league-lower px-0 py-1 text-center`:"px-0 py-1 text-center"}>{item.key}</td>
+                <td className="px-2 py-1 text-left">
+                  {item.title}
+                </td>
+                <td className="px-0 py-1 text-center">{item.gp}</td>
+                <td className="px-0 py-1 text-center">{item.gd}</td>
+                <td className="px-0 py-1 text-center">{item.points}</td>
+              </tr>
+            ))
+           :
+           matches.length === 16 ?
+             matches.map((item, k) => (
+            
+              <tr key={k.toString()}>
+               
+                <td className={item.key === "14" || item.key === "15" || item.key === "16" ? `league-lower px-0 py-1 text-center`:"px-0 py-1 text-center"}>{item.key}</td>
+                <td className="px-2 py-1 text-left">
+                  {item.title}
+                </td>
+                <td className="px-0 py-1 text-center">{item.gp}</td>
+                <td className="px-0 py-1 text-center">{item.gd}</td>
+                <td className="px-0 py-1 text-center">{item.points}</td>
+              </tr>
+            ))
+           :
+           matches.map((item, k) => (
+            
+            <tr key={k.toString()}>
                
                 <td className="px-0 py-1 text-center">{item.key}</td>
                 <td className="px-2 py-1 text-left">
@@ -33,7 +63,8 @@ const ChampionsLeagueTableMobile = ({ className, matches, title }) => {
                 <td className="px-0 py-1 text-center">{item.gd}</td>
                 <td className="px-0 py-1 text-center">{item.points}</td>
               </tr>
-            ))
+          ))
+          
           }
           </tbody>
         </table>

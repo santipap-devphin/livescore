@@ -16,9 +16,11 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
     let nav = host.slice(1, host.length - 1);
     let lastItem = host[host.length - 1]
     let newsitem = host[4]
+    var newnav = [];
     //console.log(newsitem)
     // let pageTitle = host.pop()
     let league = router.query && router.query.league
+    let nleague = league.replace(/\s/g, '');
     let teamName = router.query && router.query.name
     let idd = router.query && router.query.id
     let navi = [
@@ -26,7 +28,15 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
         "Squad",
         "Champions"
     ]
+
+    /*for(var i=0; i < nav.length; i++){
+
+        newnav.push(nav[i].replace(/\s/g, ''))
+
+    }
    
+
+    console.log(newnav)*/
     
     
     return (
@@ -38,6 +48,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                             {
                                 nav.map((navitem, index) => (
                                     <li className="breadcrumb-item text-secondary text-capitalize" key={index.toString()}>
+                                        
                                         {
                                             index === nav.length - 1
                                             ? navitem
@@ -45,6 +56,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                                             
                                             <a className="text-secondary text-decoration-none" href="/clubs">
                                                 {navitem.replace(/-/g, " ")}
+                                                
                                                 
                                             </a>
                                         }
@@ -106,7 +118,7 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                                             as={`/clubs/${league}/${teamName}/${slg.toLowerCase()}`}
                                         > */}
                                             <a 
-                                                href={`/clubs/${league}/${teamName}/${slg.toLowerCase()}/${idd}`} 
+                                                href={`/clubs/${nleague}/${teamName}/${slg.toLowerCase()}/${idd}`} 
                                                 className={`nav-link ${slg.toLowerCase() === newsitem ? "active" : ""}`}
                                             >
                                                 {}

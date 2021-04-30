@@ -45,6 +45,8 @@ const CarouselTableMobile = ({slideValues, className}) => {
   
   return (
     <CarouselTableMobileStyle {...settings}>
+       {console.log(slideValues)}
+       {console.log(className)}
         {slideValues.map((matches, k) => {
         
            return (

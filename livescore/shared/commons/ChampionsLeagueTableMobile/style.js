@@ -103,6 +103,10 @@ export const ChampionsLeagueTableMobileStyle = styled.div`
                 }
             }
         }
+        .league-lower{
+            background: ${({ theme }) => theme.colors.gray};
+            color: ${({ theme }) => theme.colors.secondary};
+        }
         .league-name {
             overflow: hidden;
             white-space: nowrap;

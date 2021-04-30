@@ -54,37 +54,37 @@ const Tabs = ({children /* initialTab*/}) => {
                          {label === "premier" ?   
                             <img 
                             width="20"
-                            src="../assets/country/7score_icon_pre.png"
+                            src="../assets/country/England.png"
                             alt="icon premier"/>
                             :
                             label === "la-liga" ? 
                             <img 
                             width="20"
-                            src="../assets/country/7score_icon_la_liga.png"
+                            src="../assets/country/Spain.png"
                             alt="icon la-liga"/>
                             :
                             label === "seria-a" ? 
                             <img 
                             width="20"
-                            src="../assets/country/7score_icon_serie_a.png"
+                            src="../assets/country/Italy.png"
                             alt="icon seria-a"/>
                             :
                             label === "bundes" ? 
                             <img 
                             width="20"
-                            src="../assets/country/7score_icon_bundes.png"
+                            src="../assets/country/Germany.png"
                             alt="icon la-liga"/>
                             : 
                             label === "france" ? 
                             <img 
                             width="20"
-                            src="../assets/country/7score_icon_france.png"
+                            src="../assets/country/France.png"
                             alt="icon la-liga"/>
                             : 
                             label === "j-league" ? 
                             <img 
                             width="20"
-                            src="../assets/country/7score_icon_japan.png"
+                            src="../assets/country/Japan.png"
                             alt="icon la-liga"/>
                             : 
                             label === "thai-league" ? 

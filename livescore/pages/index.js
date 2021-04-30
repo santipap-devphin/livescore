@@ -1490,12 +1490,17 @@ return (
                 <div className="banners">
                     <BannerInner />
                 </div>
+                <div style={{margin:'10px'}}>
+                  <h1>ผลบอล</h1> 7score.live เว็บไซต์รายงานสดผลฟุตบอลทั้งไทยและต่างประเทศทุกลีกทั่วโลก อัพเดทกันวินาทีต่อวินาทีเพื่อให้ท่านได้รับข้อมูลที่รวดเร็ว อีกทั้งยังนำเสนอข้อมูลของแต่ละทีม สถิติการพบกัน และข้อมูลสำคัญต่างๆ เพื่อเป็นแนวทางในการวิเคราะห์ของท่าน
+                 </div>
+                <div style={{margin:'10px'}}>
                 <a href="/">
                     All
                 </a>
                 <a href="#" onClick={handleClicklive} style={{"marginLeft":"20px"}}>
                     Live
                 </a>
+                </div>
                 {
 
                 (sdata !== false) ? 

@@ -4,7 +4,9 @@ import {ContentFooterPostStyle} from "./style"
 import Link from 'next/link'
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
-const ContentFooterPost = ({ linkNext, linkPrev }) => {
+const ContentFooterPost = ({ linkNext, linkPrev}) => {
+
+  
   return (
     <ContentFooterPostStyle className="post-next-prev d-flex align-items-center mb-3 mt-4 flex-column flex-md-row">
       <div className="post-prev-post mr-md-auto mb-3 mb-md-0">
@@ -17,8 +19,10 @@ const ContentFooterPost = ({ linkNext, linkPrev }) => {
               <a 
                   href={linkPrev} 
                   className=""
+                
+                
               >
-                <RiArrowLeftSLine className="mr-2" /> Last Hightlight
+                <RiArrowLeftSLine className="mr-2" /> Prev Hightlight
               </a>
             </Link>
         </div>
@@ -30,6 +34,7 @@ const ContentFooterPost = ({ linkNext, linkPrev }) => {
              <a 
                   href={`/highlight/`} 
                   className=""
+                  
               >
                กลับหน้าหลัก 
               </a>
@@ -47,6 +52,8 @@ const ContentFooterPost = ({ linkNext, linkPrev }) => {
               <a 
                   href={linkNext} 
                   className=""
+                 
+                
               >
                 Next Hightlight <RiArrowRightSLine className="ml-2" />
               </a>
@@ -61,6 +68,7 @@ const ContentFooterPost = ({ linkNext, linkPrev }) => {
 ContentFooterPost.propTypes = {
   linkNext: PropTypes.string,
   linkPrev: PropTypes.string
+
 };
 
 

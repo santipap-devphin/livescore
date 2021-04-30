@@ -625,3 +625,51 @@ table caption.text-white{
   padding: 10px;
   color: #eeeeee;
 }
+.form-W{
+  background-color: #2ba774;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  overflow: hidden;
+  margin-left: 2px;
+  line-height: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.form-D{
+  background-color:#ccc;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  overflow: hidden;
+  margin-left: 2px;
+  line-height: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.form-L{
+  background-color:#d0021b;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  overflow: hidden;
+  margin-left: 2px;
+  line-height: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}

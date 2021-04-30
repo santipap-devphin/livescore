@@ -112,7 +112,7 @@ const Teams = (props) => {
                   alt="English Premier League" 
                 />
                 <div className="media-body">
-                  <h5 className="mt-0">{items.standings.tournament["@league"]} ({items.standings["@country"]})</h5>
+                  <h5 className="mt-0">{items.standings.tournament["@league"].replace(/\s/g, '')} ({items.standings["@country"]})</h5>
                   <div className="">
                     {/*<img src="/assets/flag/england.png" className="avatar rounded-circle mr-3" alt="" />*/}
                     {/*items.standings["@country"]*/}
@@ -143,7 +143,7 @@ const Teams = (props) => {
                             href={{
                               pathname: `/clubs/[league]/[name]/overviews/${item["@id"]}`,
                             }}
-                            as={`/clubs/${items.standings.tournament["@league"]}/${item["@name"]}/overviews/${item["@id"]}`}
+                            as={`/clubs/${items.standings.tournament["@league"].replace(/\s/g, '')}/${item["@name"].replace(/\s/g, '')}/overviews/${item["@id"]}`}
                           >
                             <a className="text-dark">
                               <Avatar 
@@ -158,7 +158,7 @@ const Teams = (props) => {
                               href={{
                                 pathname: `/clubs/[league]/[name]/overviews/${item["@id"]}`,
                               }}
-                              as={`/clubs/${items.standings.tournament["@league"]}/${item["@name"]}/overviews/${item["@id"]}`}
+                              as={`/clubs/${items.standings.tournament["@league"].replace(/\s/g, '')}/${item["@name"].replace(/\s/g, '')}/overviews/${item["@id"]}`}
                               >
                               <a className="">
                                 {item["@name"]}

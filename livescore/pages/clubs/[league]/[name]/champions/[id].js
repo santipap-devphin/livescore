@@ -8,14 +8,22 @@ const Champions = (props) => {
   const League = [];
   const d1 = [];
   const Cup = [];
+  if(Array.isArray(props.trop.trophy) === true){
 
-  props.trop.trophy.map((sq,index) => (
-    (sq["@status"] === "Winner") ?
+    props.trop.trophy.map((sq,index) => (
+      (sq["@status"] === "Winner") ?
+  
+         League.push(sq) : 
+        
+        <div></div>
+    ))
 
-       League.push(sq) : 
-      
-      <div></div>
-  ))
+  }else{
+
+    
+
+  }
+ 
     
   return (
     <LayoutSidebarClub>

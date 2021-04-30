@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import HeaderSeo from "../../../shared/commons/HeaderSeo"
 import Layout from "../../../shared/container/Layout"
 import PlyrComponent from "../../../shared/commons/Plyr"
@@ -20,22 +20,65 @@ const video = {
 
 const index = (props) => {
 
+  const [presLoad , serpresLoad] = useState(false);
+
+
+  useEffect(() => {
+    
+    serpresLoad(true)
+
+
+  },[serpresLoad])
+
+  
+
+
+  
+
   const router = useRouter()
   let newslist = [];
   var urlvideo;
+  var pres = 0;
+  var nexts = 0;
+
+ 
 
   if(Array.isArray(props.video.videos.item) === true){
 
-
-     
       urlvideo = props.video.videos.item[0]["#cdata-section"];
 
   }else{
      
       urlvideo = props.video.videos.item["#cdata-section"];
   }
-  
-// console.log(props)
+
+
+  if(Array.isArray(props.listarr) === true){
+
+     if(props.listarr.indexOf(router.query.post) > -1){
+
+           //console.log(props.listarr.indexOf(router.query.post));
+
+           if(props.listarr.indexOf(router.query.post) === 0){
+
+            pres = props.listarr.indexOf(router.query.post);
+            nexts = props.listarr.indexOf(router.query.post)+1;
+
+           }else{
+
+            pres = props.listarr.indexOf(router.query.post)-1;
+            nexts = props.listarr.indexOf(router.query.post)+1;
+
+           }
+           
+
+     }
+    
+  }
+
+
+   console.log(presLoad)
+ 
   return (
     <Layout >
       <HeaderSeo
@@ -50,19 +93,28 @@ const index = (props) => {
       <BannerInner />
       <h1 className="mb-4">HIGHLIGHT! {/*props.video.title*/}</h1>
       <div className="iframe-clip">
-      {<PlyrComponent
-        matchid={props.matchid}
-        title={props.title}
-        date={props.datee}
-        view={"0"}
-        shared={"0"}
-        url={`/highlight/${props.video.title}`}
-        urlvideo={urlvideo}
-      />}
+      {
+         presLoad !== false ? 
+        
+          <PlyrComponent
+          matchid={props.matchid}
+          title={props.title}
+          date={props.datee}
+          view={"0"}
+          shared={"0"}
+          url={`/highlight/${props.video.title}`}
+          urlvideo={urlvideo}
+        />
+        : <center><h1>Loading ....</h1></center>
+      
+      }
       </div>
       <ContentFooterPost
-        linkNext=""
-        linkPrev="/highlight/andy%20robertson"
+        linkNext={`/highlight/${props.listarr[nexts]}`}
+        linkPrev={`/highlight/${props.listarr[pres]}`}
+       
+       
+       
       />
     </Layout>
   );
@@ -74,6 +126,7 @@ index.getInitialProps = async ({query}) => {
   var list_vdo  = []
   var listview = []
   var chkstatus;
+  var list_arr = [];
   var matchid;
   var datee;
   var title;
@@ -113,7 +166,10 @@ index.getInitialProps = async ({query}) => {
                             title = datatoday.scores.category[i].matches.match[k].localteam["@name"] +" "+datatoday.scores.category[i].matches.match[k].localteam["@goals"]+" - " 
                             + " "+datatoday.scores.category[i].matches.match[k].visitorteam["@goals"]+" "+ datatoday.scores.category[i].matches.match[k].visitorteam["@name"];
 
-                      }
+                            list_arr.push(datatoday.scores.category[i].matches.match[k]["@id"]);
+                       }else{
+                            list_arr.push(datatoday.scores.category[i].matches.match[k]["@id"]);
+                       }
 
                   
                 }
@@ -130,7 +186,10 @@ index.getInitialProps = async ({query}) => {
                              datee = datatoday.scores.category[i].matches.match["@date"];
                              title = datatoday.scores.category[i].matches.match.localteam["@name"] +" "+datatoday.scores.category[i].matches.match.localteam["@goals"]+" - " 
                             + " "+datatoday.scores.category[i].matches.match.visitorteam["@goals"]+" "+ datatoday.scores.category[i].matches.match.visitorteam["@name"];
+                            list_arr.push(datatoday.scores.category[i].matches.match["@id"]);
 
+                    }else{
+                          list_arr.push(datatoday.scores.category[i].matches.match["@id"]);
                     }
 
 
@@ -173,7 +232,10 @@ index.getInitialProps = async ({query}) => {
                               title = data.scores.category[i].matches.match[k].localteam["@name"] +" "+data.scores.category[i].matches.match[k].localteam["@goals"]+" - " 
                             + " "+data.scores.category[i].matches.match[k].visitorteam["@goals"]+" "+ data.scores.category[i].matches.match[k].visitorteam["@name"];
 
-                        }
+                             list_arr.push(data.scores.category[i].matches.match[k]["@id"]);
+                          }else{
+                            list_arr.push(data.scores.category[i].matches.match[k]["@id"]);
+                          }
 
                     
                   }
@@ -190,7 +252,10 @@ index.getInitialProps = async ({query}) => {
                                datee = data.scores.category[i].matches.match["@date"];
                                title = data.scores.category[i].matches.match.localteam["@name"] +" "+data.scores.category[i].matches.match.localteam["@goals"]+" - " 
                                + " "+data.scores.category[i].matches.match.visitorteam["@goals"]+" "+ data.scores.category[i].matches.match.visitorteam["@name"];
+                               list_arr.push(data.scores.category[i].matches.match["@id"]);
 
+                      }else{
+                              list_arr.push(data.scores.category[i].matches.match["@id"]);
                       }
 
 
@@ -210,7 +275,7 @@ index.getInitialProps = async ({query}) => {
 
 
   return { 
-    video: list_vdo[0] , matchid:matchid ,datee:datee ,title:title
+    video: list_vdo[0] , matchid:matchid ,datee:datee ,title:title ,listarr:list_arr
 }
   
 

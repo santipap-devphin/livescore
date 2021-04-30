@@ -169,12 +169,7 @@ const Standings = (data) => {
                 {<Tabs>
                     <div label="premier" texts="พรีเมียร์ ลีก">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/England.png"}
-                        alt={"พรีเมียร์ลีก อังกฤษ ล่าสุด"} 
-                        />พรีเมียร์ลีก อังกฤษ</h1>
+                        พรีเมียร์ลีก อังกฤษ</h1>
                         <LeagueTable 
                         title={data.leages[1].PremierLeague["@league"]}
                         matches={data.leages[1].PremierLeague.team} 
@@ -184,12 +179,7 @@ const Standings = (data) => {
                     </div>
                     <div label="la-liga" texts="ลาลีกา">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/Spain.png"}
-                        alt={"ลาลีกาลีก สเปน ล่าสุด"} 
-                        />
+                        
                         ลาลีกาลีก สเปน</h1>
                         <LeagueTable 
                         title={data.leages[0].LaLiga["@league"]}
@@ -199,12 +189,7 @@ const Standings = (data) => {
                     </div>
                     <div label="seria-a" texts="กัลโช่ เซเรีย อา">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/Italy.png"}
-                        alt={"เซเรีย อา อิตาลี ล่าสุด"} 
-                        />
+                       
                         กัลโช่ เซเรีย อา อิตาลี</h1>
                         <LeagueTable 
                         title={data.leages[3].Seriea["@league"]}
@@ -214,12 +199,7 @@ const Standings = (data) => {
                     </div>
                     <div label="bundes" texts="บุนเดสลีกา">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/Germany.png"}
-                        alt={"บุนเดสลีกา เยอรมัน ล่าสุด"} 
-                        />
+                        
                         บุนเดสลีกา เยอรมัน
                         </h1>
                         <LeagueTable 
@@ -230,12 +210,7 @@ const Standings = (data) => {
                     </div>
                     <div label="france" texts="ลีก เอิง">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/France.png"}
-                        alt={"ลีก เอิง ฝรั่งเศส ล่าสุด"} 
-                        />
+                       
                         ลีก เอิง ฝรั่งเศส
                         </h1>
                         <LeagueTable 
@@ -246,12 +221,7 @@ const Standings = (data) => {
                     </div>
                     <div label="j-league" texts="เจลีก">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/Japan.png"}
-                        alt={"เจลีก ญี่ปุ่น ล่าสุด"} 
-                        />
+                        
                         เจลีก ญี่ปุ่น
                         </h1>
                         <LeagueTable 
@@ -262,12 +232,7 @@ const Standings = (data) => {
                     </div>
                     <div label="thai-league" texts="ไทยลีก">
                         <h1 style={{padding:10}}>
-                        <img 
-                        width={30}
-                        style={{marginRight:10}}
-                        src={"../assets/country/Thailand.png"}
-                        alt={"ตารางคะแนนไทยลีก 2021"} 
-                        />
+                       
                         ไทยลีก 
                         </h1>
                         <LeagueTable 

@@ -11,6 +11,7 @@ import NavMatch from "../../../../shared/components/NavMatch"
 import MatchIonfo from "../../../../shared/components/MatchIonfo"
 import MatchSummary from "../../../../shared/components/MatchSummary"
 import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerContent"
+import {TableOdds} from "../../../../shared/components/TableOdds"
 import {Accordion} from "../../../../shared/components/Accordion"
 import { isIE } from 'react-device-detect';
 
@@ -19,17 +20,144 @@ const PremierLeague = (props ,{ }) => {
   function convertTZ(date, tzString) {
     return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
   }
+
+  let btnstyles = {
+    background: '#710000',
+    background: '-webkit-linear-gradient( 0deg, #710000 0%, #af0000 100%)',
+    background: '-webkit-linear-gradient(bottom, #710000 0%, #af0000 100%)',
+    background: 'linear-gradient( 0deg, #710000 0%, #af0000 100%)',
+    filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr="#710000",endColorstr="#af0000",GradientType=1)',
+    color: '#ffffff',
+    width: '100%',
+    fontSize :'20px',
+  
+  };
+ 
+
   const router = useRouter()
   const [defalut, setDefalut] = useState(props);
   const [ldata, setLdata] = useState(null);
   const [errs, setErrs] = useState(false);
+  const [Lbtn , setLbtn] = useState(false);
   const [opens, setOpens] = useState(false);
+  const [listOdds , setOdds] = useState([]);
+  const [listOddsUnder , setOddsUnder] = useState([]);
+  const [oddsLoad , setoddsLoad] = useState(false);
+
 
   var obj = {};
   var title_obj = {}; 
   var events = [];
   let data;
   let numm = 0;
+  var listoddss = [];
+  var listoddsunder = [];
+
+  const handdleClickOddsetc = (e) => {
+
+    e.preventDefault();
+    setLbtn(true);
+
+    for(var i = 0; i < ldata.odds.length; i++){
+
+
+      if(ldata.odds[i].id !== "1" && ldata.odds[i].id !== "4" && ldata.odds[i].id !== "5" && ldata.odds[i].id !== "22627"){
+
+          
+          if(ldata.odds[i].id === "2" 
+          || ldata.odds[i].id === "3" 
+          || ldata.odds[i].id === "13" 
+          || ldata.odds[i].id === "14" 
+          || ldata.odds[i].id === "15" 
+          || ldata.odds[i].id === "16" 
+          || ldata.odds[i].id === "17" 
+          || ldata.odds[i].id === "222" 
+          || ldata.odds[i].id === "2102" 
+          || ldata.odds[i].id === "2224"
+          || ldata.odds[i].id === "2225"
+          || ldata.odds[i].id === "2293"
+          || ldata.odds[i].id === "22602"
+          || ldata.odds[i].id === "22603"
+          || ldata.odds[i].id === "22604"
+          || ldata.odds[i].id === "22605"
+          || ldata.odds[i].id === "22607"
+          || ldata.odds[i].id === "22608"
+          || ldata.odds[i].id === "22609"
+          || ldata.odds[i].id === "22610"
+          || ldata.odds[i].id === "22611"
+          || ldata.odds[i].id === "22612"
+          || ldata.odds[i].id === "22613"
+          || ldata.odds[i].id === "22615"
+          || ldata.odds[i].id === "22618"
+          || ldata.odds[i].id === "22622"
+          || ldata.odds[i].id === "22623"
+          || ldata.odds[i].id === "22626"
+          || ldata.odds[i].id === "22713"
+          || ldata.odds[i].id === "22833"
+          || ldata.odds[i].id === "22844"
+          || ldata.odds[i].id === "22949"
+          || ldata.odds[i].id === "22950"
+          || ldata.odds[i].id === "23147"
+          ){
+            
+            listoddss.push(ldata.odds[i]);
+          }
+          else if(
+          ldata.odds[i].id === "5" 
+          || ldata.odds[i].id === "6" 
+          || ldata.odds[i].id === "7" 
+          || ldata.odds[i].id === "22124"
+          || ldata.odds[i].id === "22125"
+          || ldata.odds[i].id === "22600"
+          || ldata.odds[i].id === "22601"
+          || ldata.odds[i].id === "22621"
+          || ldata.odds[i].id === "22644"
+          || ldata.odds[i].id === "22836"
+          || ldata.odds[i].id === "22837"
+          || ldata.odds[i].id === "22841"
+          || ldata.odds[i].id === "22842"
+          || ldata.odds[i].id === "22843"
+          || ldata.odds[i].id === "22850"
+          || ldata.odds[i].id === "22905"
+          || ldata.odds[i].id === "22906"
+          || ldata.odds[i].id === "22907"
+          || ldata.odds[i].id === "22956"
+          || ldata.odds[i].id === "22957"
+          || ldata.odds[i].id === "22958"
+          || ldata.odds[i].id === "22959"
+          || ldata.odds[i].id === "22960"
+          || ldata.odds[i].id === "22961"
+          || ldata.odds[i].id === "23119"
+          || ldata.odds[i].id === "23120"
+          || ldata.odds[i].id === "23121"
+          || ldata.odds[i].id === "23121"
+          ){
+
+               listoddsunder.push(ldata.odds[i]);
+          }
+     }
+
+
+    }
+
+    setOdds(listoddss);
+    setOddsUnder(listoddsunder)
+
+    setoddsLoad(true);
+
+   
+    
+
+
+  }
+  const handdleClickOddhidec = (e) => {
+
+    e.preventDefault();
+    setLbtn(false);
+    setoddsLoad(false)
+
+  }
+
  
   const loadods = async (param,param2) => {
 
@@ -933,44 +1061,1141 @@ useEffect(() => {
               </div>
             </div>          
           </div>
-         
-         
-          {/*<Accordion>
-            
-                <div label="MatchWinner 1">
+          <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
+          <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
+              <h2><center>ราคาต่อรอง</center></h2>
+          </div>
+         {/*.slice(0, 50)*/}
+         <div style={{overflowX:'scroll'}}>
+         <table className="tbl">
+                <thead>
+                <tr>
+                 <th>ประเภท</th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/bet365.png"} /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/188bet.png"} /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/sbo.png"} /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/1xBet.png"} /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/Dafabet.png"} /></th>
+                 </tr>
+                </thead>
+                <tbody>
                  
-                    <p>
-                        Match Winner 1 text
-                    </p>
-                </div>
-                <div label="MatchWinner 2">
-                    
-                    <p>
-                        Match Winner 2 text
-                    </p>
-                </div>
-               
-          </Accordion>*/}
-          {<div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
-            <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-              ราคาต่อรอง (Match Winner) :
-            </div>
-            {
+                {
+                      errs !== false ? 
+                      
+                      ldata === null ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center> 
+                      :
 
-                  errs !== false ?
+                          ldata.odds.map((res,index) => 
+                          
+                              res["id"] === "1" ? 
+                              <tr key={index}>
+                              <td>{res["value"]}</td>
+                              <td>
+                              
+                              {Array.isArray(res["bookmakers"]) === true ?
 
-                  ldata === null ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center>
-                  :
-                  ldata.odds.map((res,index) => (
+                                        res["bookmakers"].map((resin,indexin) => (
 
-                          res["value"] === "Match Winner" ?
+                                             resin["id"] === "16" ?
 
-                                Array.isArray(res["bookmakers"]) === true ?
-                                
+                                                resin["odds"].map((result,num) => {
+                                                  
+                                                   return(
+                                                     
+                                                                result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                                :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                                :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                                :""
+                                                            
+                                                    
+                                                    )})
+                                                  :null
+                                            
+                                            ))
+                                            :null
+                                }
+                                </td>
+                                 <td>
+                                 {Array.isArray(res["bookmakers"]) === true ?
+
+                                      res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "56" ?
+
+                                              resin["odds"].map((result,num) => {
+                                                
+                                                return(
+                                                  
+                                                              result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                              :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                              :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                              :""
+                                                          
+                                                  
+                                                  )})
+                                                :null
+                                          
+                                          ))
+                                          :null
+                                 }
+                                 </td>
+                                <td>
+                                {Array.isArray(res["bookmakers"]) === true ?
+
+                                            res["bookmakers"].map((resin,indexin) => (
+
+                                                resin["id"] === "88" ?
+
+                                                    resin["odds"].map((result,num) => {
+                                                      
+                                                      return(
+                                                        
+                                                                    result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                                    :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                                    :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                                    :""
+                                                                
+                                                        
+                                                        )})
+                                                      :null
+                                                
+                                                ))
+                                                :null
+                                }
+                                </td>
+                                <td>
+                                {Array.isArray(res["bookmakers"]) === true ?
+
                                           res["bookmakers"].map((resin,indexin) => (
 
-                                              resin["id"] === "88" || resin["id"] === "56" || resin["id"] === "105" || resin["id"] === "232" || resin["id"] === "16" ? 
-                                              <div className="card-body" key={indexin}>
+                                              resin["id"] === "105" ?
+
+                                                  resin["odds"].map((result,num) => {
+                                                    
+                                                    return(
+                                                      
+                                                                  result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                                  :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                                  :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                                  :""
+                                                              
+                                                      
+                                                      )})
+                                                    :null
+                                              
+                                              ))
+                                              :null
+                                 }
+                                </td>
+                                <td>
+
+                                {Array.isArray(res["bookmakers"]) === true ?
+
+                                        res["bookmakers"].map((resin,indexin) => (
+
+                                            resin["id"] === "105" ?
+
+                                                resin["odds"].map((result,num) => {
+                                                  
+                                                  return(
+                                                    
+                                                                result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                                :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                                :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                                :""
+                                                            
+                                                    
+                                                    )})
+                                                  :null
+                                            
+                                            ))
+                                            :null
+                                        }
+
+                                </td>
+                                        
+                                             
+                                                                                
+                                  
+                                  
+                              </tr>
+                              :res["id"] === "4" ? 
+                              
+                              <tr key={index}>
+                              <td>{res["value"]} (+0)</td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                        res["bookmakers"].map((resin,indexin) => (
+
+                                            resin["id"] === "16" ?
+
+                                                
+                                                  resin["odds"].map((result,num) => {
+                                                  
+                                                  
+                                                  return(
+
+                                                    result["name"]  === "+0" ?
+
+
+                                                              Array.isArray(result["odds"]) === true ?
+
+                                                                  result["odds"].map((resultlower,indexlow) => 
+                                                                  
+                                                                        resultlower["name"] === "Home" || resultlower["name"] === "Over" ? <p key={indexlow}>Home : {resultlower["value"]}</p>
+                                                                        :resultlower["name"] === "Draw" ? <p key={indexlow}>Draw : {resultlower["value"]}</p>
+                                                                        :resultlower["name"] === "Away" || resultlower["name"] === "Under" ? <p key={indexlow}>Away : {resultlower["value"]}</p>
+                                                                        :""
+                                                                  
+                                                                  )
+                                                                      
+                                                              :""
+                                                            
+                                                    
+                                                    :""
+                                                    
+                                                    )})
+                                                  :null
+                                            
+                                            ))
+                                            :null
+                                        }
+
+                              </td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "56" ?
+
+                                                  
+                                                    resin["odds"].map((result,num) => {
+                                                    
+                                                    
+                                                    return(
+
+                                                      result["name"]  === "+0" ?
+
+
+                                                                Array.isArray(result["odds"]) === true ?
+
+                                                                    result["odds"].map((resultlower,indexlow) => 
+                                                                    
+                                                                          resultlower["name"] === "Home" || resultlower["name"] === "Over" ? <p key={indexlow}>Home : {resultlower["value"]}</p>
+                                                                          :resultlower["name"] === "Draw" ? <p key={indexlow}>Draw : {resultlower["value"]}</p>
+                                                                          :resultlower["name"] === "Away" || resultlower["name"] === "Under" ? <p key={indexlow}>Away : {resultlower["value"]}</p>
+                                                                          :""
+                                                                    
+                                                                    )
+                                                                        
+                                                                :""
+                                                              
+                                                      
+                                                      :""
+                                                      
+                                                      )})
+                                                  
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    }
+
+                              </td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                      res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "88" ?
+
+                                                  
+                                                    resin["odds"].map((result,num) => {
+                                                    
+                                                    
+                                                    return(
+
+                                                      result["name"]  === "+0" ?
+
+
+                                                                Array.isArray(result["odds"]) === true ?
+
+                                                                    result["odds"].map((resultlower,indexlow) => 
+                                                                    
+                                                                          resultlower["name"] === "Home" || resultlower["name"] === "Over" ? <p key={indexlow}>Home : {resultlower["value"]}</p>
+                                                                          :resultlower["name"] === "Draw" ? <p key={indexlow}>Draw : {resultlower["value"]}</p>
+                                                                          :resultlower["name"] === "Away" || resultlower["name"] === "Under" ? <p key={indexlow}>Away : {resultlower["value"]}</p>
+                                                                          :""
+                                                                    
+                                                                    )
+                                                                        
+                                                                :""
+                                                              
+                                                      
+                                                      :""
+                                                      
+                                                      )})
+                                                    
+                                            
+                                                  
+                                                  
+                                                :null
+                                          
+                                          ))
+                                      :null
+                                      }
+
+                              </td>
+                              <td>
+                                
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "105" ?
+
+                                              
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                
+                                                return(
+
+                                                  result["name"]  === "+0" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Home" || resultlower["name"] === "Over" ? <p key={indexlow}>Home : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Draw" ? <p key={indexlow}>Draw : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Away" || resultlower["name"] === "Under" ? <p key={indexlow}>Away : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                          
+                                                  
+                                                  :""
+                                                  
+                                                  )})
+                                              
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    } 
+
+                              </td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                          res["bookmakers"].map((resin,indexin) => (
+
+                                              resin["id"] === "232" ?
+
+                                              resin["odds"].map((result,num) => {
+                                                      
+                                                      
+                                                          return(
+
+                                                            result["name"]  === "+0" ?
+
+
+                                                                      Array.isArray(result["odds"]) === true ?
+
+                                                                          result["odds"].map((resultlower,indexlow) => 
+                                                                          
+                                                                                resultlower["name"] === "Home" || resultlower["name"] === "Over" ? <p key={indexlow}>Home : {resultlower["value"]}</p>
+                                                                                :resultlower["name"] === "Draw" ? <p key={indexlow}>Draw : {resultlower["value"]}</p>
+                                                                                :resultlower["name"] === "Away" || resultlower["name"] === "Under" ? <p key={indexlow}>Away : {resultlower["value"]}</p>
+                                                                                :""
+                                                                          
+                                                                          )
+                                                                              
+                                                                      :""
+                                                                    
+                                                            
+                                                            :""
+                                                            
+                                                            )})
+                                                      
+                                                
+                                                      
+                                                      
+                                                    :null
+                                              
+                                              ))
+                                          :null
+                                          }
+
+                              </td>
+                                
+                             </tr>
+                              :
+                              res["id"] === "5" ? 
+                              
+                              <tr key={index}>
+                              <td>{res["value"]} (2.5)</td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                      res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "16" ?
+
+                                              
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                
+                                                return(
+
+                                                  result["name"]  === "2.5" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Over"  ? <p key={indexlow}>Over : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Under" ? <p key={indexlow}>Under : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                          
+                                                  
+                                                  :""
+                                                  
+                                                  )})
+                                                
+                                            
+                                                  
+                                                  
+                                                :null
+                                          
+                                          ))
+                                          :null
+                                      }
+
+                              </td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                      res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "56" ?
+
+                                                    
+                                                      resin["odds"].map((result,num) => {
+                                                      
+                                                      
+                                                      return(
+
+                                                        result["name"]  === "2.5" ?
+
+
+                                                              Array.isArray(result["odds"]) === true ?
+
+                                                                  result["odds"].map((resultlower,indexlow) => 
+                                                                  
+                                                                        resultlower["name"] === "Over"  ? <p key={indexlow}>Over : {resultlower["value"]}</p>
+                                                                        :resultlower["name"] === "Under" ? <p key={indexlow}>Under : {resultlower["value"]}</p>
+                                                                        :""
+                                                                  
+                                                                  )
+                                                                      
+                                                              :""
+                                                            
+                                              
+                                                      :"" 
+                                                        
+                                                        )})
+                                                      
+                                                :null
+                                          
+                                          ))
+                                      :null
+                                      }
+
+                              </td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "88" ?
+
+                                                
+                                                  resin["odds"].map((result,num) => {
+                                                  
+                                                  
+                                                  return(
+
+                                                      result["name"]  === "2.5" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Over"  ? <p key={indexlow}>Over : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Under" ? <p key={indexlow}>Under : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                  
+                                          
+                                                    :""
+                                                    
+                                                    )})
+                                                  
+                                          
+                                                
+                                                
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    }
+
+                              </td>
+
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "105" ?
+
+                                              
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                
+                                                return(
+
+                                                            result["name"]  === "2.5" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Over"  ? <p key={indexlow}>Over : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Under" ? <p key={indexlow}>Under : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                          
+                                                  
+                                                        :""
+                                                  
+                                                  )})
+                                              
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    }
+
+                              </td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "232" ?
+
+
+                                                
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                
+                                                    return(
+
+                                                      result["name"]  === "2.5" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Over"  ? <p key={indexlow}>Over : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Under" ? <p key={indexlow}>Under : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                  
+                                          
+                                                      :""
+                                                      
+                                                      )})
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    }
+
+                              </td>
+                              </tr>
+                              :res["id"] === "22627" ? 
+                              <tr key={index}>
+                              <td>{res["value"]}</td>
+                              <td>
+
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "16" ?
+
+                                            resin["odds"].map((result,num) => {
+                                              
+                                              return(
+                                                
+                                                            result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                            :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                            :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                            :""
+                                                        
+                                                
+                                                )})
+                                              :null
+                                        
+                                        ))
+                                        :null
+                              }
+
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "56" ?
+
+                                            resin["odds"].map((result,num) => {
+                                              
+                                              return(
+                                                
+                                                            result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                            :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                            :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                            :""
+                                                        
+                                                
+                                                )})
+                                              :null
+                                        
+                                        ))
+                                        :null
+                              }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                          res["bookmakers"].map((resin,indexin) => (
+
+                                              resin["id"] === "88" ?
+
+                                                  resin["odds"].map((result,num) => {
+                                                    
+                                                    return(
+                                                      
+                                                                  result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                                  :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                                  :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                                  :""
+                                                              
+                                                      
+                                                      )})
+                                                    :null
+                                              
+                                              ))
+                                              :null
+                              }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "105" ?
+
+                                            resin["odds"].map((result,num) => {
+                                              
+                                              return(
+                                                
+                                                            result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                            :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                            :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                            :""
+                                                        
+                                                
+                                                )})
+                                              :null
+                                        
+                                        ))
+                                        :null
+                               }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                      res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "232" ?
+
+                                              resin["odds"].map((result,num) => {
+                                                
+                                                return(
+                                                  
+                                                              result["name"] === "Home" || result["name"] === "Over" ? <p key={num}>Home : {result["value"]}</p>
+                                                              :result["name"] === "Draw" ? <p key={num}>Draw : {result["value"]}</p>
+                                                              :result["name"] === "Away" || result["name"] === "Under" ? <p key={num}>Away : {result["value"]}</p>
+                                                              :""
+                                                          
+                                                  
+                                                  )})
+                                                :null
+                                          
+                                          ))
+                                          :null
+                                      }
+                              </td>
+                              </tr>
+                              
+
+                              :null
+                          )
+                    
+                          
+                         
+
+
+                    :<tr><td colSpan="6">Loading ......</td></tr>
+                  }
+
+                  
+                </tbody>
+                <tfoot>
+                
+                {
+                    oddsLoad !== false ? 
+                    listOdds.length === 0 ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center> 
+                    :
+                    listOdds.map((res,index) => 
+                    
+                      <tr key={index}>
+                          <td>{res["value"]}</td>
+                          <td>
+
+                          {Array.isArray(res["bookmakers"]) === true ?
+
+                              res["bookmakers"].map((resin,indexin) => (
+
+                                  resin["id"] === "16"  ?
+
+                                      resin["odds"].map((result,num) => {
+                                        
+                                        return(
+                                                       result["name"] === "Home" || result["name"] === "Over" || result["name"] === "Yes" || result["name"] === "Odd" || result["name"] === "Home/Draw" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                      :result["name"] === "Draw" || result["name"] === "Home/Away"  ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                      :result["name"] === "Away" || result["name"] === "Under"  || result["name"] === "No" || result["name"] === "Even" || result["name"] === "Draw/Away" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                      :""
+                                                  
+                                          
+                                          )})
+                                        
+                                        
+                                      :null
+                                    ))
+                                  
+                                  :null
+                              }
+
+                          </td>
+                          <td>
+                          {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "56"  ?
+
+                                            
+                                              resin["odds"].map((result,num) => {
+                                              
+                                              return(
+                                                
+                                                result["name"] === "Home" || result["name"] === "Over" || result["name"] === "Yes" || result["name"] === "Odd" || result["name"] === "Home/Draw" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                :result["name"] === "Draw" || result["name"] === "Home/Away"  ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                :result["name"] === "Away" || result["name"] === "Under"  || result["name"] === "No" || result["name"] === "Even" || result["name"] === "Draw/Away" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                :""
+                                                        
+                                                
+                                                )})
+                                            
+                                            :null
+                                          ))
+                                        
+                                        :null
+                                    }
+
+                          </td>
+                          <td>
+                          {Array.isArray(res["bookmakers"]) === true ?
+
+                                        res["bookmakers"].map((resin,indexin) => (
+
+                                            resin["id"] === "88"  ?
+
+                                                
+                                                  resin["odds"].map((result,num) => {
+                                                  
+                                                  return(
+                                                    
+                                                            
+                                                    result["name"] === "Home" || result["name"] === "Over" || result["name"] === "Yes" || result["name"] === "Odd" || result["name"] === "Home/Draw" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                    :result["name"] === "Draw" || result["name"] === "Home/Away"  ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                    :result["name"] === "Away" || result["name"] === "Under"  || result["name"] === "No" || result["name"] === "Even" || result["name"] === "Draw/Away" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                    :""
+                                                            
+                                                    
+                                                    )})
+                                                
+                                                :null
+                                              ))
+                                            
+                                            :null
+                             }
+                            </td>
+                          
+                            <td>
+                            {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "105"  ?
+
+                                          
+                                              resin["odds"].map((result,num) => {
+                                              
+                                              return(
+                                                
+                                                result["name"] === "Home" || result["name"] === "Over" || result["name"] === "Yes" || result["name"] === "Odd" || result["name"] === "Home/Draw" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                :result["name"] === "Draw" || result["name"] === "Home/Away"  ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                :result["name"] === "Away" || result["name"] === "Under"  || result["name"] === "No" || result["name"] === "Even" || result["name"] === "Draw/Away" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                :""
+                                                        
+                                                
+                                                )})
+                                          
+                                            :null
+                                          ))
+                                        
+                                        :null
+                                    }
+                            </td>
+                             <td>
+                             {Array.isArray(res["bookmakers"]) === true ?
+
+                                      res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "232"  ?
+
+                                              
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                return(
+                                                  
+                                                          
+                                                  result["name"] === "Home" || result["name"] === "Over" || result["name"] === "Yes" || result["name"] === "Odd" || result["name"] === "Home/Draw" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                  :result["name"] === "Draw" || result["name"] === "Home/Away"  ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                  :result["name"] === "Away" || result["name"] === "Under"  || result["name"] === "No" || result["name"] === "Even" || result["name"] === "Draw/Away" ? <p key={num}>{result["name"]} : {result["value"]}</p>
+                                                  :""
+                                                          
+                                                  
+                                                  )})
+                                                
+                                              :null
+                                            ))
+                                          
+                                          :null
+                                      }
+
+                             </td>
+                      </tr>
+                    
+                    
+                    )
+                    
+                    :null
+                  
+                  }
+                  {
+                     oddsLoad !== false ? 
+
+                          listOddsUnder.length === 0 ? ""
+                          :
+                          listOddsUnder.map((res,index) => 
+
+                          <tr key={index}>
+                              <td>{res["value"]}(1.5)</td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                  res["bookmakers"].map((resin,indexin) => (
+
+                                      resin["id"] === "16" ?
+
+
+                                              resin["odds"].map((result,num) => {
+                                              
+                                              
+                                                  return(
+
+                                                    result["name"]  === "1.5" ?
+
+
+                                                          Array.isArray(result["odds"]) === true ?
+
+                                                              result["odds"].map((resultlower,indexlow) => 
+                                                              
+                                                                    resultlower["name"] === "Over"  ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                    :resultlower["name"] === "Under" ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                    :""
+                                                              
+                                                              )
+                                                                  
+                                                          :""
+                                                
+                                        
+                                                    :""
+                                                    
+                                                    )})
+                                            :null
+                                      
+                                      ))
+                                  :null
+                                  }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                  res["bookmakers"].map((resin,indexin) => (
+
+                                      resin["id"] === "56" ?
+
+
+                                              resin["odds"].map((result,num) => {
+                                              
+                                              
+                                                  return(
+
+                                                    result["name"]  === "1.5" ?
+
+
+                                                          Array.isArray(result["odds"]) === true ?
+
+                                                              result["odds"].map((resultlower,indexlow) => 
+                                                              
+                                                                    resultlower["name"] === "Over"  ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                    :resultlower["name"] === "Under" ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                    :""
+                                                              
+                                                              )
+                                                                  
+                                                          :""
+                                                
+                                        
+                                                    :""
+                                                    
+                                                    )})
+                                            :null
+                                      
+                                      ))
+                                  :null
+                                  }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                  res["bookmakers"].map((resin,indexin) => (
+
+                                      resin["id"] === "88" ?
+
+
+                                              resin["odds"].map((result,num) => {
+                                              
+                                              
+                                                  return(
+
+                                                    result["name"]  === "1.5" ?
+
+
+                                                          Array.isArray(result["odds"]) === true ?
+
+                                                              result["odds"].map((resultlower,indexlow) => 
+                                                              
+                                                                    resultlower["name"] === "Over"  ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                    :resultlower["name"] === "Under" ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                    :""
+                                                              
+                                                              )
+                                                                  
+                                                          :""
+                                                
+                                        
+                                                    :""
+                                                    
+                                                    )})
+                                            :null
+                                      
+                                      ))
+                                  :null
+                                  }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "105" ?
+
+
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                
+                                                    return(
+
+                                                      result["name"]  === "1.5" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Over"  ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Under" ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                  
+                                          
+                                                      :""
+                                                      
+                                                      )})
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    }
+                              </td>
+                              <td>
+                              {Array.isArray(res["bookmakers"]) === true ?
+
+                                    res["bookmakers"].map((resin,indexin) => (
+
+                                        resin["id"] === "232" ?
+
+
+                                                resin["odds"].map((result,num) => {
+                                                
+                                                
+                                                    return(
+
+                                                      result["name"]  === "1.5" ?
+
+
+                                                            Array.isArray(result["odds"]) === true ?
+
+                                                                result["odds"].map((resultlower,indexlow) => 
+                                                                
+                                                                      resultlower["name"] === "Over"  ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                      :resultlower["name"] === "Under" ? <p key={indexlow}>{resultlower["name"]} : {resultlower["value"]}</p>
+                                                                      :""
+                                                                
+                                                                )
+                                                                    
+                                                            :""
+                                                  
+                                          
+                                                      :""
+                                                      
+                                                      )})
+                                              :null
+                                        
+                                        ))
+                                    :null
+                                    }
+                              </td>
+                          </tr>
+                          
+                          )
+                      :null
+                  }
+                  
+                  <tr>
+                          <td colSpan="6">
+                                {
+                                  Lbtn === false ?
+                                  <center>
+                                      <button style={btnstyles}  onClick={handdleClickOddsetc}>ดูราคาอื่นๆ</button>
+                                
+                                  </center>
+                                  :<center>
+                                      <button style={btnstyles}  onClick={handdleClickOddhidec}>ซ่อนรายการ</button>
+                                  </center>
+                                }
+                                
+                          </td>
+                    </tr>
+                 </tfoot>
+             </table>
+             </div>
+
+         {
+         
+         /*errs !== false ?
+
+          ldata === null ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center>
+          :
+          
+          <Accordion>
+                
+                   {ldata.odds.map((res,index) => {
+                         
+                          return(
+    
+                            <div label={res["id"]} text={res["value"]} key={index} style={{padding:5}}>
+                               
+                                  {Array.isArray(res["bookmakers"]) === true ?
+
+                                        res["bookmakers"].map((resin,indexin) => (
+
+                                          resin["id"] === "88" || resin["id"] === "56" || resin["id"] === "105" || resin["id"] === "232" || resin["id"] === "16" ? 
+                                          <div className="card-body" key={indexin} style={{background: "#222222"}}>
                                               <div className="row align-items-center">
                                                 <div className="col-sm-4 text-center text-sm-left">
                                                   {<img className="img-fluid mb-3 mb-sm-0" src={`/assets/odds/${resin["name"]}.png`} />}
@@ -982,7 +2207,7 @@ useEffect(() => {
                                                     
                                                     resin["odds"].map((result,num) => 
                                                       
-                                                    result["name"] === "Home" ?
+                                                    result["name"] === "Home" || result["name"] === "Over" ?
                                                     <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
                                                     : ""
                                                     )
@@ -1004,7 +2229,7 @@ useEffect(() => {
                                                   {
                                                       resin["odds"].map((result,num) => 
                                                       
-                                                        result["name"] === "Away" ?
+                                                        result["name"] === "Away" || result["name"] === "Under" ?
                                                         <InputGroup symbo={result["name"]} value={result["value"]} disabled={true} key={num}/>
                                                         :""
                                                         )
@@ -1015,22 +2240,37 @@ useEffect(() => {
                                             </div>
                                             :null
 
-                                      ))
-                                  
+                                        ))
 
-                                : 
-                                null
+                                   :null}
+                                 
                                 
-                          : null
-
-
-                    )) 
-                  :<center><h1>loading .......</h1></center>
-
-                  }
+                          </div>
+    
+                       )})}
+           </Accordion>
+           :<center><h1>loading .......</h1></center>
+           */
+          }
+          </div>
          
+          {/*<Accordion>
             
-                </div>}
+                <div label="MatchWinner 1">
+                 
+                    <p>
+                        Match Winner 1 text
+                    </p>
+                </div>
+                <div label="MatchWinner 2">
+                    
+                    <p>
+                        Match Winner 2 text
+                    </p>
+                </div>
+               
+          </Accordion>*/}
+         
         </div>
       </TopLiveSoccerContent>
       

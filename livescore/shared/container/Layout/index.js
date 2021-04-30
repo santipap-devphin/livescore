@@ -15,6 +15,7 @@ import NavCategory from "../../components/NavCategory"
 import NavDate from "../../commons/NavDate"
 
 
+
 function datee(nextday){
 
   const today = new Date()
@@ -98,16 +99,16 @@ const Layout = (props) => {
     let routes = [
       
    
-      { key: "1", title: "พรีเมียร์ ลีก อังกฤษ",id:"1204", country:false, links: `/league/1204/${nstr}/`, img: "/assets/icons/league/league_premier.png" },
+      { key: "1", title: "พรีเมียร์ ลีก อังกฤษ",id:"1204", country:false, links: `/league/1204/${nstr}/`, img: "/assets/country/England.png" },
       { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"1005", country:false, links: `/league/1005/${nstr}/`, img: "/assets/icons/league/league_uefa.png" },
       { key: "3", title: "ยูโรป้า ลีก",id:"1007", country:false, links: `/league/1007/${nstr}/`, img: "/assets/icons/league/league_europa.png" },
       { key: "4", title: "เอฟเอ คัพ อังกฤษ",id:"1198", country:false, links: `/league/1198/${nstr}/`, img: "/assets/icons/league/league_fa_cup.png" },
-      { key: "5", title: "ลาลีกา สเปน",id:"1399", country:false, links: `/league/1399/${nstr}/`, img: "/assets/icons/league/league_laliga.png" },
-      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี",id:"1269", country:false, links: `/league/1269/${nstr}/`, img: "/assets/icons/league/league_calcio.png" },
-      { key: "7", title: "บุนเดสลีกา เยอรมัน",id:"1229", country:false, links: `/league/1229/${nstr}/`, img: "/assets/icons/league/league_bundesliga.png" },
-      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"1322", country:false, links: `/league/1322/${nstr}/`, img: "/assets/icons/league/league_eredivisie.png" },
-      { key: "9", title: "ลีก เอิง ฝรั่งเศส",id:"1221", country:false, links: `/league/1221/${nstr}/`, img: "/assets/icons/league/league_ligue.png" },
-      { key: "10", title: "เจ ลีก ญี่ปุ่น",id:"1271", country:false, links: `/league/1271/${nstr}/`, img: "/assets/icons/league/league_jleague.png" },
+      { key: "5", title: "ลาลีกา สเปน",id:"1399", country:false, links: `/league/1399/${nstr}/`, img: "/assets/country/Spain.png" },
+      { key: "6", title: "กัลโช่ เซเรีย อา อิตาลี",id:"1269", country:false, links: `/league/1269/${nstr}/`, img: "/assets/country/Italy.png" },
+      { key: "7", title: "บุนเดสลีกา เยอรมัน",id:"1229", country:false, links: `/league/1229/${nstr}/`, img: "/assets/country/Germany.png" },
+      { key: "8", title: "เอเรดิวิซี่ ฮอลแลนด์",id:"1322", country:false, links: `/league/1322/${nstr}/`, img: "/assets/country/Holland.png" },
+      { key: "9", title: "ลีก เอิง ฝรั่งเศส",id:"1221", country:false, links: `/league/1221/${nstr}/`, img: "/assets/country/France.png" },
+      { key: "10", title: "เจ ลีก ญี่ปุ่น",id:"1271", country:false, links: `/league/1271/${nstr}/`, img: "/assets/country/Japan.png" },
       { key: "11", title: "ไทยลีก",id:"1415", country:false, links: `/league/1415/${nstr}/`, img: "/assets/country/Thailand.png" }
     ]
 

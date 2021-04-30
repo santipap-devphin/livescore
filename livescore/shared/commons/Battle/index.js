@@ -9,21 +9,24 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
     //ev.target.src = '';
    }
 
-   
+  var newstitle =  list.title.replace(/[^a-zA-Z ]/g, "");
+
+
+  
    
   return (
     <BattleStyle className={`match-header ${className}`}>
       <div className="right row mx-0 align-items-center">
         <div className="home-team team col-4 text-center">
           <div className="logo" style={{padding:20}}>
-            <a href={`/clubs/${list.title}/${list.team}/overviews/${list.teamid}`} target="_blank">
+            <a href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.team.replace(/\s/g, '')}/overviews/${list.teamid}`} target="_blank">
             <img 
             src={imgTeamA}
             alt={imgTeamAName} 
             onError={addDefaultSrc} />
             </a>
           </div>
-          <div className="name"><a href={`/clubs/${list.title}/${list.team}/overviews/${list.teamid}`} target="_blank">{imgTeamAName}</a></div>
+          <div className="name"><a href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.team.replace(/\s/g, '')}/overviews/${list.teamid}`} target="_blank">{imgTeamAName}</a></div>
         </div>
         <div className="score-date col-4">
           <div className="match-type">{type}</div>
@@ -40,14 +43,14 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
         </div>
         <div className="away-team team col-4 text-center">
           <div className="logo" style={{padding:20}}>
-            <a href={`/clubs/${list.title}/${list.teamB}/overviews/${list.teamBid}`} target="_blank">
+            <a href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.teamB.replace(/\s/g, '')}/overviews/${list.teamBid}`} target="_blank">
               <img 
                 src={imgTeamB} 
                 alt={imgTeamBName} 
                 onError={addDefaultSrc} />
             </a>
           </div>
-          <div className="name"><a href={`/clubs/${list.title}/${list.teamB}/overviews/${list.teamBid}`} target="_blank">{imgTeamBName}</a></div>
+          <div className="name"><a href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.teamB.replace(/\s/g, '')}/overviews/${list.teamBid}`} target="_blank">{imgTeamBName}</a></div>
         </div>
       </div>
       {
