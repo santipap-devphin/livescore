@@ -33,7 +33,7 @@ const SevenColCups = ({ title, cups }) => {
       imgg = "/assets/cups/Community Shield.png";
     }
     else if(titlee.indexOf("Championship") > -1){
-      imgg = "/assets/cups/Championship.png";
+      imgg = "/assets/cups/championship.png";
     }else if(titlee.indexOf("UEFA Champions League") > -1){
       imgg = "/assets/cups/004_champoins_leaguge_winner@2x.png";
     }
@@ -177,8 +177,7 @@ const SevenColCups = ({ title, cups }) => {
     <SevenColCupsStyle className="w-100 mb-3">
       <h3 className="title-cups py-3">{title}</h3>
       <div className="row seven-cols">
-        {console.log(title)}
-       {console.log(check_for_img(title))}
+      
         {
            /*<div className="col-md-1 px-2 pb-3">
            <div className="p-3 border rounded text-center">
