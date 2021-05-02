@@ -4,7 +4,7 @@ import styles from './TableOdds.module.css'
 
 const TableOdds = ({children}) => {
 
-    console.log(children)
+    console.log(children[0].props.res)
    /* const[activetab, setActivetab] = useState(children[0].props.label);
     const[label ,Setlable] = useState();
     const router = useRouter();

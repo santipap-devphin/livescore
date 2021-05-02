@@ -4,7 +4,7 @@ import {MatchSummaryStyle} from "./style"
 
 const MatchSummary = ({type, matchionfo}) => {
 
-  console.log(matchionfo)
+  //console.log(matchionfo)
   return (
     <MatchSummaryStyle className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-5">
         <div className="card-header text-dark text-center text-uppercase border-top-0 border-bottom-0 font-weight-bold">

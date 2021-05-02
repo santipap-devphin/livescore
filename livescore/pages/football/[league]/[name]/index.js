@@ -1083,7 +1083,7 @@ useEffect(() => {
                 {
                       errs !== false ? 
                       
-                      ldata === null ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center> 
+                      ldata === null ? <tr><td colSpan="6"><h1 style={{textAlign:"center"}}>ไม่มีข้อมูล</h1></td></tr>
                       :
 
                           ldata.odds.map((res,index) => 
@@ -1800,8 +1800,9 @@ useEffect(() => {
                 <tfoot>
                 
                 {
+                    
                     oddsLoad !== false ? 
-                    listOdds.length === 0 ? <center style={{padding:"10px"}}><h1>ไม่มีข้อมูล</h1></center> 
+                    listOdds.length === 0  ? <tr><td colSpan="6"></td></tr>
                     :
                     listOdds.map((res,index) => 
                     
@@ -1949,12 +1950,12 @@ useEffect(() => {
                     )
                     
                     :null
-                  
+                    
                   }
                   {
                      oddsLoad !== false ? 
 
-                          listOddsUnder.length === 0 ? ""
+                          listOddsUnder.length === 0 ? <tr><td colSpan="6"></td></tr>
                           :
                           listOddsUnder.map((res,index) => 
 
@@ -2159,6 +2160,7 @@ useEffect(() => {
                   <tr>
                           <td colSpan="6">
                                 {
+                                  ldata !== null ?
                                   Lbtn === false ?
                                   <center>
                                       <button style={btnstyles}  onClick={handdleClickOddsetc}>ดูราคาอื่นๆ</button>
@@ -2167,6 +2169,7 @@ useEffect(() => {
                                   :<center>
                                       <button style={btnstyles}  onClick={handdleClickOddhidec}>ซ่อนรายการ</button>
                                   </center>
+                                  :""
                                 }
                                 
                           </td>

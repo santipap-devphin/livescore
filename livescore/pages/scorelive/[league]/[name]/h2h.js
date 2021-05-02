@@ -65,11 +65,13 @@ const H2h = (props) => {
                                   title: defalut.league["@name"],
                                   type: defalut.league.match["@status"],
                                   date: defalut.league.match["@date"],
+                                  teamid: defalut.league.match.localteam["@id"],
                                   team: defalut.league.match.localteam["@name"],
                                   score:defalut.league.match.localteam["@goals"] + " - " +defalut.league.match.visitorteam["@goals"] ,
                                   scoreA:defalut.league.match.localteam["@goals"],
                                   scoreB:defalut.league.match.visitorteam["@goals"],
-                                  teamB: defalut.league.match.visitorteam["@name"]
+                                  teamB: defalut.league.match.visitorteam["@name"],
+                                  teamBid: defalut.league.match.visitorteam["@id"]
                                 },
                               ]
   
@@ -85,11 +87,13 @@ const H2h = (props) => {
                                  title: defalut.sleague["@name"],
                                  type: defalut.sleague.matches.match["@status"],
                                  date: defalut.sleague.matches.match["@date"],
+                                 teamid: defalut.sleague.matches.match.localteam["@id"],
                                  team: defalut.sleague.matches.match.localteam["@name"],
                                  score:defalut.sleague.matches.match.localteam["@goals"] + " - " +defalut.sleague.matches.match.visitorteam["@goals"] ,
                                  scoreA:defalut.sleague.matches.match.localteam["@goals"],
                                  scoreB:defalut.sleague.matches.match.visitorteam["@goals"],
-                                 teamB: defalut.sleague.matches.match.visitorteam["@name"]
+                                 teamB: defalut.sleague.matches.match.visitorteam["@name"],
+                                 teamBid: defalut.sleague.matches.match.visitorteam["@id"]
                                },
                              ]
   
@@ -195,7 +199,100 @@ H2h.getInitialProps = async ({asPath}) => {
   if(typeof json.commentaries.tournament === "undefined"){
 
       check = 1;
-      const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+
+
+      var datadefalut = await Promise.all([
+        /* Alternatively store each in an array */
+        // var [x, y, z] = await Promise.all([
+        // parse results as json; fetch data response has several reader methods available:
+        //.arrayBuffer()
+        //.blob()
+        //.formData()
+        //.json()
+        //.text()
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1').then((response) => response.json()),// parse each response as json
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-1?json=1').then((response) => response.json()),
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d1?json=1').then((response) => response.json()),
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-2?json=1').then((response) => response.json()),
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d2?json=1').then((response) => response.json()),
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d-3?json=1').then((response) => response.json()),
+        fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/d3?json=1').then((response) => response.json()),
+       
+      ]);
+
+      for(var ii =0; ii < datadefalut.length; ii++){
+
+
+        for(var i =0; i < datadefalut[ii].scores.category.length; i++){
+
+          if(datadefalut[ii].scores.category[i]["@id"] === host[3]){
+  
+                  cate = {
+                    "@name":datadefalut[ii].scores.category[i]["@name"],
+                    "@gid":datadefalut[ii].scores.category[i]["@gid"],
+                    "@id":datadefalut[ii].scores.category[i]["@id"],
+                    "@file_group":datadefalut[ii].scores.category[i]["@file_group"],
+                    "@iscup":datadefalut[ii].scores.category[i]["@iscup"],
+                    "matches":{}
+                }
+    
+                 
+                if(Array.isArray(datadefalut[ii].scores.category[i].matches.match) === true){
+    
+                  for(var j =0; j < datadefalut[ii].scores.category[i].matches.match.length; j++){
+    
+    
+                    if(datadefalut[ii].scores.category[i].matches.match[j]["@static_id"] === host[2]){
+    
+  
+                             match = datadefalut[ii].scores.category[i].matches.match[j];
+                            
+                             localteamid = datadefalut[ii].scores.category[i].matches.match[j].localteam["@id"];
+                             visitorteam = datadefalut[ii].scores.category[i].matches.match[j].visitorteam["@id"];
+                             const responh2hin = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${localteamid}/${visitorteam}?json=1`)
+                             const jsonh2h = await responh2hin.json()
+                             global = jsonh2h;
+  
+                            
+    
+    
+                    }
+    
+    
+                  }
+    
+    
+                }else{
+    
+                  if(datadefalut[ii].scores.category[i].matches.match["@static_id"] === host[2]){
+    
+    
+                              match = datadefalut[ii].scores.category[i].matches.match;
+                             
+                              localteamid = datadefalut[ii].scores.category[i].matches.match.localteam["@id"];
+                              visitorteam = datadefalut[ii].scores.category[i].matches.match.visitorteam["@id"];
+                              const responh2hin = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${localteamid}/${visitorteam}?json=1`)
+                              const jsonh2h = await responh2hin.json()
+                              global = jsonh2h;
+                          
+    
+    
+                     }
+    
+    
+                }
+    
+    
+          }
+    
+    
+    
+        }
+
+      }
+      cate.matches  = {match}
+
+      /*const resdefalut = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
       const datadefalut = await resdefalut.json()
 
       for(var i =0; i < datadefalut.scores.category.length; i++){
@@ -262,7 +359,7 @@ H2h.getInitialProps = async ({asPath}) => {
   
   
   
-      }
+      }*/
 
 
 
@@ -275,16 +372,6 @@ H2h.getInitialProps = async ({asPath}) => {
 
 
   }
-
-
-
-
-
-
-
-  
-
-
 
   //return { listdata: host[2]}
   return { league: json.commentaries.tournament ,listh2s :global ,check:check ,sleague :cate}
