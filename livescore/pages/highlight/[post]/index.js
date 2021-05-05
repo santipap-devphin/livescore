@@ -81,13 +81,13 @@ const index = (props) => {
  
   return (
     <Layout >
-      <HeaderSeo
+     <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title={`ไฮไลท์ฟุตบอล ${presLoad !== false ? props.title : ""}`}
+        desc={`ไฮไลท์ฟุตบอล คู่ ${presLoad !== false ? props.title : ""}`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`รายงาน ไฮไลท์ฟุตบอล ${presLoad !== false ? props.title : ""}`}
         author=""
       />
       <BannerInner />

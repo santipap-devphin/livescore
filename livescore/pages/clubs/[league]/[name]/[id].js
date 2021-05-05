@@ -28,15 +28,15 @@ class Apitest extends Component {
   
     return (
       <LayoutSidebarClub>
-        <HeaderSeo
-          siteName=""
-          title="live score"
-          desc=""
-          imgSrc=""
-          metaUrl=""
-          keyWords=""
-          author=""
-        />
+         <HeaderSeo
+            siteName=""
+            title="7score ข้อมูลสโมสรทุกลีกดัง พร้อมทั้งสถิติต่างๆจากทั่วทุกมุมโลก"
+            desc="ข้อมูลและสถิติจากทุกลีกดัง พรีเมียร์ ลีก, ลา ลีกา , กัลโช่ ซีเรีย อา, บุนเดส ลีกา และไทย ลีก พร้อมทั้งลีกรองและลีกสำคัญจากทั่วทุกมุมโลก"
+            imgSrc=""
+            metaUrl=""
+            keyWords="ข้อมูลสโมสร, รายชื่อผู้เล่น, สถิติฟุตบอล, ข้อมูลนักฟุตบอล"
+            author=""
+          />
           <h1>ผู้จัดการทีม {this.props.home.teams.team.coach["@name"]}</h1>
           <h2>อันดับตารางปัจจุบัน {this.props.home.teams.team.leagues["@league_rank"]}</h2>
           <p>ประเทศ {this.props.home.teams.team.country}</p>

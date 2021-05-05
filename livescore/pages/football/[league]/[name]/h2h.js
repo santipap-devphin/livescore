@@ -108,11 +108,11 @@ const H2h = (props) => {
     <Layout className="px-0 px-md-3">
       <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title={`ข้อมูลการพบกันของ คู่ ${nav[2]}`}
+        desc={`ข้อมูล Head to Head ของ ${nav[2]}`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`Head to Head ${nav[2]}`}
         author=""
       />
       <TopLiveSoccerContent 

@@ -7,6 +7,7 @@ import HeaderSeo from "../../shared/commons/HeaderSeo"
 import NavDate from "../../shared/commons/NavDate"
 import TableBattle from "../../shared/commons/TableBattle"
 import TableBattleMobile from "../../shared/commons/TableBattleMobile"
+import BannerInner from "../../shared/components/Banner/Inner"
 
 const Countrys = (props) => {
     const router = useRouter()
@@ -18,7 +19,7 @@ const Countrys = (props) => {
     const [error, setError] = useState('');
     const [lang , setLang] = useState([]);
     const [sectiontwo , setSectiontwo] = useState(false);
-    
+    var txtdate = null;
     let teamth = [];
     console.log(props)
   
@@ -26,6 +27,7 @@ const Countrys = (props) => {
   
       const today = new Date()
       const tomorrow = new Date(today)
+     
   
       tomorrow.setDate(tomorrow.getDate()+nextday)
   
@@ -102,7 +104,22 @@ const Countrys = (props) => {
         :
         slug[1] === "d3" ? navDate[6].today = true
         :
-        navDate[3].today = true
+        navDate[3].today = true 
+        
+
+        slug[1] === "d-3" ? txtdate = "ย้อนหลัง 3 วัน" 
+        :
+        slug[1] === "d-2" ? txtdate = "ย้อนหลัง 2 วัน" 
+        :
+        slug[1] === "d-1" ? txtdate = "ย้อนหลัง 1 วัน" 
+        :
+        slug[1] === "d1" ? txtdate = "ล่วงหน้า 1 วัน" 
+        :
+        slug[1] === "d2" ? txtdate = "ล่วงหน้า 2 วัน" 
+        :
+        slug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
+        :
+        txtdate = "วันนี้" 
 
         useEffect(() => {
 
@@ -118,16 +135,17 @@ const Countrys = (props) => {
          <Layout className="px-0 px-md-3">
          <HeaderSeo
             siteName=""
-            title="live score"
-            desc=""
+            title={`ค้นหา ผลบอล ประเทศ ${slug[0]} ${txtdate}` }
+            desc={`ผลบอลประเทศ ${slug[0]} ${txtdate}`}
             imgSrc=""
             metaUrl=""
-            keyWords=""
+            keyWords={`ผลบอลประเทศทั้งหมด ${slug[0]} ${txtdate}`}
             author=""
           />
+          <BannerInner />
           <div className="d-none d-md-block mainf-tab">
-            <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-            <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+            {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+            <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
          <NavDate 
           DataDate={navDate}
           onClickLeft={() => console.log("left")}
@@ -166,8 +184,8 @@ const Countrys = (props) => {
           <div className="d-block d-md-none mainf-tab">
                     <div className="banner px-3">
   
-                        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                        {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
   
                     </div>
   

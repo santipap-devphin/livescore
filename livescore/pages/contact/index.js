@@ -14,14 +14,14 @@ const Contact = () => {
         <Layout>
             <HeaderSeo
                 siteName=""
-                title="live score"
-                desc=""
+                title="ติดต่อเรา 7score.live"
+                desc="ติดต่อสอบถามข้อมูลกับ 7score.live ผ่านทางอีเมล์ admin@7score.live ได้ตลอด 24 ชั่วโมง"
                 imgSrc=""
                 metaUrl=""
                 keyWords=""
                 author=""
             />
-            <h1>Contact ทดสอบ ทดสอบ</h1>
+            <h1>ติดต่อเรา</h1>
             <Exam/>
         </Layout>
     )
@@ -35,7 +35,8 @@ function Exam(){
     //if(error) return error.message;
     return (
             <div>
-                <p>............</p>
+                <p>หากท่านมีข้อสงสัยสามารถติดต่อเราผ่านทางอีเมล์ของ 7score.live ด้านล่างได้ตลอด 24 ชั่วโมง</p>
+                <p>ติดต่อเรา : admin@7score.live</p>
             </div>
     )
 }

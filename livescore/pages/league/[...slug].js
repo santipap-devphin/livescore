@@ -15,14 +15,15 @@ const Post = (props) => {
   const router = useRouter()
   const slug = router.query.slug || []
   const myRef = useRef(null)
- console.log(slug)
+ 
   const [items, setItems] = useState();
   const [load, setLoad] = useState(false);
   const [error, setError] = useState('');
   const [lang , setLang] = useState([]);
   const [sectiontwo , setSectiontwo] = useState(false);
   let teamth = [];
-  console.log(props)
+  var txtdate = null ;
+  //console.log(props)
 
   function datee(nextday){
 
@@ -115,19 +116,33 @@ const Post = (props) => {
       slug[1] === "d3" ? navDate[6].today = true
       :
       navDate[3].today = true
+
+      slug[1] === "d-3" ? txtdate = "ย้อนหลัง 3 วัน" 
+      :
+      slug[1] === "d-2" ? txtdate = "ย้อนหลัง 2 วัน" 
+      :
+      slug[1] === "d-1" ? txtdate = "ย้อนหลัง 1 วัน" 
+      :
+      slug[1] === "d1" ? txtdate = "ล่วงหน้า 1 วัน" 
+      :
+      slug[1] === "d2" ? txtdate = "ล่วงหน้า 2 วัน" 
+      :
+      slug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
+      :
+      txtdate = "วันนี้" 
  
   return (
     <>
        <Layout className="px-0 px-md-3">
        <HeaderSeo
-          siteName=""
-          title="live score"
-          desc=""
-          imgSrc=""
-          metaUrl=""
-          keyWords=""
-          author=""
-        />
+        siteName=""
+        title={`ลีคยอดฮิต ${slug[0]} ${txtdate}`}
+        desc={`ลีคยอดฮิต คู่ ${slug[0]} ${txtdate}`}
+        imgSrc=""
+        metaUrl=""
+        keyWords={`รายงาน ลีคยอดฮิต ${slug[0]} ${txtdate}`}
+        author=""
+      />
         <div className="d-none d-md-block mainf-tab">
           <BannerInner />
        <NavDate 
@@ -166,8 +181,8 @@ const Post = (props) => {
         <div className="d-block d-md-none mainf-tab">
                   <div className="banner px-3">
 
-                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                      {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
 
                   </div>
 

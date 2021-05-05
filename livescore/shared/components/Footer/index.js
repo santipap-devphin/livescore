@@ -93,7 +93,7 @@ const Footer = ({ className }) => {
         <div className="container">
           <div className="d-flex align-items-md-center flex-column flex-lg-row">
             <div className="text-center text-lg-left">
-              <p className="mb-3 mb-md-0">© Copyright 2017 www.livescore-beta.com All rights reserved. Live Beta</p>
+             <p className="mb-3 mb-md-0">&copy; Copyright 2021 <a href="https://www.7score.live">www.7score.live</a> All rights reserved.</p>
             </div>
             <div className="text-center text-lg-right ml-lg-auto">
               <ul className="nav nav-sm nav-white nav-x-sm align-items-center justify-content-center">

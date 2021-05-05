@@ -5,6 +5,7 @@ import LayoutSidebarClub from "../../../../../shared/container/LayoutSidebarClub
 import OverViewMatchesTable from "../../../../../shared/components/OverViewMatchesTable"
 import OverViewStatsTable from "../../../../../shared/components/OverViewStatsTable"
 import OverViewInjuredTable from "../../../../../shared/components/OverViewInjuredTable"
+import { useRouter } from 'next/router'
 
 
 import { AiOutlineSwapRight } from "react-icons/ai";
@@ -18,6 +19,9 @@ const Apitest = (props) => {
   const [load, setLoad] = useState(false);
   const [loadSq, setSq] = useState(false);
   const [squad, setSquad] = useState();
+  const router = useRouter()
+  const sppasth = router.asPath.split("/");
+ 
 
   const loadData = async (idd) => {
 
@@ -67,18 +71,16 @@ const Apitest = (props) => {
 
   return (
     <LayoutSidebarClub>
+
       <HeaderSeo
-        siteName=""
-        title="live score"
-        desc=""
+        siteName="clubsoverview"
+        title={`ข้อมูลภาพรวมทีม  ${sppasth[3]}` }
+        desc={`ข้อมูลทีม ${sppasth[3]} รายชื่อนักเตะ ชื่อนักเตะบาดเจ็บ จำนวนยิงประตู`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`ข้อมูลทั้งหมดของทีม ${sppasth[3]}`}
         author=""
       />
-
-     
-      
         <img src={`data:image/jpeg;base64,${props.home.teams.team.image}`}  style={{display: "none"}} />
         <p style={{display: "none"}}>{props.home.teams.team.squad.player.length}</p>
       

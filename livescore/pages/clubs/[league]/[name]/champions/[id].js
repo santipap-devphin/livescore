@@ -1,9 +1,13 @@
 import React from 'react';
+import { useRouter } from 'next/router'
 import HeaderSeo from "../../../../../shared/commons/HeaderSeo"
 import SevenColCups from "../../../../../shared/commons/SevenColCups"
 import LayoutSidebarClub from "../../../../../shared/container/LayoutSidebarClub"
 
 const Champions = (props) => {
+
+  const router = useRouter()
+  const sppasth = router.asPath.split("/");
 
   const League = [];
   const d1 = [];
@@ -28,12 +32,12 @@ const Champions = (props) => {
   return (
     <LayoutSidebarClub>
       <HeaderSeo
-        siteName=""
-        title="live score"
-        desc=""
+        siteName="clubsoverview"
+        title={`จำนวนแชมป์ของ  ${sppasth[3]}` }
+        desc={`แชมป์ทั้งหมดของทีม ${sppasth[3]}`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`ข้อมูลรวมจำนวนถ้วยรางวัล ${sppasth[3]}`}
         author=""
       />
 

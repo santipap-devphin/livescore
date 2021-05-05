@@ -48,14 +48,14 @@ const Teams = (props) => {
     <Layout className="px-0 px-md-3">
         
         <HeaderSeo
-                siteName=""
-                title="live score"
-                desc=""
-                imgSrc=""
-                metaUrl=""
-                keyWords=""
-                author=""
-            />
+        siteName=""
+        title="ตารางคะแนนฉบับเต็ม"
+        desc="ตารางคะแนนฉบับเต็ม ของ ลีกต่างๆ"
+        imgSrc=""
+        metaUrl=""
+        keyWords="ตารางคะแนนฉบับเต็ม"
+        author=""
+      />
             <div>
                          <LeagueTable 
                             title={props.League["@league"]}

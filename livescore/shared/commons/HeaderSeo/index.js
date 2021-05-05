@@ -2,11 +2,28 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 
+
 const HeaderSeo = ({siteName, title, desc, imgSrc, metaUrl, keyWords, author}) => {
+
+    var icons = "";
+
+
+    if(siteName === "clubsoverview"){
+
+       
+        icons = "../../../../assets/favicon.ico";
+
+    }else{
+
+        icons = "../../../assets/favicon.ico";
+    }
+
+
+    
     return (
         <Head>
             <title>{title.replace(/(<([^>]+)>)/gi, "").substring(0, 70)}</title>
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href={icons} />
             <meta name="robots" content="index, follow" />
             <meta name="description" content={desc.replace(/(<([^>]+)>)/gi, "").substring(0, 200)} />
             <meta name="keywords" content={keyWords} />

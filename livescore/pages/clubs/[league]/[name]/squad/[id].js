@@ -10,6 +10,7 @@ import liverpool from "../../../../../mock/liverpool"
 const Squad = (props) => {
 
  const router = useRouter()
+ const sppasth = router.asPath.split("/");
  const gk = [];
  const md = [];
  const sk = [];
@@ -53,12 +54,12 @@ const Squad = (props) => {
   return (
     <LayoutSidebarClub>
       <HeaderSeo
-        siteName=""
-        title="live score"
-        desc=""
+        siteName="clubsoverview"
+        title={`รายชื่อนักเตะทีม  ${sppasth[3]}` }
+        desc={`ข้อมูลนักเตะของทีม ${sppasth[3]} แต่ละตำแหน่ง`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`นักเตะของทีม ${sppasth[3]} ทั้งหมด`}
         author=""
       />
 

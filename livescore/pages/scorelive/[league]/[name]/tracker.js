@@ -158,11 +158,11 @@ const Tracker = (props) => {
     <Layout className="px-0 px-md-3">
       <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title={`ข้อมูลเชิงลึก คู่ ${nav[2]}`}
+        desc={`ข้อมูลเชิงลึก ของ ${nav[2]}`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`ข้อมูลเพิ่มเติม ${nav[2]}`}
         author=""
       />
       <TopLiveSoccerContent

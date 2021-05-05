@@ -195,11 +195,11 @@ const LineUs = (props) => {
     <Layout className="px-0 px-md-3">
       <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title={`รายชื่อนักเตะระหว่าง ${nav[2]}`}
+        desc={`รายชื่อนักเตะระหว่าง คู่ ${nav[2]}`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`รายชื่อนักเตะระหว่าง ${nav[2]}`}
         author=""
       />
       <TopLiveSoccerContent 

@@ -975,11 +975,11 @@ useEffect(() => {
     <Layout className="px-0 px-md-3"> 
       <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title={`ผลบอล ${nav[2]}`}
+        desc={`รายละเอียดข้อมูล คู่ ${nav[2]} ข้อมูลเชิงลึก ผู้เล่น และ ผลงาน Head to Head`}
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords={`รายงาน ผลบอลระหว่าง ${nav[2]}`}
         author=""
       />
       

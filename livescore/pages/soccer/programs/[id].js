@@ -3,6 +3,7 @@ import Layout from "../../../shared/container/Layout"
 import axios from 'axios';
 import NavDate from "../../../shared/commons/NavDate"
 import HeaderSeo from "../../../shared/commons/HeaderSeo"
+import BannerInner from "../../../shared/components/Banner/Inner"
 import dynamic from 'next/dynamic';
 
 const TableBattle = dynamic(() => import('../../../shared/commons/TableBattle'));
@@ -16,6 +17,7 @@ import React, { useState, useEffect ,useRef } from 'react';
 const Homefilter = (props) => {
 
 
+  var txtdate = null;
   const myRef = useRef(null)  
   const handdleClickAfterload = (e) => {
 
@@ -141,21 +143,44 @@ const Homefilter = (props) => {
   }
 
 
+  {
+    props.id === "d-3"  ? txtdate = "ย้อนหลัง 3 วัน" 
+    :
+    props.id === "d-2"  ? txtdate = "ย้อนหลัง 2 วัน" 
+    :
+    props.id === "d-1"  ? txtdate = "ย้อนหลัง 1 วัน" 
+    :
+    props.id === "d1"  ? txtdate = "ล่วงหน้า 1 วัน" 
+    : 
+    props.id === "d2"  ? txtdate = "ล่วงหน้า 2 วัน" 
+    :
+    props.id === "d3"  ? txtdate = "ล่วงหน้า 3 วัน" 
+    :
+    txtdate = "วันนี้"
+  }
+  
+
+
+  
+
+
   return (
 
     <Layout className="px-0 px-md-3" standings={props.list}>
+
         <HeaderSeo
-          siteName=""
-          title="live score"
-          desc=""
-          imgSrc=""
-          metaUrl=""
-          keyWords=""
-          author=""
+        siteName=""
+        title={`คู่บอลเตะ ${txtdate}`}
+        desc={`คู่บอลเตะ พร้อมข้อมูลทีมแต่ละลีกทั่วโลก ${txtdate}`}
+        imgSrc=""
+        metaUrl=""
+        keyWords="ผลบอล, live score, ผลบอลสด, ไฮไลท์ฟุตบอล"
+        author=""
         />
+         <BannerInner />
         <div className="d-none d-md-block mainf-tab">
-          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+          {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+          <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
           <NavDate 
             DataDate={navDates}
             onClickLeft={() => console.log("left")}
@@ -210,8 +235,8 @@ const Homefilter = (props) => {
           <div className="d-block d-md-none">
                   <div className="banner px-3">
 
-                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                      {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                      <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
 
                   </div>
                   <NavDate 

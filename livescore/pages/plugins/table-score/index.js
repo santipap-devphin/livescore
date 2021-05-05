@@ -228,13 +228,13 @@ const TableScore = () => {
                             <div className="d-none d-md-block">
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
+                                        {/*<img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />*/}
                                     </div>
                                     <div className="col-md-4">
-                                        <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
+                                         {/*<img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />*/}
                                     </div>
                                     <div className="col-md-4">
-                                        <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
+                                         {/*<img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />*/}
                                     </div>
                                 </div>
 
@@ -271,11 +271,11 @@ const TableScore = () => {
                                 }
 
                                 
-                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                                {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
                             </div>
                             <div className="d-block d-md-none">
-                                <div className="row d-none d-md-flex">
+                                {/*<div className="row d-none d-md-flex">
                                     <div className="col-md-4">
                                         <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
@@ -296,7 +296,7 @@ const TableScore = () => {
                                     <div className="col-4 pl-7px">
                                     <img className="mb-4 img-fluid w-100 h-90px" src="/assets/ads/ads200x200.png" alt="" />
                                     </div>
-                                </div>
+                                </div>*/}
                                
                                 {
                                     loading !== false ?
@@ -322,8 +322,8 @@ const TableScore = () => {
                                     }
                                 
                                 
-                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                               {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                                <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
                             </div>
                             </>
                             : <Empty />

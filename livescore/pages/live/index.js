@@ -2,6 +2,7 @@ import React, { useState, useEffect ,useRef } from 'react';
 import axios from 'axios';
 import HeaderSeo from "../../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
+import Footer from "../../shared/components/Footer"
 import BannerInner from "../../shared/components/Banner/Inner"
 
 const TableLive = dynamic(() => import('../../shared/commons/TableLive'));
@@ -1190,20 +1191,20 @@ return (
     <div className="container">
       <HeaderSeo
         siteName=""
-        title="live score"
-        desc=""
+        title="7score ผลบอล ผลบอลสด ตารางแข่งขัน ไฮไลท์ฟุตบอลทั่วโลก"
+        desc="ผลบอล live score ผลบอลสด ผลบอลเมื่อคืน ไฮไลท์การแข่งขัน อัพเดทเรียลไทม์ พร้อมข้อมูลทีมแต่ละลีกทั่วโลก"
         imgSrc=""
         metaUrl=""
-        keyWords=""
+        keyWords="ผลบอล, live score, ผลบอลสด, ไฮไลท์ฟุตบอล"
         author=""
       />
       <div className="banners">
-                    <BannerInner />
+          <BannerInner />
       </div>
       <h1>ผลบอล</h1> 7score.live เว็บไซต์รายงานสดผลฟุตบอลทั้งไทยและต่างประเทศทุกลีกทั่วโลก อัพเดทกันวินาทีต่อวินาทีเพื่อให้ท่านได้รับข้อมูลที่รวดเร็ว อีกทั้งยังนำเสนอข้อมูลของแต่ละทีม สถิติการพบกัน และข้อมูลสำคัญต่างๆ เพื่อเป็นแนวทางในการวิเคราะห์ของท่าน
       <div className="d-none d-md-block mainf-tab">
-        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+        {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+        <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
         
         <a href="/live">
             All
@@ -1266,8 +1267,8 @@ return (
              <div className="d-block d-md-none mainf-tab">
                 <div className="banner px-3">
 
-                    <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
-                    <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                    {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
+                    <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
 
                 </div>
                 
@@ -1304,8 +1305,9 @@ return (
         
 
        }
-    
+     <Footer />
    </div>
+   
   )
 
 }
