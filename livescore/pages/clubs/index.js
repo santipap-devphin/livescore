@@ -106,7 +106,6 @@ const Teams = (props) => {
               <div className="media align-items-center py-4">
                 <Avatar
                   className="align-self-center mr-3"
-                 
                   shape="square"
                   src={`/assets/country/${items.standings["@country"]}.png`}
                   alt="English Premier League" 

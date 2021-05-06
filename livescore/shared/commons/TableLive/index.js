@@ -110,7 +110,7 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
       <h4 className={`block-title ${className} mb-0`}>
       <img 
          src={`${assets}/country/${lastimg}`}
-         alt={"icon"} 
+         alt={`ผลบอล ${title}`}
          width={25}
          style={{marginRight:20}}
          onError={DefaultSrc} />
@@ -148,7 +148,7 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ไฮไลท์ฟุตบอล ${item.localteam['@name']}`}
                                 />
                               </div> 
                               <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center text-score">  
@@ -163,7 +163,7 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ไฮไลท์ฟุตบอล ${item.visitorteam['@name']}`}
                                 />
                              {typeof th[item.visitorteam['@id']] === "undefined" ? item.visitorteam['@name'] : th[item.visitorteam['@id']]}
                             </div>
@@ -199,7 +199,7 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ไฮไลท์ฟุตบอล ${data.localteam['@name']}`}
                                 />
                             </div>
                             <div className="col-md-2 px-0 pl-md-0 pr-md-0 flex-fill text-center">  
@@ -214,7 +214,7 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ไฮไลท์ฟุตบอล ${data.visitorteam['@name']}`}
                                 />
                              {typeof th[data.visitorteam['@id']] === "undefined" ? data.visitorteam['@name'] : th[data.visitorteam['@id']]}
                           </div>

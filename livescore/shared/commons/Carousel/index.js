@@ -76,8 +76,8 @@ const Carousel = ({slideValues, title, className}) => {
                 }}
                 as={`/highlight/${item.title}`}
               >
-                <a className="d-block">
-                  <span className="play"><FaPlay /></span>
+                <a className="d-block" title={`ไฮไลท์ฟุตบอล ${item.titleurl}`}>
+                   <span className="play"><FaPlay /></span>
                 </a>
               </Link>
             </figcaption>

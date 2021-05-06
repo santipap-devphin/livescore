@@ -19,10 +19,10 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
       <div className="right row mx-0 align-items-center">
         <div className="home-team team col-4 text-center">
           <div className="logo" style={{padding:20}}>
-            <a href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.team.replace(/\s/g, '')}/overviews/${list.teamid}`} target="_blank">
+            <a title={`ผลบอล ${imgTeamAName}`} href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.team.replace(/\s/g, '')}/overviews/${list.teamid}`} target="_blank">
             <img 
             src={imgTeamA}
-            alt={imgTeamAName} 
+            alt={`livescore ${imgTeamAName}`} 
             onError={addDefaultSrc} />
             </a>
           </div>
@@ -43,10 +43,10 @@ const Battle = ({ className, type, imgTeamA, scoreTeamA, imgTeamB, scoreTeamB, i
         </div>
         <div className="away-team team col-4 text-center">
           <div className="logo" style={{padding:20}}>
-            <a href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.teamB.replace(/\s/g, '')}/overviews/${list.teamBid}`} target="_blank">
+            <a title={`ผลบอล ${imgTeamBName}`}  href={`/clubs/${newstitle.replace(/\s/g, '')}/${list.teamB.replace(/\s/g, '')}/overviews/${list.teamBid}`} target="_blank">
               <img 
                 src={imgTeamB} 
-                alt={imgTeamBName} 
+                alt={`livescore ${imgTeamBName}`} 
                 onError={addDefaultSrc} />
             </a>
           </div>

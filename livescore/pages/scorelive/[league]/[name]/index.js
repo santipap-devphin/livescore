@@ -1069,11 +1069,11 @@ useEffect(() => {
                 <thead>
                 <tr>
                  <th>ประเภท</th>
-                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/bet365.png"} /></th>
-                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/188bet.png"} /></th>
-                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/sbo.png"} /></th>
-                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/1xBet.png"} /></th>
-                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/Dafabet.png"} /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/bet365.png"}  alt="bet365"/></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/188bet.png"} alt="188bet" /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/sbo.png"} alt="sbo"/></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/1xBet.png"} alt="1xBet"/></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/Dafabet.png"} alt="Dafabet"/></th>
                  </tr>
                 </thead>
                 <tbody>

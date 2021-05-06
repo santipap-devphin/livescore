@@ -81,7 +81,7 @@ const Apitest = (props) => {
         keyWords={`ข้อมูลทั้งหมดของทีม ${sppasth[3]}`}
         author=""
       />
-        <img src={`data:image/jpeg;base64,${props.home.teams.team.image}`}  style={{display: "none"}} />
+        <img src={`data:image/jpeg;base64,${props.home.teams.team.image}`}  style={{display: "none"}}  alt={`รูปภาพ ${sppasth[3]}`}/>
         <p style={{display: "none"}}>{props.home.teams.team.squad.player.length}</p>
       
         
@@ -92,7 +92,7 @@ const Apitest = (props) => {
         <p>ที่อยู่ {props.home.teams.team.venue_address["#cdata-section"]}</p>
         <p>เมือง {props.home.teams.team.venue_city["#cdata-section"] }</p>
         <p>ความจุสนาม {props.home.teams.team.venue_capacity}</p>
-        <img src={`data:image/jpeg;base64,${props.home.teams.team.venue_image}`} style={{width: "100%"}}/>
+        <img src={`data:image/jpeg;base64,${props.home.teams.team.venue_image}`} style={{width: "100%"}} alt={`รูปภาพสนาม ${sppasth[3]}`}/>
         <p>{}</p>
         <br />
         <br />

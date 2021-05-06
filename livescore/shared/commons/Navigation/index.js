@@ -29,7 +29,7 @@ const Navigation = ({ className, routes, navTitle ,country }) => {
               >
                
                 <a>
-                  {url.img ? <span className="mr-2"><img src={url.img} alt={url.title} style={{width:19}}></img></span> : ""}
+                  {url.img ? <span className="mr-2"><img src={url.img} alt={url.title} style={{width:19}} alt={`livescore ${url.title}`}></img></span> : ""}
                   {url.title}
                 </a>
               </Link>
@@ -59,7 +59,7 @@ const Navigation = ({ className, routes, navTitle ,country }) => {
                   >
                   
                     <a>
-                      {url.img ? <span className="mr-2"><img src={url.img} alt={url.title} style={{width:19}}></img></span> : ""}
+                      {url.img ? <span className="mr-2"><img src={url.img} alt={url.title} style={{width:19}} alt={`livescore ${url.title}`}></img></span> : ""}
                       {url.title}
                     </a>
                   </Link>

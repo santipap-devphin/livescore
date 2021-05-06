@@ -23,6 +23,7 @@ const Post = (props) => {
   const [sectiontwo , setSectiontwo] = useState(false);
   let teamth = [];
   var txtdate = null ;
+  var txtleg = null;
   //console.log(props)
 
   function datee(nextday){
@@ -130,17 +131,41 @@ const Post = (props) => {
       slug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
       :
       txtdate = "วันนี้" 
+
+      slug[0] === "1005" ? txtleg = "ยูฟ่า แชมเปี้ยนส์ลีก"
+      :
+      slug[0] === "1204" ? txtleg = "พรีเมียร์ลีก อังกฤษ"
+      :
+      slug[0] === "1007" ? txtleg = "ยูโรป้า ลีก"
+      :
+      slug[0] === "1198" ? txtleg = "เอฟเอ คัพ อังกฤษ"
+      :
+      slug[0] === "1399" ? txtleg = "ลาลีกา สเปน"
+      :
+      slug[0] === "1269" ? txtleg =  "กัลโช่ เซเรีย อา อิตาลี"
+      :
+      slug[0] === "1229" ? txtleg = "บุนเดสลีกา เยอรมัน"
+      :
+      slug[0] === "1322" ? txtleg = "เอเรดิวิซี่ ฮอลแลนด์"
+      :
+      slug[0] === "1221" ? txtleg = "ลีก เอิง ฝรั่งเศส"
+      :
+      slug[0] === "1271" ? txtleg = "เจ ลีก ญี่ปุ่น"
+      :""
+      
+
+      
  
   return (
     <>
        <Layout className="px-0 px-md-3">
        <HeaderSeo
         siteName=""
-        title={`ลีคยอดฮิต ${slug[0]} ${txtdate}`}
-        desc={`ลีคยอดฮิต คู่ ${slug[0]} ${txtdate}`}
+        title={`ลีกยอดฮิต ${txtleg} ${txtdate}`}
+        desc={`ลีกยอดฮิต ชอง ${txtleg} ${txtdate}`}
         imgSrc=""
         metaUrl=""
-        keyWords={`รายงาน ลีคยอดฮิต ${slug[0]} ${txtdate}`}
+        keyWords={`รายงาน ลีกยอดฮิต ${txtleg} ${txtdate}`}
         author=""
       />
         <div className="d-none d-md-block mainf-tab">

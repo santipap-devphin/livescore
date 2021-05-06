@@ -175,7 +175,7 @@ const Layout = (props) => {
            <div className="row">
            
               <div className="col-md-3">
-                <a className="navbar-brand" href="/live"><img src="/assets/7scorex300.png" alt="7SCORE" /></a>
+                <a className="navbar-brand" href="/live" title="7SCORE"><img src="/assets/7scorex300.png" alt="7SCORE" /></a>
               </div>
               <div className="col-md-4" style={{paddingTop:20}}>
                       <a href="/live">กลับหน้าหลัก </a>
@@ -228,7 +228,7 @@ const Layout = (props) => {
 
                   }
                   <div className="banner">
-                    <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="" /></a>
+                    <a href="#" target="_blank" rel="nofollow" title="sbobet-55555"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="แบนเนอร์ sbobet-55555" /></a>
                     { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
                   </div>
                  
@@ -252,7 +252,7 @@ const Layout = (props) => {
                     />
                  }
                 <div className="banner">
-                  <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sbobetsc 250x500.gif" alt="" /></a>
+                  <a href="#" target="_blank" rel="nofollow" title="sbobetsc"><img className="" src="/banner/sbobetsc 250x500.gif" alt="แบนเนอร์ sbobetsc" /></a>
                   { /* <img className="mb-4 img-fluid w-100 h-200px" src="/assets/ads/ads200x200.png" alt="" />  */ }
                 </div>
               </div>
@@ -262,8 +262,8 @@ const Layout = (props) => {
                     slideValues={slide}
                     className="mb-4"
                   />*/}
-                  <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
-                  <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+                  {/*<img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />
+                  <img className="mb-4 img-fluid w-100 h-100px" src="/assets/ads/ads300x100.png" alt="" />*/}
                 </Sidebar>
               </div>
             </aside>

@@ -199,12 +199,12 @@ const SevenColCups = ({ title, cups }) => {
           neww.map((cup, index) => (
           
             <div className="col-md-1 px-2 pb-3" key={index.toString()}>
-              {/*console.log(cup)*/}
+            
               <div className="p-3 border rounded text-center">
                 <Avatar 
                   size={50}
                   src={check_for_img(title)}
-                  alt={/*title+cup.years*/ ""}
+                  alt={`${title} ${cup}`}
                   shape="square"
                   className="d-block mx-auto"
                 />

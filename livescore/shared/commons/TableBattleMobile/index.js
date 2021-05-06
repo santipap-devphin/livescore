@@ -123,7 +123,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
         <div className="mb-0">
         <img 
          src={`${assets}/country/${lastimg}`}
-         alt={"icon"} 
+         alt={`ผลบอล mobile ${title}`}
          width={25}
          style={{marginRight:20}}
          onError={DefaultSrc} />
@@ -159,7 +159,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ผลบอลสด ${item.localteam['@name']}`}
                                 />
                              {typeof th[item.localteam['@id']] === "undefined" ? <span className="mx-2">{item.localteam['@name']}</span> : <span className="mx-2">{th[item.localteam['@id']]}</span>}
                             </p>
@@ -169,7 +169,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ผลบอลสด ${item.visitorteam['@name']}`}
                                 />
                               {typeof th[item.visitorteam['@id']] === "undefined" ? item.visitorteam['@name'] : th[item.visitorteam['@id']]}
                             </p>
@@ -218,7 +218,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ทีม ${data.localteam['@name']}`}
                                 />
                                     {typeof th[data.localteam['@id']] === "undefined" ? <span className="mx-2">{data.localteam['@name']}</span> : <span className="mx-2">{th[data.localteam['@id']]}</span>}
                                   </p>
@@ -228,7 +228,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ทีม ${data.visitorteam['@name']}`}
                                 />
                                     
                                     {typeof th[data.visitorteam['@id']] === "undefined" ? data.visitorteam['@name'] : th[data.visitorteam['@id']]}

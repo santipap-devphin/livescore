@@ -141,10 +141,10 @@ function checkIfImageExists(url, callback) {
   return (
     <TableBattleStyle className={`league-matches ${highlight === true ? "highlight" : ""} mb-4 league-${exam}`}>
       <h4 className={`block-title ${className} mb-0`}>
-       
+       {console.log(title)}
       <img 
          src={`${assets}/country/${lastimg}`}
-         alt={"icon"} 
+         alt={`ผลบอลสด ${title}`}
          width={25}
          style={{marginRight:20}}
          onError={DefaultSrc} />
@@ -190,7 +190,7 @@ function checkIfImageExists(url, callback) {
                                   shape="square"
                                   //src={"/assets/default-team-logo.png"}
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ผลบอลทีม  ${item.localteam['@name']}`}
                                 
                                   
                                 />
@@ -209,7 +209,7 @@ function checkIfImageExists(url, callback) {
                                   shape="square"
                                   //src={"/assets/default-team-logo.png"}
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${item.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ผลบอลทีม ${item.visitorteam['@name']}`}
                                  
                                  
                                   />
@@ -247,7 +247,7 @@ function checkIfImageExists(url, callback) {
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.localteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ผลบอลทีม ${data.localteam['@name']}`}
                                 
                                  
                                 />
@@ -264,7 +264,7 @@ function checkIfImageExists(url, callback) {
                                   size={25}
                                   shape="square"
                                   src={chkforimg(exam) !== false ? `${assets}/logoteam/small/${data.visitorteam['@id']}.jpg` : `${assets}/default-team-logo.png`}
-                                  alt={title}
+                                  alt={`ผลบอลทีม ${data.visitorteam['@name']}`}
                                  
                                  
                                 />

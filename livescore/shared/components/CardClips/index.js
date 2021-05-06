@@ -57,7 +57,7 @@ const CardClips = ({ className, grid, data }) => {
                           }}
                           as={`/highlight/${item.title}`}
                         >
-                          <a className="d-block">
+                          <a className="d-block" title={`ไฮไลท์ฟุตบอล ${item.titleurl}`}>
                             <span className="play"><FaPlay /></span>
                           </a>
                         </Link>
@@ -70,7 +70,7 @@ const CardClips = ({ className, grid, data }) => {
                           }}
                           as={`/highlight/${item.title}`}
                         >
-                        <a className="d-block">
+                        <a className="d-block" title={`ไฮไลท์ฟุตบอล ${item.titleurl}`}>
                             <h5 className="card-title h6">{item.titleurl}</h5>
                         </a>
                       </Link>
@@ -130,7 +130,7 @@ const CardClips = ({ className, grid, data }) => {
                             }}
                             as={`/highlight/${item.title}`}
                           >
-                            <a className="d-block">
+                            <a className="d-block" title={`ไฮไลท์ฟุตบอล ${item.titleurl}`}>
                               <span className="play"><FaPlay /></span>
                             </a>
                           </Link>
@@ -145,7 +145,7 @@ const CardClips = ({ className, grid, data }) => {
                           }}
                           as={`/highlight/${item.title}`}
                         >
-                          <a className="d-block"><h2 className="title">{item.titleurl}</h2></a>
+                          <a className="d-block" title={`ไฮไลท์ฟุตบอล ${item.titleurl}`}><h2 className="title">{item.titleurl}</h2></a>
                         </Link>
                         <div className="video_content-editor d-flex align-items-center">
                           <AiOutlineCalendar className="mr-2" /> {item.publishedAt}

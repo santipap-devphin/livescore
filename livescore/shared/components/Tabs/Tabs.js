@@ -55,43 +55,43 @@ const Tabs = ({children /* initialTab*/}) => {
                             <img 
                             width="20"
                             src="../assets/country/England.png"
-                            alt="icon premier"/>
+                            alt="ลีก premier"/>
                             :
                             label === "la-liga" ? 
                             <img 
                             width="20"
                             src="../assets/country/Spain.png"
-                            alt="icon la-liga"/>
+                            alt="ลีก la-liga"/>
                             :
                             label === "seria-a" ? 
                             <img 
                             width="20"
                             src="../assets/country/Italy.png"
-                            alt="icon seria-a"/>
+                            alt="ลีก seria-a"/>
                             :
                             label === "bundes" ? 
                             <img 
                             width="20"
                             src="../assets/country/Germany.png"
-                            alt="icon la-liga"/>
+                            alt="ลีก bundes"/>
                             : 
                             label === "france" ? 
                             <img 
                             width="20"
                             src="../assets/country/France.png"
-                            alt="icon la-liga"/>
+                            alt="ลีก france"/>
                             : 
                             label === "j-league" ? 
                             <img 
                             width="20"
                             src="../assets/country/Japan.png"
-                            alt="icon la-liga"/>
+                            alt="ลีก j-league"/>
                             : 
                             label === "thai-league" ? 
                             <img 
                             width="20"
                             src="../assets/country/Thailand.png"
-                            alt="icon thailand"/>
+                            alt="ลีก thai-league"/>
                             : 
                             null
                             }

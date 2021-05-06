@@ -31,10 +31,10 @@ const LayoutSidebarClub = ({children }) => {
                 className="mb-4" 
               />*/}
               <div className="banner">
-              <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="" /></a>
+              <a href="#" target="_blank" rel="nofollow" title="sbobet-55555"><img className="" src="/banner/Sbobet-55555.com 250x500.gif" alt="banner sbobet-55555" /></a>
               </div>
               <div className="banner">
-              <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sbobetsc 250x500.gif" alt="" /></a>
+              <a href="#" target="_blank" rel="nofollow" title="sbobetsc"><img className="" src="/banner/sbobetsc 250x500.gif" alt="banner sbobetsc"/></a>
               </div>
               {/*<TopPlayer title="Monthly savings" players={Players} />*/}
             </Sidebar>
