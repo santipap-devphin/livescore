@@ -11,6 +11,12 @@ export const MatchSummaryStyle = styled.div`
       
     }
   }
+  .text-out{
+    color:red!important;
+ }
+ .text-in{
+  color:#fff!important;
+ }
   .time {
     font-size: 14px;
     @media (min-width: 375px) {

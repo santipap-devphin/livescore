@@ -1393,12 +1393,12 @@ return (
       />
       <div className="d-none d-md-block mainf-tab">
         <div className="banner f">
-          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/sg8bet22.gif" alt="ผลบอล" /></a>
-          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-888-728x180 2.gif" alt="live score" /></a>
-          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Top789-728x180.gif" alt="ผลบอลสด" /></a>
-          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/MSbobet-online 728x180.gif" alt="ไฮไลท์ฟุตบอล" /></a>
-          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet891 728x180-2.gif" alt="ตารางบอล" /></a>
-          <a href="#" target="_blank" rel="nofollow"><img className="" src="/banner/UFABET8989-728x180.gif" alt="คู่บอลเตะ" /></a>
+          <a href="https://thai.sg8bet.com/" target="_blank" rel="nofollow"><img className="" src="/banner/sg8bet22.gif" alt="ผลบอล" /></a>
+          <a href="https://www.sbobet-888.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-888-728x180 2.gif" alt="live score" /></a>
+          <a href="https://top789.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Top789-728x180.gif" alt="ผลบอลสด" /></a>
+          <a href="https://msbobet-online.com/" target="_blank" rel="nofollow"><img className="" src="/banner/MSbobet-online 728x180.gif" alt="ไฮไลท์ฟุตบอล" /></a>
+          <a href="https://sbobet891.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet891 728x180-2.gif" alt="ตารางบอล" /></a>
+          <a href="https://ufabet8989.com/" target="_blank" rel="nofollow"><img className="" src="/banner/UFABET8989-728x180.gif" alt="คู่บอลเตะ" /></a>
         </div>
         <h1>ผลบอล</h1> 7score.live เว็บไซต์รายงานสดผลฟุตบอลทั้งไทยและต่างประเทศทุกลีกทั่วโลก อัพเดทกันวินาทีต่อวินาทีเพื่อให้ท่านได้รับข้อมูลที่รวดเร็ว อีกทั้งยังนำเสนอข้อมูลของแต่ละทีม สถิติการพบกัน และข้อมูลสำคัญต่างๆ เพื่อเป็นแนวทางในการวิเคราะห์ของท่าน
         <NavDate 

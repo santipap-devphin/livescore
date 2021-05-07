@@ -13,6 +13,67 @@ import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerCon
 
 const H2h = (props) => {
 
+  <style jsx>{`
+  .responsive-table
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  .col-1 {
+    flex-basis: 10%;
+  }
+  .col-2 {
+    flex-basis: 40%;
+  }
+  .col-3 {
+    flex-basis: 25%;
+  }
+  .col-4 {
+    flex-basis: 25%;
+  }
+
+  @media all and (max-width: 767px) {
+    .table-header {
+      display: none;
+    }
+    .table-row{
+
+    }
+    li {
+      display: block;
+    }
+    .col {
+
+      flex-basis: 100%;
+
+    }
+    .col {
+      display: flex;
+      padding: 10px 0;
+      &:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+    }
+  }
+`}</style>
+
   //console.log(props)
   const router = useRouter()
   let path = router.asPath
@@ -125,54 +186,84 @@ const H2h = (props) => {
           {id: "3", name: "ผลงานเจอกัน", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: true },
         ]}
       >
-       
-         
-                  
-                    {
+       <div className="row">
+				<div className="col-md-12">
+					<div className="table-wrap">
+						<table className="table table-bordered table-dark table-hover">
+						  <thead className="bg-danger">
+						    <tr>
+						    
+						      <th colSpan="3" style={{textAlign: "center"}}>H2H</th>
+						    
+						    </tr>
+						  </thead>
+						  <tbody>
+						   
+              {
                       
 
-                        defalut.listh2s.h2h.top50 !== null ? 
-                     
-                          Array.isArray(defalut.listh2s.h2h.top50.match) === true ?  
-                        
-                        
-                              defalut.listh2s.h2h.top50.match.slice(0, 10).map((res,index) => (
+                      defalut.listh2s.h2h.top50 !== null ? 
+                   
+                        Array.isArray(defalut.listh2s.h2h.top50.match) === true ?  
+                      
+                      
+                            defalut.listh2s.h2h.top50.match.slice(0, 10).map((res,index) => (
 
-                                    <div className="row" key={index.toString()} style={{margin: "20px"}}>
-                                          <div className="col-6 px-2" style={{textAlign: "center"}}>
+                                        <tr key={index}>
+                                        <td style={{textAlign: "center"}}>
+
+                                        <span className="badge badge-pill badge-success">{res["@team1"]}</span>
+                                        <span className="badge badge-pill badge-warning" style={{margin:"5px"}}>{res["@team1_score"] +"-" + res["@team2_score"]}</span>
+                                        <span className="badge badge-pill badge-danger">{res["@team2"]}</span>
+                                        </td>
+                                        <td style={{textAlign: "center"}}>
+                                            <span className="badge badge-pill badge-light">{res["@league"]}</span>
+                                        </td>
+                                        <td style={{textAlign: "center"}}>
+                                        <span className="badge badge-pill badge-secondary">วันที่ {res["@date"]}</span>
                                             
-                                                  {res["@team1"] +" "+ res["@team1_score"] +"-" + res["@team2_score"] +" "+res["@team2"]} 
-                                          </div>
-                                          <div className="col-4 px-2" style={{textAlign: "center"}}>
-                                                {res["@league"]}
-                                          </div>
-                                          <div className="col-2 px-2" style={{textAlign: "center"}}>
-                                              วัน {res["@date"]}
-                                          </div>
+                                        </td>
+                                        </tr>
+                                
                                   
-                                    </div>
 
-                                ))
-                     
-                     
-                     
-                     
-                     :
-                        <div className="row" key={0} style={{margin: "20px"}}>
-                            <div className="col-6 px-2" style={{textAlign: "center"}}>
+                              ))
+                   
+                   
+                   
+                   
+                   :
+                          <tr key={0}>    
+                          <td style={{textAlign: "center"}}>
+
+                          {defalut.listh2s.h2h.top50.match["@team1"]}
+                          <span className="badge badge-pill badge-warning" style={{margin:"5px"}}>{defalut.listh2s.h2h.top50.match["@team1_score"] +"-" + defalut.listh2s.h2h.top50.match["@team2_score"]}</span>
+                          {defalut.listh2s.h2h.top50.match["@team2"]}
+                          </td>
+                          <td style={{textAlign: "center"}}>
+                          <span className="badge badge-pill badge-light">{defalut.listh2s.h2h.top50.match["@league"]}</span>
+                                
+                          </td>
+                          <td style={{textAlign: "center"}}>
+                          <span className="badge badge-pill badge-secondary">วันที่ {defalut.listh2s.h2h.top50.match["@date"]}</span>
                               
-                                    {defalut.listh2s.h2h.top50.match["@team1"] +" "+ defalut.listh2s.h2h.top50.match["@team1_score"] +"-" + defalut.listh2s.h2h.top50.match["@team2_score"] +" "+defalut.listh2s.h2h.top50.match["@team2"]} 
-                            </div>
-                            <div className="col-4 px-2" style={{textAlign: "center"}}>
-                                  {defalut.listh2s.h2h.top50.match["@league"]}
-                            </div>
-                            <div className="col-2 px-2" style={{textAlign: "center"}}>
-                                วัน {defalut.listh2s.h2h.top50.match["@date"]}
-                            </div>
-                        </div>
+                          </td>
+                          </tr>
+                  
+                  : <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
+                  }
+						  
+						   
+						    
+						   
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+         
+                  
                     
-                    : <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
-                    }
                     
                   
            

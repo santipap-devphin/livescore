@@ -6,8 +6,8 @@ const MatchIonfo = ({type, matchionfo}) => {
 
   
   return (
-    <MatchIonfoStyle className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-5">
-        <div className="card-header text-dark text-center text-uppercase border-top-0 border-bottom-0 font-weight-bold">
+    <MatchIonfoStyle className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-5" style={{color:"#fff"}}>
+        <div className="card-header text-in text-center text-uppercase border-top-0 border-bottom-0 font-weight-bold">
           {type}
         </div>
         <div className="card-body p-0">
@@ -20,10 +20,10 @@ const MatchIonfo = ({type, matchionfo}) => {
                   
                   <div> 
                   { 
-                  item["@type"] === "goal" ?  <p className="mb-0 text-dark"><span>{}</span> { item["@player"]}   (goal)</p>
+                  item["@type"] === "goal" ?  <p className="mb-0 text-in"><span>{}</span> { item["@player"]}   (goal)</p>
                   :item["@type"] === "yellowcard" ? <div className="card-match"><img src="/assets/cards/788px-Yellow_card.png" alt="Yellow Card"  style={{width: "20px"}}/>{ item["@player"]}</div>
                   :item["@type"] === "redcard" ? <div className="card-match"><img src="/assets/cards/591px-Red_card.png" alt="Red Card" style={{width: "20px"}} />{ item["@player"]}</div>
-                  :item["@type"] === "subst" ? <><p className="mb-0 text-dark">In:{item["@player"]}</p><p className="mb-0 text-secondary">Out:{item["@assist"]}</p></>
+                  :item["@type"] === "subst" ? <><p className="mb-0 text-in">In:{item["@player"]}</p><p className="mb-0 text-out">Out:{item["@assist"]}</p></>
                   : "" 
                   }
                   </div> 
@@ -43,10 +43,10 @@ const MatchIonfo = ({type, matchionfo}) => {
                   
                   <div> 
                   { 
-                  item["@type"] === "goal" ?  <p className="mb-0 text-dark"><span>{}</span> { item["@player"]}   (goal)</p>
+                  item["@type"] === "goal" ?  <p className="mb-0 text-in"><span>{}</span> { item["@player"]}   (goal)</p>
                   :item["@type"] === "yellowcard" ? <div className="card-match"><img src="/assets/cards/788px-Yellow_card.png" alt="Yellow Card" style={{width: "20px"}} />  { item["@player"]}</div>
                   :item["@type"] === "redcard" ? <div className="card-match"><img src="/assets/cards/591px-Red_card.png" alt="Red Card" style={{width: "20px"}} />  { item["@player"]}</div>
-                  :item["@type"] === "subst" ? <><p className="mb-0 text-dark">In:{item["@player"]}</p><p className="mb-0 text-secondary">Out:{item["@assist"]}</p></>
+                  :item["@type"] === "subst" ? <><p className="mb-0 text-in">In:{item["@player"]}</p><p className="mb-0 text-out">Out:{item["@assist"]}</p></>
                   : "" 
                   }
                   </div> 
