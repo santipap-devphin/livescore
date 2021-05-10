@@ -1,4 +1,3 @@
-
 import Layout from "../../../shared/container/Layout"
 import axios from 'axios';
 import NavDate from "../../../shared/commons/NavDate"
@@ -17,8 +16,10 @@ import React, { useState, useEffect ,useRef } from 'react';
 const Homefilter = (props) => {
 
 
+  var routers = useRouter();
   var txtdate = null;
   const myRef = useRef(null)  
+
   const handdleClickAfterload = (e) => {
 
 
@@ -33,11 +34,12 @@ const Homefilter = (props) => {
 
   }
   const [sdata , setDatas] =  useState(false);
+  const [defaults , setDefaults] = useState();
   const [sectiontwo , setSectiontwo] = useState(false);
   const [lang , setLang] = useState([]);
   let teamth  = [];
 
-  useEffect(() => {
+  /*useEffect(() => {
 
    if(props.list[0].sortdata.category.length > 0){
 
@@ -46,7 +48,7 @@ const Homefilter = (props) => {
     }
    
  
-  },[setDatas]);
+  },[setDatas]);*/
 
    useEffect(() => {
 
@@ -73,9 +75,234 @@ const Homefilter = (props) => {
 
       
     
-    }, 100);
+    }, 50);
 
   },[setLang])
+
+  useEffect(() => {
+
+    const Loaddatas = async () => {
+
+      const id = routers.query.id
+    
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${id}?json=1`)
+      
+      const data  = await res.json()
+
+      let ndata = [];
+
+          for(var i = 0 ; i < data.scores.category.length; i++)
+          {
+            
+            if(data.scores.category[i]["@id"] === "1204"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "1",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1005"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "2",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1007"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "3",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1198"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "4",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1399"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "5",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1269"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "6",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1229"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "7",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1322"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "8",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1221"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "9",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1271"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "10",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }else{
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "11",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+
+            }
+            
+
+          }
+
+          ndata.sort(function(a, b) {
+          
+              return a["@priority"] - b["@priority"];
+
+          });
+
+          let leage = [];
+
+          let scores = {
+                          "@sport":data.scores["@sport"],
+                          "@updated":data.scores["@updated"],
+                          "category":ndata
+                          
+                      }
+
+          leage.push({sortdata:scores})
+          
+          var list_obj = {id:id,list:leage};
+
+          setDefaults(list_obj);
+          //return {id:id,list:leage}
+
+              
+          
+    }
+
+    Loaddatas();
+
+  },[setDefaults])
 
   function datee(nextday){
 
@@ -113,65 +340,50 @@ const Homefilter = (props) => {
    
   ]
  
-
-  {
-    props.id === "d-3"  ? navDates[0] = { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: true } 
-    :
-    props.id === "d-2"  ? navDates[1] = { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
-    :
-    props.id === "d-1"  ? navDates[2] = { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
-    :
-    props.id === "d1"  ? navDates[4] = { id: "5", date: datee(1), route: "/soccer/programs/d1", today: true } 
-    : 
-    props.id === "d2"  ? navDates[5] = { id: "6", date: datee(2), route: "/soccer/programs/d2", today: true } 
-    :
-    props.id === "d3"  ? navDates[6] = { id: "7", date: datee(3), route: "/soccer/programs/d3", today: true } 
-    :
-    navDates[3] = { id: "4", date: datee(0), route: "/", today: true }
-  }
-
-  {
-    props.id === "d-2" ? navDatemobile[0] = { id: "1", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
-    :
-    props.id === "d-1" ? navDatemobile[1] = { id: "2", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
-    :
-    props.id === "d1"  ? navDatemobile[3] = { id: "4", date: datee(1), route: "/soccer/programs/d1", today: true } 
-    :
-    props.id === "d2"  ? navDatemobile[4] = { id: "5", date: datee(2), route: "/soccer/programs/d2", today: true } 
-    :
-    navDatemobile[2] = { id: "3", date: datee(0), route: "/", today: true }
-  }
+  if(defaults !== undefined){
 
 
-  {
-    props.id === "d-3"  ? txtdate = "ย้อนหลัง 3 วัน" 
-    :
-    props.id === "d-2"  ? txtdate = "ย้อนหลัง 2 วัน" 
-    :
-    props.id === "d-1"  ? txtdate = "ย้อนหลัง 1 วัน" 
-    :
-    props.id === "d1"  ? txtdate = "ล่วงหน้า 1 วัน" 
-    : 
-    props.id === "d2"  ? txtdate = "ล่วงหน้า 2 วัน" 
-    :
-    props.id === "d3"  ? txtdate = "ล่วงหน้า 3 วัน" 
-    :
-    txtdate = "วันนี้"
-  }
+    {
+      defaults.id === "d-3"  ? navDates[0] = { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: true } 
+      :
+      defaults.id === "d-2"  ? navDates[1] = { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
+      :
+      defaults.id === "d-1"  ? navDates[2] = { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
+      :
+      defaults.id === "d1"  ? navDates[4] = { id: "5", date: datee(1), route: "/soccer/programs/d1", today: true } 
+      : 
+      defaults.id === "d2"  ? navDates[5] = { id: "6", date: datee(2), route: "/soccer/programs/d2", today: true } 
+      :
+      defaults.id === "d3"  ? navDates[6] = { id: "7", date: datee(3), route: "/soccer/programs/d3", today: true } 
+      :
+      navDates[3] = { id: "4", date: datee(0), route: "/", today: true }
+    }
   
-
+    {
+      defaults.id === "d-2" ? navDatemobile[0] = { id: "1", date: datee(-2), route: "/soccer/programs/d-2", today: true } 
+      :
+      defaults.id === "d-1" ? navDatemobile[1] = { id: "2", date: datee(-1), route: "/soccer/programs/d-1", today: true } 
+      :
+      defaults.id === "d1"  ? navDatemobile[3] = { id: "4", date: datee(1), route: "/soccer/programs/d1", today: true } 
+      :
+      defaults.id === "d2"  ? navDatemobile[4] = { id: "5", date: datee(2), route: "/soccer/programs/d2", today: true } 
+      :
+      navDatemobile[2] = { id: "3", date: datee(0), route: "/", today: true }
+    }
+  
+  
+    
+  }
 
   
-
-
   return (
 
-    <Layout className="px-0 px-md-3" standings={props.list}>
+    <Layout className="px-0 px-md-3">
 
         <HeaderSeo
         siteName=""
-        title={`คู่บอลเตะ ${txtdate}`}
-        desc={`คู่บอลเตะ พร้อมข้อมูลทีมแต่ละลีกทั่วโลก ${txtdate}`}
+        title={`คู่บอลเตะ ${props.text}`}
+        desc={`คู่บอลเตะ พร้อมข้อมูลทีมแต่ละลีกทั่วโลก ${props.text}`}
         imgSrc=""
         metaUrl=""
         keyWords="ผลบอล, live score, ผลบอลสด, ไฮไลท์ฟุตบอล"
@@ -187,9 +399,10 @@ const Homefilter = (props) => {
             onClickRight={() => console.log("right")}
           />
          <div ref={myRef}></div>
+        
          {
-          (sdata !== false) ?
-            props.list[0].sortdata.category.slice(0,7).map((res,value) => (
+          (defaults !== undefined) ?
+            defaults.list[0].sortdata.category.slice(0,7).map((res,value) => (
 
                  <div key={value.toString()}> 
                       <TableBattle  
@@ -208,25 +421,26 @@ const Homefilter = (props) => {
           :<center><h1>Loading .....</h1></center>
          }
 
-{
-          (sectiontwo !== false) ? 
-            props.list[0].sortdata.category.slice(8).map((res,value) => (
+        {
+          (defaults !== undefined) ? 
+              defaults.list[0].sortdata.category.slice(8).map((res,value) => (
 
-                 <div key={value.toString()}> 
-                      <TableBattle  
-                      className="highlight bg-secondary text-white"
-                      title={res['@name']}
-                      data={res.matches.match}
-                      highlight={true} 
-                      exam = {res['@id']}
-                      after = {handdleClickAfterload}
-                      th = {lang}
-                      />
-                      
-                  </div>
-                  
-            ))
+                  <div key={value.toString()}> 
+                        <TableBattle  
+                        className="highlight bg-secondary text-white"
+                        title={res['@name']}
+                        data={res.matches.match}
+                        highlight={true} 
+                        exam = {res['@id']}
+                        after = {handdleClickAfterload}
+                        th = {lang}
+                        />
+                        
+                    </div>
+                    
+              ))
           :null
+          
          }
         </div>
 
@@ -246,8 +460,9 @@ const Homefilter = (props) => {
                     />
                       
                       {
-                      (sdata !== false) ?
-                            props.list[0].sortdata.category.map((res,value) => (
+                        
+                      (defaults !== undefined) ?
+                          defaults.list[0].sortdata.category.map((res,value) => (
                                   <div key={value.toString()}>
                                         <TableBattleMobile 
                                           title={res['@name']}
@@ -261,6 +476,7 @@ const Homefilter = (props) => {
                                   </div>
                       ))
                      : <center><h1>Loading .....</h1></center>
+                     
                      }
              </div>
 
@@ -277,214 +493,25 @@ const Homefilter = (props) => {
 
 Homefilter.getInitialProps = async ({ query }) => {
 
-  const { id } = query
-
-  const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${id}?json=1`)
-  const data  = await res.json()
-
-  let ndata = [];
-
-  for(var i = 0 ; i < data.scores.category.length; i++)
-  {
-    
-    if(data.scores.category[i]["@id"] === "1204"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "1",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1005"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "2",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1007"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "3",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1198"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "4",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1399"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "5",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1269"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "6",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1229"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "7",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1322"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "8",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1221"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "9",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1271"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "10",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }else{
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "11",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-
-    }
-    
-
-  }
-
-  ndata.sort(function(a, b) {
+   const {id} = query;
+   var txtdate= null;
+   
+    id === "d-3"  ? txtdate = "ย้อนหลัง 3 วัน" 
+    :
+    id === "d-2"  ? txtdate = "ย้อนหลัง 2 วัน" 
+    :
+    id === "d-1"  ? txtdate = "ย้อนหลัง 1 วัน" 
+    :
+    id === "d1"  ? txtdate = "ล่วงหน้า 1 วัน" 
+    : 
+    id === "d2"  ? txtdate = "ล่วงหน้า 2 วัน" 
+    :
+    id === "d3"  ? txtdate = "ล่วงหน้า 3 วัน" 
+    :
+    txtdate = "วันนี้"
   
-      return a["@priority"] - b["@priority"];
-
-  });
-
-  let leage = [];
-
-  let scores = {
-                  "@sport":data.scores["@sport"],
-                  "@updated":data.scores["@updated"],
-                  "category":ndata
-                   
-              }
-
-  leage.push({sortdata:scores})
-    
-  return {id:id,list:leage}
+    return {text:txtdate}
+  
 }
 
 export default Homefilter;

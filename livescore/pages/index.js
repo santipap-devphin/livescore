@@ -1,15 +1,12 @@
 import React, { useState, useEffect ,useRef } from 'react'
-
-import Layout from "../shared/container/Layout"
 import axios from 'axios';
-import NavDate from "../shared/commons/NavDate"
-import HeaderSeo from "../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
-
-
+const HeaderSeo = dynamic(() => import('../shared/commons/HeaderSeo'));
+const Layout = dynamic(() => import('../shared/container/Layout'));
+const NavDate = dynamic(() => import('../shared/commons/NavDate'));
 const TableBattle = dynamic(() => import('../shared/commons/TableBattle'));
 const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobile'));
-import BannerInner from "../shared/components/Banner/Inner"
+const BannerInner = dynamic(()=> import('../shared/components/Banner/Inner'));
 
 const Home = () => {
 
@@ -1466,7 +1463,7 @@ function datee(nextday){
 
       
     
-    }, 100);
+    }, 50);
 
   },[setLang])
   

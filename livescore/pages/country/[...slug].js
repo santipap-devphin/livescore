@@ -2,12 +2,13 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useState,useEffect ,useRef } from 'react'
 import Link from 'next/link'
-import Layout from "../../shared/container/Layout"
+import dynamic from 'next/dynamic'
+const Layout = dynamic(() => import('../../shared/container/Layout'));
 import HeaderSeo from "../../shared/commons/HeaderSeo"
-import NavDate from "../../shared/commons/NavDate"
-import TableBattle from "../../shared/commons/TableBattle"
-import TableBattleMobile from "../../shared/commons/TableBattleMobile"
-import BannerInner from "../../shared/components/Banner/Inner"
+const TableBattle = dynamic(() => import('../../shared/commons/TableBattle'));
+const TableBattleMobile = dynamic(()=> import('../../shared/commons/TableBattleMobile'));
+const NavDate = dynamic(()=> import('../../shared/commons/NavDate'));
+const BannerInner = dynamic(()=> import('../../shared/components/Banner/Inner'));
 
 const Countrys = (props) => {
     const router = useRouter()
@@ -15,6 +16,7 @@ const Countrys = (props) => {
     const myRef = useRef(null)
    
     const [datas, setDatas] = useState(false);
+    const [defaults , setDefaults] = useState();
     const [load, setLoad] = useState(false);
     const [error, setError] = useState('');
     const [lang , setLang] = useState([]);
@@ -41,6 +43,51 @@ const Countrys = (props) => {
       return newsformat;
   
       }
+      const Loadcountry = async () => {
+
+            let lslug =  router.query.slug;
+            var objj = [];
+            var list_objj = {};
+          
+            if(lslug[1] === "today" || lslug[1] === "undefined"){
+          
+              const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+              const data = await res.json()
+
+              for(var i =0; i < data.scores.category.length; i++)
+              {
+                    if(lslug[0] === data.scores.category[i]["@file_group"]){
+
+                        objj.push(data.scores.category[i]);
+
+                    }
+
+
+              }
+          
+            }else{
+          
+              const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
+              const data = await res.json()
+
+              for(var i =0; i < data.scores.category.length; i++)
+              {
+                    if(lslug[0] === data.scores.category[i]["@file_group"]){
+
+                        objj.push(data.scores.category[i]);
+
+                    }
+
+
+              }
+           }
+
+            list_objj = {listid:lslug[0],listdata: objj}
+            setDefaults(list_objj);
+
+
+
+      }
       const handdleClickAfterload = (e) => {
   
         e.preventDefault();
@@ -52,6 +99,11 @@ const Countrys = (props) => {
         //window.scrollTo(3000, 20)
     
       }
+      useEffect(() => {
+
+        Loadcountry();
+
+       },[setDefaults])
       useEffect(() => {
   
         const fetchItems = async () => {
@@ -107,39 +159,36 @@ const Countrys = (props) => {
         navDate[3].today = true 
         
 
-        slug[1] === "d-3" ? txtdate = "ย้อนหลัง 3 วัน" 
-        :
-        slug[1] === "d-2" ? txtdate = "ย้อนหลัง 2 วัน" 
-        :
-        slug[1] === "d-1" ? txtdate = "ย้อนหลัง 1 วัน" 
-        :
-        slug[1] === "d1" ? txtdate = "ล่วงหน้า 1 วัน" 
-        :
-        slug[1] === "d2" ? txtdate = "ล่วงหน้า 2 วัน" 
-        :
-        slug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
-        :
-        txtdate = "วันนี้" 
+        if(defaults !== undefined){
 
-        useEffect(() => {
+          if(props.id !== defaults.listid){
+  
+              Loadcountry();
+            
+          }
+          //console.log(defaults.listid)
+  
+        }
+
+        /*useEffect(() => {
 
             myRef.current.scrollIntoView()
             setTimeout(function(){
               setLoad(true)
             }, 1500)
             
-          })
+          })*/
    
     return (
       <>
          <Layout className="px-0 px-md-3">
          <HeaderSeo
             siteName=""
-            title={`ค้นหา ผลบอล ประเทศ ${slug[0]} ${txtdate}` }
-            desc={`ผลบอลประเทศ ${slug[0]} ${txtdate}`}
+            title={`ค้นหา ผลบอล ประเทศ ${slug[0]} ${props.date}` }
+            desc={`ผลบอลประเทศ ${slug[0]} ${props.date}`}
             imgSrc=""
             metaUrl=""
-            keyWords={`ผลบอลประเทศทั้งหมด ${slug[0]} ${txtdate}`}
+            keyWords={`ผลบอลประเทศทั้งหมด ${slug[0]} ${props.date}`}
             author=""
           />
           <BannerInner />
@@ -155,9 +204,9 @@ const Countrys = (props) => {
          <div ref={myRef}></div> 
   
           {
-            load !== false ?
-            props.listdata.length > 0 ?
-            props.listdata.map((res,val) => (
+            defaults !== undefined ?
+            defaults.listdata.length > 0 ?
+            defaults.listdata.map((res,val) => (
            
               
                     <div key={val.toString()}>
@@ -176,7 +225,7 @@ const Countrys = (props) => {
   
             ))
           :<center><h1>ไม่มีข้อมูล</h1></center>
-          :<center><h1>Loading ......</h1></center>  
+          :<center><h1>Loading ......</h1></center> 
           }
   
           </div>
@@ -190,9 +239,9 @@ const Countrys = (props) => {
                     </div>
   
                     {   
-                        load !== false ?
-                        props.listdata.length > 0 ?
-                        props.listdata.map((res,val) => (
+                        defaults !== undefined ?
+                        defaults.listdata.length > 0 ?
+                        defaults.listdata.map((res,val) => (
                          
                           
                           <div key={val.toString()}>
@@ -213,6 +262,7 @@ const Countrys = (props) => {
                         ))
                         :<center><h1>ไม่มีข้อมูล</h1></center>
                         :<center><h1>Loading ......</h1></center>   
+                        
                       }
   
   
@@ -227,50 +277,25 @@ const Countrys = (props) => {
   }
   Countrys.getInitialProps = async ({query}) => {
   
-     let lslug =  query.slug;
-     var objj = [];
+    let lslug =  query.slug;
+    var txtdate = null;
+   
   
-     if(lslug[1] === "today" || lslug[1] === "undefined"){
-  
-      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
-      const data = await res.json()
-
-      for(var i =0; i < data.scores.category.length; i++)
-      {
-            if(lslug[0] === data.scores.category[i]["@file_group"]){
-
-                objj.push(data.scores.category[i]);
-
-            }
-
-
-      }
-      return { 
-          listdata: objj
-        }
-  
-     }else{
-  
-      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
-      const data = await res.json()
-
-      for(var i =0; i < data.scores.category.length; i++)
-      {
-            if(lslug[0] === data.scores.category[i]["@file_group"]){
-
-                objj.push(data.scores.category[i]);
-
-            }
-
-
-      }
-  
-      return { 
-          listdata: objj
-        }
-  
-     }
-  
+        lslug[1] === "d-3" ? txtdate = "ย้อนหลัง 3 วัน" 
+        :
+        lslug[1] === "d-2" ? txtdate = "ย้อนหลัง 2 วัน" 
+        :
+        lslug[1] === "d-1" ? txtdate = "ย้อนหลัง 1 วัน" 
+        :
+        lslug[1] === "d1" ? txtdate = "ล่วงหน้า 1 วัน" 
+        :
+        lslug[1] === "d2" ? txtdate = "ล่วงหน้า 2 วัน" 
+        :
+        lslug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
+        :
+        txtdate = "วันนี้" 
+     
+        return {id:lslug[0],date:txtdate,country:lslug[0]}
   }
   
   export default Countrys

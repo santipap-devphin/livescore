@@ -2,22 +2,25 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useState,useEffect ,useRef } from 'react'
 import Link from 'next/link'
-import Layout from "../../shared/container/Layout"
+import dynamic from 'next/dynamic'
+const Layout = dynamic(() => import('../../shared/container/Layout'));
 import HeaderSeo from "../../shared/commons/HeaderSeo"
-import NavDate from "../../shared/commons/NavDate"
-import TableBattle from "../../shared/commons/TableBattle"
-import TableBattleMobile from "../../shared/commons/TableBattleMobile"
-import BannerInner from "../../shared/components/Banner/Inner"
-
-import Europe from "../../mock/uefaleague"
+const TableBattle = dynamic(() => import('../../shared/commons/TableBattle'));
+const TableBattleMobile = dynamic(()=> import('../../shared/commons/TableBattleMobile'));
+const NavDate = dynamic(()=> import('../../shared/commons/NavDate'));
+const BannerInner = dynamic(()=> import('../../shared/components/Banner/Inner'));
 
 const Post = (props) => {
+
+  console.log(props)
   const router = useRouter()
   const slug = router.query.slug || []
   const myRef = useRef(null)
  
   const [items, setItems] = useState();
+
   const [load, setLoad] = useState(false);
+  const [defaults , setDefaults] = useState();
   const [error, setError] = useState('');
   const [lang , setLang] = useState([]);
   const [sectiontwo , setSectiontwo] = useState(false);
@@ -43,6 +46,52 @@ const Post = (props) => {
     return newsformat;
 
     }
+    const Loaddatadefalut = async () => {
+  
+      let lslug =  router.query.slug;
+     
+      var objj = [];
+      var list_objj = {};
+     
+
+            if(lslug[1] === "today" || lslug[1] === "undefined"){
+
+              const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+              const data = await res.json()
+              for(var i =0; i < data.scores.category.length; i++)
+              {
+                      if(lslug[0] === data.scores.category[i]["@id"]){
+
+                          objj.push(data.scores.category[i]);
+
+                      }
+
+
+              }
+
+             }else{
+
+              const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
+              const data = await res.json()
+                  for(var i =0; i < data.scores.category.length; i++)
+                  {
+                          if(lslug[0] === data.scores.category[i]["@id"]){
+
+                              objj.push(data.scores.category[i]);
+
+                          }
+
+
+                  }
+            }
+
+            list_objj = {listid:lslug[0],listdata: objj}
+            setDefaults(list_objj)
+            
+
+      
+  
+    }
     const handdleClickAfterload = (e) => {
 
       e.preventDefault();
@@ -54,6 +103,16 @@ const Post = (props) => {
       //window.scrollTo(3000, 20)
   
     }
+    useEffect(() => {
+
+      
+      
+      Loaddatadefalut();
+  
+      
+  
+    },[setDefaults])
+
     useEffect(() => {
 
       const fetchItems = async () => {
@@ -84,14 +143,14 @@ const Post = (props) => {
   
     },[setLang])
 
-    useEffect(() => {
+    /*useEffect(() => {
 
       myRef.current.scrollIntoView()
       setTimeout(function(){
         setLoad(true)
       }, 1500)
       
-    })
+    })*/
     
     let navDate = [
         { id: "1",pathid:"d-3", date: datee(-3), route: `/league/${slug[0]}/d-3`, today: false },
@@ -118,41 +177,17 @@ const Post = (props) => {
       :
       navDate[3].today = true
 
-      slug[1] === "d-3" ? txtdate = "ย้อนหลัง 3 วัน" 
-      :
-      slug[1] === "d-2" ? txtdate = "ย้อนหลัง 2 วัน" 
-      :
-      slug[1] === "d-1" ? txtdate = "ย้อนหลัง 1 วัน" 
-      :
-      slug[1] === "d1" ? txtdate = "ล่วงหน้า 1 วัน" 
-      :
-      slug[1] === "d2" ? txtdate = "ล่วงหน้า 2 วัน" 
-      :
-      slug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
-      :
-      txtdate = "วันนี้" 
-
-      slug[0] === "1005" ? txtleg = "ยูฟ่า แชมเปี้ยนส์ลีก"
-      :
-      slug[0] === "1204" ? txtleg = "พรีเมียร์ลีก อังกฤษ"
-      :
-      slug[0] === "1007" ? txtleg = "ยูโรป้า ลีก"
-      :
-      slug[0] === "1198" ? txtleg = "เอฟเอ คัพ อังกฤษ"
-      :
-      slug[0] === "1399" ? txtleg = "ลาลีกา สเปน"
-      :
-      slug[0] === "1269" ? txtleg =  "กัลโช่ เซเรีย อา อิตาลี"
-      :
-      slug[0] === "1229" ? txtleg = "บุนเดสลีกา เยอรมัน"
-      :
-      slug[0] === "1322" ? txtleg = "เอเรดิวิซี่ ฮอลแลนด์"
-      :
-      slug[0] === "1221" ? txtleg = "ลีก เอิง ฝรั่งเศส"
-      :
-      slug[0] === "1271" ? txtleg = "เจ ลีก ญี่ปุ่น"
-      :""
       
+      if(defaults !== undefined){
+
+        if(props.id !== defaults.listid){
+
+          Loaddatadefalut();
+          
+        }
+        //console.log(defaults.listid)
+
+      }
 
       
  
@@ -161,11 +196,11 @@ const Post = (props) => {
        <Layout className="px-0 px-md-3">
        <HeaderSeo
         siteName=""
-        title={`ลีกยอดฮิต ${txtleg} ${txtdate}`}
-        desc={`ลีกยอดฮิต ชอง ${txtleg} ${txtdate}`}
+        title={`ลีกยอดฮิต ${props.legue} ${props.date}`}
+        desc={`ลีกยอดฮิต ชอง ${props.legue} ${props.date}`}
         imgSrc=""
         metaUrl=""
-        keyWords={`รายงาน ลีกยอดฮิต ${txtleg} ${txtdate}`}
+        keyWords={`รายงาน ลีกยอดฮิต ${props.legue} ${props.date}`}
         author=""
       />
         <div className="d-none d-md-block mainf-tab">
@@ -176,13 +211,12 @@ const Post = (props) => {
         onClickRight={() => console.log("right")}
        
       />
-      {console.log(load)}
        <div ref={myRef}></div> 
-
+       
         {
-          load !== false ?
-          props.listdata.length > 0 ?
-          props.listdata.map((res,val) => (
+          defaults !== undefined ?
+          defaults.listdata.length > 0 ?
+          defaults.listdata.map((res,val) => (
            
             <div key={val.toString()}>
                   <TableBattle  
@@ -212,9 +246,10 @@ const Post = (props) => {
                   </div>
 
                   {
-                      load !== false ?
-                      props.listdata.length > 0 ?
-                      props.listdata.map((res,val) => (
+                    
+                      defaults !== undefined ?
+                      defaults.listdata.length > 0 ?
+                      defaults.listdata.map((res,val) => (
                        
                         
                         <div key={val.toString()}>
@@ -234,7 +269,7 @@ const Post = (props) => {
 
                       ))
                       :<center><h1>ไม่มีข้อมูล</h1></center>
-                      :<center><h1>Loading ......</h1></center>  
+                      :<center><h1>Loading ......</h1></center> 
                     }
 
 
@@ -250,47 +285,47 @@ const Post = (props) => {
 Post.getInitialProps = async ({query}) => {
 
    let lslug =  query.slug;
-   var objj = [];
+   var txtdate = null;
+   var txtleg  = null;
+   
+      lslug[1] === "d-3" ? txtdate = "ย้อนหลัง 3 วัน" 
+      :
+      lslug[1] === "d-2" ? txtdate = "ย้อนหลัง 2 วัน" 
+      :
+      lslug[1] === "d-1" ? txtdate = "ย้อนหลัง 1 วัน" 
+      :
+      lslug[1] === "d1" ? txtdate = "ล่วงหน้า 1 วัน" 
+      :
+      lslug[1] === "d2" ? txtdate = "ล่วงหน้า 2 วัน" 
+      :
+      lslug[1] === "d3" ? txtdate = "ล่วงหน้า 3 วัน" 
+      :
+      txtdate = "วันนี้" 
 
-   if(lslug[1] === "today" || lslug[1] === "undefined"){
+      lslug[0] === "1005" ? txtleg = "ยูฟ่า แชมเปี้ยนส์ลีก"
+      :
+      lslug[0] === "1204" ? txtleg = "พรีเมียร์ลีก อังกฤษ"
+      :
+      lslug[0] === "1007" ? txtleg = "ยูโรป้า ลีก"
+      :
+      lslug[0] === "1198" ? txtleg = "เอฟเอ คัพ อังกฤษ"
+      :
+      lslug[0] === "1399" ? txtleg = "ลาลีกา สเปน"
+      :
+      lslug[0] === "1269" ? txtleg =  "กัลโช่ เซเรีย อา อิตาลี"
+      :
+      lslug[0] === "1229" ? txtleg = "บุนเดสลีกา เยอรมัน"
+      :
+      lslug[0] === "1322" ? txtleg = "เอเรดิวิซี่ ฮอลแลนด์"
+      :
+      lslug[0] === "1221" ? txtleg = "ลีก เอิง ฝรั่งเศส"
+      :
+      lslug[0] === "1271" ? txtleg = "เจ ลีก ญี่ปุ่น"
+      :""
 
-    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
-    const data = await res.json()
-    for(var i =0; i < data.scores.category.length; i++)
-    {
-            if(lslug[0] === data.scores.category[i]["@id"]){
+   
 
-                objj.push(data.scores.category[i]);
-
-            }
-
-
-    }
-
-    return { 
-        listdata: objj
-      }
-
-   }else{
-
-    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/${lslug[1]}?json=1`)
-    const data = await res.json()
-    for(var i =0; i < data.scores.category.length; i++)
-    {
-            if(lslug[0] === data.scores.category[i]["@id"]){
-
-                objj.push(data.scores.category[i]);
-
-            }
-
-
-    }
-
-    return { 
-        listdata: objj
-      }
-
-   }
+      return {id:lslug[0],date:txtdate,legue:txtleg}
 
 }
 
