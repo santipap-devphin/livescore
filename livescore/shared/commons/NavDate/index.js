@@ -13,7 +13,7 @@ const NavDate = ({ onClickLeft, onClickRight, className, DataDate }) => {
         onClick={onClickLeft}
         className="pointer d-none d-md-flex py-2 px-2 col-1 justify-content-center"
       >
-        <RiArrowLeftSLine />
+       {/* <RiArrowLeftSLine />*/}
       </div>
       {DataDate.map((item, index) => (
         <a
@@ -30,7 +30,7 @@ const NavDate = ({ onClickLeft, onClickRight, className, DataDate }) => {
         onClick={onClickRight}
         className="pointer d-none d-md-flex py-2 px-2 col-1 text-right justify-content-center"
       >
-        <RiArrowRightSLine />
+        {/*<RiArrowRightSLine />*/}
       </div>
     </NavDateStyle>
   );

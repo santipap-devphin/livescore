@@ -11,13 +11,14 @@ const TableBattle = dynamic(() => import('../shared/commons/TableBattle'));
 const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobile'));
 import BannerInner from "../shared/components/Banner/Inner"
 
-const Home = (props) => {
+const Home = () => {
 
   //console.log(props)
   const myRef = useRef(null)
   const [sdata , setDatas] =  useState(false);
 
-  const [defaults , setDefaults] = useState(props);
+  const [defaults , setDefaults] = useState();
+  const [loaddefaults , setloadDefaults] = useState(false);
   const [clickLoad, setClickLoad] = useState(false);
 
   const [priority , setPriority] = useState([]);
@@ -53,108 +54,7 @@ const Home = (props) => {
     //window.scrollTo(3000, 20)
 
   }
-   function chklive(obj,priority){
-
-    //obj = data.scores.category[i]
-    var listdata = obj;
-    var ndata = [];
-    var newsarr = [];
-
-    if(Array.isArray(listdata["matches"].match) === true){
-
-      //newsarr = [];
-        for(var j = 0 ; j < listdata["matches"].match.length; j++){
-
-                //newsarr = []
-                if(listdata["matches"].match[j]["@timer"] !== "" || listdata["matches"].match[j]["@status"] === "HT"){
-
-                    newsarr.push(
-                        {
-                          "@leagueid": listdata["@gid"],
-                          "@status": listdata["matches"].match[j]["@status"],
-                          "@timer": listdata["matches"].match[j]["@timer"],
-                          "@date": listdata["matches"].match[j]["@date"],
-                          "@formatted_date": listdata["matches"].match[j]["@formatted_date"],
-                          "@time": listdata["matches"].match[j]["@time"],
-                          "@commentary_available": listdata["matches"].match[j]["@commentary_available"],
-                          "@venue": listdata["matches"].match[j]["@venue"],
-                          "@v": listdata["matches"].match[j]["@v"],
-                          "@static_id": listdata["matches"].match[j]["@static_id"],
-                          "@fix_id": listdata["matches"].match[j]["@fix_id"],
-                          "@id": listdata["matches"].match[j]["@id"],
-                          "localteam": listdata["matches"].match[j]["localteam"],
-                          "visitorteam": listdata["matches"].match[j]["visitorteam"],
-                          "events": listdata["matches"].match[j]["events"],
-                          "ht": listdata["matches"].match[j]["ht"],
-                        }
-                      )
-
-                      ndata.push(
-                      {
-                        "@name":listdata["@name"] ,
-                        "@gid": listdata["@gid"] ,
-                        "@id": listdata["@id"] ,
-                        "@file_group": listdata["@file_group"],
-                        "@iscup": listdata["@iscup"],
-                        "@priority": priority,
-                        "matches":{match :[]}
-                      }
-                      
-          
-                    )
-                  
-                      
-                }
-
-        }
-
-
-    }else{
-
-          if(listdata["matches"].match["@timer"] !== "" || listdata["matches"].match["@status"] === "HT"){
-
-              newsarr.push(
-                {
-                  "@leagueid": listdata["@gid"],
-                  "@status": listdata["matches"].match["@status"],
-                  "@timer": listdata["matches"].match["@timer"],
-                  "@date": listdata["matches"].match["@date"],
-                  "@formatted_date": listdata["matches"].match["@formatted_date"],
-                  "@time": listdata["matches"].match["@time"],
-                  "@commentary_available": listdata["matches"].match["@commentary_available"],
-                  "@venue": listdata["matches"].match["@venue"],
-                  "@v": listdata["matches"].match["@v"],
-                  "@static_id": listdata["matches"].match["@static_id"],
-                  "@fix_id": listdata["matches"].match["@fix_id"],
-                  "@id": listdata["matches"].match["@id"],
-                  "localteam": listdata["matches"].match["localteam"],
-                  "visitorteam": listdata["matches"].match["visitorteam"],
-                  "events": listdata["matches"].match["events"],
-                  "ht": listdata["matches"].match["ht"],
-                }
-              )
-
-             ndata.push(
-                 {
-                   "@name":listdata["@name"] ,
-                   "@gid": listdata["@gid"] ,
-                   "@id": listdata["@id"] ,
-                   "@file_group": listdata["@file_group"],
-                   "@iscup": listdata["@iscup"],
-                   "@priority": priority,
-                   "matches": listdata["matches"],
-                 }
-     
-               )
-           }
-      }
-
-      return [
-        ndata,
-        newsarr
-      ];
-
-  }
+  
 
   //console.log(convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok"))
  
@@ -1210,6 +1110,227 @@ function datee(nextday){
 
   }
 
+  useEffect(() => {
+
+    const fetchteam = async () => {
+
+      const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
+      const data = await res.json()
+      let ndata = [];
+      let string_re;
+      let newdate;
+      let obkk  = {};
+      let matchs = [];
+ 
+
+  //convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok")
+
+          for(var i = 0 ; i < data.scores.category.length; i++)
+          {
+            
+            if(data.scores.category[i]["@id"] === "1204"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "1",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1005"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "2",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1007"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "3",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1198"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "4",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1399"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "5",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1269"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "6",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1229"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "7",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1322"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "8",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1221"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "9",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }
+            else if(data.scores.category[i]["@id"] === "1271"){
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "10",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }else{
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "11",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+            }
+            
+
+          }
+
+                  ndata.sort(function(a, b) {
+                  
+                      return a["@priority"] - b["@priority"];
+                  });
+          
+
+                  let scores = {
+                        "@sport":data.scores["@sport"],
+                        "@updated":data.scores["@updated"],
+                        "category":ndata
+                    
+                }
+                var object  = {home:scores}
+                setDefaults(object)
+          
+            }
+           
+             fetchteam();
+             setloadDefaults(true)
+            
+
+          },[setDefaults])
+
 
 
   useEffect(() => {
@@ -1222,6 +1343,8 @@ function datee(nextday){
      let sp_date;
      let lastdate;
     //setDatas(true);
+
+      if(sdata !== false) {
       if(defaults.home.category.length > 0){
 
             
@@ -1313,6 +1436,7 @@ function datee(nextday){
                //console.log("testst");
 
       }
+    }
    
   },[setDatas]);
 
@@ -1417,73 +1541,69 @@ return (
 
         
         {
-          
-          (sdata !== false) ? 
+           
+           (defaults !== undefined) 
+            ? 
+            defaults.home.category.slice(0, 7).map((res,value) => (
+
+                
+              <div key={value.toString()}> 
+              
+                  
+                  <TableBattle  
+                  className="highlight bg-secondary text-white"
+                  title={res['@name']}
+                  data={res.matches.match}
+                  highlight={true} 
+                  exam = {res['@id']}
+                  after = {handdleClickAfterload}
+                  th = {lang}
+                
+
+                  />
+                  
+                
+              </div>
+            
+
+              ))
+           
+           :<center><h1>loading.........</h1></center>
+          }
+          {
+          (defaults !== undefined) ? 
 
               
-              defaults.home.category.slice(0, 7).map((res,value) => (
+                defaults.home.category.slice(8).map((res,value) => (
 
-                
-                <div key={value.toString()}> 
-                
-                    
-                    <TableBattle  
-                    className="highlight bg-secondary text-white"
-                    title={res['@name']}
-                    data={res.matches.match}
-                    highlight={true} 
-                    exam = {res['@id']}
-                    after = {handdleClickAfterload}
-                    th = {lang}
+                      
+                  <div key={value.toString()}> 
                   
-
-                    />
+                      
+                      <TableBattle  
+                      className="highlight bg-secondary text-white"
+                      title={res['@name']}
+                      data={res.matches.match}
+                      highlight={true} 
+                      exam = {res['@id']}
+                      after = {handdleClickAfterload}
+                      th = {lang}
                     
-                  
-                </div>
+                      />
+                      
+                    
+                  </div>
+       
               
 
                 ))
                
-               :<center><h1>loading.........</h1></center>
-
-
-        }
-        {
-          
-          (sectiontwo !== false) ? 
-
-              defaults.home.category.slice(8).map((res,value) => (
-
-                
-                <div key={value.toString()}> 
-                
-                    
-                    <TableBattle  
-                    className="highlight bg-secondary text-white"
-                    title={res['@name']}
-                    data={res.matches.match}
-                    highlight={true} 
-                    exam = {res['@id']}
-                    after = {handdleClickAfterload}
-                    th = {lang}
-                   
-                    />
-                    
-                  
-                </div>
-           
-
-                )) 
-            :null
-
+               : null
+ 
 
         }
-
-        
-
-      
-      </div>
+       
+       </div>
 
        {
              <div className="d-block d-md-none mainf-tab score-mobile">
@@ -1503,7 +1623,7 @@ return (
                 </div>
                 {
 
-                (sdata !== false) ? 
+                (defaults !== undefined) ? 
 
                         
                         defaults.home.category.map((res,value) => (
@@ -1539,218 +1659,7 @@ return (
 Home.propTypes = {
 
 };
-Home.getInitialProps = async  (ctx) => {
 
-  const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
-  const data = await res.json()
-  let ndata = [];
-  let string_re;
-  let newdate;
-  let obkk  = {};
-  let matchs = [];
- 
-
-  //convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok")
-
-  for(var i = 0 ; i < data.scores.category.length; i++)
-  {
-    
-    if(data.scores.category[i]["@id"] === "1204"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "1",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1005"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "2",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1007"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "3",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1198"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "4",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1399"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "5",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1269"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "6",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1229"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "7",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1322"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "8",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1221"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "9",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }
-    else if(data.scores.category[i]["@id"] === "1271"){
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "10",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-
-    }else{
-
-      ndata.push(
-        {
-          "@name":data.scores.category[i]["@name"] ,
-          "@gid": data.scores.category[i]["@gid"] ,
-          "@id": data.scores.category[i]["@id"] ,
-          "@file_group": data.scores.category[i]["@file_group"],
-          "@iscup": data.scores.category[i]["@iscup"],
-          "@priority": "11",
-          "matches": data.scores.category[i]["matches"],
-        }
-
-      )
-    }
-    
-
-  }
-
-  ndata.sort(function(a, b) {
-  
-      return a["@priority"] - b["@priority"];
-  });
-  
-
-  let scores = {
-        "@sport":data.scores["@sport"],
-        "@updated":data.scores["@updated"],
-        "category":ndata
-     
- }
- //setLoads(true)
-
-  return {home: scores}
-}
 
 export default Home;
 
