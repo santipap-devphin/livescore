@@ -1318,11 +1318,105 @@ function datee(nextday){
                     
                 }
                 var object  = {home:scores}
-                setDefaults(object)
+                
+                 if(object.home.category.length > 0){
+
+                  let datee;
+                  let newdate;
+                  let timee;
+                  let formattime;
+                  let renewsdate;
+                  let sp_date;
+                  let lastdate;
+                
+                  for(var i = 0; i < object.home.category.length; i++)
+                  {
+                  
+                        if(Array.isArray(object.home.category[i].matches.match) === true){
+                        
+    
+                         for(var j = 0; j < object.home.category[i].matches.match.length; j++)
+                         {
+    
+                            
+                            datee = object.home.category[i].matches.match[j]["@formatted_date"].split(".");
+                            newdate = datee[2]+"/"+datee[1]+"/"+datee[0];
+                            timee = object.home.category[i].matches.match[j]["@time"];
+                            formattime = newdate+" "+timee +" +0000";
+                            renewsdate = convertTZ(formattime, "Asia/Bangkok");
+                            //console.log(renewsdate)
+                            sp_date = renewsdate.toString().split(" ");
+                            lastdate = sp_date[4].split(":");
+                            //console.log(lastdate[0]+":"+lastdate[1])
+    
+                            if(object.home.category[i].matches.match[j]["@timer"] === ""){
+    
+                       
+                              if(object.home.category[i].matches.match[j]["@status"] === "HT" 
+                              || object.home.category[i].matches.match[j]["@status"] === "FT" 
+                              || object.home.category[i].matches.match[j]["@status"] === "Postp." 
+                              || object.home.category[i].matches.match[j]["@status"] === "Cancl."
+                              || object.home.category[i].matches.match[j]["@status"] === "Pen."){
+                              }else{
+                                object.home.category[i].matches.match[j]["@time"] = lastdate[0]+":"+lastdate[1];
+                                object.home.category[i].matches.match[j]["@status"] = lastdate[0]+":"+lastdate[1];
+                              }
+         
+                             
+         
+         
+                           }else{
+                            object.home.category[i].matches.match[j]["@time"] = lastdate[0]+":"+lastdate[1];
+                           }
+                           // console.log(defaults.home.category[i].matches.match[j]["@timer"])
+    
+    
+                         }
+    
+                      }
+                      else{
+    
+                        datee = object.home.category[i].matches.match["@formatted_date"].split(".");
+                        newdate = datee[2]+"/"+datee[1]+"/"+datee[0];
+                        timee = object.home.category[i].matches.match["@time"];
+                        formattime = newdate+" "+timee +" +0000";
+                        renewsdate = convertTZ(formattime, "Asia/Bangkok");
+                        //console.log(renewsdate)
+                        sp_date = renewsdate.toString().split(" ");
+                        lastdate = sp_date[4].split(":");
+                        //console.log(lastdate[0]+":"+lastdate[1])
+                      
+                        if(object.home.category[i].matches.match["@timer"] === ""){
+    
+                          if(object.home.category[i].matches.match["@status"] === "HT" 
+                          || object.home.category[i].matches.match["@status"] === "FT" 
+                          || object.home.category[i].matches.match["@status"] === "Postp." 
+                          || object.home.category[i].matches.match["@status"] === "Cancl."
+                          || object.home.category[i].matches.match["@status"] === "Pen."){
+                          }else{
+                            object.home.category[i].matches.match["@time"] = lastdate[0]+":"+lastdate[1];
+                            object.home.category[i].matches.match["@status"] = lastdate[0]+":"+lastdate[1];
+                          }
+                        
+                         }else{
+                            object.home.category[i].matches.match["@time"] = lastdate[0]+":"+lastdate[1];
+                         }
+    
+    
+                      }
+    
+                  }
+    
+    
+                   setDefaults(object)
+                  
+                 }
           
             }
            
              fetchteam();
+
+             
              setloadDefaults(true)
             
 
@@ -1330,112 +1424,7 @@ function datee(nextday){
 
 
 
-  useEffect(() => {
-
-     let datee;
-     let newdate;
-     let timee;
-     let formattime;
-     let renewsdate;
-     let sp_date;
-     let lastdate;
-    //setDatas(true);
-
-      if(sdata !== false) {
-      if(defaults.home.category.length > 0){
-
-            
-              for(var i = 0; i < defaults.home.category.length; i++)
-              {
-              
-                    if(Array.isArray(defaults.home.category[i].matches.match) === true){
-                    
-
-                     for(var j = 0; j < defaults.home.category[i].matches.match.length; j++)
-                     {
-
-                        
-                        datee = defaults.home.category[i].matches.match[j]["@formatted_date"].split(".");
-                        newdate = datee[2]+"/"+datee[1]+"/"+datee[0];
-                        timee = defaults.home.category[i].matches.match[j]["@time"];
-                        formattime = newdate+" "+timee +" +0000";
-                        renewsdate = convertTZ(formattime, "Asia/Bangkok");
-                        //console.log(renewsdate)
-                        sp_date = renewsdate.toString().split(" ");
-                        lastdate = sp_date[4].split(":");
-                        //console.log(lastdate[0]+":"+lastdate[1])
-
-                        if(defaults.home.category[i].matches.match[j]["@timer"] === ""){
-
-                   
-                          if(defaults.home.category[i].matches.match[j]["@status"] === "HT" 
-                          || defaults.home.category[i].matches.match[j]["@status"] === "FT" 
-                          || defaults.home.category[i].matches.match[j]["@status"] === "Postp." 
-                          || defaults.home.category[i].matches.match[j]["@status"] === "Cancl."
-                          || defaults.home.category[i].matches.match[j]["@status"] === "Pen."){
-                          }else{
-                               defaults.home.category[i].matches.match[j]["@time"] = lastdate[0]+":"+lastdate[1];
-                               defaults.home.category[i].matches.match[j]["@status"] = lastdate[0]+":"+lastdate[1];
-                          }
-     
-                         
-     
-     
-                       }else{
-                        defaults.home.category[i].matches.match[j]["@time"] = lastdate[0]+":"+lastdate[1];
-                       }
-                       // console.log(defaults.home.category[i].matches.match[j]["@timer"])
-
-
-                     }
-
-                  }
-                  else{
-
-                    datee = defaults.home.category[i].matches.match["@formatted_date"].split(".");
-                    newdate = datee[2]+"/"+datee[1]+"/"+datee[0];
-                    timee = defaults.home.category[i].matches.match["@time"];
-                    formattime = newdate+" "+timee +" +0000";
-                    renewsdate = convertTZ(formattime, "Asia/Bangkok");
-                    //console.log(renewsdate)
-                    sp_date = renewsdate.toString().split(" ");
-                    lastdate = sp_date[4].split(":");
-                    //console.log(lastdate[0]+":"+lastdate[1])
-                  
-                    if(defaults.home.category[i].matches.match["@timer"] === ""){
-
-                      if(defaults.home.category[i].matches.match["@status"] === "HT" 
-                      || defaults.home.category[i].matches.match["@status"] === "FT" 
-                      || defaults.home.category[i].matches.match["@status"] === "Postp." 
-                      || defaults.home.category[i].matches.match["@status"] === "Cancl."
-                      || defaults.home.category[i].matches.match["@status"] === "Pen."){
-                      }else{
-                           defaults.home.category[i].matches.match["@time"] = lastdate[0]+":"+lastdate[1];
-                           defaults.home.category[i].matches.match["@status"] = lastdate[0]+":"+lastdate[1];
-                      }
-                    
-                     }else{
-                      defaults.home.category[i].matches.match["@time"] = lastdate[0]+":"+lastdate[1];
-                     }
-
-
-                  }
-
-              }
-
-
-             // console.log(defaults)
-               setDatas(true);
-
-               //convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok")
-
-               //console.log(convertTZ("16:00 +0000", "Asia/Bangkok"))
-               //console.log("testst");
-
-      }
-    }
-   
-  },[setDatas]);
+ 
 
 
   useEffect(() => {
@@ -1468,10 +1457,7 @@ function datee(nextday){
   },[setLang])
   
 
-  //console.log(priority)
-
-
-  let navDates = [
+ let navDates = [
     { id: "1", date: datee(-3), route: "/soccer/programs/d-3", today: false },
     { id: "2", date: datee(-2), route: "/soccer/programs/d-2", today: false },
     { id: "3", date: datee(-1), route: "/soccer/programs/d-1", today: false },

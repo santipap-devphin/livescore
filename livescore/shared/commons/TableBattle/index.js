@@ -141,7 +141,7 @@ function checkIfImageExists(url, callback) {
   return (
     <TableBattleStyle className={`league-matches ${highlight === true ? "highlight" : ""} mb-4 league-${exam}`}>
       <h4 className={`block-title ${className} mb-0`}>
-       {console.log(title)}
+     
       <img 
          src={`${assets}/country/${lastimg}`}
          alt={`ผลบอลสด ${title}`}

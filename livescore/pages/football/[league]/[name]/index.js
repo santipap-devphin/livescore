@@ -1,16 +1,13 @@
 import React, { useState ,useEffect } from 'react';
-import HeaderSeo from "../../../../shared/commons/HeaderSeo"
-import Layout from "../../../../shared/container/Layout"
-import Battle from "../../../../shared/commons/Battle"
+import dynamic from 'next/dynamic';
+const HeaderSeo = dynamic(() => import('../../../../shared/commons/HeaderSeo'));
+const Layout = dynamic(() => import('../../../../shared/container/Layout'));
+const Battle = dynamic(() => import('../../../../shared/commons/Battle'));
+const MatchIonfo = dynamic(() => import('../../../../shared/components/MatchIonfo'));
+const MatchSummary = dynamic(() => import('../../../../shared/components/MatchSummary'));
+const TopLiveSoccerContent = dynamic(() => import('../../../../shared/components/TopLiveSoccerContent'));
 import { useRouter } from 'next/router'
-import Breadcrumb from "../../../../shared/commons/Breadcrumb"
-import Button from "../../../../shared/commons/Button"
-import VotedBar from "../../../../shared/components/VotedBar"
-import InputGroup from "../../../../shared/commons/InputGroup"
-import NavMatch from "../../../../shared/components/NavMatch"
-import MatchIonfo from "../../../../shared/components/MatchIonfo"
-import MatchSummary from "../../../../shared/components/MatchSummary"
-import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerContent"
+
 import {TableOdds} from "../../../../shared/components/TableOdds"
 import {Accordion} from "../../../../shared/components/Accordion"
 import { isIE } from 'react-device-detect';
