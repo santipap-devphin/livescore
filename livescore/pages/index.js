@@ -62,7 +62,7 @@ const Home = () => {
     setDatas(false);
     setSectiontwo(false);
     //console.log(e.target.value);
-    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+    const res = await fetch(`https://zio666.com/service_live/load_livescore.php`)
     
     const data = await res.json()
 
@@ -1063,12 +1063,10 @@ const Home = () => {
           // console.log(newArray[key]["match"])
        
 
-      }
+       }
 
          }
-         
-       
-      }
+     }
      
    let scores = {
             "@sport":data.scores["@sport"],
@@ -1309,6 +1307,8 @@ function datee(nextday){
                   
                       return a["@priority"] - b["@priority"];
                   });
+
+                  
           
 
                   let scores = {
