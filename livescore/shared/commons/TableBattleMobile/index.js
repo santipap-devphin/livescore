@@ -201,7 +201,7 @@ const TableBattleMobile = ({title, data, className , exam ,after , th}) => {
 
                               <Link
                               href={{
-                                pathname: `/football/[league]/[name]`,
+                               pathname: `/football/[league]/[name]`,
                                query: { event: JSON.stringify(data.events) , type:JSON.stringify(data["@status"])}
                               }}
                               as={`/football/${data["@static_id"]}/${exam}`}

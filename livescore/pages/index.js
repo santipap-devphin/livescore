@@ -1110,12 +1110,12 @@ function datee(nextday){
 
     const fetchteam = async () => {
 
-      const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
+      const res = await fetch('https://zio666.com/service_live/load_livescore.php')
       const data = await res.json()
       let ndata = [];
    
  
-          for(var i = 0 ; i < data.scores.category.length; i++)
+          /*for(var i = 0 ; i < data.scores.category.length; i++)
           {
             
             if(data.scores.category[i]["@id"] === "1204"){
@@ -1301,20 +1301,20 @@ function datee(nextday){
            ndata.sort(function(a, b) {
                   
                       return a["@priority"] - b["@priority"];
-           });
+           });*/
 
-                /*let scores = {
+                let scores = {
                         "@sport":data.scores["@sport"],
                         "@updated":data.scores["@updated"],
                         "category":data.scores.category
                     
-                }*/
-                let scores = {
+                }
+                /*let scores = {
                   "@sport":data.scores["@sport"],
                   "@updated":data.scores["@updated"],
                   "category":ndata
               
-              }
+              }*/
                 var object  = {home:scores}
                 
                  if(object.home.category.length > 0){
@@ -1406,9 +1406,9 @@ function datee(nextday){
                   }
     
     
-                   setDefaults(object)
-                  
-                 }
+                  }
+
+                setDefaults(object)
           
             }
            
@@ -1416,6 +1416,7 @@ function datee(nextday){
 
              
              setloadDefaults(true)
+             setDatas(true)
             
 
           },[setDefaults])
@@ -1527,7 +1528,10 @@ return (
            
            (defaults !== undefined) 
             ? 
-            defaults.home.category.slice(0, 5).map((res,value) => (
+
+            sdata !== false ?
+
+            defaults.home.category.map((res,value) => (
 
                 
               <div key={value.toString()}> 
@@ -1549,44 +1553,11 @@ return (
               </div>
             
 
-              ))
+              )) : <center><h1>กรุณา รอสักครู่ ......</h1></center>
            
            :<center><h1>loading.........</h1></center>
           }
-          {
-          (defaults !== undefined) ? 
-
-              
-                loaddefaults !== false ?
-
-                defaults.home.category.slice(6).map((res,value) => (
-
-                      
-                  <div key={value.toString()}> 
-                  
-                      
-                      <TableBattle  
-                      className="highlight bg-secondary text-white"
-                      title={res['@name']}
-                      data={res.matches.match}
-                      highlight={true} 
-                      exam = {res['@id']}
-                      after = {handdleClickAfterload}
-                      th = {lang}
-                    
-                      />
-                      
-                    
-                  </div>
-       
-              
-
-                )) : null
-               
-               : null
- 
          
-        }
        
        </div>
 
@@ -1611,10 +1582,8 @@ return (
                 (defaults !== undefined) ? 
 
 
-                      loaddefaults !== false ?
 
-                        
-                        defaults.home.category.slice(0,10).map((res,value) => (
+                      defaults.home.category.slice(0,1).map((res,value) => (
 
                             
                             <div key={value.toString()}>
@@ -1631,7 +1600,8 @@ return (
                           
                             
                           
-                      )):null
+                      ))
+                      
               : <center><h1>กรุณา รอสักครู่ ......</h1></center>
               }
 
