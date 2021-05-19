@@ -1110,12 +1110,12 @@ function datee(nextday){
 
     const fetchteam = async () => {
 
-      const res = await fetch('https://zio666.com/service_live/load_livescore.php')
+      const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
       const data = await res.json()
       let ndata = [];
    
  
-          /*for(var i = 0 ; i < data.scores.category.length; i++)
+          for(var i = 0 ; i < data.scores.category.length; i++)
           {
             
             if(data.scores.category[i]["@id"] === "1204"){
@@ -1301,14 +1301,20 @@ function datee(nextday){
            ndata.sort(function(a, b) {
                   
                       return a["@priority"] - b["@priority"];
-           });*/
+           });
 
-                let scores = {
+                /*let scores = {
                         "@sport":data.scores["@sport"],
                         "@updated":data.scores["@updated"],
                         "category":data.scores.category
                     
-                }
+                }*/
+                let scores = {
+                  "@sport":data.scores["@sport"],
+                  "@updated":data.scores["@updated"],
+                  "category":ndata
+              
+              }
                 var object  = {home:scores}
                 
                  if(object.home.category.length > 0){
@@ -1620,7 +1626,7 @@ return (
                                     after = {handdleClickAfterload}
                                     th = {lang}
                                   />
-                                {alert(res['@name'])}
+                               
                             </div>
                           
                             
