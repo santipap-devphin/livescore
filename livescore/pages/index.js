@@ -1551,6 +1551,8 @@ return (
           (defaults !== undefined) ? 
 
               
+                loaddefaults !== false ?
+
                 defaults.home.category.slice(6).map((res,value) => (
 
                       
@@ -1573,7 +1575,7 @@ return (
        
               
 
-                )) 
+                )) : null
                
                : null
  
@@ -1602,6 +1604,9 @@ return (
 
                 (defaults !== undefined) ? 
 
+
+                      loaddefaults !== false ?
+
                         
                         defaults.home.category.map((res,value) => (
 
@@ -1620,7 +1625,7 @@ return (
                           
                             
                           
-                      ))
+                      )):null
               : <center><h1>loading.........</h1></center>
               }
 
