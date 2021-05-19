@@ -297,13 +297,28 @@ const Homefilter = (props) => {
     const today = new Date()
     const tomorrow = new Date(today)
 
+    var month_th = {};
+
+    month_th["Jan"] = "มค.";
+    month_th["Feb"] = "กพ.";
+    month_th["Mar"] = "มีค.";
+    month_th["Apr"] = "เมย.";
+    month_th["May"] = "พค.";
+    month_th["Jun"] = "มิย.";
+    month_th["Jul"] = "กค.";
+    month_th["Aug"] = "สค.";
+    month_th["Sep"] = "กย.";
+    month_th["Oct"] = "ตค.";
+    month_th["Nov"] = "พย.";
+    month_th["Dec"] = "ธค.";
+
     tomorrow.setDate(tomorrow.getDate()+nextday)
 
     const neww = String(tomorrow);
 
     const newsdate = neww.split(" ");
 
-    const newsformat = newsdate[1] + " " +newsdate[2];
+    const newsformat = month_th[newsdate[1]] + " " +newsdate[2];
 
     
     return newsformat;
