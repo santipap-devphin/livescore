@@ -55,6 +55,7 @@ const Home = () => {
 
   //console.log(convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok"))
  
+  
   const handleClicklive = async (e) => {
 
     e.preventDefault();
@@ -62,7 +63,7 @@ const Home = () => {
     setDatas(false);
     setSectiontwo(false);
     //console.log(e.target.value);
-    const res = await fetch(`https://zio666.com/service_live/load_livescore.php`)
+    const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
     
     const data = await res.json()
 
@@ -1109,18 +1110,12 @@ function datee(nextday){
 
     const fetchteam = async () => {
 
-      const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
+      const res = await fetch('https://zio666.com/service_live/load_livescore.php')
       const data = await res.json()
       let ndata = [];
-      let string_re;
-      let newdate;
-      let obkk  = {};
-      let matchs = [];
+   
  
-
-  //convertTZ("2021/03/29 16:00 +0000", "Asia/Bangkok")
-
-          for(var i = 0 ; i < data.scores.category.length; i++)
+          /*for(var i = 0 ; i < data.scores.category.length; i++)
           {
             
             if(data.scores.category[i]["@id"] === "1204"){
@@ -1303,18 +1298,15 @@ function datee(nextday){
 
           }
 
-                  ndata.sort(function(a, b) {
+           ndata.sort(function(a, b) {
                   
                       return a["@priority"] - b["@priority"];
-                  });
+           });*/
 
-                  
-          
-
-                  let scores = {
+                let scores = {
                         "@sport":data.scores["@sport"],
                         "@updated":data.scores["@updated"],
-                        "category":ndata
+                        "category":data.scores.category
                     
                 }
                 var object  = {home:scores}
@@ -1424,10 +1416,11 @@ function datee(nextday){
 
 
 
+
+ 
  
 
-
-  useEffect(() => {
+ /* useEffect(() => {
 
     const fetchItems = async () => {
 
@@ -1454,7 +1447,7 @@ function datee(nextday){
     
     }, 50);
 
-  },[setLang])
+  },[setLang])*/
   
 
  let navDates = [
@@ -1519,15 +1512,16 @@ return (
         <a href="#" onClick={handleClicklive} style={{"marginLeft":"20px"}}>
             Live
         </a>
-       
+      
         <div ref={myRef}></div> 
 
+        {console.log(loaddefaults)}
         
         {
            
            (defaults !== undefined) 
             ? 
-            defaults.home.category.slice(0, 7).map((res,value) => (
+            defaults.home.category.slice(0, 5).map((res,value) => (
 
                 
               <div key={value.toString()}> 
@@ -1557,7 +1551,9 @@ return (
           (defaults !== undefined) ? 
 
               
-                defaults.home.category.slice(8).map((res,value) => (
+                loaddefaults !== false ?
+
+                defaults.home.category.slice(6).map((res,value) => (
 
                       
                   <div key={value.toString()}> 
@@ -1579,11 +1575,11 @@ return (
        
               
 
-                ))
+                )) : null
                
                : null
  
-
+         
         }
        
        </div>
