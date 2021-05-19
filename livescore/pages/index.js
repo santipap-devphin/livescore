@@ -1515,7 +1515,7 @@ return (
       
         <div ref={myRef}></div> 
 
-        {console.log(loaddefaults)}
+       
         
         {
            
@@ -1551,8 +1551,6 @@ return (
           (defaults !== undefined) ? 
 
               
-                loaddefaults !== false ?
-
                 defaults.home.category.slice(6).map((res,value) => (
 
                       
@@ -1575,7 +1573,7 @@ return (
        
               
 
-                )) : null
+                )) 
                
                : null
  
