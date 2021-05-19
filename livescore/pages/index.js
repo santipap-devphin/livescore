@@ -1610,7 +1610,7 @@ return (
                         
                         defaults.home.category.slice(0,10).map((res,value) => (
 
-                      
+                            
                             <div key={value.toString()}>
                                   <TableBattleMobile 
                                     title={res['@name']}
@@ -1620,7 +1620,7 @@ return (
                                     after = {handdleClickAfterload}
                                     th = {lang}
                                   />
-                                
+                                {alert(res['@name'])}
                             </div>
                           
                             
