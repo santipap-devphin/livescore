@@ -1608,7 +1608,7 @@ return (
                       loaddefaults !== false ?
 
                         
-                        defaults.home.category.map((res,value) => (
+                        defaults.home.category.slice(0,10).map((res,value) => (
 
                       
                             <div key={value.toString()}>
@@ -1626,7 +1626,7 @@ return (
                             
                           
                       )):null
-              : <center><h1>loading.........</h1></center>
+              : <center><h1>กรุณา รอสักครู่ ......</h1></center>
               }
 
            </div>
