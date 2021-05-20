@@ -20,8 +20,10 @@ const Home = () => {
 
   const [priority , setPriority] = useState([]);
   const [live , setLive] = useState([]);
+  const [loadlive , setloadLive] = useState(false);
   const [sectiontwo , setSectiontwo] = useState(false);
   const [lang , setLang] = useState([]);
+  
   const fuct = useState();
   var newsarr = [];
   var _blank = [];
@@ -44,6 +46,7 @@ const Home = () => {
     e.preventDefault();
 
     setDatas(false);
+    setloadLive(false);
     setSectiontwo(false);
 
     myRef.current.scrollIntoView()
@@ -61,6 +64,7 @@ const Home = () => {
     e.preventDefault();
 
     setDatas(false);
+    setloadLive(false);
     setSectiontwo(false);
     //console.log(e.target.value);
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
@@ -1439,7 +1443,1036 @@ function datee(nextday){
 
 
 
- 
+  useEffect(() => {
+
+    const fetchlive = async () => {
+
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1`)
+      const data = await res.json()
+  
+
+      let ndata = [];
+      let objj = {};
+      let newsarr = [];
+      var values;
+    
+        for(var i = 0 ; i < data.scores.category.length; i++)
+        {
+          
+         // 
+          if(data.scores.category[i]["@id"] === "1204"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "1",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "1",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1005"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "2",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "2",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1007"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "3",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "3",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1198"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "4",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "4",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1399"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "5",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "5",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1269"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "6",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+                }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "6",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1229"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "7",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "7",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1322"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "8",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "8",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1221"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "9",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "9",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+  
+          }
+          else if(data.scores.category[i]["@id"] === "1271"){
+  
+            if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+              //newsarr = [];
+             for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                    //newsarr = []
+                    if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                        newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                              "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                              "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                              "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                              "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match[j]["events"],
+                              "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                            }
+                          )
+                          ndata.push(
+                           {
+                             "@name":data.scores.category[i]["@name"] ,
+                             "@gid": data.scores.category[i]["@gid"] ,
+                             "@id": data.scores.category[i]["@id"] ,
+                             "@file_group": data.scores.category[i]["@file_group"],
+                             "@iscup": data.scores.category[i]["@iscup"],
+                             "@priority": "10",
+                             "matches":{match :[]}
+                           }
+                         )
+                      }
+              }
+        }else{
+  
+             if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                     newsarr.push(
+                       {
+                         "@leagueid": data.scores.category[i]["@gid"],
+                         "@status": data.scores.category[i]["matches"].match["@status"],
+                         "@timer": data.scores.category[i]["matches"].match["@timer"],
+                         "@date": data.scores.category[i]["matches"].match["@date"],
+                         "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                         "@time": data.scores.category[i]["matches"].match["@time"],
+                         "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                         "@venue": data.scores.category[i]["matches"].match["@venue"],
+                         "@v": data.scores.category[i]["matches"].match["@v"],
+                         "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                         "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                         "@id": data.scores.category[i]["matches"].match["@id"],
+                         "localteam": data.scores.category[i]["matches"].match["localteam"],
+                         "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                         "events": data.scores.category[i]["matches"].match["events"],
+                         "ht": data.scores.category[i]["matches"].match["ht"],
+                       }
+                     )
+  
+                     ndata.push(
+                         {
+                           "@name":data.scores.category[i]["@name"] ,
+                           "@gid": data.scores.category[i]["@gid"] ,
+                           "@id": data.scores.category[i]["@id"] ,
+                           "@file_group": data.scores.category[i]["@file_group"],
+                           "@iscup": data.scores.category[i]["@iscup"],
+                           "@priority": "10",
+                           "matches": data.scores.category[i]["matches"],
+                         }
+             
+                       )
+                   }
+              }
+            
+  
+          }else{
+  
+              if(Array.isArray(data.scores.category[i]["matches"].match) === true){
+  
+                   //newsarr = [];
+                  for(var j = 0 ; j < data.scores.category[i]["matches"].match.length; j++){
+  
+                         //newsarr = []
+                         if(data.scores.category[i]["matches"].match[j]["@timer"] !== "" || data.scores.category[i]["matches"].match[j]["@status"] === "HT"){
+  
+                             newsarr.push(
+                                 {
+                                   "@leagueid": data.scores.category[i]["@gid"],
+                                   "@status": data.scores.category[i]["matches"].match[j]["@status"],
+                                   "@timer": data.scores.category[i]["matches"].match[j]["@timer"],
+                                   "@date": data.scores.category[i]["matches"].match[j]["@date"],
+                                   "@formatted_date": data.scores.category[i]["matches"].match[j]["@formatted_date"],
+                                   "@time": data.scores.category[i]["matches"].match[j]["@time"],
+                                   "@commentary_available": data.scores.category[i]["matches"].match[j]["@commentary_available"],
+                                   "@venue": data.scores.category[i]["matches"].match[j]["@venue"],
+                                   "@v": data.scores.category[i]["matches"].match[j]["@v"],
+                                   "@static_id": data.scores.category[i]["matches"].match[j]["@static_id"],
+                                   "@fix_id": data.scores.category[i]["matches"].match[j]["@fix_id"],
+                                   "@id": data.scores.category[i]["matches"].match[j]["@id"],
+                                   "localteam": data.scores.category[i]["matches"].match[j]["localteam"],
+                                   "visitorteam": data.scores.category[i]["matches"].match[j]["visitorteam"],
+                                   "events": data.scores.category[i]["matches"].match[j]["events"],
+                                   "ht": data.scores.category[i]["matches"].match[j]["ht"],
+                                 }
+                               )
+                               ndata.push(
+                                {
+                                  "@name":data.scores.category[i]["@name"] ,
+                                  "@gid": data.scores.category[i]["@gid"] ,
+                                  "@id": data.scores.category[i]["@id"] ,
+                                  "@file_group": data.scores.category[i]["@file_group"],
+                                  "@iscup": data.scores.category[i]["@iscup"],
+                                  "@priority": "11",
+                                  "matches":{match :[]}
+                                }
+                              )
+                           }
+                   }
+             }else{
+  
+                  if(data.scores.category[i]["matches"].match["@timer"] !== "" || data.scores.category[i]["matches"].match["@status"] === "HT"){
+  
+                          newsarr.push(
+                            {
+                              "@leagueid": data.scores.category[i]["@gid"],
+                              "@status": data.scores.category[i]["matches"].match["@status"],
+                              "@timer": data.scores.category[i]["matches"].match["@timer"],
+                              "@date": data.scores.category[i]["matches"].match["@date"],
+                              "@formatted_date": data.scores.category[i]["matches"].match["@formatted_date"],
+                              "@time": data.scores.category[i]["matches"].match["@time"],
+                              "@commentary_available": data.scores.category[i]["matches"].match["@commentary_available"],
+                              "@venue": data.scores.category[i]["matches"].match["@venue"],
+                              "@v": data.scores.category[i]["matches"].match["@v"],
+                              "@static_id": data.scores.category[i]["matches"].match["@static_id"],
+                              "@fix_id": data.scores.category[i]["matches"].match["@fix_id"],
+                              "@id": data.scores.category[i]["matches"].match["@id"],
+                              "localteam": data.scores.category[i]["matches"].match["localteam"],
+                              "visitorteam": data.scores.category[i]["matches"].match["visitorteam"],
+                              "events": data.scores.category[i]["matches"].match["events"],
+                              "ht": data.scores.category[i]["matches"].match["ht"],
+                            }
+                          )
+  
+                          ndata.push(
+                              {
+                                "@name":data.scores.category[i]["@name"] ,
+                                "@gid": data.scores.category[i]["@gid"] ,
+                                "@id": data.scores.category[i]["@id"] ,
+                                "@file_group": data.scores.category[i]["@file_group"],
+                                "@iscup": data.scores.category[i]["@iscup"],
+                                "@priority": "11",
+                                "matches": data.scores.category[i]["matches"],
+                              }
+                  
+                            )
+                        }
+                   }
+  
+              }
+          
+  
+        }
+  
+        ndata.sort(function(a, b) {
+        
+            return a["@priority"] - b["@priority"];
+        });
+  
+        
+  
+        var flags = [], output = [], l = ndata.length, i;
+  
+        for( i=0; i<l; i++) {
+  
+            if(flags[ndata[i]["@gid"]]) continue;
+            flags[ndata[i]["@gid"]] = true;
+            output.push(ndata[i]);
+        }
+  
+        
+        
+  
+       var newArray = newsarr.reduce(function(acc, curr) {
+          //finding Index in the array where the NamaCategory matched
+          var findIfNameExist = acc.findIndex(function(item) {
+            return item["@leagueid"] === curr["@leagueid"];
+          })
+          // if in the new array no such object exist where
+          // namecategory matches then create a new object
+          if (findIfNameExist === -1) {
+            let obj = {
+              '@leagueid': curr["@leagueid"],
+              "match": [curr]
+            }
+            acc.push(obj)
+          } else {
+            // if name category matches , then push the value 
+            acc[findIfNameExist].match.push(curr)
+          }
+          return acc;
+  
+        }, []);
+  
+  
+        //console.log(output)
+        //console.log(newArray)
+  
+         
+  
+         for (let [key, value] of Object.entries(output)) {
+          
+  
+           for(var i = 0; i < newArray.length; i++){
+            //console.log(value["@gid"] +"==="+ newArray[i]["@leagueid"])
+            if(value["@gid"] === newArray[i]["@leagueid"]){
+  
+              //console.log(newArray[key])
+             //value.matches.push(newArray[key])
+  
+             //objjj = newArray[key]["match"];
+             value.matches.match = newArray[i]["match"];
+            // console.log(newArray[key]["match"])
+         
+  
+         }
+  
+           }
+       }
+       
+     let scores = {
+              "@sport":data.scores["@sport"],
+              "@updated":data.scores["@updated"],
+              "category":output
+          
+      }
+   
+      objj = {home:scores};
+
+
+      setLive(objj)
+      setloadLive(true)
+       
+  
+    }
+
+    fetchlive();
+
+  },[setLive])
  
 
  /* useEffect(() => {
@@ -1537,8 +2570,37 @@ return (
       
         <div ref={myRef}></div> 
 
-       
         
+       
+        {
+          (loadlive !== false) ? 
+
+              live.home.category.map((res,value) => (
+
+               <div key={value.toString()}> 
+              
+                  
+                  <TableBattle  
+                  className="highlight bg-secondary text-white"
+                  title={res['@name']}
+                  data={res.matches.match}
+                  highlight={true} 
+                  exam = {res['@id']}
+                  after = {handdleClickAfterload}
+                  th = {lang}
+                
+
+                  />
+                  
+                
+              </div>
+            
+
+              ))
+
+           :null
+
+        }
         {
            
            (defaults !== undefined) 
@@ -1592,6 +2654,27 @@ return (
                     Live
                 </a>
                 </div>
+
+                  {
+                    (loadlive !== false) ? 
+                        live.home.category.map((res,value) => (
+                          <div key={value.toString()}>
+                                <TableBattleMobile 
+                                  title={res['@name']}
+                                  data={res.matches.match}
+                                  highlight={false} 
+                                  exam = {res['@id']}
+                                  after = {handdleClickAfterload}
+                                  th = {lang}
+                                />
+                            
+                          </div>
+                        
+                          
+                        
+                    )) :null
+
+                }
                 {
 
                 (defaults !== undefined) ? 

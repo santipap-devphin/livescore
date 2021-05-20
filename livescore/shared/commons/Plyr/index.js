@@ -49,7 +49,7 @@ class PlyrComponent extends React.Component {
             }}
             as={this.props.matchid}
           >
-            <a className="d-block"><h2 className="title">{this.props.title}</h2></a>
+            <a className="d-block" title={this.props.title}><h2 className="title">{this.props.title}</h2></a>
           </Link>
           <div className="video_content-editor d-flex align-items-center">
             <AiOutlineCalendar className="mr-2" /> {this.props.date}

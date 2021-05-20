@@ -263,13 +263,7 @@ const H2h = (props) => {
 			</div>
          
                   
-                    
-                    
-                  
-           
-
-          
-      </TopLiveSoccerContent>
+       </TopLiveSoccerContent>
     </Layout>
   );
 };
