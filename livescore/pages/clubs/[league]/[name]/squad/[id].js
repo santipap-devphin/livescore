@@ -1,11 +1,9 @@
 import React, { useState,useEffect } from 'react';
 import { useRouter } from 'next/router'
 import HeaderSeo from "../../../../../shared/commons/HeaderSeo"
-import Avatar from "../../../../../shared/commons/Avatar"
 import LayoutSidebarClub from "../../../../../shared/container/LayoutSidebarClub"
 import SquadPlayerTable from "../../../../../shared/components/SquadPlayerTable"
 
-import liverpool from "../../../../../mock/liverpool"
 
 const Squad = (props) => {
 

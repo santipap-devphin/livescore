@@ -1,11 +1,11 @@
 import React, { useState, useEffect ,useRef } from 'react'
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import TableBattle from "../shared/commons/TableBattle"
+import TableBattleMobile from "../shared/commons/TableBattleMobile"
 const HeaderSeo = dynamic(() => import('../shared/commons/HeaderSeo'));
 const Layout = dynamic(() => import('../shared/container/Layout'));
 const NavDate = dynamic(() => import('../shared/commons/NavDate'));
-const TableBattle = dynamic(() => import('../shared/commons/TableBattle'));
-const TableBattleMobile = dynamic(()=> import('../shared/commons/TableBattleMobile'));
 const BannerInner = dynamic(()=> import('../shared/components/Banner/Inner'));
 
 const Home = () => {

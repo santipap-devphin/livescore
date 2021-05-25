@@ -20,6 +20,7 @@ const Homefilter = (props) => {
   var routers = useRouter();
   var txtdate = null;
   const myRef = useRef(null)  
+  const [clickLoad, setClickLoad] = useState(false);
 
   const handdleClickAfterload = (e) => {
 
@@ -27,6 +28,7 @@ const Homefilter = (props) => {
     e.preventDefault();
 
     setDatas(false);
+    setClickLoad(false)
     setSectiontwo(false);
 
     myRef.current.scrollIntoView()
@@ -282,6 +284,7 @@ const Homefilter = (props) => {
           var list_obj = {id:id,list:leage};
 
           setDefaults(list_obj);
+          setClickLoad(true)
           //return {id:id,list:leage}
 
               
@@ -405,6 +408,9 @@ const Homefilter = (props) => {
         
          {
           (defaults !== undefined) ?
+
+           clickLoad !== false ?
+
             defaults.list[0].sortdata.category.slice(0,7).map((res,value) => (
 
                  <div key={value.toString()}> 
@@ -420,12 +426,13 @@ const Homefilter = (props) => {
                       
                   </div>
                   
-            ))
+            )) :<center><h1>Loading .....</h1></center>
           :<center><h1>Loading .....</h1></center>
          }
 
         {
           (defaults !== undefined) ? 
+              clickLoad !== false ?
               defaults.list[0].sortdata.category.slice(8).map((res,value) => (
 
                   <div key={value.toString()}> 
@@ -441,7 +448,7 @@ const Homefilter = (props) => {
                         
                     </div>
                     
-              ))
+              )) :null
           :null
           
          }
@@ -465,6 +472,7 @@ const Homefilter = (props) => {
                       {
                         
                       (defaults !== undefined) ?
+                          clickLoad !== false ?
                           defaults.list[0].sortdata.category.map((res,value) => (
                                   <div key={value.toString()}>
                                         <TableBattleMobile 
@@ -477,7 +485,7 @@ const Homefilter = (props) => {
                                         />
                                       
                                   </div>
-                      ))
+                      )) : <center><h1>Loading .....</h1></center>
                      : <center><h1>Loading .....</h1></center>
                      
                      }

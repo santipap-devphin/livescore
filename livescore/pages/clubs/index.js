@@ -1,25 +1,48 @@
-import React, { useState, useEffect ,useRef } from 'react';
-import HeaderSeo from "../../shared/commons/HeaderSeo"
-import Layout from "../../shared/container/Layout"
-import Empty from "../../shared/commons/Empty"
+import React, { useState, useEffect ,useRef } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import Avatar from "../../shared/commons/Avatar"
-import BannerInner from "../../shared/components/Banner/Inner"
 
-const Teams = (props) => {
+
+const HeaderSeo = dynamic(() => import('../../shared/commons/HeaderSeo'));
+const Layout = dynamic(() => import('../../shared/container/Layout'));
+const BannerInner = dynamic(() => import('../../shared/components/Banner/Inner'));
+
+import Empty from "../../shared/commons/Empty"
+import Avatar from "../../shared/commons/Avatar"
+
+const Teams = () => {
 
    const [isLeague, setLeague] = useState("0");
-   const [items, setItems] = useState(props);
+   const [items, setItems] = useState();
    const [load, setLoad] = useState(false);
    const [error, setError] = useState('');
    const [sdata , setDatas] =  useState(false);
    const myRef = useRef(null)
    let events = [];
-  useEffect(() => {
+  /*useEffect(() => {
     setLeague("1204");
     setLoad(true)
-  }, []);
+  }, []);*/
 
+  useEffect(() => {
+
+    const fetchdataleague = async () => {
+
+      const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1204.xml?json=1`)
+      const data = await res.json()
+  
+      data.standings.tournament.team.sort(function(a, b) {
+        
+         return a["@id"] - b["@id"];
+      });
+      setItems(data);
+      setLoad(true);
+    }
+    
+    fetchdataleague();
+    
+
+  },[setItems])
  
    
   const  handdleClickAfterload = (e) => {
@@ -63,6 +86,8 @@ const Teams = (props) => {
 
   }
 
+  
+
 
   
   
@@ -97,6 +122,7 @@ const Teams = (props) => {
         </div>
       </div>
 
+      {console.log(items)}
      
       {
         load !== false
@@ -226,7 +252,7 @@ const Teams = (props) => {
     </Layout>
   )
 }
-Teams.getInitialProps = async () => {
+/*Teams.getInitialProps = async () => {
 
   const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/standings/1204.xml?json=1`)
   const data = await res.json()
@@ -238,7 +264,7 @@ Teams.getInitialProps = async () => {
  
    return data
 
-}
+}*/
 
 
 export default Teams

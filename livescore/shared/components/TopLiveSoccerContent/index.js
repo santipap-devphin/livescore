@@ -234,7 +234,7 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
 
 TopLiveSoccerContent.propTypes = {
   children: PropTypes.node,
-  navMatch: PropTypes.array
+  /*navMatch: PropTypes.array*/
 };
 
 

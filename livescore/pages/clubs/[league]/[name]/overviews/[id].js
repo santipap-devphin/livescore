@@ -1,7 +1,9 @@
 import React,{ Component ,useState, useEffect } from 'react';
+import dynamic from 'next/dynamic'
 import fetch from 'isomorphic-unfetch'
-import HeaderSeo from "../../../../../shared/commons/HeaderSeo"
-import LayoutSidebarClub from "../../../../../shared/container/LayoutSidebarClub"
+const HeaderSeo = dynamic(() => import('../../../../../shared/commons/HeaderSeo'));
+const LayoutSidebarClub = dynamic(() => import('../../../../../shared/container/LayoutSidebarClub'));
+
 import OverViewMatchesTable from "../../../../../shared/components/OverViewMatchesTable"
 import OverViewStatsTable from "../../../../../shared/components/OverViewStatsTable"
 import OverViewInjuredTable from "../../../../../shared/components/OverViewInjuredTable"
@@ -24,6 +26,8 @@ const Apitest = (props) => {
  
 
   const loadData = async (idd) => {
+
+    console.log(idd)
 
     const res = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccerfixtures/data/${idd}?json=1`)
     const data = await res.json()

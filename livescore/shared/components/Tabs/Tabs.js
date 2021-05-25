@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const Tabs = ({children /* initialTab*/}) => {
 
-   
+    //console.log(children[0].props.label)
     const[activetab, setActivetab] = useState(children[0].props.label);
     const[label ,Setlable] = useState();
     const router = useRouter();

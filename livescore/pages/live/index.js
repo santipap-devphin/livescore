@@ -1,13 +1,11 @@
 import React, { useState, useEffect ,useRef } from 'react';
 import axios from 'axios';
-import HeaderSeo from "../../shared/commons/HeaderSeo"
 import dynamic from 'next/dynamic';
-import Footer from "../../shared/components/Footer"
-import BannerInner from "../../shared/components/Banner/Inner"
-
-const TableLive = dynamic(() => import('../../shared/commons/TableLive'));
-const TableBattleMobile = dynamic(()=> import('../../shared/commons/TableBattleMobile'));
-
+const HeaderSeo = dynamic(() => import('../../shared/commons/HeaderSeo'));
+const Footer = dynamic(() => import('../../shared/components/Footer'));
+const BannerInner = dynamic(() => import('../../shared/components/Banner/Inner'));
+import TableLive from "../../shared/commons/TableLive"
+import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
 const Live = (props) => {
 

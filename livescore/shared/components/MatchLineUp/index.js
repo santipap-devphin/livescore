@@ -264,8 +264,8 @@ const MatchLineUp = ({teams,list,type, players}) => {
 
 
 MatchLineUp.propTypes = {
-  type: PropTypes.string,
-  players: PropTypes.array.isRequired
+  type: PropTypes.string
+  /*players: PropTypes.array.isRequired*/
 };
 
 

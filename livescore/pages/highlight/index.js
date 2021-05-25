@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import HeaderSeo from "../../shared/commons/HeaderSeo"
-import Layout from "../../shared/container/Layout"
+import dynamic from 'next/dynamic';
+
+const HeaderSeo = dynamic(() => import('../../shared/commons/HeaderSeo'));
+const Layout = dynamic(() => import('../../shared/container/Layout'));
+const BannerInner = dynamic(() => import('../../shared/components/Banner/Inner'));
+const Button = dynamic(() => import('../../shared/commons/Button'));
+
 import CardClips from "../../shared/components/CardClips"
-import posts from "../../mock/Blog"
 import Carousel from "../../shared/commons/Carousel"
-import Button from "../../shared/commons/Button"
-import BannerInner from "../../shared/components/Banner/Inner"
+
 
 const limit = 4;
 let arrayForHoldingPosts = [];

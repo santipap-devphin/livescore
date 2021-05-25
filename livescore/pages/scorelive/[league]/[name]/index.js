@@ -1,16 +1,16 @@
 import React, { useState ,useEffect } from 'react';
-import HeaderSeo from "../../../../shared/commons/HeaderSeo"
-import Layout from "../../../../shared/container/Layout"
-import Battle from "../../../../shared/commons/Battle"
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router'
-import Breadcrumb from "../../../../shared/commons/Breadcrumb"
-import Button from "../../../../shared/commons/Button"
-import VotedBar from "../../../../shared/components/VotedBar"
-import InputGroup from "../../../../shared/commons/InputGroup"
-import NavMatch from "../../../../shared/components/NavMatch"
-import MatchIonfo from "../../../../shared/components/MatchIonfo"
-import MatchSummary from "../../../../shared/components/MatchSummary"
-import TopLiveSoccerContent from "../../../../shared/components/TopLiveSoccerContent"
+
+const HeaderSeo = dynamic(() => import('../../../../shared/commons/HeaderSeo'));
+const Layout = dynamic(() => import('../../../../shared/container/Layout'));
+const MatchIonfo = dynamic(() => import('../../../../shared/components/MatchIonfo'));
+const MatchSummary = dynamic(() => import('../../../../shared/components/MatchSummary'));
+const TopLiveSoccerContent = dynamic(() => import('../../../../shared/components/TopLiveSoccerContent'));
+
+import TabsFootball from "../../../../shared/components/TabsFootball"
+import CardSoccer from "../../../../shared/components/CardSoccer"
+import MatchLineUp from "../../../../shared/components/MatchLineUp"
 
 
 const PremierLeague = (props ,{ }) => {
@@ -50,6 +50,7 @@ const PremierLeague = (props ,{ }) => {
   let numm = 0;
   var listoddss = [];
   var listoddsunder = [];
+  let objteam = {};
 
   const handdleClickOddsetc = (e) => {
 
@@ -345,8 +346,10 @@ if(props.check === 1){
 
 }else{
 
-  if(typeof router.query.event === "undefined"){
+  //console.log(props)
 
+ // if(typeof router.query.event === "undefined"){
+    if(props.check === 0){
     
     obj = {event:"reload","summary":props.league.match.summary};
     title_obj = {"title":props.league.match["@status"]};
@@ -799,6 +802,7 @@ useEffect(() => {
 
                             nav[1] = toTh;
                             nav[2] = props.league.match.localteam["@name"] +" vs "+ props.league.match.visitorteam["@name"];
+                            //nav[3] = props.league.match.localteam["@name"] +"-vs-"+ props.league.match.visitorteam["@name"];
 
                             let datee;
                             let newdate;
@@ -859,7 +863,8 @@ useEffect(() => {
                                 teamBid: props.league.match.visitorteam["@id"],
                               },
                             ]
-
+                            objteam["localteam"] = props.league.match.localteam["@name"];
+                            objteam["visitorteam"] = props.league.match.visitorteam["@name"];
 
                           }
                           else{
@@ -911,6 +916,7 @@ useEffect(() => {
 
                             nav[1] = toTh;
                             nav[2] = defalut.sleague.matches.match.localteam["@name"] +" vs "+ defalut.sleague.matches.match.visitorteam["@name"];
+                            //nav[3] = defalut.sleague.matches.match.localteam["@name"] +"-vs-"+ defalut.sleague.matches.match.visitorteam["@name"];
                              data = [
                               {
                                 title: defalut.sleague["@name"],
@@ -926,6 +932,8 @@ useEffect(() => {
                               },
                             ]
 
+                            objteam["localteam"] = defalut.sleague.matches.match.localteam["@name"];
+                            objteam["visitorteam"] = defalut.sleague.matches.match.visitorteam["@name"];
 
                           }
         
@@ -980,86 +988,90 @@ useEffect(() => {
         keyWords={`รายงาน ผลบอลระหว่าง ${nav[2]}`}
         author=""
       />
+
+     
       
       <TopLiveSoccerContent 
         nav={nav} 
         data={data[0]} 
-        navMatch={[
+        navMatch={""/*[
           {id: "1", name: "รายละเอียด", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}`, active: true },
           {id: "2", name: "ข้อมูลเชิงลึก", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/tracker`, active: false },
           {id: "3", name: "ผู้เล่น", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/line-us`, active: false },
           {id: "3", name: "ผลงานเจอกัน", paths: `/${navMatchs[0]}/${navMatchs[1]}/${navMatchs[2]}/h2h`, active: false },
-        ]}
-      >  
-        
-        <div className='card border-top-0 py-4 mb-4 mb-sm-0 card-content'>
-          {
-             Array.isArray(obj.event) ? 
-            (
-              <MatchIonfo 
-                type={router.query.type}
-                matchionfo={obj.event}
-              />
-             ) :
-             obj.event === 1 ?  
-             <MatchIonfo
-                    type={title_obj.title}
-                    matchionfo={events}
-               />
-               
-             :
-             /* (obj.event === null)
-              ? (<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล null</h1></center></div>)
-            :*/
-              (obj.event === "reload")
-              ? (<div style={{padding: "20px"}}>
-                <center>
-                  {
-                  obj.summary === null ? <h1>ไม่มีข้อมูล</h1>
-                  
-                  :<MatchSummary
-                    type={title_obj.title}
-                    matchionfo={events}
-                   />
-                  }
-                  
-                  
-                  </center>
-                  </div>
-                )
-              :
-              (obj.event === "nodata") ? <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
-              :<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
+        ]*/}
+      >
 
-          }
+      <TabsFootball title={`${nav[3]}`}>
+                <div label="tab-1" texts="รายละเอียด">
+                    <div className='card border-top-0 py-4 mb-4 mb-sm-0 card-content'>
+                      {
+                        Array.isArray(obj.event) ? 
+                        (
+                          <MatchIonfo 
+                            type={router.query.type}
+                            matchionfo={obj.event}
+                          />
+                        ) :
+                        obj.event === 1 ?  
+                        <MatchIonfo
+                                type={title_obj.title}
+                                matchionfo={events}
+                          />
+                          
+                        :
+                        /* (obj.event === null)
+                          ? (<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล null</h1></center></div>)
+                        :*/
+                          (obj.event === "reload")
+                          ? (<div style={{padding: "20px"}}>
+                            <center>
+                              {
+                              obj.summary === null ? <h1>ไม่มีข้อมูล</h1>
+                              
+                              :<MatchSummary
+                                type={title_obj.title}
+                                matchionfo={events}
+                              />
+                              }
+                              
+                              
+                              </center>
+                              </div>
+                            )
+                          :
+                          (obj.event === "nodata") ? <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
+                          :<div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
+
+                      }
           
-          <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4 card-content">
-          <div className="row bg-dark">
-            <div className="col-md-3">
-              <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold"> เตะสนาม: </div>
-            </div>
-            <div className="col-md-9">
-              <div className="card-body">
-                <p className="mb-0">{ defalut.check === 1 ? "ไม่มีข้อมูล" :  defalut.league.match.matchinfo.stadium["@name"]}</p>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4 card-content">
-            <div className="row bg-dark">
-              <div className="col-md-3">
-                <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
-                  ผู้ตัดสิน:
-                </div>
-              </div>
-              <div className="col-md-9">
-                <div className="card-body">
-                  <p className="mb-0">{defalut.check === 1 ? "ไม่มีข้อมูล" : defalut.league.match.matchinfo.referee["@name"]}</p>
-                </div>
-              </div>
-            </div>          
-          </div>
-          <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
+                        <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4 card-content">
+                        <div className="row bg-dark">
+                          <div className="col-md-3">
+                            <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold"> เตะสนาม: </div>
+                          </div>
+                          <div className="col-md-9">
+                            <div className="card-body">
+                              <p className="mb-0">{ defalut.check === 1 ? "ไม่มีข้อมูล" :  defalut.league.match.matchinfo.stadium["@name"]}</p>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        <div className="card rounded-0 border-top-0 border-left-0 border-right-0 mb-4 card-content">
+                          <div className="row bg-dark">
+                            <div className="col-md-3">
+                              <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
+                                ผู้ตัดสิน:
+                              </div>
+                            </div>
+                            <div className="col-md-9">
+                              <div className="card-body">
+                                <p className="mb-0">{defalut.check === 1 ? "ไม่มีข้อมูล" : defalut.league.match.matchinfo.referee["@name"]}</p>
+                              </div>
+                            </div>
+                          </div>          
+                        </div>
+                        <div className="card rounded-0 border-top-0 border-bottom-0 border-left-0 border-right-0 card-content">
           <div className="card-header  text-lowercase border-top-0 border-bottom-0 font-weight-bold">
               <h2><center>ราคาต่อรอง</center></h2>
           </div>
@@ -1070,7 +1082,7 @@ useEffect(() => {
                 <tr>
                  <th>ประเภท</th>
                  <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/bet365.png"}  alt="bet365"/></th>
-                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/188bet.png"} alt="188bet" /></th>
+                 <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/188bet.png"} alt="188bet"/></th>
                  <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/sbo.png"} alt="sbo"/></th>
                  <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/1xBet.png"} alt="1xBet"/></th>
                  <th><img className="img-fluid mb-3 mb-sm-0" src={"/assets/odds/Dafabet.png"} alt="Dafabet"/></th>
@@ -1798,8 +1810,9 @@ useEffect(() => {
                 <tfoot>
                 
                 {
+                    
                     oddsLoad !== false ? 
-                    listOdds.length === 0 ? <tr><td colSpan="6"></td></tr>
+                    listOdds.length === 0  ? <tr><td colSpan="6"></td></tr>
                     :
                     listOdds.map((res,index) => 
                     
@@ -1947,7 +1960,7 @@ useEffect(() => {
                     )
                     
                     :null
-                  
+                    
                   }
                   {
                      oddsLoad !== false ? 
@@ -2254,24 +2267,143 @@ useEffect(() => {
           }
           </div>
          
-          {/*<Accordion>
-            
-                <div label="MatchWinner 1">
-                 
-                    <p>
-                        Match Winner 1 text
-                    </p>
-                </div>
-                <div label="MatchWinner 2">
-                    
-                    <p>
-                        Match Winner 2 text
-                    </p>
-                </div>
-               
-          </Accordion>*/}
+                      {/*<Accordion>
+                        
+                            <div label="MatchWinner 1">
+                            
+                                <p>
+                                    Match Winner 1 text
+                                </p>
+                            </div>
+                            <div label="MatchWinner 2">
+                                
+                                <p>
+                                    Match Winner 2 text
+                                </p>
+                            </div>
+                          
+                      </Accordion>*/}
          
-        </div>
+                   </div>     
+
+
+                </div>
+                <div label="tab-2" texts="ข้อมูลเชิงลึก">
+                   
+                {
+                      defalut.check === 1 ? 
+                      <div style={{padding: "20px"}}>
+                        <center><h1>ไม่มีข้อมูล</h1></center>
+                      </div>
+                      
+                      :  
+                          defalut.league.match.stats === null ? 
+                          <div style={{padding: "20px"}}>
+                            <center><h1>ไม่มีข้อมูล</h1></center>
+                          </div>
+                          : 
+                          <CardSoccer teams={objteam} list={defalut.league.match.stats}/>
+                      }
+                   
+                </div>
+                <div label="tab-3" texts="ผู้เล่น">
+                   
+                    {defalut.check === 1 ? 
+                              <div style={{padding: "20px"}}>
+                                    <center><h1>ไม่มีข้อมูล</h1></center>
+                              </div> 
+                              :
+                              defalut.league.match.teams === null ? 
+                              <div style={{padding: "20px"}}>
+                                  <center><h1>ไม่มีข้อมูล</h1></center>
+                              </div>
+                              : 
+                              <MatchLineUp teams={objteam} list={defalut.league.match.teams} type="FT" players={""} />
+                      }
+                    
+                </div>
+                <div label="tab-4" texts="ผลงานพบกัน">
+                  
+                        <div className="row">
+                            <div className="col-md-12">
+                              <div className="table-wrap">
+                                <table className="table table-bordered table-dark table-hover">
+                                  <thead className="bg-danger">
+                                    <tr>
+                                    
+                                      <th colSpan="3" style={{textAlign: "center"}}>H2H</th>
+                                    
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  
+                                  {
+                                          
+
+                                          defalut.listh2s.h2h.top50 !== null ? 
+                                      
+                                            Array.isArray(defalut.listh2s.h2h.top50.match) === true ?  
+                                          
+                                          
+                                                defalut.listh2s.h2h.top50.match.slice(0, 10).map((res,index) => (
+
+                                                            <tr key={index}>
+                                                            <td style={{textAlign: "center"}}>
+
+                                                            <span className="badge badge-pill badge-success">{res["@team1"]}</span>
+                                                            <span className="badge badge-pill badge-warning" style={{margin:"5px"}}>{res["@team1_score"] +"-" + res["@team2_score"]}</span>
+                                                            <span className="badge badge-pill badge-danger">{res["@team2"]}</span>
+                                                            </td>
+                                                            <td style={{textAlign: "center"}}>
+                                                                <span className="badge badge-pill badge-light">{res["@league"]}</span>
+                                                            </td>
+                                                            <td style={{textAlign: "center"}}>
+                                                            <span className="badge badge-pill badge-secondary">วันที่ {res["@date"]}</span>
+                                                                
+                                                            </td>
+                                                            </tr>
+                                                    
+                                                      
+
+                                                  ))
+                                      
+                                      
+                                      
+                                      
+                                      :
+                                              <tr key={0}>    
+                                              <td style={{textAlign: "center"}}>
+
+                                              {defalut.listh2s.h2h.top50.match["@team1"]}
+                                              <span className="badge badge-pill badge-warning" style={{margin:"5px"}}>{defalut.listh2s.h2h.top50.match["@team1_score"] +"-" + defalut.listh2s.h2h.top50.match["@team2_score"]}</span>
+                                              {defalut.listh2s.h2h.top50.match["@team2"]}
+                                              </td>
+                                              <td style={{textAlign: "center"}}>
+                                              <span className="badge badge-pill badge-light">{defalut.listh2s.h2h.top50.match["@league"]}</span>
+                                                    
+                                              </td>
+                                              <td style={{textAlign: "center"}}>
+                                              <span className="badge badge-pill badge-secondary">วันที่ {defalut.listh2s.h2h.top50.match["@date"]}</span>
+                                                  
+                                              </td>
+                                              </tr>
+                                      
+                                      : <div style={{padding: "20px"}}><center><h1>ไม่มีข้อมูล</h1></center></div>
+                                      }
+                                  
+                                  
+                                    
+                                  
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                        </div>
+                     </div>
+       </TabsFootball>
+
+        
+        
       </TopLiveSoccerContent>
       
       
@@ -2298,6 +2430,9 @@ PremierLeague.getInitialProps = async ({query}) => {
   let cate;
   let paramdefalut = "home";
   var todayNY = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+  let localteamid;
+  let visitorteam;
+  let global;
   
 
   if(typeof data.commentaries.tournament === "undefined"){
@@ -2355,6 +2490,13 @@ PremierLeague.getInitialProps = async ({query}) => {
 
                         
                               match = datadefalut[ii].scores.category[i].matches.match[j];
+
+                              localteamid = datadefalut[ii].scores.category[i].matches.match[j].localteam["@id"];
+                              visitorteam = datadefalut[ii].scores.category[i].matches.match[j].visitorteam["@id"];
+                              const responh2hin = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${localteamid}/${visitorteam}?json=1`)
+                              const jsonh2h = await responh2hin.json()
+                              global = jsonh2h;
+
                            }
                     }
 
@@ -2365,6 +2507,11 @@ PremierLeague.getInitialProps = async ({query}) => {
 
 
                               match = datadefalut[ii].scores.category[i].matches.match;
+                              localteamid = datadefalut[ii].scores.category[i].matches.match.localteam["@id"];
+                              visitorteam = datadefalut[ii].scores.category[i].matches.match.visitorteam["@id"];
+                              const responh2hin = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${localteamid}/${visitorteam}?json=1`)
+                              const jsonh2h = await responh2hin.json()
+                              global = jsonh2h;
                         }
                    }
             }
@@ -2419,12 +2566,18 @@ PremierLeague.getInitialProps = async ({query}) => {
 
     cate.matches  = {match}
 
+   }else{
+
+    const responh2h = await fetch(`https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/h2h/${data.commentaries.tournament.match.localteam["@id"]}/${data.commentaries.tournament.match.visitorteam["@id"]}?json=1`)
+    const jsonh2h = await responh2h.json()
+    global = jsonh2h;
+
    }
  
    
 
    return { 
-        league: data.commentaries.tournament , check:check , sleague : cate
+        league: data.commentaries.tournament , check:check , sleague : cate ,listh2s :global
    }
 
   /*let paths =  asPath;

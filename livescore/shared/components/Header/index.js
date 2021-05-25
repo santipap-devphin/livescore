@@ -38,7 +38,7 @@ const Header = ({className}) => {
               <li className={`nav-item ${firstItem === "clubs" ? "active" : ""}`}>
                 <a className="nav-link" href="/clubs">ข้อมูลสโมสร</a>
               </li>
-              <li className={`nav-item ${firstItem === "standings" ? "active" : ""}`}>
+              <li className={`nav-item ${firstItem === "standings" ||  firstItem === "standings?tab=premier" ? "active" : ""}`}>
                 <a className="nav-link" href="/standings">ตารางคะแนนฟุตบอล</a>
               </li>
               <li className={`nav-item ${firstItem === "contact" ? "active" : ""}`}>
