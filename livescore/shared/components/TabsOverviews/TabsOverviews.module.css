@@ -1,0 +1,36 @@
+.tabscon{
+    
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.tabs{
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+border-bottom: 2px solid #666666;
+color:#606060;
+}
+.tabs > li {
+background-color: #fff;
+padding: 10px;
+font-size: 16px;
+width: 33%;
+text-align: center;
+}
+.current{
+background: linear-gradient(0deg,#710000 0%,#af0000 100%);
+color:#fff;
+font-weight: bold;
+border: 2px solid #666666;
+border-bottom: 0;
+border-top-right-radius: 5px;
+border-top-left-radius: 5px;
+position: relative;
+top:2px;
+}
+.content{
+padding: 20px 5px 5px 5px;
+
+}

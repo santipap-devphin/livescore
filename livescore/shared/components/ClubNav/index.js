@@ -29,6 +29,8 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
         "Champions"
     ]
 
+    //console.log(logo)
+
     /*for(var i=0; i < nav.length; i++){
 
         newnav.push(nav[i].replace(/\s/g, ''))
@@ -109,26 +111,26 @@ const ClubNav = ({ children, title, logo, flag, nation }) => {
                
                 <div className="container-fluid container-xl">
                     <div className="nav-overview">
-                        <ul className="nav">
-                            {
+                        {/*<ul className="nav">
+                            
                                 navi.map((slg, index) => (
                                     <li className="nav-item" key={index.toString()}>
-                                        {/* <Link
+                                           <Link
                                             href={`/clubs/[league]/[name]/${pageTitle}`}
                                             as={`/clubs/${league}/${teamName}/${slg.toLowerCase()}`}
-                                        > */}
+                                            > 
                                             <a 
                                                 href={`/clubs/${nleague}/${teamName}/${slg.toLowerCase()}/${idd}`} 
                                                 className={`nav-link ${slg.toLowerCase() === newsitem ? "active" : ""}`}
                                             >
-                                                {}
+                                                
                                                 {slg}
                                             </a>
-                                        {/* </Link> */}
+                                         </Link> 
                                     </li>
                                 ))
-                            }
-                        </ul>
+                            
+                        </ul>*/}
                     </div>
                 </div>
             </div>
