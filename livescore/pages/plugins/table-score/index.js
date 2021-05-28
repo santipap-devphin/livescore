@@ -124,7 +124,8 @@ const TableScore = () => {
             <BannerInner />
             <h1 className="pb-4 border-bottom mb-0" style={{ lineHeight: 'unset' }}>แจกตารางผลคะแนน</h1>
             <p className="mb-0 pt-4 pb-4">
-                Setup your very own free Livescore Widget. You will have a customised version of Livescore-eiei  to use for free on your own website. The free Livescore Widget can be customised with your own size. All data is provided by Livescore-eiei which means, that all data is fast & reliable, 24/7.
+            ติดตั้งตาราง Live Score ได้ฟรีๆ คุณสามารถกำหนดขนาดของตาราง Live Score ให้ใช้ได้ฟรีบนเว็บไชต์ของคุณเอง
+            โดยข้อมูลทั้งหมดที่มีไว้ให้โดย 7Score.Live รวดเร็ว เชื่อถือได้ สดตลอดทั้งวัน 24 ชม.
             </p>
             <form>
                 <div className="form-row">
@@ -158,7 +159,7 @@ const TableScore = () => {
                     <div className="form-group">
                         <h3>GENERATE URL AND CODE</h3>
                         <p className="mb-0">
-                            Generate the widget and the code you need. Paste the code onto your website, or in your WordPress Widgets and you'll be on your way in no time.
+                        เพียงเลือก Generate URL แล้วระบบจะสร้างโค้ดที่คุณต้องการ วางโค้ดลงในเว็บไซต์ของคุณหรือในวิดเจ็ต WordPress ของคุณ7score แจกโค้ดผลบอลสด livescore ราคาบอลอัพเดททุกวินาทีจากลีกดังทั่วโลกhttps://7score.live
                         </p>
                     </div>
                 </div>

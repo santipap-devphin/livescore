@@ -3,7 +3,7 @@ import axios from 'axios';
 import dynamic from 'next/dynamic';
 const HeaderSeo = dynamic(() => import('../../shared/commons/HeaderSeo'));
 const Footer = dynamic(() => import('../../shared/components/Footer'));
-const BannerInner = dynamic(() => import('../../shared/components/Banner/Inner'));
+
 import TableLive from "../../shared/commons/TableLive"
 import TableBattleMobile from "../../shared/commons/TableBattleMobile"
 
@@ -19,8 +19,40 @@ const [defaults , setDefaults] = useState(props);
 const myRef = useRef(null)
 const [sectiontwo , setSectiontwo] = useState(false);
 const [lang , setLang] = useState([]);
+const [live , setLive] = useState([]);
+const [poparr , setpoparr] = useState([]);
+const [loadlive , setloadLive] = useState(false);
 var newsarr = [];
 let teamth  = [];
+
+const fetchlives = async () => {
+
+  const res = await fetch(`https://zio666.com/service_live/load_live.php`)
+  const data = await res.json()
+
+  let objj = {};
+
+  let scores = {
+          "@sport":data.scores["@sport"],
+          "@updated":data.scores["@updated"],
+          "category":data.scores.category,
+         
+      
+  }
+
+  objj = {home:scores};
+
+  setLive(objj)
+  setpoparr(data.scores.list)
+  setloadLive(true)
+
+}
+
+useEffect(() => {
+
+  fetchlives();
+
+},[setLive])
 
 const  handdleClickAfterload = (e) => {
 
@@ -1154,7 +1186,7 @@ useEffect(() => {
 
 }, [setDatas])
 
-useEffect(() => {
+/*useEffect(() => {
 
   const fetchItems = async () => {
 
@@ -1181,7 +1213,7 @@ useEffect(() => {
   
   }, 100);
 
-},[setLang])
+},[setLang])*/
 
 
 return (
@@ -1196,9 +1228,7 @@ return (
         keyWords="ผลบอล, live score, ผลบอลสด, ไฮไลท์ฟุตบอล"
         author=""
       />
-      <div className="banners">
-          <BannerInner />
-      </div>
+      
       <h1>ผลบอล</h1> 7score.live เว็บไซต์รายงานสดผลฟุตบอลทั้งไทยและต่างประเทศทุกลีกทั่วโลก อัพเดทกันวินาทีต่อวินาทีเพื่อให้ท่านได้รับข้อมูลที่รวดเร็ว อีกทั้งยังนำเสนอข้อมูลของแต่ละทีม สถิติการพบกัน และข้อมูลสำคัญต่างๆ เพื่อเป็นแนวทางในการวิเคราะห์ของท่าน
       <div className="d-none d-md-block mainf-tab">
         {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
@@ -1211,11 +1241,31 @@ return (
             Live
         </a>
         <div ref={myRef}></div> 
-        {/*console.log(defaults)*/}
+        {
+          loadlive !== false ? 
+
+          live.home.category.map((res,value) => (
+  
+            <div key={value.toString()}> 
+                    <TableLive  
+                    className="highlight bg-secondary text-white"
+                    title={res['@name']}
+                    data={res.matches.match}
+                    highlight={true} 
+                    exam = {res['@id']}
+                    after = {handdleClickAfterload}
+                    th = {lang}
+                    />
+                    
+              </div>
+              
+              )) 
+              : <center><h1>loading.........</h1></center>
+        }
         {
           (sdata !== false) ? 
            
-            defaults.home.category.slice(0,7).map((res,value) => (
+            defaults.home.category.map((res,value) => (
   
               <div key={value.toString()}> 
                       <TableLive  
@@ -1235,29 +1285,7 @@ return (
 
 
         }
-        {
-          (sectiontwo !== false) ? 
-           
-            defaults.home.category.slice(8).map((res,value) => (
-  
-              <div key={value.toString()}> 
-                      <TableLive  
-                      className="highlight bg-secondary text-white"
-                      title={res['@name']}
-                      data={res.matches.match}
-                      highlight={true} 
-                      exam = {res['@id']}
-                      after = {handdleClickAfterload}
-                      th = {lang}
-                      />
-                      
-                </div>
-                
-                )) 
-                : null
-
-
-        }
+       
         
       </div>
 
@@ -1314,11 +1342,11 @@ Live.propTypes = {
 };
 Live.getInitialProps = async (ctx) => {
 
-  const res = await fetch('https://www.goalserve.com/getfeed/40e962b3c2a941d6a61008d85e49316a/soccernew/home?json=1')
+  const res = await fetch('https://zio666.com/service_live/load_livescore.php')
   const data = await res.json()
   let ndata = [];
 
-  for(var i = 0 ; i < data.scores.category.length; i++)
+  /*for(var i = 0 ; i < data.scores.category.length; i++)
   {
     
     if(data.scores.category[i]["@id"] === "1204"){
@@ -1504,16 +1532,22 @@ Live.getInitialProps = async (ctx) => {
   ndata.sort(function(a, b) {
   
       return a["@priority"] - b["@priority"];
-  });
+  });*/
   
 
-  let scores = {
+  /*let scores = {
         "@sport":data.scores["@sport"],
         "@updated":data.scores["@updated"],
         "category":ndata
      
+ }*/
+
+  let scores = {
+        "@sport":data.scores["@sport"],
+        "@updated":data.scores["@updated"],
+        "category":data.scores.category
+     
  }
-  
 
   return {home: scores}
 }
