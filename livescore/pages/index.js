@@ -1735,7 +1735,7 @@ return (
                 (defaults !== undefined) ? 
 
 
-
+                      sdata !== false ?
                       defaults.home.category.map((res,value) => (
 
                             
@@ -1753,7 +1753,7 @@ return (
                           
                             
                           
-                      ))
+                      )): null
                       
               : <center><h1>กรุณา รอสักครู่ ......</h1></center>
               }

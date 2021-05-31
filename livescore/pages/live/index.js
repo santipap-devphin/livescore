@@ -1104,6 +1104,8 @@ useEffect(() => {
      let lastdate;
      //console.log(defaults.home.category)
 
+     setDatas(false)
+
   if(defaults.home.category.length > 0){
         for(var i = 0; i < defaults.home.category.length; i++)
         {
@@ -1263,6 +1265,7 @@ return (
               : <center><h1>loading.........</h1></center>
         }
         {
+          (defaults !== undefined) ? 
           (sdata !== false) ? 
            
             defaults.home.category.map((res,value) => (
@@ -1281,7 +1284,8 @@ return (
                 </div>
                 
                 )) 
-                : <center><h1>loading.........</h1></center>
+                : null
+                :<center><h1>loading.........</h1></center>
 
 
         }
@@ -1308,6 +1312,7 @@ return (
                 </div>
                 {
 
+                (defaults !== undefined) ? 
                 (sdata !== false) ? 
                    
                     defaults.home.category.map((res,value) => (
@@ -1324,9 +1329,10 @@ return (
                            
                         </div>
                 ))
-              : <center><h1>loading.........</h1></center>
+              : null
+              :<center><h1>loading.........</h1></center>
               }
-        
+           
           </div>
         
 
