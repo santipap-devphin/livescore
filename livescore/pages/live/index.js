@@ -1265,8 +1265,8 @@ return (
               : <center><h1>loading.........</h1></center>
         }
         {
-          (defaults !== undefined) ? 
-          (sdata !== false) ? 
+          
+          sdata !== false ? 
            
             defaults.home.category.map((res,value) => (
   
@@ -1284,8 +1284,8 @@ return (
                 </div>
                 
                 )) 
-                : null
-                :<center><h1>loading.........</h1></center>
+                : <center><h1>loading.........</h1></center>
+               
 
 
         }
@@ -1312,8 +1312,8 @@ return (
                 </div>
                 {
 
-                (defaults !== undefined) ? 
-                (sdata !== false) ? 
+               
+                sdata !== false ? 
                    
                     defaults.home.category.map((res,value) => (
 
@@ -1329,8 +1329,8 @@ return (
                            
                         </div>
                 ))
-              : null
-              :<center><h1>loading.........</h1></center>
+              : <center><h1>loading.........</h1></center>
+             
               }
            
           </div>

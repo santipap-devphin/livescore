@@ -1430,15 +1430,12 @@ function datee(nextday){
                   }
 
                 setDefaults(object)
+                setloadDefaults(true)
+                setDatas(true)
           
             }
            
              fetchteam();
-
-             
-             setloadDefaults(true)
-             setDatas(true)
-            
 
           },[setDefaults])
 
@@ -1658,9 +1655,6 @@ return (
         
         {
            
-           (defaults !== undefined) 
-            ? 
-
             sdata !== false ?
 
             defaults.home.category.map((res,value) => (
@@ -1687,7 +1681,7 @@ return (
 
               )) : <center><h1>กรุณา รอสักครู่ ......</h1></center>
            
-           :<center><h1>loading.........</h1></center>
+          
           }
          
        
@@ -1732,9 +1726,7 @@ return (
                 }
                 {
 
-                (defaults !== undefined) ? 
-
-
+               
                       sdata !== false ?
                       defaults.home.category.map((res,value) => (
 
@@ -1753,9 +1745,9 @@ return (
                           
                             
                           
-                      )): null
+                      )): <center><h1>กรุณา รอสักครู่ ......</h1></center>
                       
-              : <center><h1>กรุณา รอสักครู่ ......</h1></center>
+              
               }
 
            </div>
