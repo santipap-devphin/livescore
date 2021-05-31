@@ -54,6 +54,12 @@ useEffect(() => {
 
 },[setLive])
 
+useEffect(() => {
+
+  setDatas(true);
+
+},[setDatas])
+
 const  handdleClickAfterload = (e) => {
 
   e.preventDefault();
@@ -1093,7 +1099,7 @@ const handleClicklive = async (e) => {
 
 }
 
-useEffect(() => {
+/*useEffect(() => {
 
      let datee;
      let newdate;
@@ -1104,7 +1110,7 @@ useEffect(() => {
      let lastdate;
      //console.log(defaults.home.category)
 
-     setDatas(false)
+    setDatas(false)
 
   if(defaults.home.category.length > 0){
         for(var i = 0; i < defaults.home.category.length; i++)
@@ -1186,7 +1192,7 @@ useEffect(() => {
   }
 
 
-}, [setDatas])
+}, [setDatas])*/
 
 /*useEffect(() => {
 
@@ -1243,6 +1249,7 @@ return (
             Live
         </a>
         <div ref={myRef}></div> 
+       
         {
           loadlive !== false ? 
 
