@@ -1336,9 +1336,10 @@ function datee(nextday){
                   "category":ndata
               
               }*/
+              
                 var object  = {home:scores}
                 
-                 if(object.home.category.length > 0){
+                 /*if(object.home.category.length > 0){
 
                   let datee;
                   let newdate;
@@ -1427,7 +1428,7 @@ function datee(nextday){
                   }
     
     
-                  }
+                  }*/
 
                 setDefaults(object)
                 setloadDefaults(true)
