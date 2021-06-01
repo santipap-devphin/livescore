@@ -1317,6 +1317,28 @@ return (
                     Live
                 </a>
                 </div>
+
+                {
+                  loadlive !== false ? 
+
+                    live.home.category.map((res,value) => (
+  
+                       <div key={value.toString()}>
+                            <TableBattleMobile 
+                              title={res['@name']}
+                              data={res.matches.match}
+                              highlight={false}
+                              exam = {res['@id']}
+                              after = {handdleClickAfterload}
+                              th = {lang}
+                            />
+                           
+                        </div>
+                      
+                      )) 
+                      : null
+
+                }
                 {
 
                
