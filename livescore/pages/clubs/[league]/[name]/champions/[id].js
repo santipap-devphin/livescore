@@ -12,6 +12,7 @@ const Champions = (props) => {
   const League = [];
   const d1 = [];
   const Cup = [];
+  
   if(Array.isArray(props.trop.trophy) === true){
 
     props.trop.trophy.map((sq,index) => (

@@ -1241,13 +1241,13 @@ return (
       <div className="d-none d-md-block mainf-tab">
         {/*<img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />
         <img className="mb-4 img-fluid w-100 h-70px" src="/assets/ads/ads630x70.png" alt="" />*/}
-        
-        <a href="/live">
-            All
-        </a>
-        <a href="#" onClick={handleClicklive} style={{"marginLeft":"20px"}}>
+        <a href="#" onClick={handleClicklive} >
             Live
         </a>
+        <a href="/live" style={{"marginLeft":"20px"}}>
+            All
+        </a>
+        
         <div ref={myRef}></div> 
        
         {
@@ -1310,12 +1310,13 @@ return (
                 </div>
                 
                  <div style={{margin:'10px'}}>
-                <a href="/live">
-                  All
-                </a>
-                <a href="#" onClick={handleClicklive} style={{"marginLeft":"20px"}}>
+                 <a href="#" onClick={handleClicklive}>
                     Live
                 </a>
+                <a href="/live" style={{"marginLeft":"20px"}}>
+                  All
+                </a>
+               
                 </div>
 
                 {
