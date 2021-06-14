@@ -243,7 +243,8 @@ const Homefilter = (props) => {
 
               )
 
-            }else{
+            }
+            else if(data.scores.category[i]["@id"] === "1001"){
 
               ndata.push(
                 {
@@ -253,6 +254,21 @@ const Homefilter = (props) => {
                   "@file_group": data.scores.category[i]["@file_group"],
                   "@iscup": data.scores.category[i]["@iscup"],
                   "@priority": "11",
+                  "matches": data.scores.category[i]["matches"],
+                }
+
+              )
+
+            }else{
+
+              ndata.push(
+                {
+                  "@name":data.scores.category[i]["@name"] ,
+                  "@gid": data.scores.category[i]["@gid"] ,
+                  "@id": data.scores.category[i]["@id"] ,
+                  "@file_group": data.scores.category[i]["@file_group"],
+                  "@iscup": data.scores.category[i]["@iscup"],
+                  "@priority": "12",
                   "matches": data.scores.category[i]["matches"],
                 }
 

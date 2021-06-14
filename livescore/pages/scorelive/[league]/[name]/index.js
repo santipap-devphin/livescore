@@ -783,6 +783,8 @@ useEffect(() => {
                       ? "ลีก เอิง ฝรั่งเศส"
                       : router.query.name === "1271"
                         ? "เจ ลีก ญี่ปุ่น"
+                        : router.query.name === "1001"
+                        ? "บอลยูโร"
                         : router.query.name && router.query.name.replace(/-/g, " ")
                             : router.query.name && router.query.name.replace(/-/g, " ")
                             let pageTitle = router.query.name ? router.query.name.replace(/-/g, " ") : " "

@@ -53,6 +53,9 @@ const TopLiveSoccerContent = ({data, children, navMatch, nav}) => {
          case "1271":
          txt = true;
          break;
+         case "1001":
+          txt = true;
+          break;
          default:
          txt = false;
      }

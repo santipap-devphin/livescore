@@ -107,7 +107,7 @@ const Layout = (props) => {
     
     let routes = [
       
-   
+      { key: "0", title: "บอลยูโร",id:"1001", country:false, links: `/league/1001/${nstr}/`, img: "/assets/country/Europe.png" },
       { key: "1", title: "พรีเมียร์ ลีก อังกฤษ",id:"1204", country:false, links: `/league/1204/${nstr}/`, img: "/assets/country/England.png" },
       { key: "2", title: "ยูฟ่า แชมเปี้ยนส์ลีก",id:"1005", country:false, links: `/league/1005/${nstr}/`, img: "/assets/icons/league/league_uefa.png" },
       { key: "3", title: "ยูโรป้า ลีก",id:"1007", country:false, links: `/league/1007/${nstr}/`, img: "/assets/icons/league/league_europa.png" },

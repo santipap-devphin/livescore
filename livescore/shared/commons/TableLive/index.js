@@ -100,6 +100,9 @@ const TableLive = ({ className, title, data, highlight , exam , after ,th }) => 
        case "1271":
        txt = true;
        break;
+       case "1001":
+       txt = true;
+       break;
        default:
        txt = false;
    }
