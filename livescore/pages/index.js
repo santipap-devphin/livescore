@@ -1683,12 +1683,12 @@ return (
       />
       <div className="d-none d-md-block mainf-tab">
         <div className="banner f">
-        <a href="https://sbobet-55555.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com.gif" alt="ไฮไลท์ฟุตบอล" /></a>
+          <a href="https://sbobet-55555.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-55555.com.gif" alt="ไฮไลท์ฟุตบอล" /></a>
           <a href="https://thai.sg8bet.com/" target="_blank" rel="nofollow"><img className="" src="/banner/th.sg8bet.com.gif" alt="ผลบอล" /></a>
           <a href="https://www.sbobet-888.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-888.com.gif" alt="live score" /></a>
           <a href="https://top789.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Top789.com.gif" alt="ผลบอลสด" /></a>
           <a href="https://sbobet891.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet891.com.gif" alt="ตารางบอล" /></a>
-          <a href="https://sbobet-onlines.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-onlines.com.gif" alt="ดูผลบอล" /></a>
+          <a href="https://sbobet-onlines.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobet-onlines.com-728x180new.gif" alt="ดูผลบอล" /></a>
           <a href="https://sbobetmobile.com/" target="_blank" rel="nofollow"><img className="" src="/banner/Sbobetmobile.com.gif" alt="ผลบอลพรีเมียร์" /></a>
         </div>
         <h1>ผลบอล</h1> 7score.live เว็บไซต์รายงานสดผลฟุตบอลทั้งไทยและต่างประเทศทุกลีกทั่วโลก อัพเดทกันวินาทีต่อวินาทีเพื่อให้ท่านได้รับข้อมูลที่รวดเร็ว อีกทั้งยังนำเสนอข้อมูลของแต่ละทีม สถิติการพบกัน และข้อมูลสำคัญต่างๆ เพื่อเป็นแนวทางในการวิเคราะห์ของท่าน
